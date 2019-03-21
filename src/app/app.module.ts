@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
+
 const appRoutes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   // { path: 'newservice', component: ServicesComponent },
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule,
     SweetAlert2Module.forRoot(),
-    PasswordStrengthMeterModule
+    PasswordStrengthMeterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

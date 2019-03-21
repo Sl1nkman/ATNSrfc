@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'; // Router import
 import {Login} from '../../models/login'; // interface import
 import swal from 'sweetalert2'; // Sweet Alerts import
+import * as crypto from 'crypto-js';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -24,15 +25,15 @@ export class RegistrationComponent implements OnInit {
 
   // Login object created from interface
   login: Login = {
-    name: '',
-    surname: '',
+    name: undefined,
+    surname: undefined,
     employeeId: undefined ,
-    email: '',
-    contactNumber: '',
-    permission: '',
-    region: '',
-    department: '',
-    password: ''
+    email: undefined,
+    contactNumber: undefined,
+    permission: undefined,
+    region: undefined,
+    department: undefined,
+    password: undefined
   };
   availablePermissions: String [] = ['Specialist', 'Manager' , 'Employee']; // to be delegated to database
   availableRegions: String [] = ['Northern', 'Southern', 'Both']; // to be delegated to database
@@ -65,7 +66,9 @@ export class RegistrationComponent implements OnInit {
   // Called on register button click this is where the data is stored in the database and the password is hashed and stored in the login object
   onRegister() {
     if (this.showRegisterButton === true) {
-      swal('Success!', 'Thank you for registering.', 'success');
+      const hash = crypto.MD5(this.passwordCheck);
+      this.login.password = hash;
+      swal('Success!', 'Thank you for registering.  ' + hash + this.login.password , 'success');
     } else {
       swal('Failure', 'Please complete the registration form', 'error');
     }
@@ -81,8 +84,8 @@ export class RegistrationComponent implements OnInit {
   }
   // Validates phone number on input
   validatePhoneNumber(phone: string) {
-    const phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if (phoneNum.test(phone)) {
+    const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (re.test(phone)) {
       this.showPhone = true;
     } else {
       this.showPhone = false;
