@@ -1,0 +1,14 @@
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.col {
+  width: 50%;
+  float: left;
+  margin-bottom: 20px;
+}
+
+.text-c {
+  text-align: center;
+}
