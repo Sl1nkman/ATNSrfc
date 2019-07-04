@@ -1,39 +1,55 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2'
+import {AppRoutingModule} from './models/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { LoginComponent } from './pages/login/login.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-
-const appRoutes: Routes = [
-  { path: 'registration', component: RegistrationComponent },
-  // { path: 'newservice', component: ServicesComponent },
-  // { path: 'upsquotes', component: UpsQuotesComponent },
-  // { path: 'generatorquotes', component: GeneratorQuotesComponent },
-  // { path: 'aboutus', component: AboutUsComponent },
-  { path: '', redirectTo: '/registration', pathMatch: 'full' },
-  { path: '**', component: RegistrationComponent },
-];
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ToastrModule } from 'ngx-toastr';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MyRFCSComponent } from './pages/my-rfcs/my-rfcs.component';
+import { CreateRfcsComponent } from './pages/create-rfcs/create-rfcs.component';
+import { HomeComponent } from './pages/home/home.component';
+import {AuthGuard} from './guards/auth.guard';
+import { CurrentRFCSComponent } from './pages/current-rfcs/current-rfcs.component';
+import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent,
+    NavbarComponent,
+    SidebarComponent,
+    MyRFCSComponent,
+    CreateRfcsComponent,
+    HomeComponent,
+    CurrentRFCSComponent,
+    RFCsignoffComponent,
   ],
+
   imports: [
-    RouterModule.forRoot(appRoutes),
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
     SweetAlert2Module.forRoot(),
     PasswordStrengthMeterModule,
+    CollapseModule.forRoot(),
+    ToastrModule.forRoot(),
+    AppRoutingModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

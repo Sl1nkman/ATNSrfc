@@ -1,0 +1,34 @@
+
+<div class="card mx-auto" style="width: 45rem;">
+
+  <h5 class="card-header info-color white-text text-center py-4">
+    <strong>Sign in</strong>
+  </h5>
+
+  <div class="card-body px-lg-5 pt-0">
+    <form class="md-form" style="color: #757575;">
+      <label for="username">User Name</label>
+      <input type="email" id="username"  name="username" class="form-control" [(ngModel)]="user" (input)="setUsername(user)">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" class="form-control" [(ngModel)]="pass"  (input)="setPassword(pass)">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="materialLoginFormRemember" >
+          <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
+        </div>
+        <div>
+          <a href="">Forgot password?</a>
+        </div>
+      </div>
+
+      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit"  (click)="onLogin($event)">Sign in</button>
+
+      <div class="text-center">
+        <p>Not a member?
+          <a href="#" routerLink="/register" routerLinkActive="active">Register</a>
+        </p>
+
+      </div>
+    </form>
+  </div>
+</div>
