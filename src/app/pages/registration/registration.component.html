@@ -19,29 +19,29 @@
     </div>
     <div class="form-group" >
       <label for="name">Name</label>
-      <input title="Please enter your First names"  required class="form-control" [(ngModel)]="register.name"
+      <input title="Please enter your First names"  required class="form-control" [(ngModel)]="User.name"
              type="text" name="name" id="name">
     </div>
     <div class="form-group">
       <label for="surname">Surname</label>
-      <input title="Please enter your Surname" required class="form-control" [(ngModel)]="register.surname"
+      <input title="Please enter your Surname" required class="form-control" [(ngModel)]="User.surname"
              type="text" name="surname" id="surname">
     </div>
     <div class="form-group">
       <label for="employeeID">Employee ID</label>
-      <input title="Please enter your Employee ID" class="form-control" (input)="validateEmpId(register.employeeId)"
+      <input title="Please enter your Employee ID" class="form-control" (input)="validateEmpId(User.employeeId)"
              [ngClass]="{'true': this.showEmpId, 'false':
             !this.showEmpId}"
-             [(ngModel)]="register.employeeId"
+             [(ngModel)]="User.employeeId"
              type="number" name='EmployeeId' id="employeeID" required>
     </div>
     <div class="form-group">
       <label>Contact Number</label>
       <label *ngIf="this.showPhone == false" style="color: red">Invalid South African Number</label>
       <label *ngIf="this.showPhone == true" style="color: green">Valid South African Number </label>
-      <input (input)="validatePhoneNumber(register.contactNumber)"
+      <input (input)="validatePhoneNumber(User.contactNumber)"
              class="form-control" [ngClass]="{'true': this.showPhone, 'false':
-            !this.showPhone}" [(ngModel)]="register.contactNumber" type="text"
+            !this.showPhone}" [(ngModel)]="User.contactNumber" type="text"
              name="contactNum" required>
     </div>
     <div class="form-group">
@@ -49,9 +49,9 @@
       <label *ngIf="this.showEmail == false" style="color: red">Invalid</label>
       <label *ngIf="this.showEmail == true" style="color: green">Valid
       </label>
-      <input title="Please enter the username of your email before the @" (input)="validateEmail(register.email)" class="form-control"
+      <input title="Please enter the username of your email before the @" (input)="validateEmail(User.email)" class="form-control"
              [ngClass]="{'true': this.showEmail, 'false': !this.showEmail}"
-             id="username" name="username" [(ngModel)]= register.email type="email"
+             id="username" name="username" [(ngModel)]= User.email type="email"
              required>
     </div>
     <div class="form-group">

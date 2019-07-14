@@ -10,30 +10,30 @@
 </div>
 
 <body>
-<div id="main">
-  <form class="InitiatiorForm" type="GET">
+<div id="main" class="mx-auto">
+  <form class="card-body md-form " type="GET">
     <div class="form-group" >
       <label for="userTitle">Requester Title</label>
-      <h1 id="userTitle">{{user.title}}</h1>
+      <h1 id="userTitle">{{User.title}}</h1>
     </div>
     <div class="form-group">
-      <label for="userName">Requestor Full Name</label>
-      <h2 id = "userName">{{user.name}}</h2>
+      <label for="userName">Requester Full Name</label>
+      <h2 id = "userName">{{User.name}}</h2>
     </div>
     <div class="form-group">
       <label id = "requestedChange">Change Request</label>
-      <textarea rows="4" class="form-control" [(ngModel)]="RFC.requestedChange"
+      <textarea rows="4" class="form-control" [(ngModel)]="reqChange"
                 type="text" name="enquiry"></textarea>
     </div>
     <div class="form-group">
       <label>Description</label>
-      <textarea rows="4" class="form-control" [(ngModel)]="RFC.description"
+      <textarea rows="4" class="form-control" [(ngModel)]="desc"
                 type="text" name="enquiry"></textarea>
     </div>
 
     <br>
 
-    <button type="submit" value="Register" class="btn-primary" (click)="onLogin()"
+    <button type="submit" value="User" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" (click)="onSubmit()"
     >Submit</button>
 
 

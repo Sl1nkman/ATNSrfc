@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'; // Router import
-import {Register} from '../../models/register'; // interface import
+import {User} from '../../models/User'; // interface import
 import swal from 'sweetalert2'; // Sweet Alerts import
 import {TooltipPosition} from '@angular/material';
 import {FormControl} from '@angular/forms';
@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   passwordCheck: string;
 
   // Login object created from interface
-  register: Register = {
+  User: User = {
     title: undefined,
     surname: undefined,
     name: undefined,
@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
     password: undefined
   };
 
-  availableTitles: String [] = ['Mr' , 'Ms' , 'Regional manager']
+  availableTitles: String [] = ['Mr' , 'Ms' , 'Regional manager'];
   availablePermissions: String [] = ['Specialist', 'Manager' , 'Employee']; // to be delegated to database
   availableRegions: String [] = ['Northern', 'Southern', 'Both']; // to be delegated to database
   availableDepartments: String [] = ['Department1' , 'Department2', 'Department3']; // to be delegated to database
@@ -59,29 +59,29 @@ export class RegistrationComponent implements OnInit {
 }
 
 
-  onSelectTitle(value: string){
-    this.register.title = value;
+  onSelectTitle(value: string) {
+    this.User.title = value;
   }
 
   onSelectPermission(value: string) {
-    this.register.permission = value ;
+    this.User.permission = value ;
   }
 
   onSelectRegion(value: string) {
-    this.register.region = value;
+    this.User.region = value;
   }
 
   onSelectDepartment(value: string) {
-    this.register.department =  value;
+    this.User.department =  value;
   }
 
   // Called on register button click this is where the data is stored in the database and the password is hashed and stored in the login object
   onRegister() {
     if (this.showRegisterButton === true) {
       const hash = crypto.MD5(this.passwordCheck);
-      this.register.password = hash;
-      this.registration.registerUser(this.register).subscribe(data => {
-        swal('Success!', 'Thank you for registering.  ' + hash + this.register.password , 'success');
+      this.User.password = hash;
+      this.registration.registerUser(this.User).subscribe(data => {
+        swal('Success!', 'Thank you for registering.  ' + hash + this.User.password , 'success');
         this.router.navigate(['login']);
       });
     } else {
