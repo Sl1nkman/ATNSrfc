@@ -3,7 +3,7 @@ import {OAuth} from '../../models/OAuth';
 import swal from 'sweetalert2'; // Sweet Alerts import
 import * as crypto from 'crypto-js';
 import {OathService} from '../../services/oath.service';
-import {Router } from '@angular/router';
+import {Data, Router} from '@angular/router';
 import {json} from '@angular-devkit/core';
 
 @Component({
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.OAuth.username = this.user;
       this.OAuth.password = hash ;
 
-      this.OAuthService.getUserDetails(this.OAuth.username, this.OAuth.password.toString() ).subscribe(data => {
+      this.OAuthService.getUserDetails(this.OAuth.username, this.OAuth.password.toString() ).subscribe((data: Data) => {
         if (data.success) {
           this.OAuthService.setLoggedIn(true);
           this.router.navigate(['home']);

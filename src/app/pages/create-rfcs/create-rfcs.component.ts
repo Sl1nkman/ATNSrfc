@@ -13,6 +13,7 @@ export class CreateRfcsComponent implements OnInit {
   constructor() { }
 
   RFC: RFC  = {
+    dateRequested: undefined,
     requestedChange: undefined,
     description: undefined
 };
@@ -30,6 +31,7 @@ export class CreateRfcsComponent implements OnInit {
   }
 
 getRFC() {
+    this.RFC.dateRequested =  new Date();
     this.RFC.requestedChange = this.reqChange;
     this.RFC.description = this.desc;
 }

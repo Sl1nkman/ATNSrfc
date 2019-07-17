@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2'
 import {AppRoutingModule} from './models/app-routing.module';
@@ -10,6 +11,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { LoginComponent } from './pages/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BsDatepickerModule} from 'ngx-bootstrap';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
@@ -36,6 +39,7 @@ import { Phase1Component } from './pages/phase1/phase1.component';
     CurrentRFCSComponent,
     RFCsignoffComponent,
     Phase1Component,
+
   ],
 
   imports: [
@@ -48,7 +52,9 @@ import { Phase1Component } from './pages/phase1/phase1.component';
     CollapseModule.forRoot(),
     ToastrModule.forRoot(),
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    BsDatepickerModule.forRoot(),
+    NgxFileDropModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

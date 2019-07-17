@@ -10,10 +10,13 @@ import {AuthGuard} from '../guards/auth.guard';
 import {HomeComponent} from '../pages/home/home.component';
 import {CurrentRFCSComponent} from '../pages/current-rfcs/current-rfcs.component';
 import {RFCsignoffComponent} from '../pages/rfcsignoff/rfcsignoff.component';
+import {Phase1Component} from '../pages/phase1/phase1.component';
+
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/phase1', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
+  {path: 'phase1' , component: Phase1Component},
   { path: 'home' , component: HomeComponent ,
   children: [
     { path: 'createRFC' , component: CreateRfcsComponent},
