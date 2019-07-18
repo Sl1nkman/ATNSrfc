@@ -156,6 +156,7 @@ export class Phase1Component implements OnInit {
 
     onSubmit() {
 
+
     }
     public dropped(files: NgxFileDropEntry[]) {
         // this.files = files;
