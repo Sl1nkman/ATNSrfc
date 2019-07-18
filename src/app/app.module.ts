@@ -25,6 +25,7 @@ import {AuthGuard} from './guards/auth.guard';
 import { CurrentRFCSComponent } from './pages/current-rfcs/current-rfcs.component';
 import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 import { Phase1Component } from './pages/phase1/phase1.component';
+import { Phase3Component } from './pages/phase3/phase3.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { Phase1Component } from './pages/phase1/phase1.component';
     CurrentRFCSComponent,
     RFCsignoffComponent,
     Phase1Component,
+    Phase3Component,
 
   ],
 

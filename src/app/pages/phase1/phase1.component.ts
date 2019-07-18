@@ -30,7 +30,7 @@ export class Phase1Component implements OnInit {
     phase1: CCRPhase1 = {
     TCB_CRF_ID: undefined,
     requestPriority: undefined,
-    predictedImpact: undefined,
+    predictedImpact: '',
     changePeriod: undefined,
     temporaryPeriod: undefined,
     natureOfChange: undefined,
@@ -86,7 +86,7 @@ export class Phase1Component implements OnInit {
 
     onSelectEosSystem(value: string) {
         this.phase1.eosSystem = value;
-        this.phase1.TCB_CRF_ID = value + '0001';
+        this.phase1.TCB_CRF_ID = value + '0001'; // database reference to eos tcb number + 1
     }
 
     onSelectChangeTypeHW(e) {
@@ -152,6 +152,10 @@ export class Phase1Component implements OnInit {
             this.phase1.notSubmittedToAllPartiesReason = undefined;
             this.phase1.submittedToAllParties = false;
         }
+    }
+
+    onSubmit() {
+
     }
     public dropped(files: NgxFileDropEntry[]) {
         // this.files = files;
