@@ -52,10 +52,9 @@ export class Phase1Component implements OnInit {
     problemReportRef: undefined,
     changeSuccessfullyTested: false,
     changeNotSuccessfullyTestedReason: undefined,
-    submittedToAllParties: false,
-    notSubmittedToAllPartiesReason: undefined,
     specialistComment: undefined,
     proposedImplementationDate: undefined,
+    recommend_oppose: undefined
     };
     constructor() {
     }
@@ -145,14 +144,14 @@ export class Phase1Component implements OnInit {
             this.phase1.changeSuccessfullyTested = false;
         }
     }
-    onSelectSubmittedToAllConcerned (e) {
-        if (e.target.value === 'yes') {
-            this.phase1.submittedToAllParties = true;
-        } else if (e.target.value === 'no') {
-            this.phase1.notSubmittedToAllPartiesReason = undefined;
-            this.phase1.submittedToAllParties = false;
-        }
-    }
+    // onSelectSubmittedToAllConcerned (e) {
+    //     if (e.target.value === 'yes') {
+    //         this.phase1.submittedToAllParties = true;
+    //     } else if (e.target.value === 'no') {
+    //         this.phase1.notSubmittedToAllPartiesReason = undefined;
+    //         this.phase1.submittedToAllParties = false;
+    //     }
+    // }
 
     onSubmit() {
 

@@ -23,8 +23,7 @@ export interface CCRPhase1 {
     problemReportRef: string;
     changeSuccessfullyTested: boolean;
     changeNotSuccessfullyTestedReason: string;
-    submittedToAllParties: boolean;
-    notSubmittedToAllPartiesReason: string;
     specialistComment: string;
     proposedImplementationDate: Date;
+    recommend_oppose: {};
 }

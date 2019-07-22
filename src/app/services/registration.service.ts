@@ -13,6 +13,6 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   registerUser(reg: User) {
-    return this.http.post('http://localhost/ATNS_RFC_php/register.php', reg , httpOptions);
+    return this.http.post('http://localhost/ATNS_RFC_php/api/register.php', reg , httpOptions);
   }
 }

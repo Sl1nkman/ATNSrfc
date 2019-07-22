@@ -26,6 +26,7 @@ import { CurrentRFCSComponent } from './pages/current-rfcs/current-rfcs.componen
 import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 import { Phase1Component } from './pages/phase1/phase1.component';
 import { Phase3Component } from './pages/phase3/phase3.component';
+import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,20 +45,21 @@ import { Phase3Component } from './pages/phase3/phase3.component';
 
   ],
 
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    SweetAlert2Module.forRoot(),
-    PasswordStrengthMeterModule,
-    CollapseModule.forRoot(),
-    ToastrModule.forRoot(),
-    AppRoutingModule,
-    CommonModule,
-    BsDatepickerModule.forRoot(),
-    NgxFileDropModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        SweetAlert2Module.forRoot(),
+        PasswordStrengthMeterModule,
+        CollapseModule.forRoot(),
+        ToastrModule.forRoot(),
+        AppRoutingModule,
+        CommonModule,
+        BsDatepickerModule.forRoot(),
+        NgxFileDropModule,
+        NgbPopoverModule
+    ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })

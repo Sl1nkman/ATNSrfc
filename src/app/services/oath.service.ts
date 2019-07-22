@@ -20,6 +20,6 @@ return this.loggedInStatus;
   }
   getUserDetails(username , password) {
     let obj = {username ,  password}
-    return this.http.post( 'http://localhost/ATNS_RFC_php/auth.php', obj , httpOptions);
+    return this.http.post( 'http://localhost/ATNS_RFC_php/api/login.php', obj , httpOptions);
   }
 }

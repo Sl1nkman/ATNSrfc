@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {OAuth} from '../../models/OAuth';
 import swal from 'sweetalert2'; // Sweet Alerts import
-import * as crypto from 'crypto-js';
 import {OathService} from '../../services/oath.service';
 import {Data, Router} from '@angular/router';
-import {json} from '@angular-devkit/core';
+
 
 @Component({
   selector: 'app-login',
@@ -31,9 +30,8 @@ export class LoginComponent implements OnInit {
   }
   onLogin(event) {
     const target = event.target;
-      const hash = crypto.MD5(this.pass);
       this.OAuth.username = this.user;
-      this.OAuth.password = hash ;
+      this.OAuth.password = this.pass ;
 
       this.OAuthService.getUserDetails(this.OAuth.username, this.OAuth.password.toString() ).subscribe((data: Data) => {
         if (data.success) {
