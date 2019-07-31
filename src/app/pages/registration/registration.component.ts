@@ -36,9 +36,7 @@ export class RegistrationComponent implements OnInit {
     employeeId: undefined ,
     email: undefined,
     contactNumber: undefined,
-    permission: undefined,
-    region: undefined,
-    department: undefined,
+    site: undefined,
     password: undefined
   };
 
@@ -62,17 +60,8 @@ export class RegistrationComponent implements OnInit {
   onSelectTitle(value: string) {
     this.User.title = value;
   }
-
-  onSelectPermission(value: string) {
-    this.User.permission = value ;
-  }
-
-  onSelectRegion(value: string) {
-    this.User.region = value;
-  }
-
-  onSelectDepartment(value: string) {
-    this.User.department =  value;
+  onSelectSite(value: string) {
+    this.User.site =  value;
   }
 
   // Called on register button click this is where the data is stored in the database and the password is hashed and stored in the login object

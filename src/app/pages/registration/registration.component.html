@@ -84,7 +84,7 @@
     </div>
     <div class="form-group">
       <label for="department">Department</label>
-      <select title="Select your relevant department" (change)="onSelectDepartment($event.target.value)" name="department"  id="department">
+      <select title="Select your relevant department" (change)="onSelectSite($event.target.value)" name="department"  id="department">
         <option *ngFor="let department of availableDepartments">{{department}}</option>
       </select>
     </div>

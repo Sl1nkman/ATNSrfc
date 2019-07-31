@@ -13,6 +13,7 @@ import { LoginComponent } from './pages/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
@@ -58,7 +59,8 @@ import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
         CommonModule,
         BsDatepickerModule.forRoot(),
         NgxFileDropModule,
-        NgbPopoverModule
+        NgbPopoverModule,
+        SelectDropDownModule
     ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

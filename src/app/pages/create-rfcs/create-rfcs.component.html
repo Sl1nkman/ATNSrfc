@@ -1,44 +1,54 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <title>ATNS RFC Creation</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<div id="header">
 
-</div>
 
-<body>
-<div id="main" class="mx-auto">
-  <form class="card-body " type="GET">
-    <div class="form-group" >
+  <form class="card mx-auto secondary-color" type="GET">
+    <div class="form-group px-3" >
       <label for="userTitle">Requester Title</label>
       <h1 id="userTitle">{{User.title}}</h1>
     </div>
-    <div class="form-group">
+    <div class="form-group px-3">
       <label for="userName">Requester Full Name</label>
       <h2 id = "userName">{{User.name}}</h2>
     </div>
-    <div class="form-group">
-      <label id = "requestedChange">Change Request</label>
-      <textarea rows="4" class="form-control" [(ngModel)]="reqChange"
-                type="text" name="enquiry"></textarea>
+    <div class="form-group px-3">
+      <label for= "requestedChange">Change Request</label>
+      <textarea rows="8" class="form-control rounded"
+                type="text"
+                name="requestedChange"
+                id="requestedChange"
+                (input)="requestedChange()"
+                [(ngModel)]="RFC.requestedChange">
+      </textarea>
     </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea rows="4" class="form-control" [(ngModel)]="desc"
-                type="text" name="enquiry"></textarea>
+    <div class="form-group px-3">
+      <label for="description">Description</label>
+      <textarea rows="8" class="form-control rounded"
+                type="text"
+                name="description"
+                id="description"
+                (input)="description()"
+                [(ngModel)]="RFC.description"
+      ></textarea>
     </div>
 
     <br>
 
-    <button type="submit" value="User" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" (click)="onSubmit()"
-    >Submit</button>
+    <div class="row px-3">
+      <div class="col">
+        <button
+                type="cancel"
+                id="cancel"
+                class="btn btn-outline-danger btn-rounded w-75 mx-auto   my-4 waves-effect z-depth-0" (click)="onSubmit()"
+        >Cancel</button>
+      </div>
+      <div class="col">
+        <button
+                type="submit"
+                id="submit"
+                class="btn btn-outline-info btn-rounded w-75 mx-auto my-4 waves-effect z-depth-0 disabled" [disabled]="!this.enableSubmitButton" (click)="onSubmit()"
+        >Submit</button>
+      </div>
+    </div>
+
 
 
   </form>
-</div>
-</body>
-</html>
-

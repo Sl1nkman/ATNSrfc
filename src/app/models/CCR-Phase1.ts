@@ -1,9 +1,11 @@
 export interface CCRPhase1 {
     TCB_CRF_ID: string;
     requestPriority: string;
-    predictedImpact: string;
+    predictedImpact: String [];
     changePeriod: string;
-    temporaryPeriod: Date;
+    temporaryPeriodStartDate: Date;
+    temporaryPeriodNumberOfDays: number;
+    temporaryPeriodEndDate: Date;
     natureOfChange: string;
     eosSystem: string;
     configurationItems: string;
@@ -21,7 +23,7 @@ export interface CCRPhase1 {
     };
     problemReportRaised: boolean;
     problemReportRef: string;
-    changeSuccessfullyTested: boolean;
+    changeSuccessfullyTested: string;
     changeNotSuccessfullyTestedReason: string;
     specialistComment: string;
     proposedImplementationDate: Date;

@@ -24,7 +24,7 @@ body {
 }
 
 .wrapper {
-  height: 100%;
+  height: calc(100% - 40px);
 
   main {
     display: flex;

@@ -13,7 +13,7 @@ import {RFCsignoffComponent} from '../pages/rfcsignoff/rfcsignoff.component';
 import {Phase1Component} from '../pages/phase1/phase1.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/phase1', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   {path: 'phase1' , component: Phase1Component},
@@ -22,7 +22,8 @@ const routes: Routes = [
     { path: 'createRFC' , component: CreateRfcsComponent},
     { path: 'myRFCS' , component: MyRFCSComponent} ,
     { path: 'rfcsignoff' , component: RFCsignoffComponent},
-    { path: 'currentrfcs' , component: CurrentRFCSComponent}
+    { path: 'currentrfcs' , component: CurrentRFCSComponent},
+    {path: 'phase1' , component: Phase1Component}
   ] ,
     canActivate : [AuthGuard]
 

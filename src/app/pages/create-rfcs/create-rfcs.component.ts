@@ -8,35 +8,38 @@ import { User } from '../../models/User';
   styleUrls: ['./create-rfcs.component.css']
 })
 export class CreateRfcsComponent implements OnInit {
-  reqChange: string ;
-  desc: string ;
+  enableSubmitButton = false;
   constructor() { }
-
   RFC: RFC  = {
     dateRequested: undefined,
     requestedChange: undefined,
     description: undefined
-};
-
-    User: User = {title: undefined,
-      department: undefined,
-      name: undefined,
-      surname: undefined,
-      employeeId: undefined,
-      contactNumber: undefined,
-      email: undefined,
-      permission: undefined,
-      region: undefined,
-      password: undefined
-  }
-
-getRFC() {
+  };
+  User: User = {title: undefined,
+    site: undefined,
+    name: undefined,
+    surname: undefined,
+    employeeId: undefined,
+    contactNumber: undefined,
+    email: undefined,
+    password: undefined
+  };
+  setRFCDate() {
     this.RFC.dateRequested =  new Date();
-    this.RFC.requestedChange = this.reqChange;
-    this.RFC.description = this.desc;
-}
+  }
+  requestedChange() {
+
+  }
+  description() {
+      const submitButton = document.getElementById('submit');
+      if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined) {
+        submitButton.classList.remove('disabled');
+        this.enableSubmitButton = true;
+      }
+  }
   onSubmit() {
-    this.getRFC();
+    this.setRFCDate();
+    console.log(this.RFC.dateRequested);
 
   }
   ngOnInit() {
