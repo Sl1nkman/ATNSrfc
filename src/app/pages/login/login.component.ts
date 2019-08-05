@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private OAuthService: OathService ,
               private router: Router) { }
-
   user: String = '';
   pass: String = '';
   OAuth: OAuth = {
     username: undefined,
     password: undefined
   };
+  Token = null ;
 
   setUsername(user) {
     this.user = user;
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       this.OAuth.username = this.user;
       this.OAuth.password = this.pass ;
 
-      this.OAuthService.getUserDetails(this.OAuth.username, this.OAuth.password.toString() ).subscribe((data: Data) => {
+      this.OAuthService.getUserDetails(this.OAuth.username, this.OAuth.password , this.Token ).subscribe((data: Data) => {
         if (data.success) {
           this.OAuthService.setLoggedIn(true);
           this.router.navigate(['home']);
@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
 
   }
   ngOnInit() {
-
+    this.Token = this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
+      this.Token = data.tokenValue ;
+    });
   }
 
 }

@@ -1,8 +1,9 @@
 import {Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
 };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +19,12 @@ return this.loggedInStatus;
   setLoggedIn(value: boolean ) {
     this.loggedInStatus = value;
   }
-  getUserDetails(username , password) {
-    const obj = {username ,  password}
-    return this.http.post( 'http://localhost/ATNS_RFC_php/api/login.php', obj , httpOptions);
+  getUserDetails(username , password , token) {
+    const obj = {username ,  password , token}
+    return this.http.post( 'http://localhost/ATNSCCR_PHP/backend/api2/login.php', obj , httpOptions);
+  }
+
+  getCSRFToken() {
+    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
 }

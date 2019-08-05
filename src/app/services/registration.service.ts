@@ -10,9 +10,25 @@ const httpOptions = {
 })
 export class RegistrationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  registerUser(reg: User) {
-    return this.http.post('http://localhost/ATNS_RFC_php/api/register.php', reg , httpOptions);
+  registerUser(user: User , token) {
+    const obj = {
+      title: user.title,
+      surname: user.surname,
+      name: user.name,
+      employeeID: user.employeeId ,
+      username : user.email,
+      contactNum: user.contactNumber,
+      site: user.site,
+      password: user.password,
+      CSRF_token : token
+    };
+
+    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/register.php', obj, httpOptions);
+  }
+  getCSRFToken() {
+    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
 }

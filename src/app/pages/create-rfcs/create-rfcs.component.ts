@@ -15,15 +15,15 @@ export class CreateRfcsComponent implements OnInit {
     requestedChange: undefined,
     description: undefined
   };
-  User: User = {title: undefined,
-    site: undefined,
-    name: undefined,
-    surname: undefined,
-    employeeId: undefined,
-    contactNumber: undefined,
-    email: undefined,
-    password: undefined
-  };
+  // User: User = {title: undefined,
+  //   site: undefined,
+  //   name: undefined,
+  //   surname: undefined,
+  //   employeeId: undefined,
+  //   contactNumber: undefined,
+  //   email: undefined,
+  //   password: undefined
+  // };
   setRFCDate() {
     this.RFC.dateRequested =  new Date();
   }

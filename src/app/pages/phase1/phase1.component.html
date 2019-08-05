@@ -515,18 +515,21 @@
         </div>
         <div class="form-group">
             <div  class="row px-3">
+                <div class="col"></div>
                 <div class="col">
-                    <button class="btn btn-outline-danger btn-rounded w-75  my-4  waves-effect z-depth-0"
+                    <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0"
                             (click)="onSubmit()"> Cancel
                     </button>
                 </div>
+                <div class="col"></div>
                 <div class="col" >
                     <button [disabled]="!this.activateSubmitButton"
-                            class="btn btn-outline-info btn-rounded w-75 my-4  waves-effect z-depth-0 disabled"
+                            class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled"
                             id="submit"
                             (click)="onSubmit()"> Submit
                     </button>
                 </div>
+                <div class="col"></div>
             </div>
         </div>
     </div>
