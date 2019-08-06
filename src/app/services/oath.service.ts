@@ -8,7 +8,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class OathService {
-
+  public Token ;
   private loggedInStatus = false;
   constructor(private http: HttpClient ) { }
 
@@ -19,12 +19,13 @@ return this.loggedInStatus;
   setLoggedIn(value: boolean ) {
     this.loggedInStatus = value;
   }
+
   getUserDetails(username , password , token) {
     const obj = {username ,  password , token}
-    return this.http.post( 'http://localhost/ATNSCCR_PHP/backend/api2/login.php', obj , httpOptions);
+    return this.http.post( 'http://localhost/ATNSCCR_PHP/backend/api2/login.php', obj , httpOptions); ;
   }
 
   getCSRFToken() {
-    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+    return  this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
 }

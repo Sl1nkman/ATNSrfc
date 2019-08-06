@@ -9,7 +9,7 @@ import {OathService} from '../services/oath.service';
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private oath: OathService){
+  constructor(private oath: OathService) {
   }
 
   canActivate(

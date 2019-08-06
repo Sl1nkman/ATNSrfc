@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {OAuth} from '../../models/OAuth';
 import swal from 'sweetalert2'; // Sweet Alerts import
 import {OathService} from '../../services/oath.service';
-import {Data, Router} from '@angular/router';
-
+import {Data, Router } from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ import {Data, Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private OAuthService: OathService ,
-              private router: Router) { }
+              private router: Router ,  private cookieService: CookieService) { }
   user: String = '';
   pass: String = '';
   OAuth: OAuth = {
@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
       this.OAuthService.getUserDetails(this.OAuth.username, this.OAuth.password , this.Token ).subscribe((data: Data) => {
         if (data.success) {
           this.OAuthService.setLoggedIn(true);
-          this.router.navigate(['home']);
+          this.cookieService.set( 'jwt', data.jwt );
+
+          this.router.navigate(['home']  );
           swal('Logged In' , data.message , 'success' );
         } else {
           swal('Failure', data.message , 'error');

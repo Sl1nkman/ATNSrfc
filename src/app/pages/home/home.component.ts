@@ -7,6 +7,7 @@ import {AppService} from '../../services/app.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  Jwt = null;
   constructor(private appService: AppService) {}
   getClasses() {
     const classes = {
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
+
   }
 
 }
