@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 // imports for bootstrap forms
 import { HttpClientModule  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 // ngx imports
-import {BsDatepickerModule} from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { CookieService } from 'ngx-cookie-service';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
