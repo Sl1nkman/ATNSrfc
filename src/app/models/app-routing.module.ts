@@ -23,8 +23,8 @@ const routes: Routes = [
   { path: 'home' , component: HomeComponent, canActivate: [AuthGuard] ,
     canActivateChild: [RouteGuard],
     children: [
-      { path: 'createRFC' ,   component: CreateRfcsComponent ,  data: { allowedRoles: ['1', '2', '5'] } },
-      { path: 'myRFCS' ,      component: MyRFCSComponent ,      data: { allowedRoles: ['1', '2', '5'] } } ,
+      { path: 'createRFC' ,   component: CreateRfcsComponent },
+      { path: 'myRFCS' ,      component: MyRFCSComponent } ,
       { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedRoles: ['1', '2'] } },
       { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedRoles: ['1', '2'] }},
       {path: 'phase1' , component: Phase1Component , data: { allowedRoles: ['1', '2']}}
