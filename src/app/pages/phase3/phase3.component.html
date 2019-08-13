@@ -1,3 +1,261 @@
-<p>
-  phase3 works!
-</p>
+<!--Created by Blaine Viljoen(28023374)-->
+
+<form>
+    <div class="shadow card bg-light mx-auto">
+        <div class="form-group">
+            <h3 class="pt-3 px-3 text-primary">CCR Phase 3: Sign Off</h3>
+<!--            <div class="row">-->
+<!--                <div class="col">-->
+<!--                    <label class="px-3 pt-2" for="implementor">Implementor Name:</label>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <input type="text" id="implementor" name="implementor" class="form-control" [(ngModel)]="this.phase3.implementorName">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group pt-3">-->
+<!--                <div class="py-3">-->
+<!--                    <div class="row" >-->
+<!--                        <div class="col">-->
+<!--                            <label class="px-3" for="appropriateDate">Appropriate Implementation Date: </label>-->
+<!--                        </div>-->
+<!--                        <div class="col">-->
+<!--                            <input class=" px-3 rounded w-75 form-control"-->
+<!--                                   type="text"-->
+<!--                                   id="appropriateDate"-->
+<!--                                   name="appropriateDate"-->
+<!--                                   [bsConfig]="datepickerConfig"-->
+<!--                                   (click)="onSelectAppropriateImplementationDate()"-->
+<!--                                   [(ngModel)]="this.phase3.appropriateImplementationDate"  bsDatepicker>-->
+<!--                        </div>-->
+
+
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm">
+                    <label class="px-3">Implementation successful?</label>
+                </div>
+                <div class="col">
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="implementationSuccess"
+                               value="yes"
+                               (click)="onSelectImplementationSuccessful($event)"
+                        >
+                        Yes
+                    </Label>
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="implementationSuccess"
+                               value="no"
+                               (click)="onSelectImplementationSuccessful($event)"
+                        >
+                        No
+                    </Label>
+                </div>
+            </div>
+            <div class="row pt-3 px-3">
+                <div class="col" *ngIf="!this.phase3.implementationSuccessful&&this.showImpChange">
+                    <ngx-select-dropdown id="abortRegress" name="abortRegress"
+                        (change)="onSelectAbortRegress($event)"
+                        [multiple]="false"
+                        [(ngModel)]="this.phase3.abortRegress"
+                        [options]="abortOrRegress"
+                    >
+                    </ngx-select-dropdown>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row pt-3" *ngIf="this.phase3.abort||this.phase3.regress">
+                <div class="col-sm">
+                    <label class="px-3 pt-2" for="successReason">Reason:</label>
+                </div>
+                <div class="col-sm">
+                    <input type="text" id="successReason" name="successReason" class="form-control" [(ngModel)]="this.phase3.impSuccessReason">
+                </div>
+            </div>
+            <div class="row pt-3" *ngIf="this.phase3.regress">
+                <div class="col-sm">
+                    <label class="px-3">Already Regressed?</label>
+                </div>
+                <div class="col">
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="alreadyRegressed"
+                               value="yes"
+                               (click)="onSelectAlreadyRegressed($event)"
+                        >
+                        Yes
+                    </Label>
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="alreadyRegressed"
+                               value="no"
+                               (click)="onSelectAlreadyRegressed($event)"
+                        >
+                        No
+                    </Label>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="!this.phase3.alreadyRegressed">
+                <div class="col">
+                    <label class="px-3" for="schedRegressDate">Scheduled Regression Date: </label>
+                </div>
+                <div class="col">
+                    <input class=" px-3 rounded w-75 form-control"
+                           type="text"
+                           id="schedRegressDate"
+                           name="schedRegressDate"
+                           [bsConfig]="datepickerConfig"
+                           [(ngModel)]="this.phase3.schedRegressionDate"  bsDatepicker>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="this.phase3.implementationSuccessful&&this.showImpChange">
+                <div class="col-sm">
+                    <label class="px-3" for="tcbEvalPeriod" >Temporary period start date:</label>
+                </div>
+                <div class="col-sm ">
+                    <input class="rounded w-100 form-control"
+                           type="text"
+                           id="tcbEvalPeriod"
+                           name="tcbEvalPeriod"
+                           bsDaterangepicker
+                           [bsConfig]="datepickerConfig"
+                           [(ngModel)]="this.dateRangePicker"
+                           (ngModelChange)="onSelectTCBEval($event)"
+                    >
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="this.phase3.implementationSuccessful&&this.showImpChange">
+                <div class="col-sm">
+                    <label class="px-3">Additional documents?</label>
+                </div>
+                <div class="col">
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="additionalDocs"
+                               value="yes"
+                               (click)="onSelectAdditionalDocs($event)"
+                        >
+                        Yes
+                    </Label>
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="additionalDocs"
+                               value="no"
+                               (click)="onSelectAdditionalDocs($event)"
+                        >
+                        No
+                    </Label>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="this.phase3.additionalDocs">
+                <div class="px-3">
+                    <ngx-file-drop multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                                   (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                        <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                            Please drag and drop your additional files here
+                            <button type="button" (click)="openFileSelector()">Browse Files</button>
+                        </ng-template>
+                    </ngx-file-drop>
+                    <div class="upload-table px-3">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                            </thead>
+                            <tbody class="upload-name-style">
+                            <tr *ngFor="let item of files">
+                                <td><strong>{{ item[0].relativePath }}</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="this.phase3.additionalDocs">
+                <div class="col-sm">
+                    <label class="px-3">All Items Updated?</label>
+                </div>
+                <div class="col">
+                    <Label class="checkbox-inline px-3">
+                        <input type="checkbox"
+                               name="additionalDocs"
+                               value="yes"
+                               (click)="onSelectItemsUpdated($event)"
+                        >
+                        Yes
+                    </Label>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="this.phase3.itemsUpdated">
+                <div class="col-sm">
+                    <label class="px-3">Evaluation successful?</label>
+                </div>
+                <div class="col">
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="additionalDocs"
+                               value="yes"
+                               (click)="onSelectEvalSuccess($event)"
+                        >
+                        Yes
+                    </Label>
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="additionalDocs"
+                               value="no"
+                               (click)="onSelectEvalSuccess($event)"
+                        >
+                        No
+                    </Label>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="this.phase3.evalSuccess">
+                <div class="col-sm">
+                    <label class="px-3">Confirm Close-out:</label>
+                </div>
+                <div class="col">
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="additionalDocs"
+                               value="Confirm"
+                               (click)="onSelectConfirm($event)"
+                        >
+                        Confirm
+                    </Label>
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="additionalDocs"
+                               value="Reject"
+                               (click)="onSelectConfirm($event)"
+                        >
+                        Reject
+                    </Label>
+                </div>
+            </div>
+
+            <div class="row pt-3" *ngIf="!this.phase3.evalSuccess&&this.showEvalChange">
+                <div class="col-sm">
+                    <label class="px-3 pt-2" for="evalFail">Reason:</label>
+                </div>
+                <div class="col-sm">
+                    <input type="text" id="evalFail" name="evalFail" class="form-control" [(ngModel)]="this.phase3.evalFailure">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+<!--Created by Blaine Viljoen(28023374)-->
