@@ -11,9 +11,10 @@ import {HomeComponent} from '../pages/home/home.component';
 import {CurrentRFCSComponent} from '../pages/current-rfcs/current-rfcs.component';
 import {RFCsignoffComponent} from '../pages/rfcsignoff/rfcsignoff.component';
 import {Phase1Component} from '../pages/phase1/phase1.component';
+import {Phase3Component} from '../pages/phase3/phase3.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/phase3', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   {path: 'phase1' , component: Phase1Component},
@@ -28,6 +29,7 @@ const routes: Routes = [
     canActivate : [AuthGuard]
 
   },
+  {path: 'phase3' , component: Phase3Component},
   { path: '**', component: RegistrationComponent },
 ];
 
