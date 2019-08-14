@@ -13,10 +13,11 @@ import {AuthGuard} from '../guards/auth.guard';
 import {Phase3Component} from '../pages/phase3/phase3.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/phase3', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   {path: 'phase1' , component: Phase1Component},
+  {path: 'phase3' , component: Phase3Component},
   { path: 'home' , component: HomeComponent, canActivate: [AuthGuard] ,
     canActivateChild: [RouteGuard],
     children: [
@@ -24,9 +25,9 @@ const routes: Routes = [
       { path: 'myRFCS' ,      component: MyRFCSComponent } ,
       { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedRoles: ['1', '2'] } },
       { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedRoles: ['1', '2'] }},
-      {path: 'phase1' , component: Phase1Component , data: { allowedRoles: ['1', '2']}}
+      {path: 'phase1' , component: Phase1Component , data: { allowedRoles: ['1', '2']}},
+      {path: 'phase3' , component: Phase3Component}
       ]},
-  {path: 'phase3' , component: Phase3Component},
   { path: '**', component: RegistrationComponent },
 ];
 
