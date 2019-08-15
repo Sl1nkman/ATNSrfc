@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateRfcsComponent } from './create-rfcs.component';
+import { Phase2Component } from './phase2.component';
 
-describe('CreateRfcsComponent', () => {
-  let component: CreateRfcsComponent;
-  let fixture: ComponentFixture<CreateRfcsComponent>;
+describe('Phase2Component', () => {
+  let component: Phase2Component;
+  let fixture: ComponentFixture<Phase2Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateRfcsComponent ]
+      declarations: [ Phase2Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateRfcsComponent);
+    fixture = TestBed.createComponent(Phase2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

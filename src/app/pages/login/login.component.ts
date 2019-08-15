@@ -41,13 +41,16 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home']  );
           swal('Logged In' , data.message , 'success' );
         } else {
+          this.OAuthService.getCSRFToken().subscribe( ( data1: Data) => {
+            this.Token = data1.tokenValue ;
+          });
           swal('Failure', data.message , 'error');
         }
       });
 
   }
   ngOnInit() {
-    this.Token = this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
+    this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
       this.Token = data.tokenValue ;
     });
   }

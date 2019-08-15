@@ -1,0 +1,536 @@
+
+<form>
+    <div class="card secondary-color">
+        <h3 class="px-3 text-primary">Request for Change</h3>
+        <div>
+            <label class="px-3 d-inline-block">Name of Initiator: </label>
+            <p class=" px-3 d-inline-block"></p>
+            <label class="px-3 d-inline-block">Date Requested: </label>
+            <p class="px-3 d-inline-block"></p>
+        </div>
+        <div>
+            <label class="px-3 d-inline-block">Department:</label>
+            <p class="px-3 d-inline-block"></p>
+        </div>
+        <label class="px-3 ">Request: </label>
+        <p class="px-3">{{this.RFC.requestedChange}}</p>
+        <label class="px-3">Reason: </label>
+        <p class="px-3">{{this.RFC.description}}</p>
+    </div>
+    <div class=" shadow card bg-light mx-auto">
+        <div class="form-group">
+            <h3 class="px-3 text-primary"> CCR specialist phase 1</h3>
+            <div class="row">
+                <div class="col-sm">
+                    <label class="px-3" for="priority">Request Priority</label>
+                </div>
+                <div class="col-sm">
+                    <select ngbPopover="Select from the drop down list whether the change request is an EMERGENCY or NON-EMERGENCY (NORMAL)." triggers="mouseenter:mouseleave" placement="right" popoverTitle="CHANGE REQUEST PRIORITY"
+                            class="rounded w-100 form-control"
+                            name="priority"
+                            id="priority"
+                            (change)="onSelectPriority($event)" >
+                        <option selected="selected" disabled="disabled">Select one</option>
+                        <option *ngFor="let priority of availablePriorities">{{priority}}</option>
+                    </select>
+                </div>
+                <div class="col-sm">
+                    <div *ngIf="this.displayPredictedRisks">
+                        <label class="px-3"  for="predictedImpact"> Predicted Risk/s </label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div *ngIf="this.displayPredictedRisks">
+                        <ngx-select-dropdown
+                                ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"
+                                id="predictedImpact"
+                                name="predictedImpact"
+                                (change)="onSelectImpact($event)"
+                                [multiple]="true"
+                                [(ngModel)]="this.phase1.predictedImpact"
+                                [options]="availableImpacts">
+                        </ngx-select-dropdown>
+
+                    </div>
+                </div>
+                <div class="col-sm "></div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayChangePeriod">
+            <div class="row" >
+                <div class="col-sm">
+                    <div *ngIf="this.displayChangePeriod">
+                        <label class="px-3" for="changePeriod" >Change Period</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div *ngIf="this.displayChangePeriod">
+                        <select ngbPopover="Specify whether the requested change will be permanent or just temporary by selecting an option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="CHANGE PERIOD"
+                                class="rounded w-100 form-control"
+                                name="changePeriod"
+                                id="changePeriod"
+                                (change)="onSelectChangePeriod($event)">
+                            <option selected="selected" disabled="disabled">Select one</option>
+                            <option  *ngFor="let period of availablePeriods">{{period}}</option>
+                        </select>
+                     </div>
+                </div>
+                <div class="col-sm">
+                    <div  *ngIf="this.displaySelectTemporaryAmountOfDays">
+                        <label class="px-3" for="changePeriod" >Temporary period number of days</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div  *ngIf="displaySelectTemporaryAmountOfDays">
+                        <select ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"
+                                class="rounded w-100 form-control"
+                                name="temporaryNoDays"
+                                id="temporaryNoDays"
+                                (change)="onSelectNumberOfTemporaryDays($event)" >
+                            <option selected="selected" disabled="disabled">Select no. of days</option>
+                            <option  *ngFor="let day of availableNumberOfTemporaryDays" value="{{day}}">{{day}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm"></div>
+            </div>
+            <div class="row pt-3" *ngIf="displayTemporaryDateSelection">
+                <div class="col-sm">
+                    <label class="px-3" for="changePeriod" >Temporary period start date:</label>
+                </div>
+                <div class="col-sm ">
+                    <input class="rounded w-100 form-control"
+                           type="text"
+                           id="temporaryPeriod"
+                           name="temporaryPeriod"
+                           bsDaterangepicker
+                           [bsConfig]="datepickerConfig"
+                           [(ngModel)]="this.dateRangePicker"
+                           (ngModelChange)="onSelectTemporaryStartDate($event)"
+                           >
+                </div>
+                <div class="col-sm ">{{this.phase1.temporaryPeriodStartDate}}</div>
+                <div class="col-sm ">{{this.phase1.temporaryPeriodEndDate}}</div>
+                <div class="col-sm "></div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayNatureOfChange">
+            <div class="row" *ngIf="this.displayNatureOfChange">
+                <div class="col-sm">
+                    <div *ngIf="this.displayNatureOfChange">
+                        <label class="px-3" for="natureOfChange">Nature of the change</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div *ngIf="this.displayNatureOfChange">
+                        <select popoverTitle="SELECT NATURE OF CHANGE" ngbPopover="Select an option from the drop down list. National = Change affects both Northern and Southern regions. Regional = Either Northern or Southern is affected, but not both. Local = any ATCC or TCU or RT" triggers="mouseenter:mouseleave" placement="right"
+                                class="rounded w-100 form-control"
+                                name="natureOfChange"
+                                id="natureOfChange"
+                                (change)="onSelectNatureOfChange($event)"
+                                [(ngModel)]="this.phase1.natureOfChange">
+                            <option selected="selected" disabled="disabled">Select one</option>
+                            <option  *ngFor="let change of availableNatureOfChange">{{change}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div *ngIf="this.displayEOSystem">
+                        <label class="px-3"  for="eosSystem">EOS system</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div *ngIf="this.displayEOSystem">
+                        <select popoverTitle="SELECT EOS SYSTEM" ngbPopover="Please select from the drop down list the Essential Operational System (EOS) to which the Trusted Computing Base (TCB) change will be applied." triggers="mouseenter:mouseleave" placement="right"
+                                class="w-100 rounded form-control"
+                                name="eosSystem"
+                                id="eosSystem"
+                                (change)="onSelectEosSystem($event)" >
+                            <option selected="selected" disabled="disabled">Select one</option>
+                            <option  *ngFor="let eos of availableEosSystems">{{eos}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm "></div>
+            </div>
+        </div>
+<!--</div>-->
+<!--    <div class="card">-->
+        <div class="form-group" *ngIf="this.displayTCB_CRF_ID">
+            <div class="row" *ngIf="this.displayTCB_CRF_ID">
+                <div class="col-sm">
+                    <label class="px-3" for="tcbID">TCB-CRF ID:</label>
+                </div>
+                <div class="col-sm">
+                    <input popoverTitle="CHANGE REQUEST IDENTIFICATION" ngbPopover="The TCB-CRF ID is an unique number relative to an EOS system issued by the TCB-CRF Administrator for every change request submitted for approval and implementation." triggers="mouseenter:mouseleave" placement="right"
+                           class="rounded form-control"
+                           id="tcbID"
+                           name="tcbID"
+                           type="text"
+                           [(ngModel)]="this.phase1.TCB_CRF_ID"  >
+                </div>
+                <div class="col-sm"></div>
+                <div class="col-sm"></div>
+                <div class="col-sm"></div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayConfigurationItems">
+            <div *ngIf="this.displayConfigurationItems">
+                <div class="row">
+                    <div class="col-sm">
+                        <label class="px-3" for="configurationItems">Configuration Items: </label>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="px-3">
+                    <input  popoverTitle="ENTER ALL CONFIGURATION ITEMS" ngbPopover="TECH: Enter any sub system or system component that will be subject to the change e.g. EXTRA HDD, SW VERS., RADAR FEED, DATASET- ANY CHANGE TO THE TCB NEEDS TO BE APPROVED. OPS: Enter short description of the request.  Maximum 250 characters allowed" triggers="mouseenter:mouseleave" placement="right"
+                            maxlength="250"
+                            class="rounded w-75 form-control"
+                            id="configurationItems"
+                            name="configurationItems"
+                            type="text"
+                            (input)="this.displayChangeType = true"
+                            [(ngModel)]="this.phase1.configurationItems">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div *ngIf="this.displayChangeType">
+                        <label class="px-3">Change Type: </label>
+                    </div>
+                </div>
+                <div class="col"
+                     popoverTitle="CHANGE TYPE" ngbPopover="Select the type of change. Hardware (HW), Software (SW) or Firmware (FW). One or more of these options must be ticked if affected by the change." triggers="mouseenter:mouseleave" placement="right"
+                >
+                    <div *ngIf="this.displayChangeType">
+                        <label class="checkbox-inline px-3">
+                            <input type="checkbox"
+                                   value="HW"
+                                   (click)="onSelectChangeTypeHW($event)" >
+                            Hardware
+                        </label>
+                        <label class="checkbox-inline px-3">
+                            <input type="checkbox"
+                                   value="SW"
+                                   (click)="onSelectChangeTypeSW($event)">
+                            Software
+                        </label>
+                        <label class="checkbox-inline px-3">
+                            <input type="checkbox"
+                                   value="FW"
+                                   (click)="onSelectChangeTypeFW($event)">
+                            Firmware
+                        </label>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div *ngIf="this.displayAdditionalAttachedDocuments">
+                <div class="row">
+                    <div class="col">
+                        <label class="px-3 ">Additional attached Documents: </label>
+                    </div>
+                    <div class="col"
+                     popoverTitle="ADDITIONAL DOCUMENTS ATTACHED" ngbPopover="Tick the box next to the appropriate answer whether additional documents are attached for Phase-1. Normally there should be documents attached explaining why the change is requested and what pre-testing and evaluation has been done. " triggers="mouseenter:mouseleave" placement="right"
+                    >
+                        <Label class="radio-inline px-3">
+                            <input type="radio"
+                                   name="additionalDocs"
+                                   value="yes"
+                                   (click)="onSelectAdditionalDocuments($event)">
+                            Yes
+                        </Label>
+                        <Label class="radio-inline px-3">
+                            <input type="radio"
+                                   name="additionalDocs"
+                                   value="no"
+                                   (click)="onSelectAdditionalDocuments($event)" >
+                            No
+                        </Label>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.phase1.additionalDocuments === true">
+            <div class="row">
+                <div class="col">
+                    <label class="px-3" for="numberOfPages">Number of Pages (Documents): </label>
+                </div>
+                <div class="col">
+                    <input class="px-3 form-control rounded"
+                           type="number"
+                           name="numberOfPages"
+                           id="numberOfPages"
+                           [(ngModel)]="this.phase1.numberOfPages">
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="px-3">
+                <ngx-file-drop multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                               (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                    <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        Please drag and drop your additional files here
+                        <button type="button" (click)="openFileSelector()">Browse Files</button>
+                    </ng-template>
+                </ngx-file-drop>
+                <div class="upload-table px-3">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody class="upload-name-style">
+                        <tr *ngFor="let item of files">
+                            <td><strong>{{ item[0].relativePath }}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayEstimatedImpact">
+            <label class="px-3">Estimated Impact: </label>
+            <div class="px-3">
+                <div *ngIf="this.displayEstimatedImpactOps">
+                    <label for="operationsImpact" class="">Operations: </label>
+                    <br>
+                    <input popoverTitle="IMPACT=FUNCTIONAL/PROCEDURAL/etc" ngbPopover="Operations: e.g. NORM mode will be down, Redundency lost, No new FPLs, Operator Handbooks" triggers="mouseenter:mouseleave" placement="right"
+                           class="w-75 rounded form-control"
+                           type="text"
+                           id="operationsImpact"
+                           name="operationsImpact"
+                           (input)="estimatedImpact($event)"
+                           [(ngModel)]="this.phase1.estimatedImpacts.operations">
+                </div>
+                <div *ngIf="this.displayEstimatedImpactClients">
+                    <label for="clientsImpact" class="">Clients: </label>
+                    <br>
+                    <input popoverTitle="IMPACT=FUNCTIONAL/PROCEDURAL/etc" ngbPopover="Clients: External and Internal - loss of service such as slot information, procedural changes, etc." triggers="mouseenter:mouseleave" placement="right"
+                           class=" w-75 rounded form-control"
+                           type="text"
+                           id="clientsImpact"
+                           name="clientsImpact"
+                           (input)="estimatedImpact($event)"
+                           [(ngModel)]="this.phase1.estimatedImpacts.clients">
+                </div>
+                <div *ngIf="this.displayEstimatedImpactTech">
+                    <label for="technicalImpact" class="">Technical: </label>
+                    <br>
+                    <input popoverTitle="IMPACT=FUNCTIONAL/PROCEDURAL/etc" ngbPopover="Technical: Node Down, LAN switch down, Documents" triggers="mouseenter:mouseleave" placement="right"
+                           class=" w-75 rounded form-control"
+                           type="text"
+                           id="technicalImpact"
+                           name="technicalImpact"
+                           (input)="estimatedImpact($event)"
+                           [(ngModel)]="this.phase1.estimatedImpacts.technical">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayProblemReportRaised">
+            <div class="row">
+                <div class="col">
+                    <label class="px-3">Problem Report raised with Contractor?</label>
+                </div>
+                <div class="col"
+                     popoverTitle="PROBLEM REPORT RAISED?" ngbPopover="Specify yes or no whether a problem request or report has been raised with the contractor by selecting the appropriate check box with a left-mouse-button click." triggers="mouseenter:mouseleave" placement="right"
+                >
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="reportRaised"
+                               value="yes"
+                               (click)="onSelectReportRaised($event)">
+                        Yes
+                    </Label>
+                    <Label class="radio-inline px-3">
+                        <input type="radio"
+                               name="reportRaised"
+                               value="no"
+                               (click)="onSelectReportRaised($event)" >
+                        No
+                    </Label>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div *ngIf="this.phase1.problemReportRaised" >
+                <div class="row">
+                    <div class="col">
+                        <label for="problemReportRef" class="px-3">Problem Report Reference Number: </label>
+                    </div>
+                    <div class="col">
+                        <input popoverTitle="PROBLEM REPORT REFERENCE" ngbPopover="Enter the problem report reference number here. The problem report refers to a report that was sent to the contractor to improve a functionality or solve a problem on the system. Can be a PR, ECR, PCR, CR, etc." triggers="mouseenter:mouseleave" placement="right"
+                               class="w-100 rounded form-control"
+                               type="text"
+                               name="problemReportRef"
+                               id="problemReportRef"
+                               (input)="onInputProblemReportRef()"
+                               [(ngModel)]="this.phase1.problemReportRef">
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayChangePreTested">
+            <div *ngIf="this.displayChangePreTested">
+                <div class="row">
+                    <div class="col">
+                        <label class="px-3">Change successfully pre-tested ?</label>
+                    </div>
+                    <div class="col"
+                         popoverTitle="CHANGE SUCCESSFULLY PRE-TESTED ?" ngbPopover="Specify whether pre-tests or validations concerning the change were successful by selecting a check box accordingly with the left-mouse button." triggers="mouseenter:mouseleave" placement="right"
+                    >
+                        <Label class="radio-inline px-3">
+                            <input type="radio"
+                                   name="preTested"
+                                   value="yes"
+                                   (click)="onSelectPreTested($event)">
+                            Yes
+                        </Label>
+                        <Label class="radio-inline px-3">
+                            <input type="radio"
+                                   name="preTested"
+                                   value="no"
+                                   (click)="onSelectPreTested($event)" >
+                            No
+                        </Label>
+                        <Label class="radio-inline px-3">
+                            <input type="radio"
+                                   name="preTested"
+                                   value="na"
+                                   (click)="onSelectPreTested($event)" >
+                            N/A
+                        </Label>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="px-3" *ngIf="this.displayChangeNotSuccessfullyTestedReason">
+                    <div class="row">
+                        <div class="col">
+                            <label for="changeNotSuccessfullyTestedReason" class="">Reason for unsuccessful test: </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input popoverTitle="Reason for unsuccessful testing" ngbPopover="If the tests were unsuccessful please provide the reason here" triggers="mouseenter:mouseleave" placement="right"
+                                   class="w-75 rounded form-control"
+                                   type="text"
+                                   id="changeNotSuccessfullyTestedReason"
+                                   name="changeNotSuccessfullyTestedReason"
+                                   (input)="onUnsuccessfulTestReason()"
+                                   [(ngModel)]="this.phase1.changeNotSuccessfullyTestedReason">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="form-group">-->
+<!--            <div class="row">-->
+<!--                <div class="col">-->
+<!--                    <label class="px-3">Request submitted to all concerned parties ?</label>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <Label class="radio-inline px-3"><input type="radio" name="submittedToAll" value="yes"  (click)="onSelectSubmittedToAllConcerned($event)">Yes</Label>-->
+<!--                    <Label class="radio-inline px-3"><input type="radio" name="submittedToAll" value="no"   (click)="onSelectSubmittedToAllConcerned($event)" >No</Label>-->
+<!--                </div>-->
+<!--                <div class="col"></div>-->
+<!--            </div>-->
+
+<!--            <div  class="px-3" *ngIf="!this.phase2.submittedToAllParties">-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        <label class="">Reason why not submitted to all concerned parties?</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        <input class=" w-75 rounded form-control" type="text" name="requestNotSubmittedToAllParties" [(ngModel)]="this.phase2.notSubmittedToAllPartiesReason">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="form-group" *ngIf="this.displaySpecialistComments">
+            <div class="px-3" >
+                <div class="row" *ngIf="this.displaySpecialistComments">
+                    <div class="col">
+                        <label for="specialistComments" >Specialist comments</label>
+                    </div>
+                </div>
+                <div class="row" *ngIf="this.displaySpecialistComments">
+                    <div class="col">
+                        <input
+                                class="px-3 w-75 rounded form-control"
+                                type="text"
+                                name="specialistComments"
+                                id="specialistComments"
+                                (input)="onInputSpecialistComment()"
+                                [(ngModel)]="this.phase1.specialistComment">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group"  *ngIf="this.displaySpecialistComments" >
+            <div class="py-3">
+                <div class="row" >
+                    <div class="col">
+                        <label class="px-3" for="proposedDate">Proposed Implementation Date: </label>
+                    </div>
+                    <div class="col">
+                        <input class=" px-3 rounded w-75 form-control"
+                               type="text"
+                               id="proposedDate"
+                               name="proposedDate"
+                               [bsConfig]="datepickerConfig"
+                               (click)="onSelectProposedImplementationDate()"
+                               [(ngModel)]="this.phase1.proposedImplementationDate"  bsDatepicker>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="this.displayRecommendOrOppose || this.emergencySelected">
+            <div class="row" >
+                <div class="col">
+                    <label class="px-3" for="recommend/oppose">Recommend Or Oppose change:</label>
+                </div>
+                <div class="col">
+
+                    <select class="px-3 rounded w-75 form-control"
+                            id="recommend/oppose"
+                            name="recommend/oppose"
+                            (change)="onSelectRecommendOrOppose($event)" >
+                        <option selected="selected" disabled="disabled">Select one</option>
+                        <option  value="Recommend" >Recommend</option>
+                        <option value="Oppose">Oppose</option>
+                        <<option value="re-test">Re-Test</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div  class="row px-3">
+                <div class="col"></div>
+                <div class="col">
+                    <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0"
+                            (click)="onSubmit()"> Cancel
+                    </button>
+                </div>
+                <div class="col"></div>
+                <div class="col" >
+                    <button [disabled]="!this.activateSubmitButton"
+                            class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled"
+                            id="submit"
+                            (click)="onSubmit()"> Submit
+                    </button>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+</form>

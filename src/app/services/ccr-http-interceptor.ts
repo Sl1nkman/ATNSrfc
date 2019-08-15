@@ -16,7 +16,7 @@ export class CcrHttpInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const Authorization = this.cookieService.get('jwt');
         if (Authorization) {
-            req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + Authorization) });
+            req = req.clone({ headers: req.headers.set('Authorization', Authorization) });
         }
 
         if (!req.headers.has('Content-Type')) {
@@ -27,7 +27,9 @@ export class CcrHttpInterceptor implements HttpInterceptor {
 
         return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
+                 // req.headers.append('Authorization', 'Bearer ' + Authorization);
                 if (event instanceof HttpResponse) {
+                    console.log ('intercept event')
                     console.log('event--->>>', event);
                 }
                 return event;

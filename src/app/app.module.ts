@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // imports for bootstrap forms
-import { HttpClientModule  } from '@angular/common/http';
+import { HttpClientModule , HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
@@ -23,16 +23,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { MyRFCSComponent } from './pages/my-rfcs/my-rfcs.component';
 import { CurrentRFCSComponent } from './pages/current-rfcs/current-rfcs.component';
-import { CreateRfcsComponent } from './pages/create-rfcs/create-rfcs.component';
+import { Phase1Component } from './pages/phase1/phase1.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
-import { Phase1Component } from './pages/phase1/phase1.component';
+import { Phase2Component } from './pages/phase2/phase2.component';
 import { Phase3Component } from './pages/phase3/phase3.component';
 // Routing guards, module and auth service
 import {AuthGuard} from './guards/auth.guard';
 import {RouteGuard} from './guards/route.guard';
 import { AppRoutingModule } from './models/app-routing.module';
 import {RouteAuthorisationService} from './services/route-authorisation.service';
+import {CcrHttpInterceptor} from './services/ccr-http-interceptor';
 
 @NgModule({
   declarations: [
@@ -42,11 +43,11 @@ import {RouteAuthorisationService} from './services/route-authorisation.service'
     NavbarComponent,
     SidebarComponent,
     MyRFCSComponent,
-    CreateRfcsComponent,
+    Phase1Component,
     HomeComponent,
     CurrentRFCSComponent,
     RFCsignoffComponent,
-    Phase1Component,
+    Phase2Component,
     Phase3Component,
 
   ],
@@ -66,7 +67,8 @@ import {RouteAuthorisationService} from './services/route-authorisation.service'
         NgbPopoverModule,
         SelectDropDownModule,
     ],
-  providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard  ],
+  providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard,
+      { provide: HTTP_INTERCEPTORS, useClass: CcrHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 

@@ -20,12 +20,18 @@ return this.loggedInStatus;
     this.loggedInStatus = value;
   }
 
-  getUserDetails(username , password , token) {
-    const obj = {username ,  password , token}
+  getUserDetails(username , password , CSRF_token) {
+    const obj = {
+      username : username ,
+      password: password ,
+      CSRF_token: CSRF_token
+    };
     return this.http.post( 'http://localhost/ATNSCCR_PHP/backend/api2/login.php', obj , httpOptions); ;
   }
 
   getCSRFToken() {
     return  this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
+
+
 }
