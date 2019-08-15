@@ -29,8 +29,6 @@ export class CcrHttpInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                  // req.headers.append('Authorization', 'Bearer ' + Authorization);
                 if (event instanceof HttpResponse) {
-                    console.log ('intercept event')
-                    console.log('event--->>>', event);
                 }
                 return event;
             }));
