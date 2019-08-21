@@ -15,7 +15,6 @@ export class RouteGuard implements CanActivate , CanActivateChild {
 
   constructor(
       private routeAuthorisationService: RouteAuthorisationService,
-      private router: Router
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,

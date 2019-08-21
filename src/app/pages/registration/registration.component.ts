@@ -40,6 +40,32 @@ export class RegistrationComponent implements OnInit {
   availableSites: String [] = ['Site1' , 'Site2', 'Site3']; // to be delegated to database
   constructor( private router: Router , private registration: RegistrationService) { }
 
+  onSelectTitle($event){
+    if (!(this.User.title === undefined) &&
+        !(this.User.site === undefined) &&
+        !(this.User.email === undefined) &&
+        !(this.User.employeeId === undefined) &&
+        !(this.User.contactNumber === undefined) &&
+        !(this.User.name === undefined) &&
+        !(this.User.surname === undefined) &&
+        !(this.password === undefined)
+    ) {
+      this.showRegisterButton = true;
+    }
+  }
+  onSelectSite($event){
+    if (!(this.User.title === undefined) &&
+        !(this.User.site === undefined) &&
+        !(this.User.email === undefined) &&
+        !(this.User.employeeId === undefined) &&
+        !(this.User.contactNumber === undefined) &&
+        !(this.User.name === undefined) &&
+        !(this.User.surname === undefined) &&
+        !(this.password === undefined)
+    ) {
+      this.showRegisterButton = true;
+    }
+  }
   // Validates email input
   validateEmail(email: string) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,36 +74,9 @@ export class RegistrationComponent implements OnInit {
   } else {
     this.showEmail = true;
   }
-}
-
-
-  onSelectTitle(value: string) {
-    this.User.title = value;
-  }
-  onSelectSite(value: string) {
-    this.User.site =  value;
   }
 
-    onCancel() {
-        this.router.navigate(['login']);
-    }
-  // Called on register button click this is where the data is stored in the database and the password is hashed and stored in the login object
-  onRegister() {
-    if (this.showRegisterButton === true) {
-      // const hash = crypto.MD5(this.passwordCheck);
-      this.User.password = this.passwordCheck;
-      this.registration.registerUser(this.User , this.Token).subscribe((data: Data) => {
-        if (data.success) {
-          swal('Success!', data.message, 'success');
-          this.router.navigate(['login']);
-        } else {
-          swal('Failure', data.message, 'error');
-        }
-      });
-    } else {
-      swal('Failure', 'Please complete the registration form', 'error');
-    }
-  }
+
   // Validates password on input
   validatePassword(value: string) {
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[.@#\$%\^&\*])(?=.{8,})/;
@@ -102,7 +101,17 @@ if (this.password === value) {
     const registerButton = document.getElementById('submit');
     registerButton.classList.remove('disabled');
   this.showPasswordCheck = true;
-  this.showRegisterButton = true;
+  if (!(this.User.title === undefined) &&
+      !(this.User.site === undefined) &&
+      !(this.User.email === undefined) &&
+      !(this.User.employeeId === undefined) &&
+      !(this.User.contactNumber === undefined) &&
+      !(this.User.name === undefined) &&
+      !(this.User.surname === undefined) &&
+      !(this.password === undefined)
+  ) {
+    this.showRegisterButton = true;
+  }
 } else {
   this.showPasswordCheck = false;
   this.showRegisterButton = false;
@@ -116,9 +125,38 @@ if (this.password === value) {
       this.showEmpId = false;
     }
   }
+  onCancel() {
+    this.router.navigate(['login']);
+  }
+  // Called on register button click this is where the data is stored in the database and the password is hashed and stored in the login object
+  onRegister() {
+    if (this.showRegisterButton === true) {
+      // const hash = crypto.MD5(this.passwordCheck);
+      this.User.password = this.passwordCheck;
+      console.log(this.User);
+      this.registration.registerUser(this.User , this.Token).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success!', data.message, 'success');
+          this.router.navigate(['login']);
+        } else {
+          this.registration.getCSRFToken().subscribe( (data1: Data) => {
+            this.Token = data1.tokenValue ;
+          });
+          swal('Failure', data.message, 'error');
+        }
+      });
+    } else {
+      swal('Failure', 'Please complete the registration form', 'error');
+    }
+  }
   ngOnInit() {
      this.registration.getCSRFToken().subscribe( (data: Data) => {
        this.Token = data.tokenValue ;
      });
+    this.registration.getPageData().subscribe((data: Data) => {
+      this.availableSites = data[0];
+      this.availableTitles = data[1];
+
+    });
   }
 }

@@ -168,7 +168,7 @@ export class Phase2Component implements OnInit {
         this.displayNatureOfChange = true ;
     }
     onSelectImpact($event) {
-        console.log(this.phase1.predictedImpact)
+        console.log(this.phase1.predictedImpact);
         if (this.phase1.predictedImpact !== []) {
             this.displayChangePeriod = true;
             if (this.phase1.predictedImpact.includes('CLIENTS')) {

@@ -45,7 +45,7 @@ export class Phase1Component implements OnInit {
       this.router.navigate(['home']);
   }
   onSubmit() {
-    this.setRFCDate();
+    // this.setRFCDate();
     this.phase1Service.submitRequest( this.RFC , this.Token).subscribe( (data: Data) => {
       if (data.success) {
         this.router.navigate(['home']);

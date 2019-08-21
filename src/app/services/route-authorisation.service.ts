@@ -13,7 +13,7 @@ export class RouteAuthorisationService {
     if (allowedRoles == null || allowedRoles.length === 0) {
       return true;
     }
-    // get token from coockie or state management
+    // get token from cookie or state management
     const token = this.cookieService.get('jwt');
     // decode token to read the payload details
     const decodeToken = decode(token);

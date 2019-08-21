@@ -14,14 +14,14 @@
             </div>
             <div class="col">
                 <select
-                        class="px-3 rounded "
+                        class="px-3 rounded form-control"
                         name="title"
                         id="title"
+                        (change)="onSelectTitle($event)"
                         [(ngModel)]="this.User.title"
-
                 >
                     <option selected="selected" disabled="disabled">Select one</option>
-                    <option *ngFor="let title of availableTitles">{{title}}</option>
+                    <option *ngFor="let title of availableTitles"  [value]="title[0]" >{{title[1]}}</option>
                 </select>
             </div>
             <div class="col">
@@ -29,12 +29,14 @@
             </div>
             <div class="col">
                 <select
-                        class="px-3 rounded "
+                        class="px-3 rounded form-control"
                         [(ngModel)]="this.User.site"
                         name="site"
-                        id="site">
+                        id="site"
+                        (change)="onSelectTitle($event)"
+                >
                     <option selected="selected" disabled="disabled">Select one</option>
-                    <option *ngFor="let site of availableSites">{{site}}</option>
+                    <option *ngFor="let site of availableSites" [value]="site[0]">{{site[1]}}</option>
                 </select>
             </div>
         </div>

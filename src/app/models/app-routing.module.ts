@@ -14,21 +14,22 @@ import {Phase3Component} from '../pages/phase3/phase3.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'registration', component: RegistrationComponent },
-  {path: 'phase1' , component: Phase2Component},
-  {path: 'phase3' , component: Phase3Component},
-  { path: 'home' , component: HomeComponent, canActivate: [AuthGuard] ,
+  { path: 'login',        component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
+  { path: 'phase1' ,      component: Phase2Component},
+  { path: 'phase3' ,      component: Phase3Component},
+  { path: 'home' ,        component: HomeComponent,
+    canActivate: [AuthGuard] ,
     canActivateChild: [RouteGuard],
     children: [
       { path: 'createRFC' ,   component: Phase1Component },
       { path: 'myRFCS' ,      component: MyRFCSComponent } ,
-      { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedRoles: ['1', '2'] } },
+      { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedRoles: ['1', '2'] }},
       { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedRoles: ['1', '2'] }},
-      {path: 'phase1' , component: Phase2Component , data: { allowedRoles: ['1', '2']}},
-      {path: 'phase3' , component: Phase3Component}
+      { path: 'phase1' ,      component: Phase2Component ,      data: { allowedRoles: ['1', '2'] }},
+      { path: 'phase3' ,      component: Phase3Component}
       ]},
-  { path: '**', component: RegistrationComponent },
+  { path: '**',           component: LoginComponent },
 ];
 
 
