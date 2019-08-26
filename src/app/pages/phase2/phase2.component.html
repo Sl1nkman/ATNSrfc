@@ -96,21 +96,30 @@
             </div>
             <div class="row pt-3" *ngIf="displayTemporaryDateSelection">
                 <div class="col-sm">
-                    <label class="px-3" for="changePeriod" >Temporary period start date:</label>
+                    <label class="px-3" for="temporaryStartPeriod" >Temporary period start date:</label>
                 </div>
                 <div class="col-sm ">
                     <input class="rounded w-100 form-control"
                            type="text"
-                           id="temporaryPeriod"
-                           name="temporaryPeriod"
-                           bsDaterangepicker
+                           id="temporaryStartPeriod"
+                           name="temporaryStartPeriod"
+                           bsDatepicker
                            [bsConfig]="datepickerConfig"
-                           [(ngModel)]="this.dateRangePicker"
+                           [(ngModel)]="this.phase1.temporaryPeriodStartDate"
                            (ngModelChange)="onSelectTemporaryStartDate($event)"
                            >
                 </div>
-                <div class="col-sm ">{{this.phase1.temporaryPeriodStartDate}}</div>
-                <div class="col-sm ">{{this.phase1.temporaryPeriodEndDate}}</div>
+                <div class="col-sm "> <label class="px-3" for="temporaryEndPeriod" >Temporary period end date:</label></div>
+                <div class="col-sm "><input  class="rounded w-100 form-control"
+                                             type="text"
+                                             id="temporaryEndPeriod"
+                                             name="temporaryEndPeriod"
+                                             bsDatepicker
+                                             [bsConfig]="datepickerConfig"
+                                             [(ngModel)]="this.phase1.temporaryPeriodEndDate"
+                                             disabled
+                                             readonly>
+                </div>
                 <div class="col-sm "></div>
             </div>
         </div>
@@ -475,7 +484,7 @@
             </div>
         </div>
 
-        <div class="form-group"  *ngIf="this.displaySpecialistComments" >
+        <div class="form-group"  *ngIf="this.displaySpecialistComments && !this.displaySelectTemporaryAmountOfDays" >
             <div class="py-3">
                 <div class="row" >
                     <div class="col">

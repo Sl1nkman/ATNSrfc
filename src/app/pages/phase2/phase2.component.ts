@@ -15,6 +15,8 @@ export class Phase2Component implements OnInit {
     datepickerConfig: Partial<BsDatepickerConfig> ;
     startDate: Date;
     endDate: Date;
+    startDateString: string;
+    endDateString: string;
     dateRangePicker: Date;
     public files: NgxFileDropEntry[] [] = []  ;
 
@@ -92,11 +94,14 @@ export class Phase2Component implements OnInit {
     };
 
     constructor( ) {
+        const minDate = new Date();
+
         this.datepickerConfig = Object.assign({},
             {containerClass: 'theme-dark-blue'},
             { dateInputFormat: 'YYYY-MM-DD'} ,
             {showWeekNumbers: false},
-            {minDate: new Date()});
+            {minDate: minDate});
+
     }
 
 
@@ -160,12 +165,11 @@ export class Phase2Component implements OnInit {
         this.displayTemporaryDateSelection = true ;
     }
     onSelectTemporaryStartDate($event) {
-        console.log($event);
-        this.startDate = $event[0];
-        this.endDate = $event[1];
-        this.phase1.temporaryPeriodStartDate = this.startDate;
-        this.phase1.temporaryPeriodEndDate = this.endDate;
+        const maxDate = new Date() ;
+        maxDate.setDate($event.getDate() + parseInt('' + this.phase1.temporaryPeriodNumberOfDays, 10));
+        this.phase1.temporaryPeriodEndDate = maxDate;
         this.displayNatureOfChange = true ;
+
     }
     onSelectImpact($event) {
         console.log(this.phase1.predictedImpact);
@@ -334,20 +338,30 @@ export class Phase2Component implements OnInit {
             this.displayChangeNotSuccessfullyTestedReason = false ;
             this.displaySpecialistComments = true ;
             this.phase1.changeNotSuccessfullyTestedReason = undefined ;
+            if (this.displaySelectTemporaryAmountOfDays) {
+                this.displayRecommendOrOppose = true ;
+            }
         } else if (e.target.value === 'no') {
             this.phase1.changeNotSuccessfullyTestedReason = undefined;
             this.phase1.changeSuccessfullyTested = 'no';
             this.displayChangeNotSuccessfullyTestedReason = true ;
             this.displaySpecialistComments = false ;
+            this.displayRecommendOrOppose = false ;
         } else if (e.target.value === 'na') {
             this.phase1.changeSuccessfullyTested = 'na';
             this.displayChangeNotSuccessfullyTestedReason = false ;
             this.displaySpecialistComments = true ;
             this.phase1.changeNotSuccessfullyTestedReason = undefined ;
+            if (this.displaySelectTemporaryAmountOfDays) {
+                this.displayRecommendOrOppose = true ;
+            }
         }
     }
     onUnsuccessfulTestReason() {
         this.displaySpecialistComments = true ;
+        if (this.displaySelectTemporaryAmountOfDays) {
+            this.displayRecommendOrOppose = true ;
+        }
     }
 
     onInputSpecialistComment() {
