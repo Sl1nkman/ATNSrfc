@@ -39,7 +39,14 @@ export class LoginComponent implements OnInit {
           this.cookieService.set( 'jwt', data.jwt );
 
           this.router.navigate(['home']  );
-          swal('Logged In' , data.message , 'success' );
+          // swal('Logged In' , data.message , 'success' );
+          swal({
+            type: 'success',
+            title: 'Logged In',
+            text: data.message ,
+            showConfirmButton: false,
+            timer: 1500
+          });
         } else {
           this.OAuthService.getCSRFToken().subscribe( ( data1: Data) => {
             this.Token = data1.tokenValue ;

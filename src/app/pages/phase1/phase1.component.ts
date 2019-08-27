@@ -45,16 +45,42 @@ export class Phase1Component implements OnInit {
       this.router.navigate(['home']);
   }
   onSubmit() {
-    // this.setRFCDate();
-    this.phase1Service.submitRequest( this.RFC , this.Token).subscribe( (data: Data) => {
-      if (data.success) {
-        this.router.navigate(['home']);
-        swal('Success' , data.message , 'success' );
-      } else {
-        swal('Failure' , data.message , 'error' );
+
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able make changes to your submission",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#5bc0de',
+      cancelButtonColor: '#d9534f' ,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.phase1Service.submitRequest( this.RFC , this.Token).subscribe( (data: Data) => {
+          if (data.success) {
+            this.router.navigate(['home']);
+            swal('Success' , data.message , 'success' );
+          } else {
+            swal('Failure' , data.message , 'error' );
+          }
+        });
+      } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === swal.DismissReason.cancel
+      ) {
+        swal({
+          title: 'Cancelled',
+          text: 'Your may continue to make changes',
+          type: 'error',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     });
   }
+
   ngOnInit() {
     this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
       this.Token = data.tokenValue ;

@@ -8,9 +8,9 @@ export class RouteAuthorisationService {
 
   constructor( private cookieService: CookieService) {}
 
-  isAuthorized(allowedRoles: string[]): boolean {
+  isAuthorized(allowedPermission: string): boolean {
     // check if the list of allowed roles is empty, if empty, authorize the user to access the page
-    if (allowedRoles == null || allowedRoles.length === 0) {
+    if (allowedPermission == null || allowedPermission.length === 0) {
       return true;
     }
     // get token from cookie or state management
@@ -23,6 +23,6 @@ export class RouteAuthorisationService {
       return false;
     }
     // check if the user roles is in the list of allowed roles, return true if allowed and false if not allowed
-    return allowedRoles.includes(decodeToken.data.role);
+    return decodeToken.data.permissions.includes(allowedPermission);
   }
 }

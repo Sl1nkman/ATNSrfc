@@ -3,6 +3,7 @@ import {CCRPhase1} from '../../models/CCR-Phase1';
 import {RFC} from '../../models/RFC';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class Phase2Component implements OnInit {
         'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
         'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
 
-    // Form boolean values
+    // Form display boolean values
     emergencySelected: boolean;
     displayPredictedRisks: boolean;
     displayChangePeriod: boolean;
@@ -42,7 +43,6 @@ export class Phase2Component implements OnInit {
     displayChangeType: boolean;
     displaySelectTemporaryAmountOfDays: boolean ;
     displayTemporaryDateSelection: boolean;
-
     displayAdditionalAttachedDocuments: boolean ;
     displayEstimatedImpact: boolean ;
     displayEstimatedImpactOps: boolean;
@@ -97,10 +97,10 @@ export class Phase2Component implements OnInit {
         const minDate = new Date();
 
         this.datepickerConfig = Object.assign({},
-            {containerClass: 'theme-dark-blue'},
-            { dateInputFormat: 'YYYY-MM-DD'} ,
-            {showWeekNumbers: false},
-            {minDate: minDate});
+            {containerClass: 'theme-dark-blue' },
+            { dateInputFormat: 'YYYY-MM-DD' } ,
+            { showWeekNumbers: false },
+            { minDate: minDate });
 
     }
 
@@ -172,7 +172,6 @@ export class Phase2Component implements OnInit {
 
     }
     onSelectImpact($event) {
-        console.log(this.phase1.predictedImpact);
         if (this.phase1.predictedImpact !== []) {
             this.displayChangePeriod = true;
             if (this.phase1.predictedImpact.includes('CLIENTS')) {
@@ -216,10 +215,8 @@ export class Phase2Component implements OnInit {
 
         if (e.target.checked) {
             this.phase1.change.hardware = true;
-            console.log(this.phase1.change.hardware);
         } else {
             this.phase1.change.hardware = false ;
-            console.log(this.phase1.change.hardware);
         }
         if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
             this.displayAdditionalAttachedDocuments = true ;
@@ -229,10 +226,8 @@ export class Phase2Component implements OnInit {
     onSelectChangeTypeSW(e) {
         if (e.target.checked) {
             this.phase1.change.software = true;
-            console.log(this.phase1.change.software);
         } else {
             this.phase1.change.software = false ;
-            console.log(this.phase1.change.software);
         }
         if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
             this.displayAdditionalAttachedDocuments = true ;
@@ -242,10 +237,8 @@ export class Phase2Component implements OnInit {
     onSelectChangeTypeFW(e) {
         if (e.target.checked) {
             this.phase1.change.firmware = true;
-            console.log(this.phase1.change.firmware);
         } else {
             this.phase1.change.firmware = false ;
-            console.log(this.phase1.change.firmware);
         }
         if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
             this.displayAdditionalAttachedDocuments = true ;
@@ -255,13 +248,11 @@ export class Phase2Component implements OnInit {
         if (e.target.value === 'yes') {
             this.phase1.additionalDocuments = true;
             this.displayEstimatedImpact = false ;
-            console.log('We have additional work');
         } else if (e.target.value === 'no') {
             this.files = [];
             this.phase1.additionalDocuments = false;
             this.phase1.numberOfPages = undefined ;
             this.displayEstimatedImpact = true ;
-            console.log('No additional work');
         }
     }
     public dropped(files: NgxFileDropEntry[]) {
@@ -388,9 +379,32 @@ export class Phase2Component implements OnInit {
 
     onSubmit() {
 
-
-        console.log(JSON.stringify(this.phase1));
-
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able make changes to your submission",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f' ,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                // perform post with service
+                console.log(JSON.stringify(this.phase1));
+            } else if (
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
     }
 
 

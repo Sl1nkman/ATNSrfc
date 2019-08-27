@@ -20,7 +20,6 @@ export class Phase1Service {
       description: phase1.description,
       CSRF_token: token
     };
-    console.log(obj);
      return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', obj , httpOptions);
   }
   getCSRFToken() {
