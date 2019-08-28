@@ -40,7 +40,7 @@ export class RegistrationComponent implements OnInit {
   availableSites: String [] = ['Site1' , 'Site2', 'Site3']; // to be delegated to database
   constructor( private router: Router , private registration: RegistrationService) { }
 
-  onSelectTitle($event){
+  onSelectTitle($event) {
     if (!(this.User.title === undefined) &&
         !(this.User.site === undefined) &&
         !(this.User.email === undefined) &&
@@ -53,7 +53,7 @@ export class RegistrationComponent implements OnInit {
       this.showRegisterButton = true;
     }
   }
-  onSelectSite($event){
+  onSelectSite($event) {
     if (!(this.User.title === undefined) &&
         !(this.User.site === undefined) &&
         !(this.User.email === undefined) &&

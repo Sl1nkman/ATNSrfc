@@ -60,7 +60,6 @@ export class Phase3Component implements OnInit {
         {showWeekNumbers: false},
         {minDate: new Date()});
   }
-
   onSelectTCBEval($event) {
       const startDate = $event[0];
       const endDate = $event[1];
