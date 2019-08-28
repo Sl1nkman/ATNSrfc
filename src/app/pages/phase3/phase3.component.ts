@@ -62,8 +62,8 @@ export class Phase3Component implements OnInit {
   }
 
   onSelectTCBEval($event) {
-      let startDate = $event[0];
-      let endDate = $event[1];
+      const startDate = $event[0];
+      const endDate = $event[1];
       console.log(startDate);
       console.log(endDate);
       this.phase3.tcbEvalStart = startDate;
@@ -163,7 +163,7 @@ export class Phase3Component implements OnInit {
       }
   }
 
-  onSelectConfirm(e){
+  onSelectConfirm(e) {
       if (e.target.value === 'Confirm') {
           this.phase3.ccrConfirmation = true;
           this.activateSubmitButton = true;
@@ -172,10 +172,7 @@ export class Phase3Component implements OnInit {
           this.activateSubmitButton = true;
       }
   }
-  onSubmit(){
-
-    onSubmit() {
-
+  onSubmit() {
         console.log(JSON.stringify(this.phase3));
 
     }
@@ -235,4 +232,4 @@ export class Phase3Component implements OnInit {
 
 }
 
-//Created by Blaine Viljoen 28023374
+// Created by Blaine Viljoen 28023374
