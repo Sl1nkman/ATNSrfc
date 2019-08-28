@@ -26,7 +26,7 @@ const routes: Routes = [
       { path: 'myRFCS' ,      component: MyRFCSComponent ,      data: { allowedPermission: '2' }},
       { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedPermission: '1' }},
       { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedPermission: '3' }},
-      { path: 'phase1' ,      component: Phase2Component ,      data: { allowedPermission: '1' }},
+      { path: 'phase2' ,      component: Phase2Component ,      data: { allowedPermission: '1' }},
       { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '1' }}
       ]},
   { path: '**',           component: LoginComponent },

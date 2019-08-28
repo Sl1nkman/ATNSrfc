@@ -1,13 +1,13 @@
 <aside class="sidebar shadow">
   <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
-    <div class="picture-wrapper mb-3">
-      <div class="logo-container m-auto">
-        <img src="../../../assets/images/atns_logo.png" class="img-fluid" alt="">
-      </div>
-    </div>
+<!--    <div class="picture-wrapper mb-3">-->
+<!--      <div class="logo-container m-auto">-->
+<!--        <img src="../../../assets/images/atns_logo.png" class="img-fluid" alt="">-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="profile-details text-center pb-4">
       <p class="mb-0 text-uppercase name">{{this.username}}</p>
-      <small class="text-uppercase role">Specialist/Manager/Employee</small>
+      <small class="text-uppercase role">{{this.roles}}</small>
     </div>
   </div>
   <nav class="sidebar-menu pt-3 pb-3">
@@ -26,7 +26,7 @@
         </a>
       </li>
       <li>
-        <a href="#" routerLink="/home/phase1">
+        <a href="#" routerLink="/home/phase2">
           <i class="fa fa-table"></i>
           <span>Tables</span>
         </a>

@@ -42,7 +42,32 @@ export class Phase1Component implements OnInit {
       }
   }
   onCancel() {
-      this.router.navigate(['home']);
+
+    swal({
+      title: 'Are you sure?',
+      text: 'You will lose this data',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#5bc0de',
+      cancelButtonColor: '#d9534f' ,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.router.navigate(['home/myRFCS']);
+      } else if (
+          result.dismiss === swal.DismissReason.cancel
+      ) {
+        swal({
+          title: 'Cancelled',
+          text: 'Your may continue to make changes',
+          type: 'error',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
   }
   onSubmit() {
 
