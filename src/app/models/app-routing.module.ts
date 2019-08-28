@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'home' ,        component: HomeComponent,
     canActivate: [AuthGuard] ,
     canActivateChild: [RouteGuard],
+    runGuardsAndResolvers: 'always',
     children: [
       { path: 'createRFC' ,   component: Phase1Component ,      data: { allowedPermission: '1' }},
       { path: 'myRFCS' ,      component: MyRFCSComponent ,      data: { allowedPermission: '2' }},
@@ -36,7 +37,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes , { onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

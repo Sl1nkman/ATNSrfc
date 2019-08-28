@@ -29,11 +29,11 @@ import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 import { Phase2Component } from './pages/phase2/phase2.component';
 import { Phase3Component } from './pages/phase3/phase3.component';
 // Routing guards, module and auth service
-import {AuthGuard} from './guards/auth.guard';
-import {RouteGuard} from './guards/route.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { RouteGuard } from './guards/route.guard';
 import { AppRoutingModule } from './models/app-routing.module';
-import {RouteAuthorisationService} from './services/route-authorisation.service';
-import {CcrHttpInterceptor} from './services/ccr-http-interceptor';
+import { RouteAuthorisationService } from './services/route-authorisation.service';
+import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
 
 @NgModule({
   declarations: [

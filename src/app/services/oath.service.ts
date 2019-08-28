@@ -8,7 +8,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class OathService {
-  public Token ;
   private loggedInStatus = false;
   constructor(private http: HttpClient ) { }
 
