@@ -1,7 +1,12 @@
+//Created by Blaine Viljoen 28023374
+
 import { Component, OnInit } from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {CCRPhase3} from '../../models/CCR-Phase3';
 import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
+import {Data, Router} from '@angular/router';
+import {OAuth} from '../../models/OAuth';
+import {OathService} from '../../services/oath.service';
 
 @Component({
   selector: 'app-phase3',
@@ -15,6 +20,8 @@ export class Phase3Component implements OnInit {
   displayImpSuccess: boolean;
   showImpChange: boolean;
   showEvalChange: boolean;
+  showSched: boolean;
+  activateSubmitButton: boolean ;
   public files: NgxFileDropEntry[] [] = []  ;
 
   abortOrRegress: String[] = ['Abort', 'Regress'];
@@ -27,7 +34,7 @@ export class Phase3Component implements OnInit {
     implementationSuccessful: true,
     abort: false,
     regress: false,
-    abortRegress: undefined,
+    abortRegressReason: undefined,
     impSuccessReason: undefined,
     alreadyRegressed: true,
     additionalDocs: false,
@@ -37,7 +44,16 @@ export class Phase3Component implements OnInit {
     evalFailure: undefined
   };
 
-  constructor() {
+    user: String = '';
+    pass: String = '';
+    OAuth: OAuth = {
+        username: undefined,
+        password: undefined
+    };
+    Token = null ;
+
+  constructor(private OAuthService: OathService ,
+              private router: Router) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,
@@ -55,13 +71,19 @@ export class Phase3Component implements OnInit {
   }
 
   onSelectAbortRegress($event) {
-    if (this.phase3.abortRegress !== undefined) {
-      if (this.phase3.abortRegress.includes('Abort')) {
+    if (this.phase3.abortRegressReason !== undefined) {
+      if (this.phase3.abortRegressReason.includes('Abort')) {
         this.phase3.abort = true;
         this.phase3.regress = false;
-      } else if (this.phase3.abortRegress.includes('Regress')) {
+        this.activateSubmitButton = true;
+        this.phase3.abortRegressReason = undefined;
+        this.phase3.alreadyRegressed = false;
+        this.phase3.schedRegressionDate = undefined;
+      } else if (this.phase3.abortRegressReason.includes('Regress')) {
         this.phase3.abort = false;
         this.phase3.regress = true;
+        this.activateSubmitButton = false;
+        this.phase3.abortRegressReason = undefined;
       }
     }
   }
@@ -73,6 +95,13 @@ export class Phase3Component implements OnInit {
       this.phase3.abort = false;
       this.phase3.regress = false;
       this.showImpChange = true;
+      this.phase3.schedRegressionDate = undefined;
+      this.phase3.abort = false;
+      this.phase3.regress = false;
+      this.phase3.abortRegressReason = undefined;
+      this.phase3.impSuccessReason = undefined;
+      this.phase3.alreadyRegressed = true;
+      this.activateSubmitButton = false;
     } else {
       this.phase3.implementationSuccessful = false;
       this.displayImpSuccess = true;
@@ -80,7 +109,15 @@ export class Phase3Component implements OnInit {
       this.showEvalChange = false;
       this.phase3.itemsUpdated = false;
       this.phase3.additionalDocs = false;
-
+      this.phase3.tcbEvalStart = undefined;
+      this.phase3.tcbEvalEnd = undefined;
+      this.phase3.additionalDocs = false;
+      this.phase3.itemsUpdated = false;
+      this.phase3.evalSuccess = false;
+      this.phase3.ccrConfirmation = false;
+      this.phase3.evalFailure = undefined;
+      this.showEvalChange = false;
+      this.activateSubmitButton = false;
     }
   }
   
@@ -89,14 +126,19 @@ export class Phase3Component implements OnInit {
           this.phase3.additionalDocs = true;
       } else {
           this.phase3.additionalDocs = false;
+          this.phase3.itemsUpdated = true;
       }
   }
 
   onSelectAlreadyRegressed(e) {
       if (e.target.value === 'yes') {
           this.phase3.alreadyRegressed = true;
+          this.activateSubmitButton = true;
+          this.showSched = false;
       } else {
           this.phase3.alreadyRegressed = false;
+          this.activateSubmitButton = true;
+          this.showSched = true;
       }
 
   }
@@ -111,21 +153,36 @@ export class Phase3Component implements OnInit {
       if (e.target.value === 'yes') {
           this.phase3.evalSuccess = true;
           this.showEvalChange = true;
+          this.phase3.evalFailure = undefined;
+          this.activateSubmitButton = false;
       } else {
           this.phase3.evalSuccess = false;
           this.showEvalChange = true;
+          this.phase3.ccrConfirmation = false;
+          this.activateSubmitButton = true;
       }
   }
 
   onSelectConfirm(e){
       if (e.target.value === 'Confirm') {
           this.phase3.ccrConfirmation = true;
+          this.activateSubmitButton = true;
       } else {
           this.phase3.ccrConfirmation = false;
+          this.activateSubmitButton = true;
       }
   }
 
+    onSubmit() {
+
+        console.log(JSON.stringify(this.phase3));
+
+    }
+
   ngOnInit() {
+      this.Token = this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
+          this.Token = data.tokenValue ;
+      });
   }
 
     public fileOver(event) {
@@ -176,3 +233,5 @@ export class Phase3Component implements OnInit {
     }
 
 }
+
+//Created by Blaine Viljoen 28023374

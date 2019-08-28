@@ -28,6 +28,8 @@ import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 import { Phase1Component } from './pages/phase1/phase1.component';
 import { Phase3Component } from './pages/phase3/phase3.component';
 import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,13 @@ import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
         BsDatepickerModule.forRoot(),
         NgxFileDropModule,
         NgbPopoverModule,
-        SelectDropDownModule
+        SelectDropDownModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        LayoutModule
     ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

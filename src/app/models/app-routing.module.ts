@@ -30,6 +30,7 @@ const routes: Routes = [
 
   },
   {path: 'phase3' , component: Phase3Component},
+  {path: 'CurrentRFCsComponent', component: CurrentRFCSComponent},
   { path: '**', component: RegistrationComponent },
 ];
 
