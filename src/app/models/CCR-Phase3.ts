@@ -1,4 +1,4 @@
-
+//Created by Blaine Viljoen 28023374
 
 export interface CCRPhase3 {
     schedRegressionDate: Date;
@@ -8,7 +8,7 @@ export interface CCRPhase3 {
     implementationSuccessful: boolean;
     abort: boolean;
     regress: boolean;
-    abortRegress: string;
+    abortRegressReason: string;
     impSuccessReason: string;
     alreadyRegressed: boolean;
     additionalDocs: boolean;
@@ -17,3 +17,5 @@ export interface CCRPhase3 {
     ccrConfirmation: boolean;
     evalFailure: string;
 }
+
+//Created by Blaine Viljoen 28023374

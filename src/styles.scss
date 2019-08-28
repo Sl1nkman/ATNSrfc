@@ -17,3 +17,5 @@ $hamburger-hover-opacity       : 0.7 !default;
 @import './assets/lightning-admin';
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
 @import "~ngx-select-dropdown/dist/assets/style.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

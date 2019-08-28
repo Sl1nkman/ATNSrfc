@@ -30,6 +30,8 @@ const routes: Routes = [
       { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '1' }}
       ]},
   { path: '**',           component: LoginComponent },
+  {path: 'phase3' , component: Phase3Component},
+  {path: 'CurrentRFCsComponent', component: CurrentRFCSComponent},
 ];
 
 
