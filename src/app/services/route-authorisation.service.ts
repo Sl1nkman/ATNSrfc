@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Injectable } from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import decode from 'jwt-decode';

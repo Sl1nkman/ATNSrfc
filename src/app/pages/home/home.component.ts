@@ -1,3 +1,7 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
+
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppService} from '../../services/app.service';
 import {Router, NavigationEnd, RouterEvent} from '@angular/router';

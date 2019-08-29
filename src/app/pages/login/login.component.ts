@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, OnInit } from '@angular/core';
 import {OAuth} from '../../models/OAuth';
 import swal from 'sweetalert2'; // Sweet Alerts import

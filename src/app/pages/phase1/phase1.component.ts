@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, OnInit } from '@angular/core';
 import { RFC } from '../../models/RFC';
 import {Phase1Service} from '../../services/phase1.service';
@@ -89,6 +92,9 @@ export class Phase1Component implements OnInit {
             swal('Success' , data.message , 'success' );
           } else {
             swal('Failure' , data.message , 'error' );
+            if (data.message === 'Session expired') {
+              this.router.navigate(['login']);
+            }
           }
         });
       } else if (

@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, OnInit } from '@angular/core';
 import {Data, Router} from '@angular/router'; // Router import
 import {User} from '../../models/User'; // interface import

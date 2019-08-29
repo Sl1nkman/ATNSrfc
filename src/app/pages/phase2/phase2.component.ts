@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, OnInit } from '@angular/core';
 import {CCRPhase1} from '../../models/CCR-Phase1';
 import {RFC} from '../../models/RFC';
