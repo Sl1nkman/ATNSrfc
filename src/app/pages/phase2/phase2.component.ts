@@ -7,6 +7,8 @@ import {RFC} from '../../models/RFC';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import swal from 'sweetalert2';
+import {Data} from '@angular/router';
+import {Phase2Service} from '../../services/phase2.service';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class Phase2Component implements OnInit {
     endDateString: string;
     dateRangePicker: Date;
     public files: NgxFileDropEntry[] [] = []  ;
-
+    private Token ;
 
     availableNumberOfTemporaryDays: String [] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
         '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
@@ -96,7 +98,7 @@ export class Phase2Component implements OnInit {
         recommend_oppose: undefined
     };
 
-    constructor( ) {
+    constructor(private phase2: Phase2Service ) {
         const minDate = new Date();
 
         this.datepickerConfig = Object.assign({},
@@ -110,7 +112,7 @@ export class Phase2Component implements OnInit {
 
     onSelectPriority($event) {
         const prioritySelect = document.getElementById('priority');
-        if ($event.target.value === 'EMERGENCY') {
+        if ($event.target.value === '1') {
             prioritySelect.classList.add('text-danger');
             this.emergencySelected = true;
             this.displaySpecialistComments = true ;
@@ -147,18 +149,18 @@ export class Phase2Component implements OnInit {
 
     onSelectChangePeriod($event) {
         switch ($event.target.value) {
-            case 'Temporary' :
+            case '1' :
+                this.displayNatureOfChange = true;
+                this.displaySelectTemporaryAmountOfDays = false ;
+                break;
+            case '2' :
                 this.displaySelectTemporaryAmountOfDays = true ;
                 this.displayNatureOfChange = false;
                 break;
-            case 'Trial':
+            case '3':
 
                 this.displayNatureOfChange = false;
                 this.displaySelectTemporaryAmountOfDays = true ;
-                break;
-            case 'Permanent' :
-                this.displayNatureOfChange = true;
-                this.displaySelectTemporaryAmountOfDays = false ;
                 break;
         }
         this.phase1.changePeriod = $event.target.value;
@@ -413,6 +415,17 @@ export class Phase2Component implements OnInit {
 
 
     ngOnInit() {
+        this.phase2.getCSRFToken().subscribe( (data: Data) => {
+            this.Token = data.tokenValue ;
+        });
+        this.phase2.getPageData().subscribe((data: Data) => {
+            this.availablePriorities     = data[0];
+            this.availableImpacts        = data[1];
+            this.availablePeriods        = data[2];
+            this.availableNatureOfChange = data[3];
+            this.availableEosSystems     = data[4];
+
+        });
         this.RFC.requestedChange = 'We need new laptops for engineering';
         this.RFC.description = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
         this.phase1.TCB_CRF_ID = 'Undefined' ;

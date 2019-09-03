@@ -32,7 +32,7 @@
                             id="priority"
                             (change)="onSelectPriority($event)" >
                         <option selected="selected" disabled="disabled">Select one</option>
-                        <option *ngFor="let priority of availablePriorities">{{priority}}</option>
+                        <option *ngFor="let priority of availablePriorities"  [value]="priority[0]" >{{priority[1]}}</option>
                     </select>
                 </div>
                 <div class="col-sm">
@@ -72,7 +72,7 @@
                                 id="changePeriod"
                                 (change)="onSelectChangePeriod($event)">
                             <option selected="selected" disabled="disabled">Select one</option>
-                            <option  *ngFor="let period of availablePeriods">{{period}}</option>
+                            <option *ngFor="let period of availablePeriods"  [value]="period[0]" >{{period[1]}}</option>
                         </select>
                      </div>
                 </div>
@@ -140,7 +140,7 @@
                                 (change)="onSelectNatureOfChange($event)"
                                 [(ngModel)]="this.phase1.natureOfChange">
                             <option selected="selected" disabled="disabled">Select one</option>
-                            <option  *ngFor="let change of availableNatureOfChange">{{change}}</option>
+                            <option *ngFor="let change of availableNatureOfChange"  [value]="change[0]" >{{change[1]}}</option>
                         </select>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                                 id="eosSystem"
                                 (change)="onSelectEosSystem($event)" >
                             <option selected="selected" disabled="disabled">Select one</option>
-                            <option  *ngFor="let eos of availableEosSystems">{{eos}}</option>
+                            <option *ngFor="let eos of availableEosSystems"  [value]="eos[0]" >{{eos[1]}}</option>
                         </select>
                     </div>
                 </div>

@@ -14,8 +14,10 @@ import swal from 'sweetalert2';
   styleUrls: ['./phase1.component.css']
 })
 export class Phase1Component implements OnInit {
+  usersSites ;
   enableSubmitButton = false;
   private Token ;
+  private selectedSite;
   constructor(private phase1Service: Phase1Service ,  private router: Router) { }
   RFC: RFC  = {
     dateRequested: undefined,
@@ -31,15 +33,15 @@ export class Phase1Component implements OnInit {
   //   email: undefined,
   //   password: undefined
   // };
-  setRFCDate() {
-    this.RFC.dateRequested =  new Date();
+  onSelectSite($event) {
+    this.selectedSite = $event.target.value;
   }
   requestedChange() {
 
   }
   description() {
       const submitButton = document.getElementById('submit');
-      if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined) {
+      if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined && this.selectedSite !== undefined) {
         submitButton.classList.remove('disabled');
         this.enableSubmitButton = true;
       }
@@ -86,7 +88,7 @@ export class Phase1Component implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.phase1Service.submitRequest( this.RFC , this.Token).subscribe( (data: Data) => {
+        this.phase1Service.submitRequest( this.RFC , this.Token , this.selectedSite).subscribe( (data: Data) => {
           if (data.success) {
             this.router.navigate(['home']);
             swal('Success' , data.message , 'success' );
@@ -116,6 +118,10 @@ export class Phase1Component implements OnInit {
     this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
       this.Token = data.tokenValue ;
     });
+    this.phase1Service.getPageData().subscribe((data: Data) => {
+      this.usersSites = data ;
+    });
+
   }
 
 }
