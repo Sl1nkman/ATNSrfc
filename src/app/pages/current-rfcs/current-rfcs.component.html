@@ -4,9 +4,9 @@
     <div *ngFor="let rfc of rfcs; index as i">
         <div class="shadow card bg-light mx-auto" (click)="onClick(i)" style="cursor: pointer;">
             <div class="form group">
-                <h2 class="px-3 pt-1 text-primary">CCR ID: {{rfc.id}}</h2><br>
-                <h3 class="px-3 text-secondary">Request: {{rfc.request}}</h3>
-                <h3 class="px-3 text-secondary">Reason: {{rfc.reason}}</h3>
+                <h2 class="px-3 pt-1 text-primary">CCR ID: {{rfc[0]}}</h2><br>
+                <h3 class="px-3 text-secondary">Request: {{rfc[1]}}</h3>
+                <h3 class="px-3 text-secondary">Reason: {{rfc[2]}}</h3>
             </div>
         </div>
         <br>

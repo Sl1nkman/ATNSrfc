@@ -7,6 +7,7 @@ import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'n
 import {Data, Router} from '@angular/router';
 import {OAuth} from '../../models/OAuth';
 import {OathService} from '../../services/oath.service';
+import {Phase3Service} from '../../services/phase3.service';
 
 @Component({
   selector: 'app-phase3',
@@ -45,14 +46,9 @@ export class Phase3Component implements OnInit {
   };
 
     user: String = '';
-    pass: String = '';
-    OAuth: OAuth = {
-        username: undefined,
-        password: undefined
-    };
     Token = null ;
 
-  constructor(private OAuthService: OathService ,
+  constructor(private Phase3Service: Phase3Service ,
               private router: Router) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
@@ -177,7 +173,7 @@ export class Phase3Component implements OnInit {
     }
 
   ngOnInit() {
-      this.Token = this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
+      this.Token = this.Phase3Service.getCSRFToken().subscribe( (data: Data) => {
           this.Token = data.tokenValue ;
       });
   }
