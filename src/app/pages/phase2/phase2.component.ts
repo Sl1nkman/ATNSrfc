@@ -397,6 +397,11 @@ export class Phase2Component implements OnInit {
         }).then((result) => {
             if (result.value) {
                 // perform post with service
+                this.phase2.submitPhase2(this.phase1 , this.Token).subscribe((data: Data) => {
+                    if (data.success) {
+
+                    }
+                    });
                 console.log(JSON.stringify(this.phase1));
             } else if (
                 result.dismiss === swal.DismissReason.cancel

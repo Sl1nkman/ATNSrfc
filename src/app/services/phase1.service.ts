@@ -16,7 +16,6 @@ export class Phase1Service {
   }
 
   submitRequest(phase1: RFC , token , selectedSite) {
-
     const obj = {
       date: phase1.dateRequested ,
       change: phase1.requestedChange ,

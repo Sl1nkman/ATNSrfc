@@ -26,12 +26,12 @@ const routes: Routes = [
     canActivateChild: [RouteGuard],
     runGuardsAndResolvers: 'always',
     children: [
-      { path: 'createRFC' ,   component: Phase1Component ,      data: { allowedPermission: '1' }},
-      { path: 'myRFCS' ,      component: MyRFCSComponent ,      data: { allowedPermission: '2' }},
-      { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedPermission: '1' }},
-      { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedPermission: '3' }},
-      { path: 'phase2' ,      component: Phase2Component ,      data: { allowedPermission: '1' }},
-      { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '1' }}
+      { path: 'createRFC' ,   component: Phase1Component ,      data: { allowedPermission: '1' } , runGuardsAndResolvers: 'always' },
+      { path: 'myRFCS' ,      component: MyRFCSComponent ,      data: { allowedPermission: '2' }, runGuardsAndResolvers: 'always'},
+      { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always'},
+      { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedPermission: '3' }, runGuardsAndResolvers: 'always'},
+      { path: 'phase2' ,      component: Phase2Component ,      data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always'},
+      { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always'}
       ]},
   { path: '**',           component: LoginComponent },
   {path: 'phase3' , component: Phase3Component},
