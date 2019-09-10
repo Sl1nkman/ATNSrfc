@@ -1,62 +1,101 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <title>ATNS RFC Registration</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<div id="header">
+<!-- Created by : Liam Gordon McCabe-->
+<!-- Student number: 27455211-->
+<div class="card mx-auto" style="width: 60rem;">
 
-</div>
-<body>
-<div id="main">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Register</strong>
+    </h5>
+
+<div class="card-body px-lg-5 pt-3">
   <form class="registrationForm" >
-    <div class="form-group">
-      <label for="department">Title</label>
-      <select title="Select your relevant department" (change)="onSelectTitle($event.target.value)" name="title"  id="title">
-        <option *ngFor="let title of availableTitles">{{title}}</option>
-      </select>
+
+    <div class="form-group" style="color: #757575;">
+        <div class="row">
+            <div class="col">
+                <label for="title">Title</label>
+            </div>
+            <div class="col">
+                <select
+                        ngbPopover="Select a title by selecting an option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="SELECT TITLE"
+                        class="px-3 rounded form-control"
+                        name="title"
+                        id="title"
+                        (change)="onSelectTitle($event)"
+                        [(ngModel)]="this.User.title"
+                >
+                    <option selected="selected" disabled="disabled">Select one</option>
+                    <option *ngFor="let title of availableTitles"  [value]="title[0]" >{{title[1]}}</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="site">Site</label>
+            </div>
+            <div class="col">
+                <select
+                        ngbPopover="Select a site by selecting an option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="SELECT SITE"
+                        class="px-3 rounded form-control"
+                        [(ngModel)]="this.User.site"
+                        name="site"
+                        id="site"
+                        (change)="onSelectTitle($event)"
+                >
+                    <option selected="selected" disabled="disabled">Select one</option>
+                    <option *ngFor="let site of availableSites" [value]="site[0]">{{site[1]}}</option>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="form-group" >
       <label for="name">Name</label>
-      <input title="Please enter your First names"  required class="form-control" [(ngModel)]="User.name"
-             type="text" name="name" id="name">
+      <input
+              ngbPopover="Please enter your first name" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT FIRST NAME"
+              required class="form-control" [(ngModel)]="User.name"
+              type="text" name="name" id="name">
     </div>
     <div class="form-group">
       <label for="surname">Surname</label>
-      <input title="Please enter your Surname" required class="form-control" [(ngModel)]="User.surname"
-             type="text" name="surname" id="surname">
+      <input
+              ngbPopover="Please enter your surname" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT SURNAME"
+              required class="form-control" [(ngModel)]="User.surname"
+              type="text" name="surname" id="surname">
     </div>
     <div class="form-group">
       <label for="employeeID">Employee ID</label>
-      <input title="Please enter your Employee ID" class="form-control" (input)="validateEmpId(User.employeeId)"
-             [ngClass]="{'true': this.showEmpId, 'false':
-            !this.showEmpId}"
-             [(ngModel)]="User.employeeId"
-             type="number" name='EmployeeId' id="employeeID" required>
+      <input
+              ngbPopover="Please enter your employee ID" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT EMPLOYEE ID"
+              class="form-control" (input)="validateEmpId(User.employeeId)"
+              [ngClass]="{'true': this.showEmpId, 'false':!this.showEmpId}"
+              [(ngModel)]="User.employeeId"
+              type="number" name='EmployeeId' id="employeeID" required>
     </div>
     <div class="form-group">
       <label>Contact Number</label>
       <label *ngIf="this.showPhone == false" style="color: red">Invalid South African Number</label>
       <label *ngIf="this.showPhone == true" style="color: green">Valid South African Number </label>
-      <input (input)="validatePhoneNumber(User.contactNumber)"
-             class="form-control" [ngClass]="{'true': this.showPhone, 'false':
-            !this.showPhone}" [(ngModel)]="User.contactNumber" type="text"
-             name="contactNum" required>
+      <input
+              ngbPopover="Please enter your phone number" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT PHONE NUMBER"
+              (input)="validatePhoneNumber(this.User.contactNumber)"
+              class="form-control" [ngClass]="{'true': this.showPhone, 'false': !this.showPhone}"
+              [(ngModel)]="this.User.contactNumber"
+              type="text"
+              name="contactNum" required>
     </div>
     <div class="form-group">
       <label for="username">Username</label>
       <label *ngIf="this.showEmail == false" style="color: red">Invalid</label>
       <label *ngIf="this.showEmail == true" style="color: green">Valid
       </label>
-      <input title="Please enter the username of your email before the @" (input)="validateEmail(User.email)" class="form-control"
+      <input
+              ngbPopover="Please enter the username of your email before the @" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT USERNAME"
+              (input)="validateEmail(User.email)" class="form-control"
              [ngClass]="{'true': this.showEmail, 'false': !this.showEmail}"
              id="username" name="username" [(ngModel)]= User.email type="email"
              required>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input title="Password must be at least 8 characters in length containing  1 Uppercase, 1 Lowercase and 1 special character"
+      <input
+              ngbPopover="Password must be at least 8 characters in length containing  1 Uppercase, 1 Lowercase and 1 special character" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT PASSWORD"
              (input)="validatePassword(password)"
              [ngClass]="{'true': this.showPassword, 'false': !this.showPassword}"
              class="form-control" id="password" name="password" [(ngModel)]="password" type="password" required>
@@ -64,30 +103,27 @@
                                class="form-control" id="passwordStrengthMeter" name="passwordStrengthMeter" >
       </password-strength-meter>
       <label for="passwordCheck">Confirm Password</label>
-      <input title="Re-Enter your password" (input)="confirmPassword(passwordCheck)"
+      <input
+              ngbPopover="Re-Enter your password" triggers="mouseenter:mouseleave" placement="right" popoverTitle="INPUT PASSWORD AGAIN"
+              (input)="confirmPassword(passwordCheck)"
              [ngClass]="{'true': this.showPasswordCheck, 'false': !this.showPasswordCheck}"
              class="form-control" id="passwordCheck" name="passwordCheck" [(ngModel)]="passwordCheck" type="password">
 
     </div>
-    <div class="form-group">
-      <label for="permissionLevel">Permission Level</label>
-      <select title="Select your relevant Permission level" required  (change)="onSelectPermission($event.target.value)"
-              name="permissionLevel" id="permissionLevel">
-        <option *ngFor="let permission of availablePermissions">{{permission}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="region">Region</label>
-      <select title="Select your relevant region" (change)="onSelectRegion($event.target.value)" name="region" id="region">
-        <option *ngFor="let region of availableRegions">{{region}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="department">Department</label>
-      <select title="Select your relevant department" (change)="onSelectDepartment($event.target.value)" name="department"  id="department">
-        <option *ngFor="let department of availableDepartments">{{department}}</option>
-      </select>
-    </div>
+<!--    <div class="form-group">-->
+<!--      <label for="permissionLevel">Permission Level</label>-->
+<!--      <select title="Select your relevant Permission level" required  (change)="onSelectPermission($event.target.value)"-->
+<!--              name="permissionLevel" id="permissionLevel">-->
+<!--        <option *ngFor="let permission of availablePermissions">{{permission}}</option>-->
+<!--      </select>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label for="region">Region</label>-->
+<!--      <select title="Select your relevant region" (change)="onSelectRegion($event.target.value)" name="region" id="region">-->
+<!--        <option *ngFor="let region of availableRegions">{{region}}</option>-->
+<!--      </select>-->
+<!--    </div>-->
+
     <!--<div class="form-group">-->
       <!--<label>Submit</label>-->
       <!--<textarea rows="4" class="form-control" [(ngModel)]="email.description"-->
@@ -95,12 +131,30 @@
     <!--</div>-->
 
     <br>
+          <div class="row">
+              <div class="col"></div>
+              <div class="col">
+                  <button
+                          type="submit"
+                          value="Register"
+                          class="btn btn-outline-danger btn-rounded w-100  my-4  waves-effect z-depth-0"
+                          (click)="onCancel()"
+                  >Cancel</button>
+              </div>
+              <div class="col"></div>
+              <div class="col">
+                  <button
+                          type="submit"
+                          value="Register"
+                          id="submit"
+                          class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled"
+                          [disabled]="!this.showRegisterButton"
+                          (click)="onRegister()"
+                  >Register</button>
+              </div>
 
-    <button type="submit" value="Register" class="btn-primary" (click)="onRegister()"
-           >Register</button>
-
-
+              <div class="col"></div>
+          </div>
   </form>
 </div>
-</body>
-</html>
+</div>

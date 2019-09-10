@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 $fa-font-path:"~font-awesome/fonts";
 
 $hamburger-padding-x           : 0px !default;
@@ -14,6 +16,8 @@ $hamburger-hover-opacity       : 0.7 !default;
 @import '~bootstrap/scss/bootstrap';
 @import '~font-awesome/scss/font-awesome';
 @import '~hamburgers/_sass/hamburgers/hamburgers';
-@import '~ngx-toastr/toastr-bs4-alert';
 @import './assets/lightning-admin';
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
+@import "~ngx-select-dropdown/dist/assets/style.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

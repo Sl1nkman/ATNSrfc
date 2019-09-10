@@ -1,321 +1,61 @@
-
-<form>
-    <div class="card secondary-color">
-        <h3 class="px-3 text-primary">Request for Change</h3>
-        <div>
-            <label class="px-3 d-inline-block">Name of Initiator: </label>
-            <p class=" px-3 d-inline-block"></p>
-            <label class="px-3 d-inline-block">Date Requested: </label>
-            <p class="px-3 d-inline-block"></p>
+<!-- Created by : Liam Gordon McCabe-->
+<!-- Student number: 27455211-->
+  <form class="card mx-auto secondary-color" type="GET">
+    <div class="form-group px-3 pt-3">
+      <div class="row">
+        <div class="col"> <label for= "site">Select your site</label></div>
+        <div class="col">
+          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"
+              class="rounded w-100 form-control"
+              name="site"
+              id="site"
+              (change)="onSelectSite($event)" >
+            <option selected="selected" disabled="disabled">Select one</option>
+            <option *ngFor="let site of usersSites"  [value]="site[0]" >{{site[1]}}</option>
+          </select>
         </div>
-        <div>
-            <label class="px-3 d-inline-block">Department:</label>
-            <p class="px-3 d-inline-block"></p>
-        </div>
-        <label class="px-3 ">Request: </label>
-        <p class="px-3">{{this.RFC.requestedChange}}</p>
-        <label class="px-3">Reason: </label>
-        <p class="px-3">{{this.RFC.description}}</p>
+      </div>
     </div>
-    <div class=" card bg-light">
-        <div class="form-group">
-            <h3 class="px-3 text-primary"> CCR specialist phase 1</h3>
-            <div class="row">
-                <div class="col-sm">
-                    <label class="px-3" for="priority">Request Priority</label>
-                </div>
-                <div class="col-sm">
-
-                    <select ngbPopover="{{this.phase1.requestPriority}}" triggers="mouseenter:mouseleave" placement="right" popoverTitle="Change request priority"
-                            class="rounded w-100 form-control"
-                            (change)="onSelectPriority($event.target.value)" name="priority"  id="priority">
-                        <option *ngFor="let priority of availablePriorities">{{priority}}</option>
-                    </select>
-
-                </div>
-                <div class="col-sm">
-                    <label class="" for="predictedImpact"> Predicted Impact Risk/s </label>
-                </div>
-                <div class="col-sm">
-                    <select ngbPopover="on relevant parties" triggers="mouseenter:mouseleave" placement="right" popoverTitle="Select impact/s "
-                            class="rounded w-100 form-control"
-                            (change)="onSelectImpact($event.target.value)" name="predictedImpact"  id="predictedImpact">
-                        <option  *ngFor="let impact of availableImpacts" value="{{impact}}">{{impact}}</option>
-                    </select>
-                </div>
-                <div class="col-sm "></div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm">
-                    <label class="px-3" for="changePeriod" >Change Period</label>
-                </div>
-                <div class="col-sm">
-                    <select ngbPopover="Select Priority" triggers="mouseenter:mouseleave" placement="right" popoverTitle="This can be any title"
-                            class="rounded w-100 form-control" title="Select your relevant department"
-                            (change)="onSelectChangePeriod($event.target.value)" name="changePeriod"  id="changePeriod">
-                        <option  *ngFor="let period of availablePeriods">{{period}}</option>
-                    </select>
-                </div>
-                <div class="col-sm">
-                    <div *ngIf="displayTemporaryDateSelection">
-                        <label class="" for="changePeriod" >Temporary period end date:</label>
-                    </div>
-                </div>
-                <div class="col-sm ">
-                    <input
-                            class="rounded w-100 form-control" *ngIf="displayTemporaryDateSelection" id="temporaryPeriod" name="temporaryPeriod"
-                        [(ngModel)]="this.phase1.temporaryPeriod" type="text" bsDaterangepicker>
-                </div>
-                <div class="col-sm "></div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm">
-                    <label class="px-3" for="natureOfChange">Nature of the change</label>
-                </div>
-                <div class="col-sm">
-                    <select class="rounded w-100 form-control" title="Select your relevant department" (change)="onSelectNatureOfChange($event.target.value)" name="natureOfChange"  id="natureOfChange">
-                        <option  *ngFor="let change of availableNatureOfChange">{{change}}</option>
-                    </select>
-                </div>
-                <div class="col-sm">
-                    <label class="" for="eosSystem">EOS system</label>
-                </div>
-                <div class="col-sm">
-                    <select class="w-100 rounded form-control" title="Select your relevant department" (change)="onSelectEosSystem($event.target.value)" name="eosSystem"  id="eosSystem">
-                        <option  *ngFor="let eos of availableEosSystems">{{eos}}</option>
-                    </select>
-                </div>
-                <div class="col-sm "></div>
-            </div>
-        </div>
-<!--</div>-->
-<!--    <div class="card">-->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm">
-                    <label class="px-3" for="tcbID">TCB-CRF ID:</label>
-                </div>
-                <div class="col-sm">
-                    <input class="rounded form-control" id="tcbID" name="tcbID" type="text" [(ngModel)]="this.phase1.TCB_CRF_ID"  >
-                </div>
-                <div class="col-sm"></div>
-                <div class="col-sm"></div>
-                <div class="col-sm"></div>
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm">
-                    <label class="px-3" for="configurationItems">Configuration Items: </label>
-                </div>
-                <div class="col">
-                </div>
-            </div>
-            <div class="px-3">
-                <input class="rounded w-75 form-control" id="configurationItems" name="configurationItems" type="text" [(ngModel)]="this.phase1.configurationItems">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label class="px-3">Change Type: </label>
-                </div>
-                <div class="col">
-                    <label class="checkbox-inline px-3"><input type="checkbox" value="HW" (click)="onSelectChangeTypeHW($event)" >Hardware</label>
-                    <label class="checkbox-inline px-3"><input type="checkbox" value="SW" (click)="onSelectChangeTypeSW($event)">Software</label>
-                    <label class="checkbox-inline px-3"><input type="checkbox" value="FW" (click)="onSelectChangeTypeFW($event)">Firmware</label>
-                </div>
-                <div class="col"></div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label class="px-3 ">Additional attached Documents: </label>
-                </div>
-                <div class="col">
-                    <Label class="radio-inline px-3"><input type="radio" name="additionalDocs" value="yes" (click)="onSelectAdditionalDocuments($event)">Yes</Label>
-                    <Label class="radio-inline px-3"><input type="radio" name="additionalDocs" value="no"  (click)="onSelectAdditionalDocuments($event)" >No</Label>
-                </div>
-                <div class="col"></div>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="this.phase1.additionalDocuments === true">
-            <div class="row">
-                <div class="col">
-                    <label class="px-3" for="numberOfPages">Number of Pages (Documents): </label>
-                </div>
-                <div class="col">
-                    <input class="px-3 form-control rounded" type="number" name="numberOfPages" id="numberOfPages" [(ngModel)]="this.phase1.numberOfPages">
-                </div>
-                <div class="col"></div>
-            </div>
-            <div class="px-3">
-                <ngx-file-drop multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
-                           (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-                    <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                    Please drag and drop your additional files here
-                        <button type="button" (click)="openFileSelector()">Browse Files</button>
-                    </ng-template>
-                </ngx-file-drop>
-                <div class="upload-table px-3">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                        </thead>
-                        <tbody class="upload-name-style">
-                        <tr *ngFor="let item of files; let i=index">
-                            <td><strong>{{ item[0].relativePath }}</strong></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="px-3">Estimated Impact: </label>
-            <div *ngIf="this.phase1.predictedImpact.includes('OPS')">
-                <div class="px-3">
-                    <label class="">Operations: </label>
-                    <br>
-                    <input class="w-75 rounded form-control" type="text" name="operationsImpact" [(ngModel)]="this.phase1.estimatedImpacts.operations">
-
-                    <div *ngIf="this.phase1.predictedImpact.includes('CLIENTS')">
-                        <label class="">Clients: </label>
-                        <br>
-                        <input class=" w-75 rounded form-control" type="text" name="clientsImpact" [(ngModel)]="this.phase1.estimatedImpacts.clients">
-                    </div>
-                    <div *ngIf="this.phase1.predictedImpact.includes('TECH')">
-                        <label class="">Technical: </label>
-                        <br>
-                        <input class=" w-75 rounded form-control" type="text" name="technicalImpact" [(ngModel)]="this.phase1.estimatedImpacts.technical">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label class="px-3">Problem Report raised with Contractor?</label>
-                </div>
-                <div class="col">
-                    <Label class="radio-inline px-3"><input type="radio" name="reportRaised" value="yes" (click)="onSelectReportRaised($event)">Yes</Label>
-                    <Label class="radio-inline px-3"><input type="radio" name="reportRaised" value="no"  (click)="onSelectReportRaised($event)" >No</Label>
-                </div>
-                <div class="col"></div>
-            </div>
-            <div *ngIf="this.phase1.problemReportRaised" >
-                <div class="row">
-                    <div class="col">
-                        <label class="px-3">Problem Report Reference Number: </label>
-                    </div>
-                    <div class="col">
-                        <input class="w-100 rounded form-control" type="text" name="problemReportRef" id="problemReportRef" [(ngModel)]="this.phase1.problemReportRef">
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col">
-                    <label class="px-3">Change successfully pre-tested ?</label>
-                </div>
-                <div class="col">
-                    <Label class="radio-inline px-3"><input type="radio" name="preTested" value="yes" (click)="onSelectPreTested($event)">Yes</Label>
-                    <Label class="radio-inline px-3"><input type="radio" name="preTested" value="no"  (click)="onSelectPreTested($event)" >No</Label>
-                </div>
-                <div class="col"></div>
-            </div>
-            <div class="px-3" *ngIf="!this.phase1.changeSuccessfullyTested">
-                <div class="row">
-                    <div class="col">
-                        <label class="">Reason for unsuccessful test: </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="w-75 rounded form-control" type="text" name="changeNotSuccessfullyTestedReason" [(ngModel)]="this.phase1.changeNotSuccessfullyTestedReason">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="form-group">
-<!--            <div class="row">-->
-<!--                <div class="col">-->
-<!--                    <label class="px-3">Request submitted to all concerned parties ?</label>-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    <Label class="radio-inline px-3"><input type="radio" name="submittedToAll" value="yes"  (click)="onSelectSubmittedToAllConcerned($event)">Yes</Label>-->
-<!--                    <Label class="radio-inline px-3"><input type="radio" name="submittedToAll" value="no"   (click)="onSelectSubmittedToAllConcerned($event)" >No</Label>-->
-<!--                </div>-->
-<!--                <div class="col"></div>-->
-<!--            </div>-->
-
-<!--            <div  class="px-3" *ngIf="!this.phase1.submittedToAllParties">-->
-<!--                <div class="row">-->
-<!--                    <div class="col">-->
-<!--                        <label class="">Reason why not submitted to all concerned parties?</label>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="row">-->
-<!--                    <div class="col">-->
-<!--                        <input class=" w-75 rounded form-control" type="text" name="requestNotSubmittedToAllParties" [(ngModel)]="this.phase1.notSubmittedToAllPartiesReason">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-        </div>
-
-        <div class="form-group">
-            <div class="px-3">
-                <div class="row">
-                    <div class="col">
-                        <label for="specialistComments" >Specialist comments</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="px-3 w-75 rounded form-control" type="text" name="specialistComments" id="specialistComments" [(ngModel)]="this.phase1.specialistComment">
-                    </div>
-                </div>
-
-
-                <div class="py-3">
-                    <div class="row">
-                        <div class="col">
-                            <label for="proposedDate">Proposed Implementation Date: </label>
-                        </div>
-                        <div class="col">
-                            <input  class="rounded w-100 form-control" id="proposedDate" name="proposedDate"
-                            [(ngModel)]="this.phase1.proposedImplementationDate" type="text" bsDatepicker>
-                        </div>
-                        <div class="col"></div>
-                        <div class="col"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="recommend/oppose">Proposed Implementation Date: </label>
-                    </div>
-                    <div class="col">
-                        <select class="rounded w-100 form-control" title="Select your relevant department" (change)="onSelectNatureOfChange($event.target.value)" name="recommend/oppose"  id="recommend/oppose">
-                            <option  value="true">Recommend</option>
-                            <option value="false">Oppose</option>
-                        </select>
-                    </div>
-                    <div class="col"></div>
-                    <div class="col"></div>
-                </div>
-                <button class="btn btn-outline-info btn-rounded btn-block my-4 px-3 waves-effect z-depth-0" (click)="onSubmit()">Submit</button>
-            </div>
-        </div>
+    <div class="form-group px-3 pt-3">
+      <label for= "requestedChange">Change Request</label>
+      <textarea rows="8" class="form-control rounded"
+                type="text"
+                name="requestedChange"
+                id="requestedChange"
+                (input)="requestedChange()"
+                [(ngModel)]="RFC.requestedChange">
+      </textarea>
     </div>
-</form>
+    <div class="form-group px-3">
+      <label for="description">Description</label>
+      <textarea rows="8" class="form-control rounded"
+                type="text"
+                name="description"
+                id="description"
+                (input)="description()"
+                [(ngModel)]="RFC.description"
+      ></textarea>
+    </div>
+
+    <br>
+
+    <div class="row px-3">
+      <div class="col"></div>
+      <div class="col">
+        <button
+                type="cancel"
+                id="cancel"
+                class="btn btn-outline-danger btn-rounded w-100 mx-auto   my-4 waves-effect z-depth-0" (click)="onCancel()"
+        >Cancel</button>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <button
+                type="submit"
+                id="submit"
+                class="btn btn-outline-info btn-rounded w-100 mx-auto my-4 waves-effect z-depth-0 disabled" [disabled]="!this.enableSubmitButton" (click)="onSubmit()"
+        >Submit</button>
+      </div>
+      <div class="col"></div>
+    </div>
+  </form>
