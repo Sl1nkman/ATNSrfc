@@ -1,24 +1,26 @@
 <!-- Created by : Liam Gordon McCabe-->
 <!-- Student number: 27455211-->
-  <form class="card mx-auto secondary-color" type="GET">
+  <form class="card mx-auto secondary-color">
     <div class="form-group px-3 pt-3">
       <div class="row">
         <div class="col"> <label for= "site">Select your site</label></div>
         <div class="col">
           <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"
-              class="rounded w-100 form-control"
-              name="site"
-              id="site"
-              (change)="onSelectSite($event)" >
+                  class="rounded w-100 form-control"
+                  name="site"
+                  id="site"
+                  (change)="onSelectSite($event)" >
             <option selected="selected" disabled="disabled">Select one</option>
-            <option *ngFor="let site of usersSites"  [value]="site[0]" >{{site[1]}}</option>
+            <option *ngFor="let site of usersSites"  [value]="site[0]" [selected]="this.selectedSite == site[0]" >{{site[1]}}</option>
           </select>
         </div>
+
       </div>
     </div>
     <div class="form-group px-3 pt-3">
       <label for= "requestedChange">Change Request</label>
-      <textarea rows="8" class="form-control rounded"
+      <textarea rows="8"
+                class="form-control rounded"
                 type="text"
                 name="requestedChange"
                 id="requestedChange"

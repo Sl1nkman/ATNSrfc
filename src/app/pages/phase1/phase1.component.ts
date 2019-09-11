@@ -35,11 +35,13 @@ export class Phase1Component implements OnInit {
   // };
   onSelectSite($event) {
     this.selectedSite = $event.target.value;
+    localStorage.setItem('site' , $event.target.value);
   }
   requestedChange() {
-
+    localStorage.setItem('request' , this.RFC.requestedChange);
   }
   description() {
+    localStorage.setItem('description' , this.RFC.description);
       const submitButton = document.getElementById('submit');
       if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined && this.selectedSite !== undefined) {
         submitButton.classList.remove('disabled');
@@ -60,6 +62,9 @@ export class Phase1Component implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
+        localStorage.removeItem('request');
+        localStorage.removeItem('description');
+        localStorage.removeItem('site');
         this.router.navigate(['home/myRFCS']);
       } else if (
           result.dismiss === swal.DismissReason.cancel
@@ -90,6 +95,9 @@ export class Phase1Component implements OnInit {
       if (result.value) {
         this.phase1Service.submitRequest( this.RFC , this.Token , this.selectedSite).subscribe( (data: Data) => {
           if (data.success) {
+            localStorage.removeItem('request');
+            localStorage.removeItem('description');
+            localStorage.removeItem('site');
             this.router.navigate(['home']);
             swal('Success' , data.message , 'success' );
           } else {
@@ -122,6 +130,9 @@ export class Phase1Component implements OnInit {
       this.usersSites = data ;
     });
 
+    this.RFC.requestedChange = localStorage.getItem('request');
+    this.RFC.description = localStorage.getItem('description');
+    this.selectedSite = localStorage.getItem('site');
   }
 
 }

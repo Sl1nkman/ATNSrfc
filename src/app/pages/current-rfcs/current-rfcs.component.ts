@@ -21,13 +21,13 @@ export class CurrentRFCSComponent implements OnInit {
     document.getElementById('test').innerHTML = 'You selected the card with id: ' + this.rfcs[index][0];
   }
 
-  constructor(private CurrentRfcsService: CurrentRfcsService) { }
+  constructor(private currentRfcsService: CurrentRfcsService) { }
 
   ngOnInit() {
-     this.CurrentRfcsService.getCSRFToken().subscribe( (data: Data) => {
+     this.currentRfcsService.getCSRFToken().subscribe( (data: Data) => {
          this.Token = data.tokenValue ;
      });
-     this.CurrentRfcsService.getPageData().subscribe((data:Data) => {
+     this.currentRfcsService.getPageData().subscribe((data: Data) => {
         this.rfcs = data[0];
         console.log(this.rfcs);
      });

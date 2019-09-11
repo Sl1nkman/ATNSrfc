@@ -4,7 +4,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 // imports for bootstrap forms
 import { HttpClientModule , HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -52,9 +51,7 @@ import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
     RFCsignoffComponent,
     Phase2Component,
     Phase3Component,
-
   ],
-
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -74,6 +71,5 @@ import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
       { provide: HTTP_INTERCEPTORS, useClass: CcrHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
 }
