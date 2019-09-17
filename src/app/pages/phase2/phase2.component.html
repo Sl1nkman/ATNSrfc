@@ -48,7 +48,7 @@
                                 name="predictedImpact"
                                 (change)="onSelectImpact($event)"
                                 [multiple]="true"
-                                [(ngModel)]="this.phase1.predictedImpact"
+                                [(ngModel)]="this.phase2.predictedImpact"
                                 [options]="availableImpacts">
                         </ngx-select-dropdown>
 
@@ -106,7 +106,7 @@
                            name="temporaryStartPeriod"
                            bsDatepicker
                            [bsConfig]="datepickerConfig"
-                           [(ngModel)]="this.phase1.temporaryPeriodStartDate"
+                           [(ngModel)]="this.phase2.temporaryPeriodStartDate"
                            (ngModelChange)="onSelectTemporaryStartDate($event)"
                            >
                 </div>
@@ -117,7 +117,7 @@
                                              name="temporaryEndPeriod"
                                              bsDatepicker
                                              [bsConfig]="datepickerConfig"
-                                             [(ngModel)]="this.phase1.temporaryPeriodEndDate"
+                                             [(ngModel)]="this.phase2.temporaryPeriodEndDate"
                                              disabled
                                              readonly>
                 </div>
@@ -138,7 +138,7 @@
                                 name="natureOfChange"
                                 id="natureOfChange"
                                 (change)="onSelectNatureOfChange($event)"
-                                [(ngModel)]="this.phase1.natureOfChange">
+                                [(ngModel)]="this.phase2.natureOfChange">
                             <option selected="selected" disabled="disabled">Select one</option>
                             <option *ngFor="let change of availableNatureOfChange"  [value]="change[0]" >{{change[1]}}</option>
                         </select>
@@ -177,7 +177,7 @@
                            id="tcbID"
                            name="tcbID"
                            type="text"
-                           [(ngModel)]="this.phase1.TCB_CRF_ID"  >
+                           [(ngModel)]="this.phase2.TCB_CRF_ID"  >
                 </div>
                 <div class="col-sm"></div>
                 <div class="col-sm"></div>
@@ -200,7 +200,7 @@
                             name="configurationItems"
                             type="text"
                             (input)="this.displayChangeType = true"
-                            [(ngModel)]="this.phase1.configurationItems">
+                            [(ngModel)]="this.phase2.configurationItems">
                 </div>
             </div>
         </div>
@@ -266,7 +266,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" *ngIf="this.phase1.additionalDocuments === true">
+        <div class="form-group" *ngIf="this.phase2.additionalDocuments === true">
             <div class="row">
                 <div class="col">
                     <label class="px-3" for="numberOfPages">Number of Pages (Documents): </label>
@@ -276,7 +276,7 @@
                            type="number"
                            name="numberOfPages"
                            id="numberOfPages"
-                           [(ngModel)]="this.phase1.numberOfPages">
+                           [(ngModel)]="this.phase2.numberOfPages">
                 </div>
                 <div class="col"></div>
             </div>
@@ -318,7 +318,7 @@
                            id="operationsImpact"
                            name="operationsImpact"
                            (input)="estimatedImpact($event)"
-                           [(ngModel)]="this.phase1.estimatedImpacts.operations">
+                           [(ngModel)]="this.phase2.estimatedImpacts.operations">
                 </div>
                 <div *ngIf="this.displayEstimatedImpactClients">
                     <label for="clientsImpact" class="">Clients: </label>
@@ -329,7 +329,7 @@
                            id="clientsImpact"
                            name="clientsImpact"
                            (input)="estimatedImpact($event)"
-                           [(ngModel)]="this.phase1.estimatedImpacts.clients">
+                           [(ngModel)]="this.phase2.estimatedImpacts.clients">
                 </div>
                 <div *ngIf="this.displayEstimatedImpactTech">
                     <label for="technicalImpact" class="">Technical: </label>
@@ -340,7 +340,7 @@
                            id="technicalImpact"
                            name="technicalImpact"
                            (input)="estimatedImpact($event)"
-                           [(ngModel)]="this.phase1.estimatedImpacts.technical">
+                           [(ngModel)]="this.phase2.estimatedImpacts.technical">
                 </div>
             </div>
         </div>
@@ -369,7 +369,7 @@
                 </div>
                 <div class="col"></div>
             </div>
-            <div *ngIf="this.phase1.problemReportRaised" >
+            <div *ngIf="this.phase2.problemReportRaised" >
                 <div class="row">
                     <div class="col">
                         <label for="problemReportRef" class="px-3">Problem Report Reference Number: </label>
@@ -381,7 +381,7 @@
                                name="problemReportRef"
                                id="problemReportRef"
                                (input)="onInputProblemReportRef()"
-                               [(ngModel)]="this.phase1.problemReportRef">
+                               [(ngModel)]="this.phase2.problemReportRef">
                     </div>
                     <div class="col"></div>
                 </div>
@@ -434,7 +434,7 @@
                                    id="changeNotSuccessfullyTestedReason"
                                    name="changeNotSuccessfullyTestedReason"
                                    (input)="onUnsuccessfulTestReason()"
-                                   [(ngModel)]="this.phase1.changeNotSuccessfullyTestedReason">
+                                   [(ngModel)]="this.phase2.changeNotSuccessfullyTestedReason">
                         </div>
                     </div>
                 </div>
@@ -481,7 +481,7 @@
                                 name="specialistComments"
                                 id="specialistComments"
                                 (input)="onInputSpecialistComment()"
-                                [(ngModel)]="this.phase1.specialistComment">
+                                [(ngModel)]="this.phase2.specialistComment">
                     </div>
                 </div>
             </div>
@@ -500,7 +500,7 @@
                                name="proposedDate"
                                [bsConfig]="datepickerConfig"
                                (click)="onSelectProposedImplementationDate()"
-                               [(ngModel)]="this.phase1.proposedImplementationDate"  bsDatepicker>
+                               [(ngModel)]="this.phase2.proposedImplementationDate"  bsDatepicker>
                     </div>
 
                 </div>
