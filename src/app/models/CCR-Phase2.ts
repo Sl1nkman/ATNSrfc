@@ -19,6 +19,7 @@ export interface CCRPhase2 {
     };
     additionalDocuments: boolean;
     numberOfPages: number;
+    documentIds: String[];
     estimatedImpacts: {
         operations: string,
         clients: string,
@@ -31,4 +32,5 @@ export interface CCRPhase2 {
     specialistComment: string;
     proposedImplementationDate: Date;
     recommend_oppose: {};
+    CSRF_token: string ;
 }

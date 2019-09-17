@@ -14,41 +14,33 @@ import swal from 'sweetalert2';
   styleUrls: ['./phase1.component.css']
 })
 export class Phase1Component implements OnInit {
-  usersSites ;
-  enableSubmitButton = false;
-  private Token ;
-  private selectedSite;
+  private usersSites ;
+  private enableSubmitButton = false;
   constructor(private phase1Service: Phase1Service ,  private router: Router) { }
-  RFC: RFC  = {
+  private RFC: RFC  = {
     dateRequested: undefined,
     requestedChange: undefined,
-    description: undefined
+    description: undefined,
+    CSRF_token: undefined,
+    site_ID: undefined
   };
-  // User: User = {title: undefined,
-  //   site: undefined,
-  //   name: undefined,
-  //   surname: undefined,
-  //   employeeId: undefined,
-  //   contactNumber: undefined,
-  //   email: undefined,
-  //   password: undefined
-  // };
-  onSelectSite($event) {
-    this.selectedSite = $event.target.value;
+
+  public onSelectSite($event) {
+    this.RFC.site_ID = $event.target.value;
     localStorage.setItem('site' , $event.target.value);
   }
-  requestedChange() {
+  public  requestedChange() {
     localStorage.setItem('request' , this.RFC.requestedChange);
   }
-  description() {
+  public description() {
     localStorage.setItem('description' , this.RFC.description);
       const submitButton = document.getElementById('submit');
-      if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined && this.selectedSite !== undefined) {
+      if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined && this.RFC.site_ID !== undefined) {
         submitButton.classList.remove('disabled');
         this.enableSubmitButton = true;
       }
   }
-  onCancel() {
+  public onCancel() {
 
     swal({
       title: 'Are you sure?',
@@ -79,7 +71,7 @@ export class Phase1Component implements OnInit {
       }
     });
   }
-  onSubmit() {
+  public onSubmit() {
 
     swal({
       title: 'Are you sure?',
@@ -93,7 +85,7 @@ export class Phase1Component implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.phase1Service.submitRequest( this.RFC , this.Token , this.selectedSite).subscribe( (data: Data) => {
+        this.phase1Service.submitRequest( this.RFC ).subscribe( (data: Data) => {
           if (data.success) {
             localStorage.removeItem('request');
             localStorage.removeItem('description');
@@ -124,7 +116,7 @@ export class Phase1Component implements OnInit {
 
   ngOnInit() {
     this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
-      this.Token = data.tokenValue ;
+      this.RFC.CSRF_token = data.tokenValue ;
     });
     this.phase1Service.getPageData().subscribe((data: Data) => {
       this.usersSites = data ;
@@ -132,7 +124,7 @@ export class Phase1Component implements OnInit {
 
     this.RFC.requestedChange = localStorage.getItem('request');
     this.RFC.description = localStorage.getItem('description');
-    this.selectedSite = localStorage.getItem('site');
+    this.RFC.site_ID = localStorage.getItem('site');
   }
 
 }

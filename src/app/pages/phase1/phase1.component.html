@@ -11,7 +11,7 @@
                   id="site"
                   (change)="onSelectSite($event)" >
             <option selected="selected" disabled="disabled">Select one</option>
-            <option *ngFor="let site of usersSites"  [value]="site[0]" [selected]="this.selectedSite == site[0]" >{{site[1]}}</option>
+            <option *ngFor="let site of usersSites"  [value]="site[0]" [selected]="this.RFC.site_ID == site[0]" >{{site[1]}}</option>
           </select>
         </div>
 

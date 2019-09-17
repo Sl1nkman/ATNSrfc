@@ -1,7 +1,7 @@
 /* Created by : Liam Gordon McCabe
 *  Student number: 27455211
 */
-import { Component, OnInit , EventEmitter} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {CCRPhase2} from '../../models/CCR-Phase2';
 import {RFC} from '../../models/RFC';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
@@ -9,7 +9,6 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import swal from 'sweetalert2';
 import {Data} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -20,51 +19,53 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class Phase2Component implements OnInit {
 
     private  formData = new FormData();
-    datepickerConfig: Partial<BsDatepickerConfig> ;
+    private datepickerConfig: Partial<BsDatepickerConfig> ;
     private files: NgxFileDropEntry[] [] = []  ;
     private Token ;
 
 
-    availableNumberOfTemporaryDays: String [] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
+    private availableNumberOfTemporaryDays: String [] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
         '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-    availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
-    availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
-    availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
-    availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
-    availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
+    private availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
+    private availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
+    private availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
+    private availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
+    private availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
         'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
         'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
 
     // Form display boolean values
-    emergencySelected: boolean;
-    displayPredictedRisks: boolean;
-    displayChangePeriod: boolean;
-    displayNatureOfChange: boolean;
-    displayEOSystem: boolean;
-    displayTCB_CRF_ID: boolean;
-    displayConfigurationItems: boolean;
-    displayChangeType: boolean;
-    displaySelectTemporaryAmountOfDays: boolean ;
-    displayTemporaryDateSelection: boolean;
-    displayAdditionalAttachedDocuments: boolean ;
-    displayEstimatedImpact: boolean ;
-    displayEstimatedImpactOps: boolean;
-    displayEstimatedImpactClients: boolean;
-    displayEstimatedImpactTech: boolean;
-    displayProblemReportRaised: boolean ;
-    displayChangePreTested: boolean ;
-    displayChangeNotSuccessfullyTestedReason: boolean ;
-    displaySpecialistComments: boolean ;
-    displayProposedImplementationDate: boolean ;
-    displayRecommendOrOppose: boolean ;
-    activateSubmitButton: boolean ;
+    private emergencySelected: boolean;
+    private displayPredictedRisks: boolean;
+    private displayChangePeriod: boolean;
+    private displayNatureOfChange: boolean;
+    private displayEOSystem: boolean;
+    private displayTCB_CRF_ID: boolean;
+    private displayConfigurationItems: boolean;
+    private displayChangeType: boolean;
+    private displaySelectTemporaryAmountOfDays: boolean ;
+    private displayTemporaryDateSelection: boolean;
+    private displayAdditionalAttachedDocuments: boolean ;
+    private displayEstimatedImpact: boolean ;
+    private displayEstimatedImpactOps: boolean;
+    private displayEstimatedImpactClients: boolean;
+    private displayEstimatedImpactTech: boolean;
+    private displayProblemReportRaised: boolean ;
+    private displayChangePreTested: boolean ;
+    private displayChangeNotSuccessfullyTestedReason: boolean ;
+    private displaySpecialistComments: boolean ;
+    private displayProposedImplementationDate: boolean ;
+    private displayRecommendOrOppose: boolean ;
+    private activateSubmitButton: boolean ;
 
-    RFC: RFC = {
+    private RFC: RFC = {
         dateRequested: undefined,
         requestedChange: undefined,
-        description: undefined
+        description: undefined,
+        CSRF_token: undefined ,
+        site_ID: undefined
     };
-    phase2: CCRPhase2 = {
+    private phase2: CCRPhase2 = {
         TCB_CRF_ID: undefined,
         requestPriority: undefined,
         predictedImpact: [],
@@ -81,6 +82,7 @@ export class Phase2Component implements OnInit {
             firmware: false
         },
         additionalDocuments: false,
+        documentIds: undefined,
         numberOfPages: undefined,
         estimatedImpacts: {
             operations: undefined,
@@ -93,10 +95,11 @@ export class Phase2Component implements OnInit {
         changeNotSuccessfullyTestedReason: undefined,
         specialistComment: undefined,
         proposedImplementationDate: undefined,
-        recommend_oppose: undefined
+        recommend_oppose: undefined ,
+        CSRF_token: undefined
     };
 
-    constructor(private phase2service: Phase2Service, private fb: FormBuilder ) {
+    constructor(private phase2service: Phase2Service ) {
         const minDate = new Date();
 
         this.datepickerConfig = Object.assign({},
@@ -108,7 +111,7 @@ export class Phase2Component implements OnInit {
 
 
 
-    onSelectPriority($event) {
+    public onSelectPriority($event) {
         const prioritySelect = document.getElementById('priority');
         if ($event.target.value === '1') {
             prioritySelect.classList.add('text-danger');
@@ -145,7 +148,7 @@ export class Phase2Component implements OnInit {
         this.phase2.requestPriority = $event.target.value;
     }
 
-    onSelectChangePeriod($event) {
+    public onSelectChangePeriod($event) {
         switch ($event.target.value) {
             case '1' :
                 this.displayNatureOfChange = true;
@@ -163,18 +166,18 @@ export class Phase2Component implements OnInit {
         }
         this.phase2.changePeriod = $event.target.value;
     }
-    onSelectNumberOfTemporaryDays($event) {
+    public onSelectNumberOfTemporaryDays($event) {
         this.phase2.temporaryPeriodNumberOfDays = $event.target.value ;
         this.displayTemporaryDateSelection = true ;
     }
-    onSelectTemporaryStartDate($event) {
+    public onSelectTemporaryStartDate($event) {
         const maxDate = new Date() ;
         maxDate.setDate($event.getDate() + parseInt('' + this.phase2.temporaryPeriodNumberOfDays, 10));
         this.phase2.temporaryPeriodEndDate = maxDate;
         this.displayNatureOfChange = true ;
 
     }
-    onSelectImpact($event) {
+    public onSelectImpact($event) {
         if (this.phase2.predictedImpact !== []) {
             this.displayChangePeriod = true;
             if (this.phase2.predictedImpact.includes('CLIENTS')) {
@@ -198,7 +201,7 @@ export class Phase2Component implements OnInit {
 
 
     }
-    onSelectNatureOfChange($event) {
+    public onSelectNatureOfChange($event) {
 
         if (this.phase2.natureOfChange !== undefined ) {
             this.displayEOSystem = true ;
@@ -207,14 +210,14 @@ export class Phase2Component implements OnInit {
         }
     }
 
-    onSelectEosSystem($event) {
+    public onSelectEosSystem($event) {
         this.phase2.eosSystem = $event.target.value;
         this.phase2.TCB_CRF_ID = $event.target.value + '0001'; // database reference to eos tcb number + 1
         this.displayTCB_CRF_ID = true ;
         this.displayConfigurationItems = true;
     }
 
-    onSelectChangeTypeHW(e) {
+    public onSelectChangeTypeHW(e) {
 
         if (e.target.checked) {
             this.phase2.change.hardware = true;
@@ -226,7 +229,7 @@ export class Phase2Component implements OnInit {
         } else { this.displayAdditionalAttachedDocuments = false ; }
     }
 
-    onSelectChangeTypeSW(e) {
+    public onSelectChangeTypeSW(e) {
         if (e.target.checked) {
             this.phase2.change.software = true;
         } else {
@@ -237,7 +240,7 @@ export class Phase2Component implements OnInit {
         } else { this.displayAdditionalAttachedDocuments = false ; }
     }
 
-    onSelectChangeTypeFW(e) {
+    public onSelectChangeTypeFW(e) {
         if (e.target.checked) {
             this.phase2.change.firmware = true;
         } else {
@@ -247,7 +250,7 @@ export class Phase2Component implements OnInit {
             this.displayAdditionalAttachedDocuments = true ;
         } else { this.displayAdditionalAttachedDocuments = false ; }
     }
-    onSelectAdditionalDocuments(e) {
+    public onSelectAdditionalDocuments(e) {
         if (e.target.value === 'yes') {
             this.phase2.additionalDocuments = true;
             this.displayEstimatedImpact = false ;
@@ -295,7 +298,7 @@ export class Phase2Component implements OnInit {
     }
 
     // first file uploader end
-    estimatedImpact($event) {
+    public estimatedImpact($event) {
         if ( this.phase2.estimatedImpacts.technical !== undefined   ||
             this.phase2.estimatedImpacts.clients !== undefined   ||
             this.phase2.estimatedImpacts.operations !== undefined  ) {
@@ -303,7 +306,7 @@ export class Phase2Component implements OnInit {
         } else {
             this.displayProblemReportRaised = false ; }
     }
-    onSelectReportRaised(e) {
+    public onSelectReportRaised(e) {
         if (e.target.value === 'yes') {
             this.displayChangePreTested = false ;
             this.phase2.problemReportRaised = true;
@@ -313,11 +316,11 @@ export class Phase2Component implements OnInit {
             this.phase2.problemReportRaised = false;
         }
     }
-    onInputProblemReportRef() {
+    public onInputProblemReportRef() {
         this.displayChangePreTested = true;
     }
 
-    onSelectPreTested(e) {
+    public onSelectPreTested(e) {
         if (e.target.value === 'yes') {
             this.phase2.changeSuccessfullyTested = 'yes';
             this.displayChangeNotSuccessfullyTestedReason = false ;
@@ -342,21 +345,21 @@ export class Phase2Component implements OnInit {
             }
         }
     }
-    onUnsuccessfulTestReason() {
+    public onUnsuccessfulTestReason() {
         this.displaySpecialistComments = true ;
         if (this.displaySelectTemporaryAmountOfDays) {
             this.displayRecommendOrOppose = true ;
         }
     }
 
-    onInputSpecialistComment() {
+    public onInputSpecialistComment() {
         this.displayProposedImplementationDate = true ;
     }
 
-    onSelectProposedImplementationDate() {
+    public onSelectProposedImplementationDate() {
         this.displayRecommendOrOppose = true ;
     }
-    onSelectRecommendOrOppose($event) {
+    public onSelectRecommendOrOppose($event) {
         this.phase2.recommend_oppose = $event.target.value;
         const submitButton = document.getElementById('submit');
         submitButton.classList.remove('disabled');
@@ -364,7 +367,7 @@ export class Phase2Component implements OnInit {
     }
 
 
-    onSubmit() {
+    public onSubmit() {
         swal({
             title: 'Are you sure?',
             text: "You won't be able make changes to your submission",
@@ -379,8 +382,8 @@ export class Phase2Component implements OnInit {
             if (result.value) {
                 this.phase2service.upload(this.formData).subscribe((data: Data) => {
                     if (data.success) {
-
-                        this.phase2service.submitPhase2(this.phase2 , this.Token ).subscribe((data1: Data) => {
+                         this.phase2.documentIds = data.generatedName;
+                        this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
                             if (data1.success) {
                                 swal({
                                     title: 'Received',
@@ -430,7 +433,7 @@ export class Phase2Component implements OnInit {
 
     ngOnInit() {
         this.phase2service.getCSRFToken().subscribe( (data: Data) => {
-            this.Token = data.tokenValue ;
+            this.phase2.CSRF_token = data.tokenValue ;
         });
         this.phase2service.getPageData().subscribe((data: Data) => {
             this.availablePriorities     = data[0];

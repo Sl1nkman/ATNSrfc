@@ -1,7 +1,7 @@
 /* Created by : Liam Gordon McCabe
 *  Student number: 27455211
 */
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     HttpEvent,
     HttpInterceptor,
@@ -22,10 +22,6 @@ export class CcrHttpInterceptor implements HttpInterceptor {
             req = req.clone({ headers: req.headers.set('Authorization', Authorization) });
         }
 
-        // if (!req.headers.has('Content-Type')) {
-        //     req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
-        // }
-
         req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
 
         return next.handle(req).pipe(
@@ -36,6 +32,4 @@ export class CcrHttpInterceptor implements HttpInterceptor {
                 return event;
             }));
     }
-
-
 }

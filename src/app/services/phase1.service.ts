@@ -15,15 +15,9 @@ export class Phase1Service {
   constructor(private http: HttpClient ) {
   }
 
-  submitRequest(phase1: RFC , token , selectedSite) {
-    const obj = {
-      date: phase1.dateRequested ,
-      change: phase1.requestedChange ,
-      description: phase1.description,
-      site_ID: selectedSite,
-      CSRF_token: token
-    };
-     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', obj , httpOptions);
+  submitRequest(phase1: RFC ) {
+
+     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', phase1 , httpOptions);
   }
   getPageData() {
     const obj = {
