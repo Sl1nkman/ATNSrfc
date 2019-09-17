@@ -71,8 +71,9 @@ export class RegistrationComponent implements OnInit {
   }
   // Validates email input
   validateEmail(email: string) {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (re.test(String(email).toLowerCase()) === true) {
+  // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re = /[!@#$%^&*(),.?"'~`:;{}|<>_+=[ ]/g;
+    if (re.test(String(email).toLowerCase()) === true) {
     this.showEmail = false;
   } else {
     this.showEmail = true;
@@ -111,7 +112,11 @@ if (this.password === value) {
       !(this.User.contactNumber === undefined) &&
       !(this.User.name === undefined) &&
       !(this.User.surname === undefined) &&
-      !(this.password === undefined)
+      !(this.password === undefined) &&
+      (this.showEmail === true) &&
+      (this.showEmpId === true) &&
+      (this.showPassword === true) &&
+      (this.showPhone === true)
   ) {
     this.showRegisterButton = true;
   }

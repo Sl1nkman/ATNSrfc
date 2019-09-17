@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CCRPhase1} from '../models/CCR-Phase1';
+import {CCRPhase2} from '../models/CCR-Phase2';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+let httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
 };
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,12 @@ export class Phase2Service {
     };
     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
-  submitPhase2( phase2: CCRPhase1 , token) {
+  upload(formData: FormData) {
+    // httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data ' , 'Accept': 'application/json'})};
+    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php' , formData  );
+  }
+
+  submitPhase2(phase2: CCRPhase2 , token ) {
     const obj = {
       TCB_CRF_ID: phase2.TCB_CRF_ID,
       requestPriority: phase2.requestPriority,
@@ -52,8 +57,9 @@ export class Phase2Service {
       specialistComment: undefined,
       proposedImplementationDate: undefined,
       recommend_oppose: undefined,
-      token: token
+      CSRF_token: token,
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/phase2submit.php' , obj , httpOptions);
+    console.log(obj);
+    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/specialistConfiguration.php' , obj , httpOptions);
   }
 }

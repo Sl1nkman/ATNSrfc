@@ -22,9 +22,9 @@ export class CcrHttpInterceptor implements HttpInterceptor {
             req = req.clone({ headers: req.headers.set('Authorization', Authorization) });
         }
 
-        if (!req.headers.has('Content-Type')) {
-            req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
-        }
+        // if (!req.headers.has('Content-Type')) {
+        //     req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+        // }
 
         req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
 

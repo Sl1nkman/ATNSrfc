@@ -1,14 +1,15 @@
 /* Created by : Liam Gordon McCabe
 *  Student number: 27455211
 */
-import { Component, OnInit } from '@angular/core';
-import {CCRPhase1} from '../../models/CCR-Phase1';
+import { Component, OnInit , EventEmitter} from '@angular/core';
+import {CCRPhase2} from '../../models/CCR-Phase2';
 import {RFC} from '../../models/RFC';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import swal from 'sweetalert2';
 import {Data} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -18,14 +19,11 @@ import {Phase2Service} from '../../services/phase2.service';
 })
 export class Phase2Component implements OnInit {
 
+    private  formData = new FormData();
     datepickerConfig: Partial<BsDatepickerConfig> ;
-    startDate: Date;
-    endDate: Date;
-    startDateString: string;
-    endDateString: string;
-    dateRangePicker: Date;
-    public files: NgxFileDropEntry[] [] = []  ;
+    private files: NgxFileDropEntry[] [] = []  ;
     private Token ;
+
 
     availableNumberOfTemporaryDays: String [] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
         '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
@@ -66,7 +64,7 @@ export class Phase2Component implements OnInit {
         requestedChange: undefined,
         description: undefined
     };
-    phase1: CCRPhase1 = {
+    phase2: CCRPhase2 = {
         TCB_CRF_ID: undefined,
         requestPriority: undefined,
         predictedImpact: [],
@@ -98,7 +96,7 @@ export class Phase2Component implements OnInit {
         recommend_oppose: undefined
     };
 
-    constructor(private phase2: Phase2Service ) {
+    constructor(private phase2service: Phase2Service, private fb: FormBuilder ) {
         const minDate = new Date();
 
         this.datepickerConfig = Object.assign({},
@@ -106,8 +104,8 @@ export class Phase2Component implements OnInit {
             { dateInputFormat: 'YYYY-MM-DD' } ,
             { showWeekNumbers: false },
             { minDate: minDate });
-
     }
+
 
 
     onSelectPriority($event) {
@@ -144,7 +142,7 @@ export class Phase2Component implements OnInit {
             this.displaySpecialistComments = false ;
             this.emergencySelected = false;
         }
-        this.phase1.requestPriority = $event.target.value;
+        this.phase2.requestPriority = $event.target.value;
     }
 
     onSelectChangePeriod($event) {
@@ -163,33 +161,33 @@ export class Phase2Component implements OnInit {
                 this.displaySelectTemporaryAmountOfDays = true ;
                 break;
         }
-        this.phase1.changePeriod = $event.target.value;
+        this.phase2.changePeriod = $event.target.value;
     }
     onSelectNumberOfTemporaryDays($event) {
-        this.phase1.temporaryPeriodNumberOfDays = $event.target.value ;
+        this.phase2.temporaryPeriodNumberOfDays = $event.target.value ;
         this.displayTemporaryDateSelection = true ;
     }
     onSelectTemporaryStartDate($event) {
         const maxDate = new Date() ;
-        maxDate.setDate($event.getDate() + parseInt('' + this.phase1.temporaryPeriodNumberOfDays, 10));
-        this.phase1.temporaryPeriodEndDate = maxDate;
+        maxDate.setDate($event.getDate() + parseInt('' + this.phase2.temporaryPeriodNumberOfDays, 10));
+        this.phase2.temporaryPeriodEndDate = maxDate;
         this.displayNatureOfChange = true ;
 
     }
     onSelectImpact($event) {
-        if (this.phase1.predictedImpact !== []) {
+        if (this.phase2.predictedImpact !== []) {
             this.displayChangePeriod = true;
-            if (this.phase1.predictedImpact.includes('CLIENTS')) {
+            if (this.phase2.predictedImpact.includes('CLIENTS')) {
                 this.displayEstimatedImpactClients = true;
             } else {
                 this.displayEstimatedImpactClients = false;
             }
-            if (this.phase1.predictedImpact.includes('TECHNICAL')) {
+            if (this.phase2.predictedImpact.includes('TECHNICAL')) {
                 this.displayEstimatedImpactTech = true;
             } else {
                 this.displayEstimatedImpactTech = false;
             }
-            if (this.phase1.predictedImpact.includes('OPERATIONS')) {
+            if (this.phase2.predictedImpact.includes('OPERATIONS')) {
                 this.displayEstimatedImpactOps = true;
             } else {
                 this.displayEstimatedImpactOps = false;
@@ -202,7 +200,7 @@ export class Phase2Component implements OnInit {
     }
     onSelectNatureOfChange($event) {
 
-        if (this.phase1.natureOfChange !== undefined ) {
+        if (this.phase2.natureOfChange !== undefined ) {
             this.displayEOSystem = true ;
         } else {
             this.displayEOSystem = false ;
@@ -210,8 +208,8 @@ export class Phase2Component implements OnInit {
     }
 
     onSelectEosSystem($event) {
-        this.phase1.eosSystem = $event.target.value;
-        this.phase1.TCB_CRF_ID = $event.target.value + '0001'; // database reference to eos tcb number + 1
+        this.phase2.eosSystem = $event.target.value;
+        this.phase2.TCB_CRF_ID = $event.target.value + '0001'; // database reference to eos tcb number + 1
         this.displayTCB_CRF_ID = true ;
         this.displayConfigurationItems = true;
     }
@@ -219,47 +217,49 @@ export class Phase2Component implements OnInit {
     onSelectChangeTypeHW(e) {
 
         if (e.target.checked) {
-            this.phase1.change.hardware = true;
+            this.phase2.change.hardware = true;
         } else {
-            this.phase1.change.hardware = false ;
+            this.phase2.change.hardware = false ;
         }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
+        if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware ) {
             this.displayAdditionalAttachedDocuments = true ;
         } else { this.displayAdditionalAttachedDocuments = false ; }
     }
 
     onSelectChangeTypeSW(e) {
         if (e.target.checked) {
-            this.phase1.change.software = true;
+            this.phase2.change.software = true;
         } else {
-            this.phase1.change.software = false ;
+            this.phase2.change.software = false ;
         }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
+        if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware ) {
             this.displayAdditionalAttachedDocuments = true ;
         } else { this.displayAdditionalAttachedDocuments = false ; }
     }
 
     onSelectChangeTypeFW(e) {
         if (e.target.checked) {
-            this.phase1.change.firmware = true;
+            this.phase2.change.firmware = true;
         } else {
-            this.phase1.change.firmware = false ;
+            this.phase2.change.firmware = false ;
         }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
+        if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware ) {
             this.displayAdditionalAttachedDocuments = true ;
         } else { this.displayAdditionalAttachedDocuments = false ; }
     }
     onSelectAdditionalDocuments(e) {
         if (e.target.value === 'yes') {
-            this.phase1.additionalDocuments = true;
+            this.phase2.additionalDocuments = true;
             this.displayEstimatedImpact = false ;
         } else if (e.target.value === 'no') {
-            this.files = [];
-            this.phase1.additionalDocuments = false;
-            this.phase1.numberOfPages = undefined ;
+            // this.files = [];
+            this.phase2.additionalDocuments = false;
+            this.phase2.numberOfPages = undefined ;
             this.displayEstimatedImpact = true ;
         }
     }
+
+    // first file uploader start
     public dropped(files: NgxFileDropEntry[]) {
         this.displayEstimatedImpact = true;
         // this.files = files;
@@ -272,33 +272,17 @@ export class Phase2Component implements OnInit {
                 fileEntry.file((file: File) => {
 
                     // Here you can access the real file
-                    console.log(droppedFile.relativePath, file);
+                    // console.log(droppedFile.relativePath, file);
 
-                    /**
-                     // You could upload it like this:
-                     const formData = new FormData()
-                     formData.append('logo', file, relativePath)
-
-                     // Headers
-                     const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-                     this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-                     .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-                     **/
-
+                     this.formData.append('file', file, droppedFile.relativePath );
+                     console.log(this.formData.getAll('file'));
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)
                 const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-                console.log(droppedFile.relativePath, fileEntry);
             }
         }
     }
-
     public fileOver(event) {
         console.log(event);
     }
@@ -306,10 +290,15 @@ export class Phase2Component implements OnInit {
     public fileLeave(event) {
         console.log(event);
     }
+    public uploadFiles() {
+
+    }
+
+    // first file uploader end
     estimatedImpact($event) {
-        if ( this.phase1.estimatedImpacts.technical !== undefined   ||
-            this.phase1.estimatedImpacts.clients !== undefined   ||
-            this.phase1.estimatedImpacts.operations !== undefined  ) {
+        if ( this.phase2.estimatedImpacts.technical !== undefined   ||
+            this.phase2.estimatedImpacts.clients !== undefined   ||
+            this.phase2.estimatedImpacts.operations !== undefined  ) {
              this.displayProblemReportRaised = true ;
         } else {
             this.displayProblemReportRaised = false ; }
@@ -317,11 +306,11 @@ export class Phase2Component implements OnInit {
     onSelectReportRaised(e) {
         if (e.target.value === 'yes') {
             this.displayChangePreTested = false ;
-            this.phase1.problemReportRaised = true;
+            this.phase2.problemReportRaised = true;
         } else if (e.target.value === 'no') {
             this.displayChangePreTested = true ;
-            this.phase1.problemReportRef = undefined;
-            this.phase1.problemReportRaised = false;
+            this.phase2.problemReportRef = undefined;
+            this.phase2.problemReportRaised = false;
         }
     }
     onInputProblemReportRef() {
@@ -330,24 +319,24 @@ export class Phase2Component implements OnInit {
 
     onSelectPreTested(e) {
         if (e.target.value === 'yes') {
-            this.phase1.changeSuccessfullyTested = 'yes';
+            this.phase2.changeSuccessfullyTested = 'yes';
             this.displayChangeNotSuccessfullyTestedReason = false ;
             this.displaySpecialistComments = true ;
-            this.phase1.changeNotSuccessfullyTestedReason = undefined ;
+            this.phase2.changeNotSuccessfullyTestedReason = undefined ;
             if (this.displaySelectTemporaryAmountOfDays) {
                 this.displayRecommendOrOppose = true ;
             }
         } else if (e.target.value === 'no') {
-            this.phase1.changeNotSuccessfullyTestedReason = undefined;
-            this.phase1.changeSuccessfullyTested = 'no';
+            this.phase2.changeNotSuccessfullyTestedReason = undefined;
+            this.phase2.changeSuccessfullyTested = 'no';
             this.displayChangeNotSuccessfullyTestedReason = true ;
             this.displaySpecialistComments = false ;
             this.displayRecommendOrOppose = false ;
         } else if (e.target.value === 'na') {
-            this.phase1.changeSuccessfullyTested = 'na';
+            this.phase2.changeSuccessfullyTested = 'na';
             this.displayChangeNotSuccessfullyTestedReason = false ;
             this.displaySpecialistComments = true ;
-            this.phase1.changeNotSuccessfullyTestedReason = undefined ;
+            this.phase2.changeNotSuccessfullyTestedReason = undefined ;
             if (this.displaySelectTemporaryAmountOfDays) {
                 this.displayRecommendOrOppose = true ;
             }
@@ -368,22 +357,14 @@ export class Phase2Component implements OnInit {
         this.displayRecommendOrOppose = true ;
     }
     onSelectRecommendOrOppose($event) {
-        this.phase1.recommend_oppose = $event.target.value;
+        this.phase2.recommend_oppose = $event.target.value;
         const submitButton = document.getElementById('submit');
         submitButton.classList.remove('disabled');
         this.activateSubmitButton = true;
     }
-    // onSelectSubmittedToAllConcerned (e) {
-    //     if (e.target.value === 'yes') {
-    //         this.phase2.submittedToAllParties = true;
-    //     } else if (e.target.value === 'no') {
-    //         this.phase2.notSubmittedToAllPartiesReason = undefined;
-    //         this.phase2.submittedToAllParties = false;
-    //     }
-    // }
+
 
     onSubmit() {
-
         swal({
             title: 'Are you sure?',
             text: "You won't be able make changes to your submission",
@@ -396,13 +377,40 @@ export class Phase2Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-                // perform post with service
-                this.phase2.submitPhase2(this.phase1 , this.Token).subscribe((data: Data) => {
+                this.phase2service.upload(this.formData).subscribe((data: Data) => {
                     if (data.success) {
 
+                        this.phase2service.submitPhase2(this.phase2 , this.Token ).subscribe((data1: Data) => {
+                            if (data1.success) {
+                                swal({
+                                    title: 'Received',
+                                    text: 'Your files have been received',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } else {
+                                swal({
+                                    title: 'Failed',
+                                    text: data.message,
+                                    type: 'error',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
+                    } else {
+                        swal({
+                            title: 'Files not uploaded',
+                            text: data.message,
+                            type: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                     }
-                    });
-                console.log(JSON.stringify(this.phase1));
+                });
+
+
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
@@ -419,11 +427,12 @@ export class Phase2Component implements OnInit {
 
 
 
+
     ngOnInit() {
-        this.phase2.getCSRFToken().subscribe( (data: Data) => {
+        this.phase2service.getCSRFToken().subscribe( (data: Data) => {
             this.Token = data.tokenValue ;
         });
-        this.phase2.getPageData().subscribe((data: Data) => {
+        this.phase2service.getPageData().subscribe((data: Data) => {
             this.availablePriorities     = data[0];
             this.availableImpacts        = data[1];
             this.availablePeriods        = data[2];
@@ -433,7 +442,7 @@ export class Phase2Component implements OnInit {
         });
         this.RFC.requestedChange = 'We need new laptops for engineering';
         this.RFC.description = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
-        this.phase1.TCB_CRF_ID = 'Undefined' ;
+        this.phase2.TCB_CRF_ID = 'Undefined' ;
     }
 
 }

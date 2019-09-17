@@ -1,7 +1,7 @@
 /* Created by : Liam Gordon McCabe
 *  Student number: 27455211
 */
-export interface CCRPhase1 {
+export interface CCRPhase2 {
     TCB_CRF_ID: string;
     requestPriority: string;
     predictedImpact: String [];

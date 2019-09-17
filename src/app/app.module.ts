@@ -2,8 +2,9 @@
 *  Student number: 27455211
 */
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder } from '@angular/forms'
 // imports for bootstrap forms
 import { HttpClientModule , HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -67,7 +68,7 @@ import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
         NgbPopoverModule,
         SelectDropDownModule,
     ],
-  providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard,
+  providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard, FormBuilder ,
       { provide: HTTP_INTERCEPTORS, useClass: CcrHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
