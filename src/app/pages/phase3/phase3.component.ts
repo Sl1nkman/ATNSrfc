@@ -5,9 +5,9 @@ import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {CCRPhase3} from '../../models/CCR-Phase3';
 import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
 import {Data, Router} from '@angular/router';
-import {OAuth} from '../../models/OAuth';
-import {OathService} from '../../services/oath.service';
 import {Phase3Service} from '../../services/phase3.service';
+import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-phase3',
@@ -15,6 +15,7 @@ import {Phase3Service} from '../../services/phase3.service';
   styleUrls: ['./phase3.component.css']
 })
 export class Phase3Component implements OnInit {
+  private  formData = new FormData();
 
   datepickerConfig: Partial<BsDatepickerConfig> ;
   dateRangePicker: Date;
@@ -22,8 +23,8 @@ export class Phase3Component implements OnInit {
   showImpChange: boolean;
   showEvalChange: boolean;
   showSched: boolean;
-  activateSubmitButton: boolean ;
-  public files: NgxFileDropEntry[] [] = []  ;
+  disableSubmitButton: boolean;
+  private files: NgxFileDropEntry[] [] = []  ;
 
   abortOrRegress: String[] = ['Abort', 'Regress'];
 
@@ -36,26 +37,31 @@ export class Phase3Component implements OnInit {
     abort: false,
     regress: false,
     abortRegressReason: undefined,
-    impSuccessReason: undefined,
+    abortRegress: undefined,
     alreadyRegressed: true,
     additionalDocs: false,
     itemsUpdated: false,
     evalSuccess: false,
     ccrConfirmation: false,
-    evalFailure: undefined
+    evalFailure: undefined,
+    documentIds: undefined
   };
 
     user: String = '';
     Token = null ;
 
-  constructor(private Phase3Service: Phase3Service ,
-              private router: Router) {
+  constructor(private phase3Service: Phase3Service) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,
         {showWeekNumbers: false},
         {minDate: new Date()});
   }
+
+  removeFile(index){
+      this.files.splice(index, 1);
+  }
+
   onSelectTCBEval($event) {
       const startDate = $event[0];
       const endDate = $event[1];
@@ -66,21 +72,39 @@ export class Phase3Component implements OnInit {
   }
 
   onSelectAbortRegress($event) {
-    if (this.phase3.abortRegressReason !== undefined) {
-      if (this.phase3.abortRegressReason.includes('Abort')) {
+    if (this.phase3.abortRegress !== undefined) {
+      if (this.phase3.abortRegress.includes('Abort')) {
         this.phase3.abort = true;
         this.phase3.regress = false;
-        this.activateSubmitButton = true;
         this.phase3.abortRegressReason = undefined;
         this.phase3.alreadyRegressed = false;
         this.phase3.schedRegressionDate = undefined;
-      } else if (this.phase3.abortRegressReason.includes('Regress')) {
+      } else if (this.phase3.abortRegress.includes('Regress')) {
         this.phase3.abort = false;
         this.phase3.regress = true;
-        this.activateSubmitButton = false;
         this.phase3.abortRegressReason = undefined;
       }
     }
+  }
+
+  abortRegressReasonCheck(){
+      if(this.phase3.abortRegressReason !== undefined && this.phase3.abortRegress.includes('Abort')){
+          const submitButton = document.getElementById('submit');
+          submitButton.classList.remove('disabled');
+          this.disableSubmitButton = true;
+      } else if(this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed){
+          const submitButton = document.getElementById('submit');
+          submitButton.classList.remove('disabled');
+          this.disableSubmitButton = true;
+      }
+  }
+
+  schedRegressCheck(){
+      if(this.phase3.schedRegressionDate !== undefined){
+          const submitButton = document.getElementById('submit');
+          submitButton.classList.remove('disabled');
+          this.disableSubmitButton = true;
+      }
   }
 
   onSelectImplementationSuccessful(e) {
@@ -94,9 +118,8 @@ export class Phase3Component implements OnInit {
       this.phase3.abort = false;
       this.phase3.regress = false;
       this.phase3.abortRegressReason = undefined;
-      this.phase3.impSuccessReason = undefined;
+      this.phase3.abortRegress = undefined;
       this.phase3.alreadyRegressed = true;
-      this.activateSubmitButton = false;
     } else {
       this.phase3.implementationSuccessful = false;
       this.displayImpSuccess = true;
@@ -112,7 +135,6 @@ export class Phase3Component implements OnInit {
       this.phase3.ccrConfirmation = false;
       this.phase3.evalFailure = undefined;
       this.showEvalChange = false;
-      this.activateSubmitButton = false;
     }
   }
   
@@ -128,11 +150,9 @@ export class Phase3Component implements OnInit {
   onSelectAlreadyRegressed(e) {
       if (e.target.value === 'yes') {
           this.phase3.alreadyRegressed = true;
-          this.activateSubmitButton = true;
           this.showSched = false;
       } else {
           this.phase3.alreadyRegressed = false;
-          this.activateSubmitButton = true;
           this.showSched = true;
       }
 
@@ -149,31 +169,98 @@ export class Phase3Component implements OnInit {
           this.phase3.evalSuccess = true;
           this.showEvalChange = true;
           this.phase3.evalFailure = undefined;
-          this.activateSubmitButton = false;
       } else {
           this.phase3.evalSuccess = false;
           this.showEvalChange = true;
           this.phase3.ccrConfirmation = false;
-          this.activateSubmitButton = true;
       }
   }
 
   onSelectConfirm(e) {
       if (e.target.value === 'Confirm') {
           this.phase3.ccrConfirmation = true;
-          this.activateSubmitButton = true;
+          const submitButton = document.getElementById('submit');
+          submitButton.classList.remove('disabled');
+          this.disableSubmitButton = true;
       } else {
           this.phase3.ccrConfirmation = false;
-          this.activateSubmitButton = true;
+          const submitButton = document.getElementById('submit');
+          submitButton.classList.remove('disabled');
+          this.disableSubmitButton = true;
       }
   }
   onSubmit() {
-        console.log(JSON.stringify(this.phase3));
+      swal({
+          title: 'Are you sure?',
+          text: "You won't be able make changes to your submission",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Submit',
+          cancelButtonText: 'Cancel',
+          confirmButtonColor: '#5bc0de',
+          cancelButtonColor: '#d9534f' ,
+          reverseButtons: true
+      }).then((result) => { if (result.value) {
+          this.phase3Service.upload(this.formData).subscribe((data: Data) => {
+              if (data.success) {
+                  this.phase3.documentIds = data.generatedName;
+                  this.phase3Service.submitPhase3(this.phase3).subscribe((data1: Data) => {
+                      if (data1.success) {
+                          swal({
+                              title: 'Received',
+                              text: 'Your files have been received',
+                              type: 'success',
+                              showConfirmButton: false,
+                              timer: 1500
+                          });
+                      } else {
+                          swal({
+                              title: 'Failed',
+                              text: data.message,
+                              type: 'error',
+                              showConfirmButton: false,
+                              timer: 1500
+                          });
+                      }
+                  });
+              } else {
+                  swal({
+                      title: 'Files not uploaded',
+                      text: data.message,
+                      type: 'error',
+                      showConfirmButton: false,
+                      timer: 1500
+                  });
+              }
+          });
+          } else if (
+              result.dismiss === swal.DismissReason.cancel
+          ) {
+              swal({
+                  title: 'Cancelled',
+                  text: 'Your may continue to make changes',
+                  type: 'error',
+                  showConfirmButton: false,
+                  timer: 1500
+              });
+          }
+      });
+  }
 
-    }
+  evalReasonCheck(){
+      if (this.phase3.evalFailure !== undefined){
+          const submitButton = document.getElementById('submit');
+          submitButton.classList.remove('disabled');
+          this.disableSubmitButton = true;
+      }
+  }
 
   ngOnInit() {
-      this.Token = this.Phase3Service.getCSRFToken().subscribe( (data: Data) => {
+      this.disableSubmitButton = false;
+      const submitButton = document.getElementById('submit');
+      submitButton.classList.add('disabled');
+
+      this.Token = this.phase3Service.getCSRFToken().subscribe( (data: Data) => {
           this.Token = data.tokenValue ;
       });
   }
@@ -187,7 +274,6 @@ export class Phase3Component implements OnInit {
     }
 
     public dropped(files: NgxFileDropEntry[]) {
-        // this.displayEstimatedImpact = true;
         // this.files = files;
         this.files.push(files);
         for (const droppedFile of files) {
@@ -198,29 +284,14 @@ export class Phase3Component implements OnInit {
                 fileEntry.file((file: File) => {
 
                     // Here you can access the real file
-                    console.log(droppedFile.relativePath, file);
+                    // console.log(droppedFile.relativePath, file);
 
-                    /**
-                     // You could upload it like this:
-                     const formData = new FormData()
-                     formData.append('logo', file, relativePath)
-
-                     // Headers
-                     const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-                     this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-                     .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-                     **/
-
+                    this.formData.append('file', file, droppedFile.relativePath );
+                    console.log(this.formData.getAll('file'));
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)
                 const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-                console.log(droppedFile.relativePath, fileEntry);
             }
         }
     }

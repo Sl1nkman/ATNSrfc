@@ -36,6 +36,7 @@ import { RouteGuard } from './guards/route.guard';
 import { AppRoutingModule } from './models/app-routing.module';
 import { RouteAuthorisationService } from './services/route-authorisation.service';
 import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,8 @@ import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
     RFCsignoffComponent,
     Phase2Component,
     Phase3Component,
+    AdminDashboardComponent,
+
   ],
     imports: [
         BrowserModule,

@@ -9,13 +9,14 @@ export interface CCRPhase3 {
     abort: boolean;
     regress: boolean;
     abortRegressReason: string;
-    impSuccessReason: string;
+    abortRegress: string;
     alreadyRegressed: boolean;
     additionalDocs: boolean;
     itemsUpdated: boolean;
     evalSuccess: boolean;
     ccrConfirmation: boolean;
     evalFailure: string;
+    documentIds: String[];
 }
 
 //Created by Blaine Viljoen 28023374
