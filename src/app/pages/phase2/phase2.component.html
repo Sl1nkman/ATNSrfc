@@ -267,16 +267,17 @@
             </div>
         </div>
         <div class="form-group" *ngIf="this.phase2.additionalDocuments === true">
-            <div class="row">
+            <div class="row pb-3">
                 <div class="col">
                     <label class="px-3" for="numberOfPages">Number of Pages (Documents): </label>
                 </div>
                 <div class="col">
                     <input class="px-3 form-control rounded"
+                           disabled="true"
                            type="number"
                            name="numberOfPages"
                            id="numberOfPages"
-                           [(ngModel)]="this.phase2.numberOfPages">
+                           [(ngModel)]="this.filesForUpload.length">
                 </div>
                 <div class="col"></div>
             </div>
@@ -292,18 +293,17 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Name:</th>
                         </tr>
                         </thead>
                         <tbody class="upload-name-style">
-                        <div *ngFor="let item of files">
-                            <tr *ngFor="let file of item">
-                                    <strong>{{ file.relativePath }}</strong>
-                                    <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0" (click)="removeFile(file.relativePath)">Remove</button>
-                            </tr>
-                        </div>
+                        <tr *ngFor="let item of filesForUpload, index as i">
+                            <td><strong>{{ item.name }}</strong></td>
+                            <td class="px-3" (click)="removeFile(i)" style="cursor: pointer;">&#10005;</td>
+                        </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

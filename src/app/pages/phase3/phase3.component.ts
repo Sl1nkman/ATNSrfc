@@ -25,6 +25,7 @@ export class Phase3Component implements OnInit {
   showSched: boolean;
   disableSubmitButton: boolean;
   private files: NgxFileDropEntry[] [] = []  ;
+  private filesForUpload = [];
 
   abortOrRegress: String[] = ['Abort', 'Regress'];
 
@@ -59,7 +60,8 @@ export class Phase3Component implements OnInit {
   }
 
   removeFile(index){
-      this.files.splice(index, 1);
+      this.filesForUpload.splice(index, 1);
+      console.log(this.filesForUpload);
   }
 
   onSelectTCBEval($event) {
@@ -201,27 +203,17 @@ export class Phase3Component implements OnInit {
           cancelButtonColor: '#d9534f' ,
           reverseButtons: true
       }).then((result) => { if (result.value) {
+          this.populateForm();
           this.phase3Service.upload(this.formData).subscribe((data: Data) => {
               if (data.success) {
                   this.phase3.documentIds = data.generatedName;
-                  this.phase3Service.submitPhase3(this.phase3).subscribe((data1: Data) => {
-                      if (data1.success) {
-                          swal({
-                              title: 'Received',
-                              text: 'Your files have been received',
-                              type: 'success',
-                              showConfirmButton: false,
-                              timer: 1500
-                          });
-                      } else {
-                          swal({
-                              title: 'Failed',
-                              text: data.message,
-                              type: 'error',
-                              showConfirmButton: false,
-                              timer: 1500
-                          });
-                      }
+                  console.log(this.phase3.documentIds);
+                  swal({
+                      title: 'Received',
+                      text: 'Your files have been received',
+                      type: 'success',
+                      showConfirmButton: false,
+                      timer: 1500
                   });
               } else {
                   swal({
@@ -247,8 +239,8 @@ export class Phase3Component implements OnInit {
       });
   }
 
-  evalReasonCheck(){
-      if (this.phase3.evalFailure !== undefined){
+  evalReasonCheck() {
+      if (this.phase3.evalFailure !== undefined) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
@@ -282,18 +274,20 @@ export class Phase3Component implements OnInit {
             if (droppedFile.fileEntry.isFile) {
                 const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
                 fileEntry.file((file: File) => {
-
-                    // Here you can access the real file
-                    // console.log(droppedFile.relativePath, file);
-
-                    this.formData.append('file', file, droppedFile.relativePath );
-                    console.log(this.formData.getAll('file'));
+                    this.filesForUpload.push(file);
+                    console.log(this.filesForUpload);
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)
                 const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
             }
         }
+    }
+
+    private populateForm() {
+      for (let i = 0; i < this.filesForUpload.length; i++) {
+          this.formData.append('file[]', this.filesForUpload[i], this.filesForUpload[i].name);
+      }
     }
 
 }

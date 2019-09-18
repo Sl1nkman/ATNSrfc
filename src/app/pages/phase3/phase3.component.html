@@ -136,7 +136,7 @@
 
             <div class="row pt-3" *ngIf="this.phase3.additionalDocs">
                 <div class="px-3" ngbPopover="Please drag and drop or select any relevant files that need to uploaded and linked with this respective change request" triggers="mouseenter:mouseleave" placement="bottom-left" popoverTitle="CHANGE REQUEST ADDITIONAL DOCUMENTS">
-                    <ngx-file-drop multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                    <ngx-file-drop multiple="true" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
                                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                         <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                             Please drag and drop your additional files here
@@ -151,8 +151,8 @@
                             </tr>
                             </thead>
                             <tbody class="upload-name-style">
-                            <tr *ngFor="let item of files, index as i">
-                                <td><strong>{{ item[0].relativePath }}</strong></td>
+                            <tr *ngFor="let item of filesForUpload, index as i">
+                                <td><strong>{{ item.name }}</strong></td>
                                 <td class="px-3" (click)="removeFile(i)" style="cursor: pointer;">&#10005;</td>
                             </tr>
                             </tbody>

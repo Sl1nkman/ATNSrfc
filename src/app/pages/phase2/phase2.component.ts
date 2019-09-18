@@ -21,6 +21,7 @@ export class Phase2Component implements OnInit {
     private  formData = new FormData();
     private datepickerConfig: Partial<BsDatepickerConfig> ;
     private files: NgxFileDropEntry[] [] = []  ;
+    private filesForUpload = [];
     private Token ;
 
 
@@ -273,10 +274,8 @@ export class Phase2Component implements OnInit {
             if (droppedFile.fileEntry.isFile) {
                 const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
                 fileEntry.file((file: File) => {
-                    // Here you can access the real file
-                    // console.log(droppedFile.relativePath, file);
-                     this.formData.append('file', file, droppedFile.relativePath );
-                     console.log(this.formData.getAll('file'));
+                    this.filesForUpload.push(file);
+                    console.log(this.filesForUpload);
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)
@@ -286,6 +285,16 @@ export class Phase2Component implements OnInit {
     }
     public fileOver(event) {
         console.log(event);
+    }
+
+    private populateForm() {
+        for (let i = 0; i < this.filesForUpload.length; i++) {
+            this.formData.append('file[]', this.filesForUpload[i], this.filesForUpload[i].name);
+        }
+    }
+
+    removeFile(index){
+        this.filesForUpload.splice(index, 1);
     }
 
     public fileLeave(event) {
@@ -378,6 +387,7 @@ export class Phase2Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
+                this.populateForm();
                 this.phase2service.upload(this.formData).subscribe((data: Data) => {
                     if (data.success) {
                          this.phase2.documentIds = data.generatedName;
