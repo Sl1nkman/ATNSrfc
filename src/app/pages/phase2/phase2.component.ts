@@ -266,17 +266,15 @@ export class Phase2Component implements OnInit {
     public dropped(files: NgxFileDropEntry[]) {
         this.displayEstimatedImpact = true;
         // this.files = files;
+
         this.files.push(files);
         for (const droppedFile of files) {
-
             // Is it a file?
             if (droppedFile.fileEntry.isFile) {
                 const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
                 fileEntry.file((file: File) => {
-
                     // Here you can access the real file
                     // console.log(droppedFile.relativePath, file);
-
                      this.formData.append('file', file, droppedFile.relativePath );
                      console.log(this.formData.getAll('file'));
                 });
@@ -293,7 +291,7 @@ export class Phase2Component implements OnInit {
     public fileLeave(event) {
         console.log(event);
     }
-    public uploadFiles() {
+    public removeFile(relativePath) {
 
     }
 
@@ -383,25 +381,7 @@ export class Phase2Component implements OnInit {
                 this.phase2service.upload(this.formData).subscribe((data: Data) => {
                     if (data.success) {
                          this.phase2.documentIds = data.generatedName;
-                        this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
-                            if (data1.success) {
-                                swal({
-                                    title: 'Received',
-                                    text: 'Your files have been received',
-                                    type: 'success',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                            } else {
-                                swal({
-                                    title: 'Failed',
-                                    text: data.message,
-                                    type: 'error',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
-                            }
-                        });
+
                     } else {
                         swal({
                             title: 'Files not uploaded',
@@ -411,6 +391,25 @@ export class Phase2Component implements OnInit {
                             timer: 1500
                         });
                     }
+                    this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
+                        if (data1.success) {
+                            swal({
+                                title: 'Received',
+                                text: 'Your files have been received',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            swal({
+                                title: 'Failed',
+                                text: data.message,
+                                type: 'error',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    });
                 });
 
 

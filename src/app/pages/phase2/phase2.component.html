@@ -281,7 +281,7 @@
                 <div class="col"></div>
             </div>
             <div class="px-3">
-                <ngx-file-drop multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                <ngx-file-drop multiple="true" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
                                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                     <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                         Please drag and drop your additional files here
@@ -296,13 +296,14 @@
                         </tr>
                         </thead>
                         <tbody class="upload-name-style">
-                        <tr *ngFor="let item of files">
-                            <td><strong>{{ item[0].relativePath }}</strong></td>
-                        </tr>
+                        <div *ngFor="let item of files">
+                            <tr *ngFor="let file of item">
+                                    <strong>{{ file.relativePath }}</strong>
+                                    <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0" (click)="removeFile(file.relativePath)">Remove</button>
+                            </tr>
+                        </div>
                         </tbody>
                     </table>
-                    <button class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0" id="upload" (click)="uploadFiles()">Upload files</button>
-
                 </div>
             </div>
         </div>
