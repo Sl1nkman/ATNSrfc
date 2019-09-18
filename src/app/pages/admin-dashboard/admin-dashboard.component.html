@@ -1,0 +1,52 @@
+<!--Created By Blaine Viljoen-->
+<form>
+  <!--    <select class="rounded w-100 form-control"-->
+  <!--            name="user"-->
+  <!--            id="user"-->
+  <!--            (change)="onSelectUser($event)">-->
+  <!--        <option selected="selected" disabled="disabled">Select a user</option>-->
+  <!--        <option *ngFor="let user of this.users, index as x"  [value]="user[1]" >{{user[1]}}</option>-->
+  <!--    </select>-->
+
+  <div *ngIf="!this.buttonSelected">
+    <div *ngFor="let rfc of rfcs; index as i">
+      <div class="shadow card bg-light mx-auto" style="cursor: pointer;">
+        <div class="form group">
+          <div class="row px-3">
+            <div class="col">
+              <h2 class="px-3 pt-1 text-primary">CCR ID: {{rfc.id}}</h2>
+            </div>
+            <div class="col">
+
+            </div>
+          </div><br>
+          <div class="row m-0">
+            <div class="col">
+              <p class="px-3 pt-2">Request: {{rfc.request}}</p>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.edit(i)">Edit CCR</button>
+            </div>
+          </div><br>
+          <div class="row m-0">
+            <div class="col">
+              <p class="px-3 pt-2">Reason: {{rfc.reason}}</p>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec">Reassign Specialist</button>
+            </div>
+          </div><br>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <h3 id="test" class="pt-3 px-3"></h3>
+  <div *ngIf="this.buttonSelected">
+    <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="back" (click)="this.back()">Back</button>
+  </div>
+</form>
+<!--Created By Blaine Viljoen-->

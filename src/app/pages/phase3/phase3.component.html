@@ -36,7 +36,7 @@
                     <ngx-select-dropdown ngbPopover="Select from the drop down list whether the change request has either been Aborted or Regressed." triggers="mouseenter:mouseleave" placement="bottom-left" popoverTitle="CHANGE REQUEST ABORT/REGRESS" id="abortRegress" name="abortRegress"
                         (change)="onSelectAbortRegress($event)"
                         [multiple]="false"
-                        [(ngModel)]="this.phase3.abortRegressReason"
+                        [(ngModel)]="this.phase3.abortRegress"
                         [options]="abortOrRegress"
                     >
                     </ngx-select-dropdown>
@@ -49,7 +49,7 @@
                 </div>
                 <div ngbPopover="Please provide any relevant information as to why this change request was aborted/regressed." triggers="mouseenter:mouseleave" placement="bottom-left" popoverTitle="CHANGE REQUEST ABORT/REGRESS REASON"
                         class="col-sm">
-                    <input type="text" id="abortRegressReason" name="abortRegressReason" class="px-3 rounded form-control" [(ngModel)]="this.phase3.impSuccessReason">
+                    <input type="text" id="abortRegressReason" name="abortRegressReason" class="px-3 rounded form-control" [(ngModel)]="this.phase3.abortRegressReason" (ngModelChange)="abortRegressReasonCheck()">
                 </div>
             </div>
             <div class="row pt-3" *ngIf="this.phase3.regress">
@@ -87,7 +87,8 @@
                            id="schedRegressDate"
                            name="schedRegressDate"
                            [bsConfig]="datepickerConfig"
-                           [(ngModel)]="this.phase3.schedRegressionDate"  bsDatepicker>
+                           [(ngModel)]="this.phase3.schedRegressionDate"  bsDatepicker
+                           (ngModelChange)="schedRegressCheck()">
                 </div>
             </div>
 
@@ -135,7 +136,7 @@
 
             <div class="row pt-3" *ngIf="this.phase3.additionalDocs">
                 <div class="px-3" ngbPopover="Please drag and drop or select any relevant files that need to uploaded and linked with this respective change request" triggers="mouseenter:mouseleave" placement="bottom-left" popoverTitle="CHANGE REQUEST ADDITIONAL DOCUMENTS">
-                    <ngx-file-drop  multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                    <ngx-file-drop multiple dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
                                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                         <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                             Please drag and drop your additional files here
@@ -146,12 +147,13 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Name:</th>
                             </tr>
                             </thead>
                             <tbody class="upload-name-style">
-                            <tr *ngFor="let item of files">
+                            <tr *ngFor="let item of files, index as i">
                                 <td><strong>{{ item[0].relativePath }}</strong></td>
+                                <td class="px-3" (click)="removeFile(i)" style="cursor: pointer;">&#10005;</td>
                             </tr>
                             </tbody>
                         </table>
@@ -225,25 +227,6 @@
                     </Label>
                 </div>
             </div>
-            <div class="form-group">
-                <div  class="row px-3">
-                    <div class="col"></div>
-                    <div class="col">
-                        <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0"
-                                (click)="onSubmit()"> Cancel
-                        </button>
-                    </div>
-                    <div class="col"></div>
-                    <div class="col" >
-                        <button
-                                class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled"
-                                id="submit"
-                                (click)="onSubmit()"> Submit
-                        </button>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </div>
 
             <div class="row pt-3 pr-3" *ngIf="!this.phase3.evalSuccess&&this.showEvalChange">
                 <div class="col-sm">
@@ -251,12 +234,12 @@
                 </div>
                 <div ngbPopover="Please provide any relevant information as to why the evaluation of the change request was not successful." triggers="mouseenter:mouseleave" placement="bottom-left" popoverTitle="CHANGE REQUEST EVALUATION FAILURE REASON"
                         class="col-sm">
-                    <input  type="text" id="evalFail" name="evalFail" class="form-control" [(ngModel)]="this.phase3.evalFailure">
+                    <input  type="text" id="evalFail" name="evalFail" class="form-control" [(ngModel)]="this.phase3.evalFailure" (ngModelChange)="evalReasonCheck()">
                 </div>
             </div>
 
         </div>
-        <div class="form-group" *ngIf="this.activateSubmitButton">
+        <div class="form-group">
             <div  class="row px-3">
                 <div class="col"></div>
                 <div class="col">
@@ -266,7 +249,7 @@
                 </div>
                 <div class="col"></div>
                 <div class="col" >
-                    <button class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0"
+                    <button class="btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0" [disabled]="!this.disableSubmitButton"
                             id="submit"
                             (click)="onSubmit()"> Submit
                     </button>
@@ -274,6 +257,7 @@
                 <div class="col"></div>
             </div>
         </div>
+
     </div>
 </form>
 

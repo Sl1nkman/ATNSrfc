@@ -14,6 +14,7 @@ import { Phase2Component } from '../pages/phase2/phase2.component';
 import { RouteGuard } from '../guards/route.guard';
 import { AuthGuard } from '../guards/auth.guard';
 import { Phase3Component } from '../pages/phase3/phase3.component';
+import {AdminDashboardComponent} from '../pages/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,7 +32,9 @@ const routes: Routes = [
       { path: 'rfcsignoff' ,  component: RFCsignoffComponent ,  data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always'},
       { path: 'currentrfcs' , component: CurrentRFCSComponent , data: { allowedPermission: '3' }, runGuardsAndResolvers: 'always'},
       { path: 'phase2' ,      component: Phase2Component ,      data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always'},
-      { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always'}
+      { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always'},
+        // change permission level for admin dashboard to higher security level
+      {path: 'adminDashboard', component: AdminDashboardComponent, data:{allowedPermission: '5'}, runGuardsAndResolvers: 'always'}
       ]},
   { path: '**',           component: LoginComponent },
   {path: 'phase3' , component: Phase3Component},

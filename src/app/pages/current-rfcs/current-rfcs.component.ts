@@ -1,6 +1,5 @@
+// Created by Blaine Viljoen
 import { Component, OnInit } from '@angular/core';
-import {CurrentRfcsService} from '../../services/currentRfcs.service';
-import {Data} from '@angular/router';
 
 @Component({
   selector: 'app-current-rfcs',
@@ -9,28 +8,10 @@ import {Data} from '@angular/router';
 })
 export class CurrentRFCSComponent implements OnInit {
 
-  Token = null;
 
-  rfcs = [
-    {id: 1, request: 'something', reason: 'Cause I said so ...'},
-    {id: 2, request: 'something else', reason: 'Same as the last one ...'},
-    {id: 3, request: 'one last thing', reason: 'Just do it ...'}
-  ];
-
-  onClick(index) {
-    document.getElementById('test').innerHTML = 'You selected the card with id: ' + this.rfcs[index][0];
+  ngOnInit(){
   }
 
-  constructor(private currentRfcsService: CurrentRfcsService) { }
-
-  ngOnInit() {
-     this.currentRfcsService.getCSRFToken().subscribe( (data: Data) => {
-         this.Token = data.tokenValue ;
-     });
-     this.currentRfcsService.getPageData().subscribe((data: Data) => {
-        this.rfcs = data[0];
-        console.log(this.rfcs);
-     });
-  }
+  constructor() { }
 
 }
