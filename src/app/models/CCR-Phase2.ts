@@ -4,7 +4,7 @@
 export interface CCRPhase2 {
     TCB_CRF_ID: string;
     requestPriority: string;
-    predictedImpact: String [];
+    predictedImpact: string;
     changePeriod: string;
     temporaryPeriodStartDate: Date;
     temporaryPeriodNumberOfDays: number;

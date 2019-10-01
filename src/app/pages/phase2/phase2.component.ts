@@ -69,7 +69,7 @@ export class Phase2Component implements OnInit {
     private phase2: CCRPhase2 = {
         TCB_CRF_ID: undefined,
         requestPriority: undefined,
-        predictedImpact: [],
+        predictedImpact: undefined ,
         changePeriod: undefined,
         temporaryPeriodStartDate: undefined,
         temporaryPeriodNumberOfDays: undefined,
@@ -179,23 +179,73 @@ export class Phase2Component implements OnInit {
 
     }
     public onSelectImpact($event) {
-        if (this.phase2.predictedImpact !== []) {
+        this.phase2.predictedImpact = $event.target.value;
+        if (this.phase2.predictedImpact !== undefined) {
             this.displayChangePeriod = true;
-            if (this.phase2.predictedImpact.includes('CLIENTS')) {
-                this.displayEstimatedImpactClients = true;
-            } else {
-                this.displayEstimatedImpactClients = false;
+            console.log(this.phase2.predictedImpact);
+            switch (this.phase2.predictedImpact) {
+                case '1':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
+                case '2':
+                    this.displayProblemReportRaised = true;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
+                case '3':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = true;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    break;
+                case '4':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = true;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    break;
+                case '5':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = true;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    break;
+                case '6':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = true;
+                    break;
+                case '7':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
+                case '8':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
             }
-            if (this.phase2.predictedImpact.includes('TECHNICAL')) {
-                this.displayEstimatedImpactTech = true;
-            } else {
-                this.displayEstimatedImpactTech = false;
-            }
-            if (this.phase2.predictedImpact.includes('OPERATIONS')) {
-                this.displayEstimatedImpactOps = true;
-            } else {
-                this.displayEstimatedImpactOps = false;
-            }
+
         } else {
             this.displayChangePeriod = false;
         }
@@ -300,10 +350,6 @@ export class Phase2Component implements OnInit {
     public fileLeave(event) {
         console.log(event);
     }
-    public removeFile(relativePath) {
-
-    }
-
     // first file uploader end
     public estimatedImpact($event) {
         if ( this.phase2.estimatedImpacts.technical !== undefined   ||

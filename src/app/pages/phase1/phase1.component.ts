@@ -19,8 +19,8 @@ export class Phase1Component implements OnInit {
   constructor(private phase1Service: Phase1Service ,  private router: Router) { }
   private RFC: RFC  = {
     dateRequested: undefined,
-    requestedChange: undefined,
-    description: undefined,
+    requestDescription: undefined,
+    reasonForRequest: undefined,
     CSRF_token: undefined,
     site_ID: undefined
   };
@@ -30,12 +30,12 @@ export class Phase1Component implements OnInit {
     localStorage.setItem('site' , $event.target.value);
   }
   public  requestedChange() {
-    localStorage.setItem('request' , this.RFC.requestedChange);
+    localStorage.setItem('request' , this.RFC.requestDescription);
   }
   public description() {
-    localStorage.setItem('description' , this.RFC.description);
+    localStorage.setItem('description' , this.RFC.reasonForRequest);
       const submitButton = document.getElementById('submit');
-      if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined && this.RFC.site_ID !== undefined) {
+      if (this.RFC.requestDescription !== undefined && this.RFC.reasonForRequest !== undefined && this.RFC.site_ID !== undefined) {
         submitButton.classList.remove('disabled');
         this.enableSubmitButton = true;
       }
@@ -113,7 +113,6 @@ export class Phase1Component implements OnInit {
       }
     });
   }
-
   ngOnInit() {
     this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
       this.RFC.CSRF_token = data.tokenValue ;
@@ -122,8 +121,8 @@ export class Phase1Component implements OnInit {
       this.usersSites = data ;
     });
 
-    this.RFC.requestedChange = localStorage.getItem('request');
-    this.RFC.description = localStorage.getItem('description');
+    this.RFC.requestDescription = localStorage.getItem('request');
+    this.RFC.reasonForRequest = localStorage.getItem('description');
     this.RFC.site_ID = localStorage.getItem('site');
   }
 

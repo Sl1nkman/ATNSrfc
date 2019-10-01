@@ -42,15 +42,23 @@
                 </div>
                 <div class="col-sm">
                     <div *ngIf="this.displayPredictedRisks">
-                        <ngx-select-dropdown
-                                ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"
-                                id="predictedImpact"
+                        <select ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"
+                                class="rounded w-100 form-control"
                                 name="predictedImpact"
-                                (change)="onSelectImpact($event)"
-                                [multiple]="true"
-                                [(ngModel)]="this.phase2.predictedImpact"
-                                [options]="availableImpacts">
-                        </ngx-select-dropdown>
+                                id="predictedImpact"
+                                (change)="onSelectImpact($event)" >
+                            <option selected="selected" disabled="disabled">Select one</option>
+                            <option *ngFor="let impacts of availableImpacts"  [value]="impacts[0]" >{{impacts[1]}}</option>
+                        </select>
+<!--                        <ngx-select-dropdown-->
+<!--                                ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"-->
+<!--                                id="predictedImpact"-->
+<!--                                name="predictedImpact"-->
+<!--                                (change)="onSelectImpact($event)"-->
+<!--                                [multiple]="true"-->
+<!--                                [(ngModel)]="this.phase2.predictedImpact"-->
+<!--                                [options]="availableImpacts">-->
+<!--                        </ngx-select-dropdown>-->
 
                     </div>
                 </div>
@@ -104,6 +112,7 @@
                            type="text"
                            id="temporaryStartPeriod"
                            name="temporaryStartPeriod"
+                           autocomplete="off"
                            bsDatepicker
                            [bsConfig]="datepickerConfig"
                            [(ngModel)]="this.phase2.temporaryPeriodStartDate"
@@ -115,6 +124,7 @@
                                              type="text"
                                              id="temporaryEndPeriod"
                                              name="temporaryEndPeriod"
+                                             autocomplete="off"
                                              bsDatepicker
                                              [bsConfig]="datepickerConfig"
                                              [(ngModel)]="this.phase2.temporaryPeriodEndDate"
@@ -345,7 +355,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" *ngIf="this.displayProblemReportRaised">
+        <div class="form-group" *ngIf="this.displayProblemReportRaised && this.displayEstimatedImpact">
             <div class="row">
                 <div class="col">
                     <label class="px-3">Problem Report raised with Contractor?</label>
@@ -499,9 +509,11 @@
                                type="text"
                                id="proposedDate"
                                name="proposedDate"
+                               autocomplete="off"
+                               bsDatepicker
                                [bsConfig]="datepickerConfig"
                                (click)="onSelectProposedImplementationDate()"
-                               [(ngModel)]="this.phase2.proposedImplementationDate"  bsDatepicker>
+                               [(ngModel)]="this.phase2.proposedImplementationDate"  >
                     </div>
 
                 </div>
@@ -519,8 +531,8 @@
                             name="recommend/oppose"
                             (change)="onSelectRecommendOrOppose($event)" >
                         <option selected="selected" disabled="disabled">Select one</option>
-                        <option  value="Recommend" >Recommend</option>
-                        <option value="Oppose">Oppose</option>
+                        <option [disabled]="this.phase2.changeSuccessfullyTested === 'no'" value="Recommend" >Recommend</option>
+                        <option [disabled]="this.phase2.changeSuccessfullyTested === 'no'" value="Oppose">Oppose</option>
                         <<option value="re-test">Re-Test</option>
                     </select>
                 </div>

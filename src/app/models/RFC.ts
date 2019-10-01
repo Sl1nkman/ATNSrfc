@@ -4,8 +4,8 @@
 
 export interface RFC {
     dateRequested: Date;
-    requestedChange: string ;
-    description: string ;
+    requestDescription: string ;
+    reasonForRequest: string ;
     CSRF_token: string ;
     site_ID: string ;
 }
