@@ -44,7 +44,7 @@
                                 id="predictedImpact"
                                 (change)="onSelectImpact($event)" >
                             <option selected="selected" disabled="disabled">Select one</option>
-                            <option *ngFor="let impacts of availableImpacts"  [value]="impacts[0]" >{{impacts[1]}}</option>
+                            <option *ngFor="let impacts of availableImpacts" [selected]="this.phase2.predictedImpact === impacts[0]"  [value]="impacts[0]" >{{impacts[1]}}</option>
                         </select>
 <!--                        <ngx-select-dropdown-->
 <!--                                ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"-->
@@ -93,7 +93,7 @@
                                 id="temporaryNoDays"
                                 (change)="onSelectNumberOfTemporaryDays($event)" >
                             <option selected="selected" disabled="disabled">Select no. of days</option>
-                            <option  *ngFor="let day of availableNumberOfTemporaryDays" value="{{day}}">{{day}}</option>
+                            <option  *ngFor="let day of availableNumberOfTemporaryDays" [selected]="this.phase2.temporaryPeriodNumberOfDays ===  day" value="{{day}}">{{day}}</option>
                         </select>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                                 id="eosSystem"
                                 (change)="onSelectEosSystem($event)" >
                             <option selected="selected" disabled="disabled">Select one</option>
-                            <option *ngFor="let eos of availableEosSystems"  [value]="eos[0]" >{{eos[1]}}</option>
+                            <option *ngFor="let eos of availableEosSystems"  [value]="eos[0]" [selected]="this.phase2.eosSystem === eos[0]" >{{eos[1]}}</option>
                         </select>
                     </div>
                 </div>
@@ -539,6 +539,7 @@
                 <div class="col"></div>
                 <div class="col">
                     <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0"
+                            id="cancel"
                             (click)="onCancel()"> Cancel
                     </button>
                 </div>

@@ -50,11 +50,11 @@ export class Phase2Service {
     return this.obj;
   }
 
-  getPhase1(){
+  getPhase1() {
     return this.phase1;
   }
 
-  getUser(){
+  getUser() {
     return this.user;
   }
 }

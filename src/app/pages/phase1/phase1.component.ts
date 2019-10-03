@@ -87,7 +87,7 @@ export class Phase1Component implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        if(this.localOBJ !== null){
+        if (this.localOBJ !== null) {
           this.phase1Service.updateRequest(this.RFC, this.localOBJ.ID).subscribe((data: Data) => {
             if (data.success) {
               this.localOBJ = null;
@@ -153,8 +153,8 @@ export class Phase1Component implements OnInit {
       localStorage.setItem('description', '');
       localStorage.setItem('site', '');
     }
-    this.RFC.requestedChange = localStorage.getItem('request');
-    this.RFC.description = localStorage.getItem('description');
+    this.RFC.requestDescription = localStorage.getItem('request');
+    this.RFC.reasonForRequest = localStorage.getItem('description');
     this.RFC.site_ID = localStorage.getItem('site');
   }
 

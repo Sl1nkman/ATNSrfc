@@ -2,6 +2,7 @@
 *  Student number: 27455211
 */
 export interface CCRPhase2 {
+    CCR_ID: string;
     TCB_CRF_ID: string;
     requestPriority: string;
     predictedImpact: string;
