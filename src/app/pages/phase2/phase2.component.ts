@@ -419,6 +419,33 @@ export class Phase2Component implements OnInit {
         this.activateSubmitButton = true;
     }
 
+    public onCancel() {
+        swal({
+            title: 'Are you sure?',
+            text: "You will lose all progress on this form",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f' ,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+
+            } else if (
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
 
     public onSubmit() {
         swal({
@@ -440,6 +467,13 @@ export class Phase2Component implements OnInit {
                                 this.phase2service.upload(this.formData).subscribe((data: Data) => {
                                     if (data.success) {
                                         this.phase2.documentIds = data.generatedName;
+                                        swal({
+                                            title: 'Received',
+                                            text: 'Your files have been received',
+                                            type: 'success',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
 
                                     } else {
                                         swal({
@@ -452,13 +486,7 @@ export class Phase2Component implements OnInit {
                                     }
                                 });
                             }
-                            swal({
-                                title: 'Received',
-                                text: 'Your files have been received',
-                                type: 'success',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
+
                         } else {
                             swal({
                                 title: 'Failed',
@@ -469,9 +497,6 @@ export class Phase2Component implements OnInit {
                             });
                         }
                     });
-
-
-
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {

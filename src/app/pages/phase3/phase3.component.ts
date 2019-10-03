@@ -192,6 +192,34 @@ export class Phase3Component implements OnInit {
           this.disableSubmitButton = true;
       }
   }
+    public onCancel() {
+        swal({
+            title: 'Are you sure?',
+            text: "You will lose all progress on this form",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f' ,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+
+            } else if (
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+
   onSubmit() {
       swal({
           title: 'Are you sure?',
