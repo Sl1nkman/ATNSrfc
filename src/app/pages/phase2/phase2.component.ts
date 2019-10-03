@@ -719,20 +719,17 @@ export class Phase2Component implements OnInit {
                     this.displayEstimatedImpact = true;
                 }
 
-                if (this.localObj.impactOnClients !== undefined) {
+                if (this.localObj.impactOnClients !== null) {
                     this.displayEstimatedImpact = true;
                     this.phase2.estimatedImpacts.clients = this.localObj.impactOnClients;
-                    this.displayEstimatedImpactClients = true;
                 }
-                if (this.localObj.impactOnOperations !== undefined) {
+                if (this.localObj.impactOnOperations !== null) {
                     this.displayEstimatedImpact = true;
                     this.phase2.estimatedImpacts.operations = this.localObj.impactOnOperations;
-                    this.displayEstimatedImpactOps = true;
                 }
-                if (this.localObj.impactonTech !== undefined) {
+                if (this.localObj.impactonTech !== null) {
                     this.displayEstimatedImpact = true;
                     this.phase2.estimatedImpacts.technical = this.localObj.impactonTech;
-                    this.displayEstimatedImpactTech = true;
                 }
 
                 if (this.phase2.estimatedImpacts.technical !== undefined ||
