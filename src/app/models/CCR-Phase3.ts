@@ -1,4 +1,4 @@
-//Created by Blaine Viljoen 28023374
+// Created by Blaine Viljoen 28023374
 
 export interface CCRPhase3 {
     schedRegressionDate: Date;
@@ -17,6 +17,7 @@ export interface CCRPhase3 {
     ccrConfirmation: boolean;
     evalFailure: string;
     documentIds: String[];
+    CSRF_token: string;
 }
 
 //Created by Blaine Viljoen 28023374

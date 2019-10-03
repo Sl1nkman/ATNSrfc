@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {CCRPhase3} from '../../models/CCR-Phase3';
 import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
-import {Data, Router} from '@angular/router';
+import {Data} from '@angular/router';
 import {Phase3Service} from '../../services/phase3.service';
 import swal from 'sweetalert2';
 
@@ -45,7 +45,8 @@ export class Phase3Component implements OnInit {
     evalSuccess: false,
     ccrConfirmation: false,
     evalFailure: undefined,
-    documentIds: undefined
+    documentIds: undefined,
+    CSRF_token: undefined
   };
 
     user: String = '';
@@ -59,7 +60,7 @@ export class Phase3Component implements OnInit {
         {minDate: new Date()});
   }
 
-  removeFile(index){
+  removeFile(index) {
       this.filesForUpload.splice(index, 1);
       console.log(this.filesForUpload);
   }
@@ -89,20 +90,20 @@ export class Phase3Component implements OnInit {
     }
   }
 
-  abortRegressReasonCheck(){
-      if(this.phase3.abortRegressReason !== undefined && this.phase3.abortRegress.includes('Abort')){
+  abortRegressReasonCheck() {
+      if (this.phase3.abortRegressReason !== undefined && this.phase3.abortRegress.includes('Abort')) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
-      } else if(this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed){
+      } else if (this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
       }
   }
 
-  schedRegressCheck(){
-      if(this.phase3.schedRegressionDate !== undefined){
+  schedRegressCheck() {
+      if (this.phase3.schedRegressionDate !== undefined) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
@@ -203,39 +204,47 @@ export class Phase3Component implements OnInit {
           cancelButtonColor: '#d9534f' ,
           reverseButtons: true
       }).then((result) => { if (result.value) {
-          this.populateForm();
-          this.phase3Service.upload(this.formData).subscribe((data: Data) => {
+          this.phase3Service.submitPhase3(this.phase3).subscribe( (data: Data) => {
               if (data.success) {
-                  this.phase3.documentIds = data.generatedName;
-                  console.log(this.phase3.documentIds);
-                  swal({
-                      title: 'Received',
-                      text: 'Your files have been received',
-                      type: 'success',
-                      showConfirmButton: false,
-                      timer: 1500
-                  });
-              } else {
-                  swal({
-                      title: 'Files not uploaded',
-                      text: data.message,
-                      type: 'error',
-                      showConfirmButton: false,
-                      timer: 1500
-                  });
+               console.log('we have post');
+                  if (this.phase3.additionalDocs) {
+                      this.populateForm();
+                      this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
+                          if (data1.success) {
+                              this.phase3.documentIds = data.generatedName;
+                              console.log(this.phase3.documentIds);
+                              swal({
+                                  title: 'Received',
+                                  text: 'Your files have been received',
+                                  type: 'success',
+                                  showConfirmButton: false,
+                                  timer: 1500
+                              });
+                          } else {
+                              swal({
+                                  title: 'Files not uploaded',
+                                  text: data.message,
+                                  type: 'error',
+                                  showConfirmButton: false,
+                                  timer: 1500
+                              });
+                          }
+                      });
+                  }
               }
           });
-          } else if (
-              result.dismiss === swal.DismissReason.cancel
-          ) {
-              swal({
-                  title: 'Cancelled',
-                  text: 'Your may continue to make changes',
-                  type: 'error',
-                  showConfirmButton: false,
-                  timer: 1500
-              });
-          }
+
+      } else if (
+          result.dismiss === swal.DismissReason.cancel
+      ) {
+          swal({
+              title: 'Cancelled',
+              text: 'Your may continue to make changes',
+              type: 'error',
+              showConfirmButton: false,
+              timer: 1500
+          });
+      }
       });
   }
 
@@ -253,7 +262,7 @@ export class Phase3Component implements OnInit {
       submitButton.classList.add('disabled');
 
       this.Token = this.phase3Service.getCSRFToken().subscribe( (data: Data) => {
-          this.Token = data.tokenValue ;
+          this.phase3.CSRF_token = data.tokenValue ;
       });
   }
 

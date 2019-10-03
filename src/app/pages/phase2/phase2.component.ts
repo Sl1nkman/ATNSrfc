@@ -61,8 +61,8 @@ export class Phase2Component implements OnInit {
 
     private RFC: RFC = {
         dateRequested: undefined,
-        requestedChange: undefined,
-        description: undefined,
+        requestDescription: undefined,
+        reasonForRequest: undefined,
         CSRF_token: undefined ,
         site_ID: undefined
     };
@@ -343,7 +343,7 @@ export class Phase2Component implements OnInit {
         }
     }
 
-    removeFile(index){
+    removeFile(index) {
         this.filesForUpload.splice(index, 1);
     }
 
@@ -433,22 +433,25 @@ export class Phase2Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-                this.populateForm();
-                this.phase2service.upload(this.formData).subscribe((data: Data) => {
-                    if (data.success) {
-                         this.phase2.documentIds = data.generatedName;
-
-                    } else {
-                        swal({
-                            title: 'Files not uploaded',
-                            text: data.message,
-                            type: 'error',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
                     this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
                         if (data1.success) {
+                            if (this.phase2.additionalDocuments === true) {
+                                this.populateForm();
+                                this.phase2service.upload(this.formData).subscribe((data: Data) => {
+                                    if (data.success) {
+                                        this.phase2.documentIds = data.generatedName;
+
+                                    } else {
+                                        swal({
+                                            title: 'Files not uploaded',
+                                            text: data.message,
+                                            type: 'error',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                    }
+                                });
+                            }
                             swal({
                                 title: 'Received',
                                 text: 'Your files have been received',
@@ -459,14 +462,14 @@ export class Phase2Component implements OnInit {
                         } else {
                             swal({
                                 title: 'Failed',
-                                text: data.message,
+                                text: data1.message,
                                 type: 'error',
                                 showConfirmButton: false,
                                 timer: 1500
                             });
                         }
                     });
-                });
+
 
 
             } else if (
@@ -498,8 +501,8 @@ export class Phase2Component implements OnInit {
             this.availableEosSystems     = data[4];
 
         });
-        this.RFC.requestedChange = 'We need new laptops for engineering';
-        this.RFC.description = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
+        this.RFC.requestDescription = 'We need new laptops for engineering';
+        this.RFC.reasonForRequest = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
         this.phase2.TCB_CRF_ID = 'Undefined' ;
     }
 
