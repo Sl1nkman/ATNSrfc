@@ -149,6 +149,10 @@ export class Phase1Component implements OnInit {
       const submitButton = document.getElementById('submit');
       submitButton.classList.remove('disabled');
       document.getElementById('cancel').classList.add('invisible');
+    } else {
+      localStorage.setItem('request', '');
+      localStorage.setItem('description', '');
+      localStorage.setItem('site', '');
     }
     this.RFC.requestedChange = localStorage.getItem('request');
     this.RFC.description = localStorage.getItem('description');
