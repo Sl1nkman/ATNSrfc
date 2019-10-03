@@ -11,6 +11,8 @@ import {Data} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
 
 
+let undefined = null;
+
 @Component({
     selector: 'app-phase2',
     templateUrl: './phase2.component.html',
@@ -548,7 +550,7 @@ export class Phase2Component implements OnInit {
         this.phase2.TCB_CRF_ID = 'Undefined' ;
 
         this.localObj = this.phase2service.getObj();
-        if (this.localObj !== null) {
+        if (this.localObj !== undefined) {
             let phase1 = this.phase2service.getPhase1();
             this.RFC.requestedChange = phase1.requested_change;
             this.RFC.description = phase1.description;
@@ -590,21 +592,21 @@ export class Phase2Component implements OnInit {
                 this.emergencySelected = false;
             }
 
-            if(this.localObj.impactOnClients !== null){
+            if(this.localObj.impactOnClients !== undefined){
                 this.displayChangePeriod = true;
                 this.displayEstimatedImpactClients = true;
                 this.phase2.predictedImpact.push('CLIENTS');
             } else {
                 this.displayEstimatedImpactClients = false;
             }
-            if(this.localObj.impactOnOperations !== null){
+            if(this.localObj.impactOnOperations !== undefined){
                 this.displayChangePeriod = true;
                 this.displayEstimatedImpactOps = true;
                 this.phase2.predictedImpact.push('OPERATIONS');
             } else {
                 this.displayEstimatedImpactOps = false;
             }
-            if(this.localObj.impactonTech !== null){
+            if(this.localObj.impactonTech !== undefined){
                 this.displayChangePeriod = true;
                 this.displayEstimatedImpactTech = true;
                 this.phase2.predictedImpact.push('TECHNICAL');
@@ -629,7 +631,7 @@ export class Phase2Component implements OnInit {
                     break;
             }
 
-            if(this.localObj.temporaryStartDate !== null && this.localObj.temporaryEndDate !== null){
+            if(this.localObj.temporaryStartDate !== undefined && this.localObj.temporaryEndDate !== undefined){
                 this.phase2.temporaryPeriodStartDate = this.localObj.temporaryStartDate;
                 this.phase2.temporaryPeriodEndDate = this.localObj.temporaryEndDate;
                 this.displayNatureOfChange = true;
@@ -646,6 +648,97 @@ export class Phase2Component implements OnInit {
             this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_ID;
             this.displayTCB_CRF_ID = true ;
             this.displayConfigurationItems = true;
+            this.phase2.configurationItems = this.localObj.configurationDescr
+
+            if (this.localObj.changeTypeHW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.hardware = true;
+            } else {
+                this.phase2.change.hardware = false ;
+            }
+            if (this.localObj.changeTypeSW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.software = true;
+            } else {
+                this.phase2.change.software = false ;
+            }
+            if (this.localObj.changeTypeFW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.firmware = true;
+            } else {
+                this.phase2.change.firmware = false ;
+            }
+            if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware ) {
+                this.displayAdditionalAttachedDocuments = true ;
+            } else { this.displayAdditionalAttachedDocuments = false ; }
+
+            if(this.localObj.impactRisks_ID !== '2'){
+                this.displayEstimatedImpact = true;
+            }
+
+            if(this.localObj.impactOnClients !== undefined){
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.clients = this.localObj.impactOnClients;
+                this.displayEstimatedImpactClients = true;
+            }
+            if(this.localObj.impactOnOperations !== undefined){
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.operations = this.localObj.impactOnOperations;
+                this.displayEstimatedImpactOps = true;
+            }
+            if(this.localObj.impactonTech !== undefined){
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.technical = this.localObj.impactonTech;
+                this.displayEstimatedImpactTech = true;
+            }
+
+            if ( this.phase2.estimatedImpacts.technical !== undefined   ||
+                this.phase2.estimatedImpacts.clients !== undefined   ||
+                this.phase2.estimatedImpacts.operations !== undefined  ) {
+                this.displayProblemReportRaised = true ;
+            } else {
+                this.displayProblemReportRaised = false ; }
+
+            if(this.localObj.reportRaisedContractor === '1'){
+                this.phase2.problemReportRaised = true;
+            } else {
+                this.phase2.problemReportRaised = false;
+            }
+
+            if (this.phase2.problemReportRaised) {
+                this.displayChangePreTested = false ;
+            } else if (!this.phase2.problemReportRaised) {
+                this.displayChangePreTested = true ;
+                this.phase2.problemReportRef = undefined;
+            }
+
+            if(this.localObj.preTestSuccess){
+                this.phase2.changeSuccessfullyTested = 'yes';
+            } else if(this.localObj.preTestSuccess){
+                this.phase2.changeSuccessfullyTested = 'no';
+            } else {
+                this.phase2.changeSuccessfullyTested = 'na';
+            }
+            if (this.phase2.changeSuccessfullyTested === 'yes') {
+                this.displayChangeNotSuccessfullyTestedReason = false ;
+                this.displaySpecialistComments = true ;
+                this.phase2.changeNotSuccessfullyTestedReason = undefined ;
+                if (this.displaySelectTemporaryAmountOfDays) {
+                    this.displayRecommendOrOppose = true ;
+                }
+            } else if (this.phase2.changeSuccessfullyTested === 'no') {
+                this.phase2.changeNotSuccessfullyTestedReason = this.localObj.reasonUnsucesTest;
+                this.displayChangeNotSuccessfullyTestedReason = true ;
+                this.displaySpecialistComments = false ;
+                this.displayRecommendOrOppose = false ;
+            } else if (this.phase2.changeSuccessfullyTested === 'na') {
+                this.displayChangeNotSuccessfullyTestedReason = false ;
+                this.displaySpecialistComments = true ;
+                this.phase2.changeNotSuccessfullyTestedReason = undefined ;
+                if (this.displaySelectTemporaryAmountOfDays) {
+                    this.displayRecommendOrOppose = true ;
+                }
+            }
 
             this.activateSubmitButton = true;
             const submitButton = document.getElementById('submit');

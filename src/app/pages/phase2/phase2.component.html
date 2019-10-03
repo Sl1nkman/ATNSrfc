@@ -224,19 +224,19 @@
                         <label class="checkbox-inline px-3">
                             <input type="checkbox"
                                    value="HW"
-                                   (click)="onSelectChangeTypeHW($event)" >
+                                   (click)="onSelectChangeTypeHW($event)" [checked]="this.phase2.change.hardware">
                             Hardware
                         </label>
                         <label class="checkbox-inline px-3">
                             <input type="checkbox"
                                    value="SW"
-                                   (click)="onSelectChangeTypeSW($event)">
+                                   (click)="onSelectChangeTypeSW($event)" [checked]="this.phase2.change.software">
                             Software
                         </label>
                         <label class="checkbox-inline px-3">
                             <input type="checkbox"
                                    value="FW"
-                                   (click)="onSelectChangeTypeFW($event)">
+                                   (click)="onSelectChangeTypeFW($event)" [checked]="this.phase2.change.firmware">
                             Firmware
                         </label>
                     </div>
@@ -363,14 +363,14 @@
                         <input type="radio"
                                name="reportRaised"
                                value="yes"
-                               (click)="onSelectReportRaised($event)">
+                               (click)="onSelectReportRaised($event)" [checked]="this.phase2.problemReportRaised">
                         Yes
                     </Label>
                     <Label class="radio-inline px-3">
                         <input type="radio"
                                name="reportRaised"
                                value="no"
-                               (click)="onSelectReportRaised($event)" >
+                               (click)="onSelectReportRaised($event)" [checked]="!this.phase2.problemReportRaised">
                         No
                     </Label>
                 </div>
@@ -407,21 +407,21 @@
                             <input type="radio"
                                    name="preTested"
                                    value="yes"
-                                   (click)="onSelectPreTested($event)">
+                                   (click)="onSelectPreTested($event)" [checked]="this.phase2.changeSuccessfullyTested === 'yes'">
                             Yes
                         </Label>
                         <Label class="radio-inline px-3">
                             <input type="radio"
                                    name="preTested"
                                    value="no"
-                                   (click)="onSelectPreTested($event)" >
+                                   (click)="onSelectPreTested($event)" [checked]="this.phase2.changeSuccessfullyTested === 'no'">
                             No
                         </Label>
                         <Label class="radio-inline px-3">
                             <input type="radio"
                                    name="preTested"
                                    value="na"
-                                   (click)="onSelectPreTested($event)" >
+                                   (click)="onSelectPreTested($event)" [checked]="this.phase2.changeSuccessfullyTested === 'na'">
                             N/A
                         </Label>
                     </div>

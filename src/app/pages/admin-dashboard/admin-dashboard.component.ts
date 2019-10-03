@@ -4,6 +4,7 @@ import {Data, Router} from '@angular/router';
 import {Phase1Service} from '../../services/phase1.service';
 import {Phase2Service} from '../../services/phase2.service';
 import {Phase3Service} from '../../services/phase3.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,11 +19,15 @@ export class AdminDashboardComponent implements OnInit {
     {id: 3, request: 'one last thing', reason: 'Just do it ...', site: 'FABL'}
   ];
 
+  private selectedIndex = 0;
+
   private initiatedRFC = [];
   private phase2RFCs = [];
   private phase3RFCS = [];
   private sites = [];
   private users = [];
+  private selectedUser;
+  private displayCCR = false;
 
   private Token: null;
   private showSpecialist = false;
@@ -30,19 +35,44 @@ export class AdminDashboardComponent implements OnInit {
   private selectedPhase: String = '';
   private selectedCCR;
   private specialists = ['Liam McCabe'];
-  private specialist = String;
+  private specialist = "";
 
   constructor(private adminDashboardService: AdminDashboardService, private router: Router, private phase1: Phase1Service, private phase2: Phase2Service, private phase3: Phase3Service) {}
 
+  showCCR(index){
+    this.displayCCR = true;
+    this.selectedIndex = index;
+    this.specialist = "";
+    for (let i = 0; i < this.users.length; i++){
+      if(this.users[i].ID === this.initiatedRFC[index].user_ID){
+        this.selectedUser = this.users[i].name;
+      }
+    }
+    if(this.phase2RFCs[index].ID !== 0){
+      for (let i = 0; i < this.users.length; i++){
+        if(this.users[i].ID === this.phase2RFCs[index].spec_ID){
+          this.specialist = this.users[i].name;
+        }
+      }
+    }
+  }
+
+  hideCCR(){
+    this.displayCCR = false;
+  }
+
   selectedSpecialist(event) {
     this.specialist = event.target.value;
-    console.log(this.specialist);
   }
 
   revealSpecialist(i) {
-    this.showSpecialist = true;
-    this.selectedCCR = this.phase2RFCs[i].ID;
-    console.log(this.selectedCCR);
+    console.log(i);
+    if(this.phase2RFCs[i].ID !== 0){
+      this.showSpecialist = true;
+      this.selectedCCR = this.phase2RFCs[i].ID;
+    } else {
+      swal('Failure' , 'A specialist has not yet processed this CCR' , 'error' );
+    }
   }
 
   hideSpecialist() {
@@ -52,7 +82,11 @@ export class AdminDashboardComponent implements OnInit {
   setSpecialist() {
     this.showSpecialist = false;
     this.adminDashboardService.setNewSpecialist(this.selectedCCR, this.specialist).subscribe((data: Data) => {
-      console.log(data);
+      if(data.success){
+        swal('Success' , data.message , 'success' );
+      } else {
+        swal('Failure' , data.message , 'error' );
+      }
     });
   }
 
@@ -89,8 +123,6 @@ export class AdminDashboardComponent implements OnInit {
     console.log(this.initiatedRFC);
     console.log(this.phase2RFCs);
     console.log(this.phase3RFCS);
-    this.phase2RFCs.unshift({ID: 0});
-    console.log(this.phase2RFCs);
 
   }
 
@@ -100,6 +132,8 @@ export class AdminDashboardComponent implements OnInit {
     this.phase1.setobj(null, 0);
     this.phase2.setObj(null, null, null);
     this.phase3.setObj(null);
+
+    this.setUp();
   }
 
   ngOnInit() {
@@ -112,6 +146,11 @@ export class AdminDashboardComponent implements OnInit {
       this.specialists = data[0];
     });
 
+    this.setUp();
+
+  }
+
+  setUp(){
     this.adminDashboardService.getPageData().toPromise().then(data => {
       this.initiatedRFC = data[0];
       this.phase2RFCs = data[1];

@@ -1,17 +1,17 @@
 <!--Created By Blaine Viljoen-->
-  <div class="row" *ngIf="!this.showSpecialist && !this.edit" style="overflow-y: scroll; height: 780px">
+  <div class="row" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR" style="overflow-y: scroll; height: 780px">
       <div class="col-sm-4">
         <h2 class="px-3 text-secondary">Initiated requests:</h2><br>
         <div *ngFor="let rfc of initiatedRFC; index as i">
 
-            <div class="shadow card bg-light mx-auto" style="height: 250px; cursor: pointer;">
+            <div class="shadow card bg-light mx-auto" style="height: 250px;" >
               <div class="card-body">
-                <h2 class="px-3 pt-1 text-primary card-title">CCR ID: {{rfc.ID}}</h2>
+                <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                 <p class="px-3 pt-2 card-text">
                   Request: {{rfc.requested_change}}<br>
                   Reason: {{rfc.description}}
                 </p>
-                <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist()">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
+                <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist(i)">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
               </div>
             </div><br>
 
@@ -28,15 +28,15 @@
                   </div>
               </div>
 
-              <div class="shadow card bg-light mx-auto" style="height: 250px; cursor: pointer;" *ngIf="rfc.ID !== 0">
+              <div class="shadow card bg-light mx-auto" style="height: 250px;" *ngIf="rfc.ID !== 0">
                   <div class="card-body">
-                      <h2 class="px-3 pt-1 text-primary card-title">CCR ID: {{rfc.ID}}</h2>
+                      <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                       <p class="px-3 pt-2 card-text">
                           Phase 1 ID: {{rfc.phase1_ID}}<br>
                           Specialist ID: {{rfc.spec_ID}}<br>
                           EOS ID: {{rfc.eos_ID}}
                       </p>
-                      <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
+                      <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(this.phase2RFCs[i])">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
                   </div>
               </div>
 
@@ -54,9 +54,9 @@
                     </div>
                 </div>
 
-              <div class="shadow card bg-light mx-auto" style="height: 250px; cursor: pointer;" *ngIf="rfc.ID!==0">
+              <div class="shadow card bg-light mx-auto" style="height: 250px;" *ngIf="rfc.ID!==0">
                   <div class="card-body">
-                      <h2 class="px-3 pt-1 text-primary card-title">CCR ID: {{rfc.ID}}</h2>
+                      <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                       <p class="px-3 pt-2 card-text">
                           CCR_ID: {{rfc.CCR_ID}}
                       </p>
@@ -67,6 +67,28 @@
           </div>
       </div>
   </div>
+
+<div class="shadow card bg-light mx-auto" *ngIf="this.displayCCR">
+    <h1 class="px-3 text-primary">CCR:</h1>
+    <div class="card-body">
+        <h2 class="px-3 text-secondary">Phase 1: </h2><br>
+        <p class="px-3">
+            ID: {{this.initiatedRFC[this.selectedIndex].ID}}<br>
+            User: {{this.selectedUser}}<br>
+            Request: {{this.initiatedRFC[this.selectedIndex].requested_change}}<br>
+            Description: {{this.initiatedRFC[this.selectedIndex].description}}<br>
+            Start Time: {{this.initiatedRFC[this.selectedIndex].start_time}}<br>
+        </p><br>
+        <h2 class="px-3 text-secondary" *ngIf="this.phase2RFCs[this.selectedIndex].ID !== 0">Phase 2:</h2>
+        <p class="px-3" *ngIf="this.phase2RFCs[this.selectedIndex].ID !== 0">
+            Phase 2 ID: {{this.phase2RFCs[this.selectedIndex].ID}}<br>
+            Specialist: {{this.specialist}}<br>
+            TCB ID: {{this.phase2RFCs[this.selectedIndex].tcb_crf_ID}}<br>
+            Configuration description: {{this.phase2RFCs[this.selectedIndex].configurationDescr}}
+        </p>
+        <button class="btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideCCR()">Back</button>
+    </div>
+</div>
 
     <div *ngIf="this.showSpecialist">
         <div class="shadow card bg-light mx-auto">
