@@ -15,6 +15,7 @@ import swal from 'sweetalert2';
 })
 export class Phase1Component implements OnInit {
   private usersSites ;
+  private localOBJ;
   private enableSubmitButton = false;
   constructor(private phase1Service: Phase1Service ,  private router: Router) { }
   private RFC: RFC  = {
@@ -27,6 +28,7 @@ export class Phase1Component implements OnInit {
 
   public onSelectSite($event) {
     this.RFC.site_ID = $event.target.value;
+    console.log($event.target.value);
     localStorage.setItem('site' , $event.target.value);
   }
   public  requestedChange() {
@@ -75,7 +77,7 @@ export class Phase1Component implements OnInit {
 
     swal({
       title: 'Are you sure?',
-      text: "You won't be able make changes to your submission",
+      text: 'You won\'t be able make changes to your submission',
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Submit',
@@ -85,20 +87,34 @@ export class Phase1Component implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.phase1Service.submitRequest( this.RFC ).subscribe( (data: Data) => {
-          if (data.success) {
-            localStorage.removeItem('request');
-            localStorage.removeItem('description');
-            localStorage.removeItem('site');
-            this.router.navigate(['home']);
-            swal('Success' , data.message , 'success' );
-          } else {
-            swal('Failure' , data.message , 'error' );
-            if (data.message === 'Session expired') {
-              this.router.navigate(['login']);
+        if(this.localOBJ !== null){
+          this.phase1Service.updateRequest(this.RFC, this.localOBJ.ID).subscribe((data: Data) => {
+            if (data.success) {
+              this.localOBJ = null;
+              localStorage.removeItem('request');
+              localStorage.removeItem('description');
+              localStorage.removeItem('site');
+              swal('Success' , data.message , 'success' );
+            } else {
+              swal('Failure' , data.message , 'error' );
             }
-          }
-        });
+          });
+        } else {
+          this.phase1Service.submitRequest( this.RFC ).subscribe( (data: Data) => {
+            if (data.success) {
+              localStorage.removeItem('request');
+              localStorage.removeItem('description');
+              localStorage.removeItem('site');
+              this.router.navigate(['home']);
+              swal('Success' , data.message , 'success' );
+            } else {
+              swal('Failure' , data.message , 'error' );
+              if (data.message === 'Session expired') {
+                this.router.navigate(['login']);
+              }
+            }
+          });
+        }
       } else if (
           /* Read more about handling dismissals below */
           result.dismiss === swal.DismissReason.cancel
@@ -114,6 +130,7 @@ export class Phase1Component implements OnInit {
     });
   }
   ngOnInit() {
+
     this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
       this.RFC.CSRF_token = data.tokenValue ;
     });
@@ -121,8 +138,19 @@ export class Phase1Component implements OnInit {
       this.usersSites = data ;
     });
 
-    this.RFC.requestDescription = localStorage.getItem('request');
-    this.RFC.reasonForRequest = localStorage.getItem('description');
+    this.localOBJ = this.phase1Service.getobj();
+
+    if (this.localOBJ !== null) {
+      localStorage.setItem('request', this.localOBJ.requested_change);
+      localStorage.setItem('description', this.localOBJ.description);
+      localStorage.setItem('site', this.phase1Service.getSite().toString());
+      this.enableSubmitButton = true;
+      const submitButton = document.getElementById('submit');
+      submitButton.classList.remove('disabled');
+      document.getElementById('cancel').classList.add('invisible');
+    }
+    this.RFC.requestedChange = localStorage.getItem('request');
+    this.RFC.description = localStorage.getItem('description');
     this.RFC.site_ID = localStorage.getItem('site');
   }
 

@@ -18,20 +18,27 @@ export class AdminDashboardService{
         return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
     }
 
-    getUsers(){
+    getSpecialistData() {
         const obj = {
-            dataSelection: 'currentUsers'
+            dataSelection: 'specialist'
         };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    }
 
+    getPageData() {
+        const obj = {
+            dataSelection: 'allCCR'
+        };
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    getPageData(userIDInput) {
+    setNewSpecialist(id, specID) {
         const obj = {
-            dataSelection: 'myRfcs',
-            userID: userIDInput
+            updateSelection: 'specialist',
+            ID: id,
+            specialist: specID
         };
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
     }
 }
 // Created by Blaine Viljoen

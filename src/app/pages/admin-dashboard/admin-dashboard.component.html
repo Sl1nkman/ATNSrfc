@@ -1,52 +1,93 @@
 <!--Created By Blaine Viljoen-->
-<form>
-  <!--    <select class="rounded w-100 form-control"-->
-  <!--            name="user"-->
-  <!--            id="user"-->
-  <!--            (change)="onSelectUser($event)">-->
-  <!--        <option selected="selected" disabled="disabled">Select a user</option>-->
-  <!--        <option *ngFor="let user of this.users, index as x"  [value]="user[1]" >{{user[1]}}</option>-->
-  <!--    </select>-->
+  <div class="row" *ngIf="!this.showSpecialist && !this.edit" style="overflow-y: scroll; height: 780px">
+      <div class="col-sm-4">
+        <h2 class="px-3 text-secondary">Initiated requests:</h2><br>
+        <div *ngFor="let rfc of initiatedRFC; index as i">
 
-  <div *ngIf="!this.buttonSelected">
-    <div *ngFor="let rfc of rfcs; index as i">
-      <div class="shadow card bg-light mx-auto" style="cursor: pointer;">
-        <div class="form group">
-          <div class="row px-3">
-            <div class="col">
-              <h2 class="px-3 pt-1 text-primary">CCR ID: {{rfc.id}}</h2>
-            </div>
-            <div class="col">
+            <div class="shadow card bg-light mx-auto" style="height: 250px; cursor: pointer;">
+              <div class="card-body">
+                <h2 class="px-3 pt-1 text-primary card-title">CCR ID: {{rfc.ID}}</h2>
+                <p class="px-3 pt-2 card-text">
+                  Request: {{rfc.requested_change}}<br>
+                  Reason: {{rfc.description}}
+                </p>
+                <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist()">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
+              </div>
+            </div><br>
 
-            </div>
-          </div><br>
-          <div class="row m-0">
-            <div class="col">
-              <p class="px-3 pt-2">Request: {{rfc.request}}</p>
-            </div>
-            <div class="col"></div>
-            <div class="col">
-              <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.edit(i)">Edit CCR</button>
-            </div>
-          </div><br>
-          <div class="row m-0">
-            <div class="col">
-              <p class="px-3 pt-2">Reason: {{rfc.reason}}</p>
-            </div>
-            <div class="col"></div>
-            <div class="col">
-              <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec">Reassign Specialist</button>
-            </div>
-          </div><br>
         </div>
       </div>
-      <br>
-    </div>
+
+
+      <div class="col-sm-4">
+          <h2 class="px-3 text-secondary">CCR's in Phase 2:</h2>
+          <div *ngFor="let rfc of phase2RFCs; index as i">
+              <br><div class="shadow card bg-light" style="height: 250px;" *ngIf="rfc.ID === 0">
+                  <div class="px-3 pt-2 card-body">
+                      <p>Phase 2 has not yet been processed</p>
+                  </div>
+              </div>
+
+              <div class="shadow card bg-light mx-auto" style="height: 250px; cursor: pointer;" *ngIf="rfc.ID !== 0">
+                  <div class="card-body">
+                      <h2 class="px-3 pt-1 text-primary card-title">CCR ID: {{rfc.ID}}</h2>
+                      <p class="px-3 pt-2 card-text">
+                          Phase 1 ID: {{rfc.phase1_ID}}<br>
+                          Specialist ID: {{rfc.spec_ID}}<br>
+                          EOS ID: {{rfc.eos_ID}}
+                      </p>
+                      <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+
+      <div class="col-sm-4">
+          <h2 class="px-3 text-secondary">CCR's in Phase 3:</h2>
+          <div *ngFor="let rfc of this.phase3RFCS; index as i">
+
+              <br><div class="shadow card bg-light" style="height: 250px;" *ngIf="rfc.ID===0">
+                    <div class="px-3 pt-2 card-body">
+                        <p>Phase 3 has not yet been processed</p>
+                    </div>
+                </div>
+
+              <div class="shadow card bg-light mx-auto" style="height: 250px; cursor: pointer;" *ngIf="rfc.ID!==0">
+                  <div class="card-body">
+                      <h2 class="px-3 pt-1 text-primary card-title">CCR ID: {{rfc.ID}}</h2>
+                      <p class="px-3 pt-2 card-text">
+                          CCR_ID: {{rfc.CCR_ID}}
+                      </p>
+                      <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase3')">Edit CCR</button>
+                  </div>
+              </div>
+
+          </div>
+      </div>
   </div>
 
-  <h3 id="test" class="pt-3 px-3"></h3>
-  <div *ngIf="this.buttonSelected">
-    <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="back" (click)="this.back()">Back</button>
-  </div>
-</form>
+    <div *ngIf="this.showSpecialist">
+        <div class="shadow card bg-light mx-auto">
+            <div class="card-body">
+                <h2 class="px-3 pt-1 text-primary card-title">Select the new specialist</h2>
+                <select class="px-3 pt-2 card-text rounded w-100 form-control" name="selectedSpecialist" id="selectedSpecialist" (click)="this.selectedSpecialist($event)"
+                >
+                    <option *ngFor="let specialist of this.specialists, index as i" value="{{specialist[0]}}">{{specialist[2]}} ({{specialist[1]}})</option>
+                </select><br>
+
+                <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.setSpecialist()">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideSpecialist()">Back</button>
+            </div>
+        </div>
+    </div>
+
+<div class="form-group" *ngIf="this.edit" style="background-color: #ffffff;">
+    <app-create-rfcs *ngIf="this.selectedPhase === 'Phase1'"></app-create-rfcs><br>
+    <app-phase2 *ngIf="this.selectedPhase === 'Phase2'"></app-phase2><br>
+    <app-phase3 *ngIf="this.selectedPhase === 'Phase3'"></app-phase3><br>
+    <button *ngIf="this.edit" class="mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.back()">Back</button><br>
+</div>
+
+
 <!--Created By Blaine Viljoen-->

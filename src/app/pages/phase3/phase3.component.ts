@@ -17,6 +17,8 @@ import swal from 'sweetalert2';
 export class Phase3Component implements OnInit {
   private  formData = new FormData();
 
+  private localObj;
+
   datepickerConfig: Partial<BsDatepickerConfig> ;
   dateRangePicker: Date;
   displayImpSuccess: boolean;
@@ -62,14 +64,11 @@ export class Phase3Component implements OnInit {
 
   removeFile(index) {
       this.filesForUpload.splice(index, 1);
-      console.log(this.filesForUpload);
   }
 
   onSelectTCBEval($event) {
       const startDate = $event[0];
       const endDate = $event[1];
-      console.log(startDate);
-      console.log(endDate);
       this.phase3.tcbEvalStart = startDate;
       this.phase3.tcbEvalEnd = endDate;
   }
@@ -192,10 +191,38 @@ export class Phase3Component implements OnInit {
           this.disableSubmitButton = true;
       }
   }
+    public onCancel() {
+        swal({
+            title: 'Are you sure?',
+            text: "You will lose all progress on this form",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f' ,
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+
+            } else if (
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swal({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    }
+
   onSubmit() {
       swal({
           title: 'Are you sure?',
-          text: "You won't be able make changes to your submission",
+          text: 'You won\'t be able make changes to your submission',
           type: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Submit',
@@ -264,14 +291,19 @@ export class Phase3Component implements OnInit {
       this.Token = this.phase3Service.getCSRFToken().subscribe( (data: Data) => {
           this.phase3.CSRF_token = data.tokenValue ;
       });
+
+      this.localObj = this.phase3Service.getObj();
+      if (this.localObj !== null) {
+          this.disableSubmitButton = true;
+          submitButton.classList.remove('disabled');
+          document.getElementById('cancel').classList.add('invisible');
+      }
   }
 
     public fileOver(event) {
-        console.log(event);
     }
 
     public fileLeave(event) {
-        console.log(event);
     }
 
     public dropped(files: NgxFileDropEntry[]) {
@@ -284,7 +316,6 @@ export class Phase3Component implements OnInit {
                 const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
                 fileEntry.file((file: File) => {
                     this.filesForUpload.push(file);
-                    console.log(this.filesForUpload);
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)

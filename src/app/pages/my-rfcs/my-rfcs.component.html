@@ -7,6 +7,10 @@
         <h2 class="px-3 pt-1 text-primary">CCR ID: {{rfc[0]}}</h2><br>
         <h3 class="px-3 text-secondary">Request: {{rfc[1]}}</h3>
         <h3 class="px-3 text-secondary">Reason: {{rfc[2]}}</h3>
+        <h3 class="px-3 text-secondary">Files:</h3>
+        <div *ngFor="let link of links">
+          <a class="px-3" href="{{link}}">{{link}}</a>
+        </div>
       </div>
     </div>
     <br>

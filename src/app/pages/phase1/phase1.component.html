@@ -10,7 +10,7 @@
                   name="site"
                   id="site"
                   (change)="onSelectSite($event)" >
-            <option selected="selected" disabled="disabled">Select one</option>
+            <option id="default" selected="selected" disabled="disabled">Select one</option>
             <option *ngFor="let site of usersSites"  [value]="site[0]" [selected]="this.RFC.site_ID == site[0]" >{{site[1]}}</option>
           </select>
         </div>
@@ -29,7 +29,8 @@
     </div>
     <div class="form-group px-3">
       <label for="description">Reason For Request</label>
-      <textarea rows="8" class="form-control rounded"
+      <textarea rows="8"
+                class="form-control rounded"
                 type="text"
                 name="description"
                 id="description"
