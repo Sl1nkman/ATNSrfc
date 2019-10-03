@@ -9,7 +9,9 @@ const httpOptions = {
     providedIn: 'root'
 })
 
-export class Phase3Service{
+export class Phase3Service {
+
+    private obj = null;
 
     constructor(private http: HttpClient) {
     }
@@ -26,5 +28,13 @@ export class Phase3Service{
     submitPhase3(phase3: CCRPhase3 ) {
         console.log(phase3);
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/specialistConfiguration.php' , phase3 , httpOptions);
+    }
+
+    setObj(obj) {
+        this.obj = obj;
+    }
+
+    getObj() {
+        return this.obj;
     }
 }

@@ -12,17 +12,18 @@ import {Phase2Service} from '../../services/phase2.service';
 
 
 @Component({
-    selector: 'app-phase1',
+    selector: 'app-phase2',
     templateUrl: './phase2.component.html',
     styleUrls: ['./phase2.component.css']
 })
 export class Phase2Component implements OnInit {
 
+    private localObj;
     private  formData = new FormData();
     private datepickerConfig: Partial<BsDatepickerConfig> ;
     private files: NgxFileDropEntry[] [] = []  ;
     private filesForUpload = [];
-    private Token ;
+    private user = undefined;
 
 
     private availableNumberOfTemporaryDays: String [] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
@@ -275,7 +276,6 @@ export class Phase2Component implements OnInit {
                 const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
                 fileEntry.file((file: File) => {
                     this.filesForUpload.push(file);
-                    console.log(this.filesForUpload);
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)
@@ -284,7 +284,6 @@ export class Phase2Component implements OnInit {
         }
     }
     public fileOver(event) {
-        console.log(event);
     }
 
     private populateForm() {
@@ -293,15 +292,11 @@ export class Phase2Component implements OnInit {
         }
     }
 
-    removeFile(index){
+    removeFile(index) {
         this.filesForUpload.splice(index, 1);
     }
 
     public fileLeave(event) {
-        console.log(event);
-    }
-    public removeFile(relativePath) {
-
     }
 
     // first file uploader end
@@ -388,40 +383,49 @@ export class Phase2Component implements OnInit {
         }).then((result) => {
             if (result.value) {
                 this.populateForm();
-                this.phase2service.upload(this.formData).subscribe((data: Data) => {
-                    if (data.success) {
-                         this.phase2.documentIds = data.generatedName;
+                if(this.localObj !== null){
+                    this.phase2service.updatePhase2(this.phase2, this.localObj.ID).subscribe((data: Data) => {
+                        if (data.success) {
+                            swal('Success' , data.message , 'success' );
+                        } else {
+                            swal('Failure' , data.message , 'error' );
+                        }
+                    });
+                } else {
+                    this.phase2service.upload(this.formData).subscribe((data: Data) => {
+                        if (data.success) {
+                            this.phase2.documentIds = data.generatedName;
 
-                    } else {
-                        swal({
-                            title: 'Files not uploaded',
-                            text: data.message,
-                            type: 'error',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                    this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
-                        if (data1.success) {
-                            swal({
-                                title: 'Received',
-                                text: 'Your files have been received',
-                                type: 'success',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
                         } else {
                             swal({
-                                title: 'Failed',
+                                title: 'Files not uploaded',
                                 text: data.message,
                                 type: 'error',
                                 showConfirmButton: false,
                                 timer: 1500
                             });
                         }
+                        this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
+                            if (data1.success) {
+                                swal({
+                                    title: 'Received',
+                                    text: 'Your files have been received',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } else {
+                                swal({
+                                    title: 'Failed',
+                                    text: data.message,
+                                    type: 'error',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        });
                     });
-                });
-
+                }
 
             } else if (
                 result.dismiss === swal.DismissReason.cancel
@@ -452,9 +456,116 @@ export class Phase2Component implements OnInit {
             this.availableEosSystems     = data[4];
 
         });
+
         this.RFC.requestedChange = 'We need new laptops for engineering';
         this.RFC.description = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
         this.phase2.TCB_CRF_ID = 'Undefined' ;
+
+        this.localObj = this.phase2service.getObj();
+        if (this.localObj !== null) {
+            let phase1 = this.phase2service.getPhase1();
+            this.RFC.requestedChange = phase1.requested_change;
+            this.RFC.description = phase1.description;
+            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_id;
+            this.RFC.dateRequested = phase1.start_time;
+            this.user = this.phase2service.getUser();
+
+            this.phase2.requestPriority = this.localObj.requestPriority_ID;
+            if(this.phase2.requestPriority === '1'){
+                document.getElementById('priority').classList.add('text-danger');
+                this.emergencySelected = true;
+                this.displaySpecialistComments = true ;
+                this.displayPredictedRisks = false;
+                this.displayPredictedRisks = false;
+                this.displayChangePeriod = false;
+                this.displayNatureOfChange = false;
+                this.displayEOSystem = false;
+                this.displayTCB_CRF_ID = false;
+                this.displayConfigurationItems = false;
+                this.displayChangeType = false;
+                this.displayTemporaryDateSelection = false;
+                this.displayAdditionalAttachedDocuments = false ;
+                this.displayEstimatedImpact = false ;
+                this.displayEstimatedImpactOps = false;
+                this.displayEstimatedImpactClients = false;
+                this.displayEstimatedImpactTech = false;
+                this.displayProblemReportRaised = false ;
+                this.displayChangePreTested = false ;
+                this.displayChangeNotSuccessfullyTestedReason = false ;
+                this.displayProposedImplementationDate = false ;
+            } else if (document.getElementById('priority').classList.contains('text-danger') && this.phase2.requestPriority !== 'Emergency') {
+                this.displayPredictedRisks = true;
+                this.displaySpecialistComments = false ;
+                this.emergencySelected = false;
+                document.getElementById('priority').classList.remove('text-danger');
+            } else {
+                this.displayPredictedRisks = true;
+                this.displaySpecialistComments = false ;
+                this.emergencySelected = false;
+            }
+
+            if(this.localObj.impactOnClients !== null){
+                this.displayChangePeriod = true;
+                this.displayEstimatedImpactClients = true;
+                this.phase2.predictedImpact.push('CLIENTS');
+            } else {
+                this.displayEstimatedImpactClients = false;
+            }
+            if(this.localObj.impactOnOperations !== null){
+                this.displayChangePeriod = true;
+                this.displayEstimatedImpactOps = true;
+                this.phase2.predictedImpact.push('OPERATIONS');
+            } else {
+                this.displayEstimatedImpactOps = false;
+            }
+            if(this.localObj.impactonTech !== null){
+                this.displayChangePeriod = true;
+                this.displayEstimatedImpactTech = true;
+                this.phase2.predictedImpact.push('TECHNICAL');
+            } else {
+                this.displayEstimatedImpactTech = false;
+            }
+
+            this.phase2.changePeriod = this.localObj.changePeriod_ID;
+            switch (this.phase2.changePeriod) {
+                case '1' :
+                    this.displayNatureOfChange = true;
+                    this.displaySelectTemporaryAmountOfDays = false ;
+                    break;
+                case '2' :
+                    this.displaySelectTemporaryAmountOfDays = true ;
+                    this.displayNatureOfChange = false;
+                    break;
+                case '3':
+
+                    this.displayNatureOfChange = false;
+                    this.displaySelectTemporaryAmountOfDays = true ;
+                    break;
+            }
+
+            if(this.localObj.temporaryStartDate !== null && this.localObj.temporaryEndDate !== null){
+                this.phase2.temporaryPeriodStartDate = this.localObj.temporaryStartDate;
+                this.phase2.temporaryPeriodEndDate = this.localObj.temporaryEndDate;
+                this.displayNatureOfChange = true;
+            }
+
+            this.phase2.natureOfChange = this.localObj.natureChange_ID;
+            if (this.phase2.natureOfChange !== undefined ) {
+                this.displayEOSystem = true ;
+            } else {
+                this.displayEOSystem = false ;
+            }
+
+            this.phase2.eosSystem = this.localObj.eos_ID;
+            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_ID;
+            this.displayTCB_CRF_ID = true ;
+            this.displayConfigurationItems = true;
+
+            this.activateSubmitButton = true;
+            const submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            document.getElementById('cancel').classList.add('invisible');
+        }
     }
 
 }

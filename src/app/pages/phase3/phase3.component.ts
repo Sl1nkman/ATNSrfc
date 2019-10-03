@@ -17,6 +17,8 @@ import swal from 'sweetalert2';
 export class Phase3Component implements OnInit {
   private  formData = new FormData();
 
+  private localObj;
+
   datepickerConfig: Partial<BsDatepickerConfig> ;
   dateRangePicker: Date;
   displayImpSuccess: boolean;
@@ -59,16 +61,13 @@ export class Phase3Component implements OnInit {
         {minDate: new Date()});
   }
 
-  removeFile(index){
+  removeFile(index) {
       this.filesForUpload.splice(index, 1);
-      console.log(this.filesForUpload);
   }
 
   onSelectTCBEval($event) {
       const startDate = $event[0];
       const endDate = $event[1];
-      console.log(startDate);
-      console.log(endDate);
       this.phase3.tcbEvalStart = startDate;
       this.phase3.tcbEvalEnd = endDate;
   }
@@ -89,20 +88,20 @@ export class Phase3Component implements OnInit {
     }
   }
 
-  abortRegressReasonCheck(){
-      if(this.phase3.abortRegressReason !== undefined && this.phase3.abortRegress.includes('Abort')){
+  abortRegressReasonCheck() {
+      if (this.phase3.abortRegressReason !== undefined && this.phase3.abortRegress.includes('Abort')) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
-      } else if(this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed){
+      } else if (this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
       }
   }
 
-  schedRegressCheck(){
-      if(this.phase3.schedRegressionDate !== undefined){
+  schedRegressCheck() {
+      if (this.phase3.schedRegressionDate !== undefined) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
@@ -194,7 +193,7 @@ export class Phase3Component implements OnInit {
   onSubmit() {
       swal({
           title: 'Are you sure?',
-          text: "You won't be able make changes to your submission",
+          text: 'You won\'t be able make changes to your submission',
           type: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Submit',
@@ -207,7 +206,6 @@ export class Phase3Component implements OnInit {
           this.phase3Service.upload(this.formData).subscribe((data: Data) => {
               if (data.success) {
                   this.phase3.documentIds = data.generatedName;
-                  console.log(this.phase3.documentIds);
                   swal({
                       title: 'Received',
                       text: 'Your files have been received',
@@ -255,14 +253,19 @@ export class Phase3Component implements OnInit {
       this.Token = this.phase3Service.getCSRFToken().subscribe( (data: Data) => {
           this.Token = data.tokenValue ;
       });
+
+      this.localObj = this.phase3Service.getObj();
+      if (this.localObj !== null) {
+          this.disableSubmitButton = true;
+          submitButton.classList.remove('disabled');
+          document.getElementById('cancel').classList.add('invisible');
+      }
   }
 
     public fileOver(event) {
-        console.log(event);
     }
 
     public fileLeave(event) {
-        console.log(event);
     }
 
     public dropped(files: NgxFileDropEntry[]) {
@@ -275,7 +278,6 @@ export class Phase3Component implements OnInit {
                 const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
                 fileEntry.file((file: File) => {
                     this.filesForUpload.push(file);
-                    console.log(this.filesForUpload);
                 });
             } else {
                 // It was a directory (empty directories are added, otherwise only files)

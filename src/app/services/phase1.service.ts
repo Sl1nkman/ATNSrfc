@@ -12,6 +12,8 @@ const httpOptions = {
 })
 export class Phase1Service {
 
+  private obj = null;
+  private siteID = 0;
   constructor(private http: HttpClient ) {
   }
 
@@ -19,6 +21,12 @@ export class Phase1Service {
 
      return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', phase1 , httpOptions);
   }
+
+  updateRequest(phase1: RFC, ccrID) {
+    const obj = {phase1: phase1, updateSelection: 'phase1', ID: ccrID};
+    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+  }
+
   getPageData() {
     const obj = {
       dataSelection: 'initiateCCR'
@@ -28,5 +36,18 @@ export class Phase1Service {
   }
   getCSRFToken() {
     return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+  }
+
+  setobj(obj, siteID) {
+    this.obj = obj;
+    this.siteID = siteID;
+  }
+
+  getobj() {
+    return this.obj;
+  }
+
+  getSite() {
+    return this.siteID;
   }
 }

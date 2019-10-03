@@ -13,6 +13,7 @@ import decode from 'jwt-decode';
 export class MyRFCSComponent implements OnInit {
 
   private userID: string;
+  private links = [];
 
   Token = null;
 
@@ -39,7 +40,10 @@ export class MyRFCSComponent implements OnInit {
     });
     this.myRfcsService.getPageData(this.userID.toString()).subscribe((data:Data) => {
       this.rfcs = data[0];
-      console.log(this.rfcs);
+    });
+
+    this.myRfcsService.getFiles().subscribe((data:Data) => {
+      this.links = data[0];
     });
   }
 

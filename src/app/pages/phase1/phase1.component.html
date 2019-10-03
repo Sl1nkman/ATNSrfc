@@ -10,7 +10,7 @@
                   name="site"
                   id="site"
                   (change)="onSelectSite($event)" >
-            <option selected="selected" disabled="disabled">Select one</option>
+            <option id="default" selected="selected" disabled="disabled">Select one</option>
             <option *ngFor="let site of usersSites"  [value]="site[0]" [selected]="this.RFC.site_ID == site[0]" >{{site[1]}}</option>
           </select>
         </div>
@@ -26,6 +26,7 @@
                 id="requestedChange"
                 (input)="requestedChange()"
                 [(ngModel)]="RFC.requestedChange">
+        {{RFC.requestedChange}}
       </textarea>
     </div>
     <div class="form-group px-3">
@@ -36,7 +37,7 @@
                 id="description"
                 (input)="description()"
                 [(ngModel)]="RFC.description"
-      ></textarea>
+      >{{RFC.description}}</textarea>
     </div>
 
     <br>
