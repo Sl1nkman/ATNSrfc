@@ -39,7 +39,6 @@ export class Phase3Component implements OnInit {
     schedRegressionDate: undefined,
     tcbEvalStart: undefined,
     tcbEvalEnd: undefined,
-    implementorName: undefined,
     implementationSuccessful: true,
     abort: false,
     regress: false,
