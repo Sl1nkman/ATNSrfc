@@ -23,13 +23,17 @@ export class Phase3Component implements OnInit {
   dateRangePicker: Date;
   displayImpSuccess: boolean;
   showImpChange: boolean;
+  showTCBdatepicker: boolean;
   showEvalChange: boolean;
   showSched: boolean;
   disableSubmitButton: boolean;
   private files: NgxFileDropEntry[] [] = []  ;
   private filesForUpload = [];
+  private numberOfDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 ];
+  private selectedNoDays: number;
 
-  abortOrRegress: String[] = ['Abort', 'Regress'];
+
+    abortOrRegress: String[] = ['Abort', 'Regress'];
 
   phase3: CCRPhase3 = {
     schedRegressionDate: undefined,
@@ -66,11 +70,17 @@ export class Phase3Component implements OnInit {
       this.filesForUpload.splice(index, 1);
   }
 
+    onSelectTCBNumberOfDays($event) {
+      this.selectedNoDays = $event.target.value;
+      this.showTCBdatepicker = true;
+    }
+
   onSelectTCBEval($event) {
-      const startDate = $event[0];
-      const endDate = $event[1];
+      const startDate = $event;
+      const maxDate = new Date();
+      maxDate.setDate($event.getDate() + parseInt( '' + this.selectedNoDays, 10));
       this.phase3.tcbEvalStart = startDate;
-      this.phase3.tcbEvalEnd = endDate;
+      this.phase3.tcbEvalEnd = maxDate;
   }
 
   onSelectAbortRegress($event) {

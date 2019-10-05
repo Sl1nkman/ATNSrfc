@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class CurrentRFCSComponent implements OnInit {
 
 
-  ngOnInit(){
+  ngOnInit() {
+
   }
 
   constructor() { }

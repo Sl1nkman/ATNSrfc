@@ -103,7 +103,6 @@
                 </div>
                 <div class="col"></div>
             </div>
-
             <div class="row pt-3" *ngIf="!this.phase3.alreadyRegressed && this.showSched">
                 <div class="col">
                     <label class="pl-3" for="schedRegressDate">Scheduled Regression Date: </label>
@@ -119,15 +118,36 @@
                            name="schedRegressDate"
                            autocomplete="off"
                            [bsConfig]="datepickerConfig"
-                           [(ngModel)]="this.phase3.schedRegressionDate"  bsDatepicker
+                           [(ngModel)]="this.phase3.schedRegressionDate"
+                           bsDatepicker
                            (ngModelChange)="schedRegressCheck()">
                 </div>
                 <div class="col"></div>
             </div>
 
-            <div class="row pt-3 pr-3" *ngIf="this.phase3.implementationSuccessful&&this.showImpChange">
+            <div class="row pt-3" *ngIf="this.phase3.implementationSuccessful&&this.showImpChange">
                 <div class="col-sm">
-                    <label class="px-3" for="tcbEvalPeriod" >Temporary period start date:</label>
+                    <div >
+                        <label class="px-3" for="NoDays" >TCB number of days</label>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div>
+                        <select ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"
+                                class="rounded w-100 form-control"
+                                name="NoDays"
+                                id="NoDays"
+                                (change)="onSelectTCBNumberOfDays($event)" >
+                            <option selected="selected" disabled="disabled">Select no. of days</option>
+                            <option  *ngFor="let day of numberOfDays" value="{{day}}">{{day}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row pt-3" *ngIf="this.phase3.implementationSuccessful&&this.showTCBdatepicker">
+                <div class="col-sm">
+                    <label class="px-3" for="tcbEvalPeriod" >TCB evaluation start date:</label>
                 </div>
                 <div ngbPopover="This field refers to an evaluation period required to validate the success of the change over a longer period of time. The TCBCP administrator must enter a start date and end date  not exceeding 31 days in total."
                      triggers="mouseenter:mouseleave"
@@ -139,16 +159,27 @@
                            id="tcbEvalPeriod"
                            name="tcbEvalPeriod"
                            autocomplete="off"
-                           bsDaterangepicker
+                           bsDatepicker
                            [bsConfig]="datepickerConfig"
                            [(ngModel)]="this.dateRangePicker"
                            (ngModelChange)="onSelectTCBEval($event)"
                     >
                 </div>
-                <div class="col"></div>
+                <div class="col-sm ">
+                    <input  class="rounded w-100 form-control"
+                            type="text"
+                            id="TCBEndPeriod"
+                            name="TCBEndPeriod"
+                            autocomplete="off"
+                            bsDatepicker
+                            [bsConfig]="datepickerConfig"
+                            [(ngModel)]="this.phase3.tcbEvalEnd"
+                            disabled
+                            readonly>
+                </div>
             </div>
 
-            <div class="row pt-3" *ngIf="this.phase3.implementationSuccessful&&this.showImpChange">
+            <div class="row pt-3" *ngIf="this.phase3.implementationSuccessful&&this.showTCBdatepicker">
                 <div class="col-sm">
                     <label class="px-3">Additional documents?</label>
                 </div>
