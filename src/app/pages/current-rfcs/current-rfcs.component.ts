@@ -20,6 +20,10 @@ export class CurrentRFCSComponent implements OnInit {
     this.phase2service.setObj(null , ccr , null);
     this.displayPhase2 = true;
   }
+
+  implementCCR(){
+
+  }
   ngOnInit() {
     this.currentccrsService.getMyCCRs().subscribe( (data: Data) => {
       this.myCCRs = data;

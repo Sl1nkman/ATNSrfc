@@ -500,6 +500,15 @@ export class Phase2Component implements OnInit {
                                     });
                                 }
                             });
+                        } else {
+                            swal({
+                                title: 'Received',
+                                text: 'Thank you for your Upload all relevant personal have been updated',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            this.router.navigate(['home']);
                         }
 
                     } else {

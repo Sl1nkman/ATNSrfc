@@ -12,6 +12,8 @@ const httpOptions = {
 export class Phase3Service {
 
     private obj = null;
+    public phase1 = null;
+    public phase2 = null;
 
     constructor(private http: HttpClient) {
     }
@@ -35,5 +37,9 @@ export class Phase3Service {
 
     getObj() {
         return this.obj;
+    }
+    setphases(phase1, phase2) {
+        this.phase1 = phase1 ;
+        this.phase2 = phase2 ;
     }
 }
