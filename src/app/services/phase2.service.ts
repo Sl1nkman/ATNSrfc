@@ -57,4 +57,11 @@ export class Phase2Service {
   getUser() {
     return this.user;
   }
+  getUserByID(user_ID) {
+    const obj = {
+      dataSelection: 'user' ,
+      user_ID: user_ID
+    };
+    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+  }
 }

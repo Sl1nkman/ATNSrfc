@@ -7,7 +7,7 @@ import {RFC} from '../../models/RFC';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import swal from 'sweetalert2';
-import {Data} from '@angular/router';
+import {Data, Router} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
 
 @Component({
@@ -17,12 +17,13 @@ import {Phase2Service} from '../../services/phase2.service';
 })
 export class Phase2Component implements OnInit {
 
+    private phase1;
     private localObj;
     private formData = new FormData();
     private datepickerConfig: Partial<BsDatepickerConfig>;
     private files: NgxFileDropEntry[] [] = [];
     private filesForUpload = [];
-    private user = undefined;
+    private user ;
 
 
     private availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -101,7 +102,7 @@ export class Phase2Component implements OnInit {
         CSRF_token: undefined
     };
 
-    constructor(private phase2service: Phase2Service) {
+    constructor(private phase2service: Phase2Service, private router: Router) {
         const minDate = new Date();
 
         this.datepickerConfig = Object.assign({},
@@ -109,6 +110,7 @@ export class Phase2Component implements OnInit {
             {dateInputFormat: 'YYYY-MM-DD'},
             {showWeekNumbers: false},
             {minDate: minDate});
+
     }
 
 
@@ -446,7 +448,7 @@ export class Phase2Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-
+                this.router.navigate(['home']);
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
@@ -480,7 +482,6 @@ export class Phase2Component implements OnInit {
                             this.populateForm();
                             this.phase2service.upload(this.formData).subscribe((data: Data) => {
                                 if (data.success) {
-                                    this.phase2.documentIds = data.generatedName;
                                     swal({
                                         title: 'Received',
                                         text: 'Your files have been received',
@@ -538,19 +539,24 @@ export class Phase2Component implements OnInit {
             this.availableEosSystems = data[4];
 
         });
-        this.RFC.requestDescription = 'We need new laptops for engineering';
-        this.RFC.reasonForRequest = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
-        this.phase2.TCB_CRF_ID = 'Undefined';
 
+        this.phase1 = this.phase2service.getPhase1();
+        if (this.user == null) {
+            this.phase2service.getUserByID(this.phase1.user_ID).subscribe( (data: Data) => {
+                this.user = data.firstName + ' ' + data.lastName;
+            });
+        }
         this.localObj = this.phase2service.getObj();
-        if (this.localObj !== null) {
-            const phase1 = this.phase2service.getPhase1();
-            this.RFC.requestDescription = phase1.requested_change;
-            this.RFC.reasonForRequest = phase1.description;
-            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_id;
-            this.RFC.dateRequested = phase1.start_time;
+        if (this.phase1 != null) {
+            this.RFC.requestDescription = this.phase1.requested_change;
+            this.RFC.reasonForRequest = this.phase1.description;
+            this.RFC.dateRequested = this.phase1.start_time;
+            this.phase2.CCR_ID = this.phase1.ID
             this.user = this.phase2service.getUser();
 
+        }
+        if (this.localObj !== null) {
+            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_id;
             this.phase2.requestPriority = this.localObj.requestPriority_ID;
             if (this.phase2.requestPriority === '1') {
                 document.getElementById('priority').classList.add('text-danger');

@@ -35,29 +35,29 @@ export class AdminDashboardComponent implements OnInit {
   private selectedPhase: String = '';
   private selectedCCR;
   private specialists = ['Liam McCabe'];
-  private specialist = "";
+  private specialist = '';
 
   constructor(private adminDashboardService: AdminDashboardService, private router: Router, private phase1: Phase1Service, private phase2: Phase2Service, private phase3: Phase3Service) {}
 
-  showCCR(index){
+  showCCR(index) {
     this.displayCCR = true;
     this.selectedIndex = index;
-    this.specialist = "";
-    for (let i = 0; i < this.users.length; i++){
-      if(this.users[i].ID === this.initiatedRFC[index].user_ID){
+    this.specialist = '';
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].ID === this.initiatedRFC[index].user_ID) {
         this.selectedUser = this.users[i].name;
       }
     }
-    if(this.phase2RFCs[index].ID !== 0){
-      for (let i = 0; i < this.users.length; i++){
-        if(this.users[i].ID === this.phase2RFCs[index].spec_ID){
+    if (this.phase2RFCs[index].ID !== 0) {
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.users[i].ID === this.phase2RFCs[index].spec_ID) {
           this.specialist = this.users[i].name;
         }
       }
     }
   }
 
-  hideCCR(){
+  hideCCR() {
     this.displayCCR = false;
   }
 
@@ -67,7 +67,7 @@ export class AdminDashboardComponent implements OnInit {
 
   revealSpecialist(i) {
     console.log(i);
-    if(this.phase2RFCs[i].ID !== 0){
+    if (this.phase2RFCs[i].ID !== 0) {
       this.showSpecialist = true;
       this.selectedCCR = this.phase2RFCs[i].ID;
     } else {
@@ -82,7 +82,7 @@ export class AdminDashboardComponent implements OnInit {
   setSpecialist() {
     this.showSpecialist = false;
     this.adminDashboardService.setNewSpecialist(this.selectedCCR, this.specialist).subscribe((data: Data) => {
-      if(data.success){
+      if (data.success) {
         swal('Success' , data.message , 'success' );
       } else {
         swal('Failure' , data.message , 'error' );
@@ -97,21 +97,21 @@ export class AdminDashboardComponent implements OnInit {
     let siteID = 0;
 
     if (this.selectedPhase === 'Phase1') {
-      for(let i = 0; i < this.sites.length; i++){
-        if(this.initiatedRFC[i].user_ID === this.sites[i].user_ID){
+      for (let i = 0; i < this.sites.length; i++) {
+        if (this.initiatedRFC[i].user_ID === this.sites[i].user_ID) {
           siteID = this.sites[i].site_ID;
         }
       }
       this.phase1.setobj(this.initiatedRFC[index], siteID);
     } else if (this.selectedPhase === 'Phase2') {
-      let user = "";
-      for (let i = 0; i < this.users.length; i++){
-        if(this.initiatedRFC[index].user_ID === this.users[i].ID){
+      let user = '';
+      for (let i = 0; i < this.users.length; i++) {
+        if (this.initiatedRFC[index].user_ID === this.users[i].ID) {
           user = this.users[i].name;
         }
       }
-      for(let i = 0; i < this.sites.length; i++){
-        if(this.initiatedRFC[i].user_ID === this.sites[i].user_ID){
+      for (let i = 0; i < this.sites.length; i++) {
+        if (this.initiatedRFC[i].user_ID === this.sites[i].user_ID) {
           siteID = this.sites[i].site_ID;
         }
       }
@@ -150,7 +150,7 @@ export class AdminDashboardComponent implements OnInit {
 
   }
 
-  setUp(){
+  setUp() {
     this.adminDashboardService.getPageData().toPromise().then(data => {
       this.initiatedRFC = data[0];
       this.phase2RFCs = data[1];

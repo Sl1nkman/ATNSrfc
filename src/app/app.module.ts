@@ -37,6 +37,7 @@ import { AppRoutingModule } from './models/app-routing.module';
 import { RouteAuthorisationService } from './services/route-authorisation.service';
 import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard
     Phase2Component,
     Phase3Component,
     AdminDashboardComponent,
+    ForgotPasswordComponent,
 
   ],
     imports: [

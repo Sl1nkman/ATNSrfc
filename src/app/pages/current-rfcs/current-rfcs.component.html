@@ -1,51 +1,42 @@
 <!-- Page Features -->
-<div class="row text-center">
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text"></p>
+<div *ngIf="!this.displayPhase3 && !this.displayPhase2">
+    <div class="row text-center" *ngFor="let ccr of myCCRs" >
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h4 class="card-title">{{ccr[0][0].ID}}</h4>
+                    <p class="card-text"> Requested Change Description: {{ccr[0][0].requestedChange}}</p>
+                    <p class="card-text"> Reason for request: {{ccr[0][0].description}}</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" *ngIf="!ccr[1][0]" (click)="configureCCR(ccr[0][0])">Configure CCR</button>
+                </div>
             </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-primary">Configure CCR</a>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100" *ngIf="ccr[1][0]">
+                <div class="card-body">
+                    <h4 class="card-title">{{ccr[1][0].ID}}</h4>
+                    <p class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary" *ngIf="ccr[2][0].close_out_confirmed === '0' || !ccr[2][0]">Implement CCR</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card h-100" *ngIf="ccr[2][0]">
+                <div class="card-body">
+                    <h4 class="card-title">{{ccr[2][0].ID}}</h4>
+                    <p class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-primary">Configure CCR</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-primary">Configure CCR</a>
-            </div>
-        </div>
-    </div>
-
-<!--    <div class="col-lg-3 col-md-6 mb-4">-->
-<!--        <div class="card h-100">-->
-<!--            <div class="card-body">-->
-<!--                <h4 class="card-title">Card title</h4>-->
-<!--                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>-->
-<!--            </div>-->
-<!--            <div class="card-footer">-->
-<!--                <a href="#" class="btn btn-primary">Configure CCR</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
 </div>
-<!-- /.row -->
+    <app-phase2 *ngIf="this.displayPhase2"></app-phase2><br>
+    <app-phase3 *ngIf="this.displayPhase3"></app-phase3><br>
+
