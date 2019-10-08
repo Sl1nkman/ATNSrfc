@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {CurrentCcrsService} from '../../services/current-ccrs.service';
 import {Data} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
+import {Phase3Service} from '../../services/phase3.service';
 
 @Component({
   selector: 'app-current-rfcs',
@@ -12,7 +13,7 @@ import {Phase2Service} from '../../services/phase2.service';
 export class CurrentRFCSComponent implements OnInit {
   private myCCRs ;
 
-  constructor(private currentccrsService: CurrentCcrsService, private  phase2service: Phase2Service) { }
+  constructor(private currentccrsService: CurrentCcrsService, private  phase2service: Phase2Service , private phase3service: Phase3Service) { }
   private displayPhase2: boolean;
   private displayPhase3: boolean;
 
@@ -21,8 +22,9 @@ export class CurrentRFCSComponent implements OnInit {
     this.displayPhase2 = true;
   }
 
-  implementCCR(){
-
+  implementCCR(ccr) {
+    this.phase3service.setphases(ccr);
+    this.displayPhase3 = true;
   }
   ngOnInit() {
     this.currentccrsService.getMyCCRs().subscribe( (data: Data) => {

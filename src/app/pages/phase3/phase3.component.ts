@@ -7,6 +7,8 @@ import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'n
 import {Data} from '@angular/router';
 import {Phase3Service} from '../../services/phase3.service';
 import swal from 'sweetalert2';
+import {CCRPhase2} from '../../models/CCR-Phase2';
+import {Phase2Service} from '../../services/phase2.service';
 
 
 @Component({
@@ -32,8 +34,52 @@ export class Phase3Component implements OnInit {
   private numberOfDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 ];
   private selectedNoDays: number;
 
+    private availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+    private availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
+    private availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
+    private availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
+    private availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
+    private availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
+        'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
+        'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
+
 
     abortOrRegress: String[] = ['Abort', 'Regress'];
+    private phase2: CCRPhase2 = {
+        CCR_ID: undefined,
+        TCB_CRF_ID: undefined,
+        requestPriority: undefined,
+        predictedImpact: undefined,
+        changePeriod: undefined,
+        temporaryPeriodStartDate: undefined,
+        temporaryPeriodNumberOfDays: undefined,
+        temporaryPeriodEndDate: undefined,
+        natureOfChange: undefined,
+        eosSystem: undefined,
+        configurationItems: undefined,
+        change: {
+            hardware: false,
+            software: false,
+            firmware: false
+        },
+        additionalDocuments: false,
+        documentIds: undefined,
+        numberOfPages: undefined,
+        estimatedImpacts: {
+            operations: undefined,
+            clients: undefined,
+            technical: undefined
+        },
+        problemReportRaised: false,
+        problemReportRef: undefined,
+        changeSuccessfullyTested: undefined,
+        changeNotSuccessfullyTestedReason: undefined,
+        specialistComment: undefined,
+        proposedImplementationDate: undefined,
+        recommend_oppose: undefined,
+        CSRF_token: undefined
+    };
 
   phase3: CCRPhase3 = {
     schedRegressionDate: undefined,
@@ -57,7 +103,7 @@ export class Phase3Component implements OnInit {
     user: String = '';
     Token = null ;
 
-  constructor(private phase3Service: Phase3Service) {
+  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,
@@ -293,6 +339,49 @@ export class Phase3Component implements OnInit {
   }
 
   ngOnInit() {
+      this.phsae2service.getPageData().subscribe((data: Data) => {
+          this.availablePriorities = data[0];
+          this.availableImpacts = data[1];
+          this.availablePeriods = data[2];
+          this.availableNatureOfChange = data[3];
+          this.availableEosSystems = data[4];
+
+      });
+      this.phase2.CCR_ID                            = this.phase3Service.phaseData[1][0].phase1_ID ;
+      this.phase2.TCB_CRF_ID                        = this.phase3Service.phaseData[1][0].tcb_crf_ID;
+      this.phase2.requestPriority                   = this.phase3Service.phaseData[1][0].requestPriority_ID;
+      this.phase2.predictedImpact                   = this.phase3Service.phaseData[1][0].impactRisks_ID;
+      this.phase2.changePeriod                      = this.phase3Service.phaseData[1][0].changePeriod_ID;
+      this.phase2.temporaryPeriodStartDate          = this.phase3Service.phaseData[1][0].temporaryStartDate;
+      this.phase2.temporaryPeriodNumberOfDays       = this.phase3Service.phaseData[1][0].temporaryNoOfDays;
+      this.phase2.temporaryPeriodEndDate            = this.phase3Service.phaseData[1][0].temporaryEndDate;
+      this.phase2.natureOfChange                    = this.phase3Service.phaseData[1][0].natureChange_ID;
+      this.phase2.eosSystem                         = this.phase3Service.phaseData[1][0].eos_ID;
+      this.phase2.configurationItems                = this.phase3Service.phaseData[1][0].configurationDescr;
+      if (this.phase3Service.phaseData[1][0].changeTypeHW === '0') {
+          this.phase2.change.hardware                   = false;
+      } else {
+          this.phase2.change.hardware                   = true ;
+      }
+      if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
+          this.phase2.change.software                   = false;
+      } else {
+          this.phase2.change.software                   = true ;
+      }
+      if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
+          this.phase2.change.firmware                   = false;
+      } else {
+          this.phase2.change.firmware                   = true ;
+      }
+      this.phase2.estimatedImpacts.operations       = this.phase3Service.phaseData[1][0].impactOnOperations;
+      this.phase2.estimatedImpacts.clients          = this.phase3Service.phaseData[1][0].impactOnClients;
+      this.phase2.estimatedImpacts.technical        = this.phase3Service.phaseData[1][0].impactOnTech;
+      this.phase2.problemReportRaised               = this.phase3Service.phaseData[1][0].reportRaisedContractor;
+      this.phase2.problemReportRef                  = this.phase3Service.phaseData[1][0].contractor_report_ref;
+      this.phase2.changeSuccessfullyTested          = this.phase3Service.phaseData[1][0].pre_testSucces ;
+      this.phase2.changeNotSuccessfullyTestedReason = this.phase3Service.phaseData[1][0].reasonUnsuccesTest;
+      this.phase2.specialistComment                 = this.phase3Service.phaseData[1][0].specialist_comment;
+      this.phase2.proposedImplementationDate        = this.phase3Service.phaseData[1][0].proposed_implementation_date;
       this.disableSubmitButton = false;
       const submitButton = document.getElementById('submit');
       submitButton.classList.add('disabled');
