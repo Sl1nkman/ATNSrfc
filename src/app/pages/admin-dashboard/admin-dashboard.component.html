@@ -1,68 +1,77 @@
 <!--Created By Blaine Viljoen-->
-  <div class="row" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR" >
-      <div class="col-sm-4">
-        <h2 class="px-3 text-secondary">Initiated requests:</h2><br>
-        <div *ngFor="let rfc of initiatedRFC; index as i">
-
-            <div class="shadow card bg-light mx-auto" style="height: 250px;" >
-              <div class="card-body">
-                <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
-                <p class="px-3 pt-2 card-text">
-                  Request: {{rfc.requested_change}}<br>
-                  Reason: {{rfc.description}}
-                </p>
-                <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist(i)">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
-              </div>
-            </div><br>
-
-        </div>
-      </div>
-
-
-      <div class="col-sm-4">
-          <h2 class="px-3 text-secondary">CCR's in Phase 2:</h2>
-          <div *ngFor="let rfc of phase2RFCs; index as i">
-              <br><div class="shadow card bg-light" style="height: 250px;" *ngIf="rfc.ID === 0">
-                  <div class="px-3 pt-2 card-body">
-                      <p>Phase 2 has not yet been processed</p>
-                  </div>
-              </div>
-
-              <div class="shadow card bg-light mx-auto" style="height: 250px;" *ngIf="rfc.ID !== 0">
+<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs">
+    <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button>
+</div><br>
+  <div class="row" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs" >
+      <div class="col mb-4">
+          <h2 class="px-3 text-secondary">Initiated requests:</h2><br>
+          <div *ngFor="let rfc of initiatedRFC; index as i">
+              <div class="card h-10" style="height: 28vh">
                   <div class="card-body">
                       <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
-                      <p class="px-3 pt-2 card-text">
-                          Phase 1 ID: {{rfc.phase1_ID}}<br>
-                          Specialist ID: {{rfc.spec_ID}}<br>
-                          EOS ID: {{rfc.eos_ID}}
-                      </p>
-                      <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(this.phase2RFCs[i])">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
+                      <p class="card-text"> Request: {{rfc.requested_change}}</p>
+                      <p class="card-text"> Reason: {{rfc.description}}</p>
+                  </div>
+                  <div class="card-footer">
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist(i)">Reassign Specialist</button>
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
+                  </div>
+              </div> <br>
+          </div>
+      </div>
+
+      <div class="col-sm-4">
+          <h2 class="px-3 text-secondary">CCR's in Phase 2:</h2><br>
+          <div *ngFor="let rfc of phase2RFCs; index as i">
+              <div class="card h-10" *ngIf="this.phase2RFCs[i].ID === -1" style="height: 28vh">
+                  <div class="card-body">
+                      <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
+                      <p class="card-text"> Phase 2 not yet processed</p>
+                  </div>
+                  <div class="card-footer">
                   </div>
               </div>
+
+              <div class="card h-10" *ngIf="this.phase2RFCs[i].ID !== -1" style="height: 28vh">
+                  <div class="card-body">
+                      <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
+                      <p class="card-text"> Phase 1 ID: {{rfc.phase1_ID}}</p>
+                      <p class="card-text"> Specialist ID: {{rfc.spec_ID}}</p>
+                  </div>
+                  <div class="card-footer">
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(this.phase2RFCs[i])">Reassign Specialist</button>
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editDocs(i)">Edit Documents</button>
+                  </div>
+              </div> <br>
 
           </div>
       </div>
 
 
       <div class="col-sm-4">
-          <h2 class="px-3 text-secondary">CCR's in Phase 3:</h2>
+          <h2 class="px-3 text-secondary">CCR's in Phase 3:</h2><br>
           <div *ngFor="let rfc of this.phase3RFCS; index as i">
-
-              <br><div class="shadow card bg-light" style="height: 250px;" *ngIf="rfc.ID===0">
-                    <div class="px-3 pt-2 card-body">
-                        <p>Phase 3 has not yet been processed</p>
-                    </div>
-                </div>
-
-              <div class="shadow card bg-light mx-auto" style="height: 250px;" *ngIf="rfc.ID!==0">
+              <div class="card h-10" *ngIf="this.phase3RFCS[i].ID === -1" style="height: 28vh">
                   <div class="card-body">
                       <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
-                      <p class="px-3 pt-2 card-text">
-                          CCR_ID: {{rfc.CCR_ID}}
-                      </p>
-                      <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button><button class="ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase3')">Edit CCR</button>
+                      <p class="card-text"> Phase 3 has not yet been processed</p>
+                  </div>
+                  <div class="card-footer">
                   </div>
               </div>
+
+              <div class="card h-10" *ngIf="this.phase3RFCS[i].ID !== -1" style="height: 28vh">
+                  <div class="card-body">
+                      <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
+                      <p class="card-text"> CCR_ID: {{rfc.CCR_ID}}</p>
+                  </div>
+                  <div class="card-footer">
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button>
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase3')">Edit CCR</button>
+                      <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editDocs(i)">Edit Documents</button>
+                  </div>
+              </div> <br>
 
           </div>
       </div>
@@ -79,12 +88,47 @@
             Description: {{this.initiatedRFC[this.selectedIndex].description}}<br>
             Start Time: {{this.initiatedRFC[this.selectedIndex].start_time}}<br>
         </p><br>
-        <h2 class="px-3 text-secondary" *ngIf="this.phase2RFCs[this.selectedIndex].ID !== 0">Phase 2:</h2>
-        <p class="px-3" *ngIf="this.phase2RFCs[this.selectedIndex].ID !== 0">
+        <h2 class="px-3 text-secondary" *ngIf="this.phase2RFCs[this.selectedIndex].ID !== -1">Phase 2:</h2>
+        <p class="px-3" *ngIf="this.phase2RFCs[this.selectedIndex].ID !== -1">
             Phase 2 ID: {{this.phase2RFCs[this.selectedIndex].ID}}<br>
             Specialist: {{this.specialist}}<br>
+            EOS: {{this.selectedEOS}}<br>
             TCB ID: {{this.phase2RFCs[this.selectedIndex].tcb_crf_ID}}<br>
-            Configuration description: {{this.phase2RFCs[this.selectedIndex].configurationDescr}}
+            Request Priority: {{this.selectedPriority}}<br>
+            Change Period: {{this.selectedPeriod}}<br>
+            Impact on: {{this.selectedRisk}}<br>
+            Nature of Change: {{this.selectedChange}}<br>
+            Start Date: {{this.phase2RFCs[this.selectedIndex].startDate}}<br>
+            Temporary Start Date: {{this.temporaryStartDate}}<br>
+            Temporary End Date: {{this.temporaryEndDate}}<br>
+            Change on Hardware: {{this.changeHW}}<br>
+            Change on Software: {{this.changeSW}}<br>
+            Change on Firmware: {{this.changeFW}}<br>
+            Configuration description: {{this.phase2RFCs[this.selectedIndex].configurationDescr}}<br>
+            Impact on Operations: {{this.impactOps}}<br>
+            Impact on Clients: {{this.impactCli}}<br>
+            Impact on Tech: {{this.impactTech}}<br>
+            Report Raised with Contractor: {{this.reportRaised}}<br>
+            Pre-Test Success: {{this.preTest}}<br>
+            Reason unsuccessful: {{this.reasonUnsucc}}<br>
+            Specialist Comments: {{this.specialistComm}}<br>
+            Proposed Implementation Date: {{this.phase2RFCs[this.selectedIndex].proposed_implementation_date}}
+        </p><br>
+        <h2 class="px-3 text-secondary" *ngIf="this.phase3RFCS[this.selectedIndex].ID !== -1">Phase 3:</h2>
+        <p class="px-3" *ngIf="this.phase3RFCS[this.selectedIndex].ID !== -1">
+           <label>ID: {{this.phase3RFCS[this.selectedIndex].ID}}</label><br>
+            <label>CCR ID: {{this.phase3RFCS[this.selectedIndex].CCR_ID}}</label><br>
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '1'">Implementation: Successful</label><br *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '1'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '1'">TCB Start Date: {{this.phase3RFCS[this.selectedIndex].start_tcb_evaluation_date}}</label><br *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '1'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '1'">TCB Start Date: {{this.phase3RFCS[this.selectedIndex].end_tcb_evaluation_date}}</label><br *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '1'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '0'">Implementation: Unsuccessful</label><br *ngIf="this.phase3RFCS[this.selectedIndex].implementation_successful === '0'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].aborted_regressed !== null">Status: {{this.phase3RFCS[this.selectedIndex].aborted_regressed}}</label><br *ngIf="this.phase3RFCS[this.selectedIndex].aborted_regressed !== null">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].regression_scheduled === '1'">Regression scheduled date: {{this.phase3RFCS[this.selectedIndex].scheduled_regression_date}}</label><br *ngIf="this.phase3RFCS[this.selectedIndex].regression_scheduled === '1'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '1'">Evaluation Status: Success</label><br *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '1'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '1' && this.phase3RFCS[this.selectedIndex].close_out_confirmed === '1'">Confirmed/Rejected: Confirmed</label><br *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '1' && this.phase3RFCS[this.selectedIndex].close_out_confirmed === '1'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '1' && this.phase3RFCS[this.selectedIndex].close_out_confirmed === '0'">Confirmed/Rejected: Rejected</label><br *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '1' && this.phase3RFCS[this.selectedIndex].close_out_confirmed === '0'">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '0' && this.phase3RFCS[this.selectedIndex].aborted_regressed === null">Evaluation Status: Failed</label><br *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '0' && this.phase3RFCS[this.selectedIndex].aborted_regressed === null">
+            <label *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '0' && this.phase3RFCS[this.selectedIndex].aborted_regressed === null">Reason: {{this.phase3RFCS[this.selectedIndex].evaluation_failure_reason}}</label><br *ngIf="this.phase3RFCS[this.selectedIndex].evaluation_success === '0' && this.phase3RFCS[this.selectedIndex].aborted_regressed === null">
         </p>
         <button class="btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideCCR()">Back</button>
     </div>
@@ -109,6 +153,74 @@
     <app-phase2 *ngIf="this.selectedPhase === 'Phase2'"></app-phase2><br>
     <app-phase3 *ngIf="this.selectedPhase === 'Phase3'"></app-phase3><br>
     <button *ngIf="this.edit" class="mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.back()">Back</button><br>
+</div>
+
+<div class="form-group" *ngIf="this.showEditDocs">
+    <h2>Phase 2 Documents:</h2><br>
+    <h3>Upload explanation documents to system:</h3><br>
+    <div class="px-3">
+        <ngx-file-drop multiple="true" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event, '2')"
+                       (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                Please drag and drop your additional files here
+                <button type="button" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table px-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name:</th>
+                </tr>
+                </thead>
+                <tbody class="upload-name-style">
+                <tr *ngFor="let item of phase2Upload, index as i">
+                    <td><strong>{{ item.name }}</strong></td>
+                    <td class="px-3" (click)="removeFile(i, '2')" style="cursor: pointer;">&#10005;</td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="px-3 btn btn-outline-primary btn-rounded w-40 waves-effect z-depth-0" [disabled]="this.phase2Upload.length === -1" (click)="this.upload('2')">Upload</button><br>
+        </div>
+    </div><br>
+    <h3>Files already on system:</h3>
+    <label *ngIf="this.phase2Docs.length === -1">None</label><br>
+    <div *ngFor="let doc of phase2Docs, index as i">
+        <a class="px-3 text-primary" (click)="this.openLink(i, '2')" style="cursor: pointer">{{doc.document_name}}</a><button (click)="this.deleteDoc(i, '2')" class="px-3 btn btn-outline-danger btn-rounded w-40  my-4 waves-effect z-depth-0">Delete Document</button>
+    </div><br>
+    <h2>Phase 3 Documents:</h2><br>
+    <h3>Upload documents to system:</h3><br>
+    <div class="px-3">
+        <ngx-file-drop multiple="true" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event, '3')"
+                       (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template  ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                Please drag and drop your additional files here
+                <button type="button" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table px-3">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name:</th>
+                </tr>
+                </thead>
+                <tbody class="upload-name-style">
+                <tr *ngFor="let item of phase3Upload, index as i">
+                    <td><strong>{{ item.name }}</strong></td>
+                    <td class="px-3" (click)="removeFile(i, '3')" style="cursor: pointer;">&#10005;</td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="px-3 btn btn-outline-primary btn-rounded w-40 waves-effect z-depth-0" [disabled]="this.phase3Upload.length === -1" (click)="this.upload('3')">Upload</button><br>
+        </div>
+    </div><br>
+    <h3>Files already on system:</h3>
+    <label *ngIf="this.phase3Docs.length === -1">None</label><br>
+    <div *ngFor="let doc of phase3Docs, index as i">
+        <a class="px-3 text-primary" (click)="this.openLink(i, '3')" style="cursor: pointer">{{doc.document_name}}</a><button (click)="this.deleteDoc(i, '3')" class="px-3 btn btn-outline-danger btn-rounded w-40  my-4 waves-effect z-depth-0">Delete Document</button>
+    </div><br>
+    <button class="px-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideDocs()">Back</button>
 </div>
 
 

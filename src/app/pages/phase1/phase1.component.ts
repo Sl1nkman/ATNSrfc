@@ -16,7 +16,7 @@ import swal from 'sweetalert2';
 export class Phase1Component implements OnInit {
   private usersSites ;
   private managers;
-  private localOBJ;
+  private localOBJ = null;
   private enableSubmitButton: boolean;
   private displayNotifyManager: boolean;
   private displayRequestDescription: boolean;

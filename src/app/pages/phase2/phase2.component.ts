@@ -19,6 +19,7 @@ export class Phase2Component implements OnInit {
 
     private phase1;
     private localObj;
+    private localObj = null;
     private formData = new FormData();
     private datepickerConfig: Partial<BsDatepickerConfig>;
     private files: NgxFileDropEntry[] [] = [];
@@ -486,29 +487,69 @@ export class Phase2Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-                this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
-                    if (data1.success) {
-                        if (this.phase2.additionalDocuments === true) {
-                            this.populateForm();
-                            this.phase2service.upload(this.formData).subscribe((data: Data) => {
-                                if (data.success) {
-                                    swal({
-                                        title: 'Received',
-                                        text: 'Your files have been received',
-                                        type: 'success',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
+                if(this.localObj !== null){
+                    this.phase2service.updatePhase2(this.phase2, this.localObj.ID).subscribe((data: Data) => {
+                        if(data.success){
+                            if (this.phase2.additionalDocuments) {
+                                this.populateForm();
+                                this.formData.append('passedID', this.localObj.ID);
+                                this.phase2service.upload(this.formData).subscribe((data1: Data) => {
+                                    if (data1.success) {
+                                        swal({
+                                            title: 'Updated',
+                                            text: 'Phase 3 successfully updated',
+                                            type: 'success',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                    } else {
+                                        swal({
+                                            title: 'Failure',
+                                            text: data.message,
+                                            type: 'error',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    })
+                } else {
+                    this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
+                        if (data1.success) {
+                            if (this.phase2.additionalDocuments === true) {
+                                this.populateForm();
+                                this.phase2service.upload(this.formData).subscribe((data: Data) => {
+                                    if (data.success) {
+                                        this.phase2.documentIds = data.generatedName;
+                                        swal({
+                                            title: 'Received',
+                                            text: 'Your files have been received',
+                                            type: 'success',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
 
-                                } else {
-                                    swal({
-                                        title: 'Files not uploaded',
-                                        text: data.message,
-                                        type: 'error',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                }
+                                    } else {
+                                        swal({
+                                            title: 'Files not uploaded',
+                                            text: data.message,
+                                            type: 'error',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                    }
+                                });
+                            }
+
+                        } else {
+                            swal({
+                                title: 'Failed',
+                                text: data1.message,
+                                type: 'error',
+                                showConfirmButton: false,
+                                timer: 1500
                             });
                         } else {
                             swal({
@@ -520,17 +561,8 @@ export class Phase2Component implements OnInit {
                             });
                             this.router.navigate(['home']);
                         }
-
-                    } else {
-                        swal({
-                            title: 'Failed',
-                            text: data1.message,
-                            type: 'error',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                });
+                    });
+                }
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {

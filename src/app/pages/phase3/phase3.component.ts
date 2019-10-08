@@ -19,7 +19,9 @@ import {Phase2Service} from '../../services/phase2.service';
 export class Phase3Component implements OnInit {
   private  formData = new FormData();
 
-  private localObj;
+  private localObj = null;
+
+  private phase3ID = 2;
 
   datepickerConfig: Partial<BsDatepickerConfig> ;
   dateRangePicker: Date;
@@ -287,43 +289,68 @@ export class Phase3Component implements OnInit {
           cancelButtonColor: '#d9534f' ,
           reverseButtons: true
       }).then((result) => { if (result.value) {
-          this.phase3Service.submitPhase3(this.phase3).subscribe( (data: Data) => {
-              if (data.success) {
-               console.log('we have post');
-                  if (this.phase3.additionalDocs) {
-                      this.populateForm();
-                      this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
-                          if (data1.success) {
-                              this.phase3.documentIds = data.generatedName;
-                              console.log(this.phase3.documentIds);
-                              swal({
-                                  title: 'Received',
-                                  text: 'Your files have been received',
-                                  type: 'success',
-                                  showConfirmButton: false,
-                                  timer: 1500
-                              });
-                          } else {
-                              swal({
-                                  title: 'Files not uploaded',
-                                  text: data.message,
-                                  type: 'error',
-                                  showConfirmButton: false,
-                                  timer: 1500
-                              });
-                          }
-                      });
+          if(this.localObj !== null){
+              this.phase3Service.updatePhase3(this.phase3, this.localObj.ID).subscribe((data: Data)=>{
+                  if(data.success){
+                      if (this.phase3.additionalDocs) {
+                          this.populateForm();
+                          this.formData.append('ID', this.phase3ID.toString());
+                          this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
+                              if (data1.success) {
+                                  this.phase3.documentIds = data.generatedName;
+                                  console.log(this.phase3.documentIds);
+                                  swal({
+                                      title: 'Updated',
+                                      text: 'Phase 3 successfully updated',
+                                      type: 'success',
+                                      showConfirmButton: false,
+                                      timer: 1500
+                                  });
+                              } else {
+                                  swal({
+                                      title: 'Failure',
+                                      text: data.message,
+                                      type: 'error',
+                                      showConfirmButton: false,
+                                      timer: 1500
+                                  });
+                              }
+                          });
+                      }
                   }
-                  swal({
-                      title: 'Received',
-                      text: 'CCR Phase 3 submitted',
-                      type: 'success',
-                      showConfirmButton: false,
-                      timer: 1500
-                  });
-                  this.router.navigate(['home']);
-              }
-          });
+              });
+          } else {
+              this.phase3Service.submitPhase3(this.phase3).subscribe( (data: Data) => {
+                  if (data.success) {
+                      console.log('we have post');
+                      if (this.phase3.additionalDocs) {
+                          this.populateForm();
+                          this.formData.append('ID', this.phase3ID.toString());
+                          this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
+                              if (data1.success) {
+                                  this.phase3.documentIds = data.generatedName;
+                                  console.log(this.phase3.documentIds);
+                                  swal({
+                                      title: 'Submitted',
+                                      text: 'Phase 2 configuration has been submitted',
+                                      type: 'success',
+                                      showConfirmButton: false,
+                                      timer: 1500
+                                  });
+                              } else {
+                                  swal({
+                                      title: 'Failure',
+                                      text: data.message,
+                                      type: 'error',
+                                      showConfirmButton: false,
+                                      timer: 1500
+                                  });
+                              }
+                          });
+                      }
+                  }
+              });
+          }
 
       } else if (
           result.dismiss === swal.DismissReason.cancel
@@ -403,9 +430,100 @@ export class Phase3Component implements OnInit {
 
       this.localObj = this.phase3Service.getObj();
       if (this.localObj !== null) {
+          console.log(this.localObj);
           this.disableSubmitButton = true;
           submitButton.classList.remove('disabled');
           document.getElementById('cancel').classList.add('invisible');
+
+          if(this.localObj.implementation_successful === '1'){
+              this.phase3.implementationSuccessful = true;
+              console.log(this.phase3.implementationSuccessful);
+          } else {
+              this.phase3.implementationSuccessful = false;
+              console.log(this.phase3.implementationSuccessful);
+          }
+          if (this.phase3.implementationSuccessful) {
+              this.displayImpSuccess = false;
+              this.phase3.abort = false;
+              this.phase3.regress = false;
+              this.showImpChange = true;
+              this.phase3.schedRegressionDate = undefined;
+              this.phase3.abort = false;
+              this.phase3.regress = false;
+              this.phase3.abortRegressReason = undefined;
+              this.phase3.abortRegress = undefined;
+              this.phase3.alreadyRegressed = true;
+              this.showTCBdatepicker = true;
+          } else {
+              this.displayImpSuccess = true;
+              this.showImpChange = true;
+              this.showEvalChange = false;
+              this.phase3.itemsUpdated = false;
+              this.phase3.additionalDocs = false;
+              this.phase3.tcbEvalStart = undefined;
+              this.phase3.tcbEvalEnd = undefined;
+              this.phase3.additionalDocs = false;
+              this.phase3.itemsUpdated = false;
+              this.phase3.evalSuccess = false;
+              this.phase3.ccrConfirmation = false;
+              this.phase3.evalFailure = undefined;
+              this.showEvalChange = false;
+          }
+
+          if(this.localObj.aborted_regressed !== null){
+              this.phase3.abortRegress = this.localObj.aborted_regressed;
+              if (this.phase3.abortRegress !== undefined) {
+                  if (this.phase3.abortRegress.includes('Abort')) {
+                      this.phase3.abort = true;
+                      this.phase3.regress = false;
+                      this.phase3.abortRegressReason = undefined;
+                      this.phase3.alreadyRegressed = false;
+                      this.phase3.schedRegressionDate = undefined;
+                  } else if (this.phase3.abortRegress.includes('Regress')) {
+                      this.phase3.abort = false;
+                      this.phase3.regress = true;
+                      this.phase3.abortRegressReason = undefined;
+
+                      if (this.localObj.already_regressed === '1') {
+                          this.phase3.alreadyRegressed = true;
+                          this.showSched = false;
+                      } else {
+                          this.phase3.alreadyRegressed = false;
+                          this.showSched = true;
+                          this.phase3.schedRegressionDate = this.localObj.scheduled_regression_date;
+                      }
+                  }
+              }
+
+              this.phase3.abortRegressReason = this.localObj.reason_if_abort_regressed;
+          }
+
+          if(this.localObj.aborted_regressed === null){
+              this.phase3.tcbEvalStart = this.localObj.start_tcb_evaluation_date;
+              this.phase3.tcbEvalEnd = this.localObj.end_tcb_evaluation_date;
+              console.log(this.phase3.tcbEvalStart);
+
+              if (this.localObj.items_updated === '1') {
+                  this.phase3.itemsUpdated = true;
+              }
+
+              if(this.localObj.evaluation_success === '1'){
+                  this.phase3.evalSuccess = true;
+                  this.showEvalChange = true;
+                  this.phase3.evalFailure = undefined;
+                  if (this.localObj.close_out_confirmed === '1') {
+                      this.phase3.ccrConfirmation = true;
+                  } else {
+                      this.phase3.ccrConfirmation = false;
+                  }
+              } else {
+                  this.phase3.evalSuccess = false;
+                  this.showEvalChange = true;
+                  this.phase3.ccrConfirmation = false;
+                  this.phase3.evalFailure = this.localObj.evaluation_failure_reason;
+              }
+
+          }
       }
   }
 

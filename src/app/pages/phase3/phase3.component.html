@@ -502,6 +502,7 @@
                                name="implementationSuccess"
                                value="yes"
                                (click)="onSelectImplementationSuccessful($event)"
+                               [checked]="this.phase3.implementationSuccessful"
                         >
                         Yes
                     </Label>
@@ -510,6 +511,7 @@
                                name="implementationSuccess"
                                value="no"
                                (click)="onSelectImplementationSuccessful($event)"
+                               [checked]="!this.phase3.implementationSuccessful"
                         >
                         No
                     </Label>
@@ -552,7 +554,7 @@
                             class="px-3 rounded form-control"
                             rows="2"
                             [(ngModel)]="this.phase3.abortRegressReason"
-                            (ngModelChange)="abortRegressReasonCheck()"></textarea>
+                            (ngModelChange)="abortRegressReasonCheck()">{{this.phase3.abortRegressReason}}</textarea>
                 </div>
                 <div class="col"></div>
             </div>
@@ -570,6 +572,7 @@
                                name="alreadyRegressed"
                                value="yes"
                                (click)="onSelectAlreadyRegressed($event)"
+                               [checked]="this.phase3.alreadyRegressed"
                         >
                         Yes
                     </Label>
@@ -578,6 +581,7 @@
                                name="alreadyRegressed"
                                value="no"
                                (click)="onSelectAlreadyRegressed($event)"
+                               [checked]="!this.phase3.alreadyRegressed"
                         >
                         No
                     </Label>
@@ -642,7 +646,7 @@
                            autocomplete="off"
                            bsDatepicker
                            [bsConfig]="datepickerConfig"
-                           [(ngModel)]="this.dateRangePicker"
+                           [(ngModel)]="this.phase3.tcbEvalStart"
                            (ngModelChange)="onSelectTCBEval($event)"
                     >
                 </div>
@@ -726,12 +730,20 @@
                      popoverTitle="CHANGE REQUEST UPDATED ITEMS"
                      class="col">
                     <Label class="checkbox-inline px-3">
-                        <input type="checkbox"
+                        <input type="radio"
                                name="itemsUpdated"
                                value="yes"
                                (click)="onSelectItemsUpdated($event)"
+                               [checked]="this.phase3.itemsUpdated"
                         >
                         Yes
+                        <input type="radio"
+                               name="itemsUpdated"
+                               value="yes"
+                               (click)="onSelectItemsUpdated($event)"
+                               [checked]="!this.phase3.itemsUpdated"
+                        >
+                        No
                     </Label>
                 </div>
                 <div class="col"></div>
@@ -751,6 +763,7 @@
                                name="evalSuccess"
                                value="yes"
                                (click)="onSelectEvalSuccess($event)"
+                               [checked]="this.phase3.evalSuccess"
                         >
                         Yes
                     </Label>
@@ -759,6 +772,7 @@
                                name="evalSuccess"
                                value="no"
                                (click)="onSelectEvalSuccess($event)"
+                               [checked]="!this.phase3.evalSuccess"
                         >
                         No
                     </Label>
@@ -780,6 +794,7 @@
                                name="confirmChoice"
                                value="Confirm"
                                (click)="onSelectConfirm($event)"
+                               [checked]="this.phase3.ccrConfirmation"
                         >
                         Confirm
                     </Label>
@@ -788,6 +803,7 @@
                                name="confirmChoice"
                                value="Reject"
                                (click)="onSelectConfirm($event)"
+                               [checked]="!this.phase3.ccrConfirmation"
                         >
                         Reject
                     </Label>
@@ -809,7 +825,7 @@
                               name="evalFail"
                               class="form-control"
                               [(ngModel)]="this.phase3.evalFailure"
-                              (ngModelChange)="evalReasonCheck()"></textarea>
+                              (ngModelChange)="evalReasonCheck()">{{this.phase3.evalFailure}}</textarea>
                 </div>
                 <div class="col"></div>
             </div>
@@ -818,7 +834,7 @@
             <div  class="row px-3">
                 <div class="col"></div>
                 <div class="col">
-                    <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0"
+                    <button class="btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0" id="cancel"
                             (click)="onCancel()"> Cancel
                     </button>
                 </div>

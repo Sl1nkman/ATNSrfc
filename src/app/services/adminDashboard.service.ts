@@ -18,11 +18,31 @@ export class AdminDashboardService{
         return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
     }
 
+    getPhase2Docs(id) {
+        const obj = {
+            dataSelection: 'phase2Docs',
+            ID: id
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    }
+
+    getPhase3Docs(id) {
+        const obj = {
+            dataSelection: 'phase3Docs',
+            ID: id
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    }
+
     getSpecialistData() {
         const obj = {
             dataSelection: 'specialist'
         };
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    }
+
+    deleteDoc(obj){
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/removeFiles.php', obj, httpOptions);
     }
 
     getPageData() {
