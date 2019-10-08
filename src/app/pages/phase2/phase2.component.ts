@@ -18,7 +18,6 @@ import {Phase2Service} from '../../services/phase2.service';
 export class Phase2Component implements OnInit {
 
     private phase1;
-    private localObj;
     private localObj = null;
     private formData = new FormData();
     private datepickerConfig: Partial<BsDatepickerConfig>;
@@ -272,7 +271,7 @@ export class Phase2Component implements OnInit {
         this.phase2service.getEOSTCBNumber(this.phase2.eosSystem).subscribe( (data: Data) => {
             let tcb = parseInt(data.latest_TCB_number , 10);
             tcb += 1;
-            for (let eos of this.availableEosSystems) {
+            for (const eos of this.availableEosSystems) {
                 if (eos[0] === $event.target.value ) {
                     this.phase2.TCB_CRF_ID = eos[1] + tcb;
                 }
@@ -487,9 +486,9 @@ export class Phase2Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-                if(this.localObj !== null){
+                if (this.localObj !== null) {
                     this.phase2service.updatePhase2(this.phase2, this.localObj.ID).subscribe((data: Data) => {
-                        if(data.success){
+                        if (data.success) {
                             if (this.phase2.additionalDocuments) {
                                 this.populateForm();
                                 this.formData.append('passedID', this.localObj.ID);
@@ -514,7 +513,7 @@ export class Phase2Component implements OnInit {
                                 });
                             }
                         }
-                    })
+                    });
                 } else {
                     this.phase2service.submitPhase2(this.phase2).subscribe((data1: Data) => {
                         if (data1.success) {
@@ -551,7 +550,7 @@ export class Phase2Component implements OnInit {
                                 showConfirmButton: false,
                                 timer: 1500
                             });
-                        } else {
+                        }
                             swal({
                                 title: 'Received',
                                 text: 'Thank you for your Upload all relevant personal have been updated',
@@ -560,7 +559,7 @@ export class Phase2Component implements OnInit {
                                 timer: 1500
                             });
                             this.router.navigate(['home']);
-                        }
+
                     });
                 }
             } else if (
@@ -602,7 +601,7 @@ export class Phase2Component implements OnInit {
             this.RFC.requestDescription = this.phase1.requested_change;
             this.RFC.reasonForRequest = this.phase1.description;
             this.RFC.dateRequested = this.phase1.start_time;
-            this.phase2.CCR_ID = this.phase1.ID
+            this.phase2.CCR_ID = this.phase1.ID;
             this.user = this.phase2service.getUser();
 
         }

@@ -2,11 +2,11 @@
 <div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs">
     <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button>
 </div><br>
-  <div class="row" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs" >
+  <div class="row h-100" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs" >
       <div class="col mb-4">
           <h2 class="px-3 text-secondary">Initiated requests:</h2><br>
           <div *ngFor="let rfc of initiatedRFC; index as i">
-              <div class="card h-10" style="height: 28vh">
+              <div class="card h-100">
                   <div class="card-body">
                       <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                       <p class="card-text"> Request: {{rfc.requested_change}}</p>
@@ -19,11 +19,10 @@
               </div> <br>
           </div>
       </div>
-
-      <div class="col-sm-4">
+      <div class="col mb-4">
           <h2 class="px-3 text-secondary">CCR's in Phase 2:</h2><br>
           <div *ngFor="let rfc of phase2RFCs; index as i">
-              <div class="card h-10" *ngIf="this.phase2RFCs[i].ID === -1" style="height: 28vh">
+              <div class="card h-100" *ngIf="this.phase2RFCs[i].ID === -1" >
                   <div class="card-body">
                       <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                       <p class="card-text"> Phase 2 not yet processed</p>
@@ -32,7 +31,7 @@
                   </div>
               </div>
 
-              <div class="card h-10" *ngIf="this.phase2RFCs[i].ID !== -1" style="height: 28vh">
+              <div class="card h-100" *ngIf="this.phase2RFCs[i].ID !== -1" >
                   <div class="card-body">
                       <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                       <p class="card-text"> Phase 1 ID: {{rfc.phase1_ID}}</p>
@@ -49,7 +48,7 @@
       </div>
 
 
-      <div class="col-sm-4">
+      <div class="col mb-4">
           <h2 class="px-3 text-secondary">CCR's in Phase 3:</h2><br>
           <div *ngFor="let rfc of this.phase3RFCS; index as i">
               <div class="card h-10" *ngIf="this.phase3RFCS[i].ID === -1" style="height: 28vh">
@@ -61,7 +60,7 @@
                   </div>
               </div>
 
-              <div class="card h-10" *ngIf="this.phase3RFCS[i].ID !== -1" style="height: 28vh">
+              <div class="card h-100" *ngIf="this.phase3RFCS[i].ID !== -1" style="height: 28vh">
                   <div class="card-body">
                       <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
                       <p class="card-text"> CCR_ID: {{rfc.CCR_ID}}</p>

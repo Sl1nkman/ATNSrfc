@@ -20,8 +20,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login',        component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
-  { path: 'phase1' ,      component: Phase2Component},
-  { path: 'phase3' ,      component: Phase3Component},
   { path: 'home' ,        component: HomeComponent,
     canActivate: [AuthGuard] ,
     canActivateChild: [RouteGuard],
@@ -36,7 +34,7 @@ const routes: Routes = [
           { path: 'phase3' ,      component: Phase3Component ,      data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always'},
         ]},
         // change permission level for admin dashboard to higher security level
-      {path: 'adminDashboard', component: AdminDashboardComponent, data:{allowedPermission: '5'}, runGuardsAndResolvers: 'always'}
+      {path: 'adminDashboard', component: AdminDashboardComponent, data: {allowedPermission: '5'}, runGuardsAndResolvers: 'always'}
       ]},
   { path: '**',           component: LoginComponent },
   {path: 'phase3' , component: Phase3Component},
