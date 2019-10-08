@@ -268,7 +268,17 @@ export class Phase2Component implements OnInit {
 
     public onSelectEosSystem($event) {
         this.phase2.eosSystem = $event.target.value;
-        this.phase2.TCB_CRF_ID = $event.target.value + '0001'; // database reference to eos tcb number + 1
+        this.phase2service.getEOSTCBNumber(this.phase2.eosSystem).subscribe( (data: Data) => {
+            let tcb = parseInt(data.latest_TCB_number , 10);
+            tcb += 1;
+            for (let eos of this.availableEosSystems) {
+                if (eos[0] === $event.target.value ) {
+                    this.phase2.TCB_CRF_ID = eos[1] + tcb;
+                }
+            }
+        });
+
+         // database reference to eos tcb number + 1
         this.displayTCB_CRF_ID = true;
         this.displayConfigurationItems = true;
     }

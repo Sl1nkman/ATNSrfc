@@ -105,6 +105,7 @@
                 type="text"
                 name="requestedChange"
                 id="requestedChange"
+                maxlength="255"
                 (input)="requestedChange()"
                 [(ngModel)]="RFC.requestDescription">
       </textarea>
@@ -116,6 +117,7 @@
                 type="text"
                 name="description"
                 id="description"
+                maxlength="255"
                 (input)="description()"
                 [(ngModel)]="RFC.reasonForRequest"
       ></textarea>

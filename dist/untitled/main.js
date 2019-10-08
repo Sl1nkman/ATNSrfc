@@ -126,6 +126,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_app_routing_module__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./models/app-routing.module */ "./src/app/models/app-routing.module.ts");
 /* harmony import */ var _services_route_authorisation_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/route-authorisation.service */ "./src/app/services/route-authorisation.service.ts");
 /* harmony import */ var _services_ccr_http_interceptor__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./services/ccr-http-interceptor */ "./src/app/services/ccr-http-interceptor.ts");
+/* harmony import */ var _pages_admin_dashboard_admin_dashboard_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./pages/admin-dashboard/admin-dashboard.component */ "./src/app/pages/admin-dashboard/admin-dashboard.component.ts");
+/* harmony import */ var _pages_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./pages/forgot-password/forgot-password.component */ "./src/app/pages/forgot-password/forgot-password.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -170,6 +172,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -188,6 +192,8 @@ var AppModule = /** @class */ (function () {
                 _pages_rfcsignoff_rfcsignoff_component__WEBPACK_IMPORTED_MODULE_23__["RFCsignoffComponent"],
                 _pages_phase2_phase2_component__WEBPACK_IMPORTED_MODULE_24__["Phase2Component"],
                 _pages_phase3_phase3_component__WEBPACK_IMPORTED_MODULE_25__["Phase3Component"],
+                _pages_admin_dashboard_admin_dashboard_component__WEBPACK_IMPORTED_MODULE_31__["AdminDashboardComponent"],
+                _pages_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_32__["ForgotPasswordComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -310,7 +316,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Created by : Liam Gordon McCabe-->\r\n<!-- Student number: 27455211-->\r\n<aside class=\"sidebar shadow\">\r\n  <div class=\"sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3\">\r\n<!--    <div class=\"picture-wrapper mb-3\">-->\r\n<!--      <div class=\"logo-container m-auto\">-->\r\n<!--        <img src=\"../../../assets/images/atns_logo.png\" class=\"img-fluid\" alt=\"\">-->\r\n<!--      </div>-->\r\n<!--    </div>-->\r\n    <div class=\"profile-details text-center pb-4\">\r\n      <p class=\"mb-0 text-uppercase name\">{{this.username}}</p>\r\n      <small class=\"text-uppercase role\">{{this.roles}}</small>\r\n    </div>\r\n  </div>\r\n  <nav class=\"sidebar-menu pt-3 pb-3\">\r\n    <ul>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/createRFC\" routerLinkActive=\"active\">\r\n          <i class=\"fa fa-pencil\"></i>\r\n          <span>Initiate CCR</span>\r\n          <span class=\"badge badge-danger rounded-0 ml-auto text-light\">New</span>\r\n        </a>\r\n      </li>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/myRFCS\" routerLinkActive=\"active\" >\r\n          <i class=\"fa fa-archive\"></i>\r\n          <span>My CCR'S</span>\r\n        </a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\" routerLink=\"/home/phase2\">\r\n          <i class=\"fa fa-table\"></i>\r\n          <span>Tables</span>\r\n        </a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\" routerLink=\"/home/phase3\">\r\n          <i class=\"fa fa-align-center\"></i>\r\n          <span>Phase3</span>\r\n        </a>\r\n      </li>\r\n      <li>\r\n        <!--<a href=\"#\" routerLink=\"/maps\">-->\r\n          <!--<i class=\"fa fa-globe\"></i>-->\r\n          <!--<span>Maps</span>-->\r\n        <!--</a>-->\r\n      <!--</li>-->\r\n      <!--<li>-->\r\n        <!--<a href=\"#\" routerLink=\"/notifications\">-->\r\n          <!--<i class=\"fa fa-bell-o\"></i>-->\r\n          <!--<span>Notifications</span>-->\r\n        <!--</a>-->\r\n      <!--</li>-->\r\n    </ul>\r\n  </nav>\r\n  <nav class=\"sidebar-menu pt-3 pb-3\">\r\n    <ul>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/currentrfcs\" routerLinkActive=\"active\">\r\n          <i class=\"fa fa-eye\"></i>\r\n          <span>CCR's Dashboard</span>\r\n          <!--<span class=\"badge badge-danger rounded-0 ml-auto text-light\">New</span>-->\r\n        </a>\r\n      </li>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/rfcsignoff\" routerLinkActive=\"active\">\r\n          <i class=\"fa fa-leaf\"></i>\r\n          <span>CCR Sign Off</span>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </nav>\r\n</aside>\r\n"
+module.exports = "<!-- Created by : Liam Gordon McCabe-->\r\n<!-- Student number: 27455211-->\r\n<aside class=\"sidebar shadow\">\r\n  <div class=\"sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3\">\r\n<!--    <div class=\"picture-wrapper mb-3\">-->\r\n<!--      <div class=\"logo-container m-auto\">-->\r\n<!--        <img src=\"../../../assets/images/atns_logo.png\" class=\"img-fluid\" alt=\"\">-->\r\n<!--      </div>-->\r\n<!--    </div>-->\r\n    <div class=\"profile-details text-center pb-4\">\r\n      <p class=\"mb-0 text-uppercase name\">{{this.username}}</p>\r\n      <small class=\"text-uppercase role\">{{this.roles}}</small>\r\n    </div>\r\n  </div>\r\n  <nav class=\"sidebar-menu pt-3 pb-3\">\r\n    <ul>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/createRFC\" routerLinkActive=\"active\">\r\n          <i class=\"fa fa-plus-circle \"></i>\r\n          <span>Initiate CCR</span>\r\n          <span class=\"badge badge-danger rounded-0 ml-auto text-light\">New</span>\r\n        </a>\r\n      </li>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/myRFCS\" routerLinkActive=\"active\" >\r\n          <i class=\"fa fa-list\"></i>\r\n          <span>My CCR'S</span>\r\n        </a>\r\n      </li>\r\n        <!--<a href=\"#\" routerLink=\"/maps\">-->\r\n          <!--<i class=\"fa fa-globe\"></i>-->\r\n          <!--<span>Maps</span>-->\r\n        <!--</a>-->\r\n      <!--</li>-->\r\n      <!--<li>-->\r\n        <!--<a href=\"#\" routerLink=\"/notifications\">-->\r\n          <!--<i class=\"fa fa-bell-o\"></i>-->\r\n          <!--<span>Notifications</span>-->\r\n        <!--</a>-->\r\n      <!--</li>-->\r\n    </ul>\r\n  </nav>\r\n  <nav class=\"sidebar-menu pt-3 pb-3\">\r\n    <ul>\r\n      <li class=\"active\">\r\n        <a  routerLink=\"/home/currentrfcs\" routerLinkActive=\"active\">\r\n          <i class=\"fa fa-eye\"></i>\r\n          <span>CCR's Dashboard</span>\r\n          <!--<span class=\"badge badge-danger rounded-0 ml-auto text-light\">New</span>-->\r\n        </a>\r\n      </li>\r\n<!--      <li class=\"active\">-->\r\n<!--        <a  routerLink=\"/home/rfcsignoff\" routerLinkActive=\"active\">-->\r\n<!--          <i class=\"fa fa-leaf\"></i>-->\r\n<!--          <span>CCR Sign Off</span>-->\r\n<!--        </a>-->\r\n<!--      </li>-->\r\n      <li class=\"active\">\r\n        <a routerLink=\"/home/adminDashboard\" routerLinkActive=\"active\">\r\n          <i class=\"fa fa-diamond\"></i>\r\n          <span>Admin Dashboard</span>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </nav>\r\n</aside>\r\n"
 
 /***/ }),
 
@@ -534,6 +540,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _guards_route_guard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../guards/route.guard */ "./src/app/guards/route.guard.ts");
 /* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../guards/auth.guard */ "./src/app/guards/auth.guard.ts");
 /* harmony import */ var _pages_phase3_phase3_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/phase3/phase3.component */ "./src/app/pages/phase3/phase3.component.ts");
+/* harmony import */ var _pages_admin_dashboard_admin_dashboard_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/admin-dashboard/admin-dashboard.component */ "./src/app/pages/admin-dashboard/admin-dashboard.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -543,6 +550,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 /* Created by : Liam Gordon McCabe
 *  Student number: 27455211
 */
+
 
 
 
@@ -570,9 +578,13 @@ var routes = [
             { path: 'createRFC', component: _pages_phase1_phase1_component__WEBPACK_IMPORTED_MODULE_5__["Phase1Component"], data: { allowedPermission: '1' }, runGuardsAndResolvers: 'always' },
             { path: 'myRFCS', component: _pages_my_rfcs_my_rfcs_component__WEBPACK_IMPORTED_MODULE_4__["MyRFCSComponent"], data: { allowedPermission: '2' }, runGuardsAndResolvers: 'always' },
             { path: 'rfcsignoff', component: _pages_rfcsignoff_rfcsignoff_component__WEBPACK_IMPORTED_MODULE_8__["RFCsignoffComponent"], data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always' },
-            { path: 'currentrfcs', component: _pages_current_rfcs_current_rfcs_component__WEBPACK_IMPORTED_MODULE_7__["CurrentRFCSComponent"], data: { allowedPermission: '3' }, runGuardsAndResolvers: 'always' },
-            { path: 'phase2', component: _pages_phase2_phase2_component__WEBPACK_IMPORTED_MODULE_9__["Phase2Component"], data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always' },
-            { path: 'phase3', component: _pages_phase3_phase3_component__WEBPACK_IMPORTED_MODULE_12__["Phase3Component"], data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always' }
+            { path: 'currentrfcs', component: _pages_current_rfcs_current_rfcs_component__WEBPACK_IMPORTED_MODULE_7__["CurrentRFCSComponent"], data: { allowedPermission: '3' }, runGuardsAndResolvers: 'always',
+                children: [
+                    { path: 'phase2', component: _pages_phase2_phase2_component__WEBPACK_IMPORTED_MODULE_9__["Phase2Component"], data: { allowedPermission: '4' }, runGuardsAndResolvers: 'always' },
+                    { path: 'phase3', component: _pages_phase3_phase3_component__WEBPACK_IMPORTED_MODULE_12__["Phase3Component"], data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always' },
+                ] },
+            // change permission level for admin dashboard to higher security level
+            { path: 'adminDashboard', component: _pages_admin_dashboard_admin_dashboard_component__WEBPACK_IMPORTED_MODULE_13__["AdminDashboardComponent"], data: { allowedPermission: '5' }, runGuardsAndResolvers: 'always' }
         ] },
     { path: '**', component: _pages_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'phase3', component: _pages_phase3_phase3_component__WEBPACK_IMPORTED_MODULE_12__["Phase3Component"] },
@@ -590,6 +602,234 @@ var AppRoutingModule = /** @class */ (function () {
     return AppRoutingModule;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/app/pages/admin-dashboard/admin-dashboard.component.css":
+/*!*********************************************************************!*\
+  !*** ./src/app/pages/admin-dashboard/admin-dashboard.component.css ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/admin-dashboard/admin-dashboard.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/pages/admin-dashboard/admin-dashboard.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--Created By Blaine Viljoen-->\r\n  <div class=\"row\" *ngIf=\"!this.showSpecialist && !this.edit && !this.displayCCR\" >\r\n      <div class=\"col-sm-4\">\r\n        <h2 class=\"px-3 text-secondary\">Initiated requests:</h2><br>\r\n        <div *ngFor=\"let rfc of initiatedRFC; index as i\">\r\n\r\n            <div class=\"shadow card bg-light mx-auto\" style=\"height: 250px;\" >\r\n              <div class=\"card-body\">\r\n                <h2 class=\"px-3 pt-1 text-primary card-title\" style=\"cursor: pointer;\" (click)=\"this.showCCR(i)\">CCR ID: {{rfc.ID}}</h2>\r\n                <p class=\"px-3 pt-2 card-text\">\r\n                  Request: {{rfc.requested_change}}<br>\r\n                  Reason: {{rfc.description}}\r\n                </p>\r\n                <button class=\"btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" id=\"reassignSpec\" (click)=\"revealSpecialist(i)\">Reassign Specialist</button><button class=\"ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" id=\"editCCR\" (click)=\"this.editCCR(i, 'Phase1')\">Edit CCR</button>\r\n              </div>\r\n            </div><br>\r\n\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"col-sm-4\">\r\n          <h2 class=\"px-3 text-secondary\">CCR's in Phase 2:</h2>\r\n          <div *ngFor=\"let rfc of phase2RFCs; index as i\">\r\n              <br><div class=\"shadow card bg-light\" style=\"height: 250px;\" *ngIf=\"rfc.ID === 0\">\r\n                  <div class=\"px-3 pt-2 card-body\">\r\n                      <p>Phase 2 has not yet been processed</p>\r\n                  </div>\r\n              </div>\r\n\r\n              <div class=\"shadow card bg-light mx-auto\" style=\"height: 250px;\" *ngIf=\"rfc.ID !== 0\">\r\n                  <div class=\"card-body\">\r\n                      <h2 class=\"px-3 pt-1 text-primary card-title\" style=\"cursor: pointer;\" (click)=\"this.showCCR(i)\">CCR ID: {{rfc.ID}}</h2>\r\n                      <p class=\"px-3 pt-2 card-text\">\r\n                          Phase 1 ID: {{rfc.phase1_ID}}<br>\r\n                          Specialist ID: {{rfc.spec_ID}}<br>\r\n                          EOS ID: {{rfc.eos_ID}}\r\n                      </p>\r\n                      <button class=\"btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" (click)=\"revealSpecialist(this.phase2RFCs[i])\">Reassign Specialist</button><button class=\"ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" (click)=\"this.editCCR(i, 'Phase2')\">Edit CCR</button>\r\n                  </div>\r\n              </div>\r\n\r\n          </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"col-sm-4\">\r\n          <h2 class=\"px-3 text-secondary\">CCR's in Phase 3:</h2>\r\n          <div *ngFor=\"let rfc of this.phase3RFCS; index as i\">\r\n\r\n              <br><div class=\"shadow card bg-light\" style=\"height: 250px;\" *ngIf=\"rfc.ID===0\">\r\n                    <div class=\"px-3 pt-2 card-body\">\r\n                        <p>Phase 3 has not yet been processed</p>\r\n                    </div>\r\n                </div>\r\n\r\n              <div class=\"shadow card bg-light mx-auto\" style=\"height: 250px;\" *ngIf=\"rfc.ID!==0\">\r\n                  <div class=\"card-body\">\r\n                      <h2 class=\"px-3 pt-1 text-primary card-title\" style=\"cursor: pointer;\" (click)=\"this.showCCR(i)\">CCR ID: {{rfc.ID}}</h2>\r\n                      <p class=\"px-3 pt-2 card-text\">\r\n                          CCR_ID: {{rfc.CCR_ID}}\r\n                      </p>\r\n                      <button class=\"btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" (click)=\"revealSpecialist(i)\">Reassign Specialist</button><button class=\"ml-2 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" (click)=\"this.editCCR(i, 'Phase3')\">Edit CCR</button>\r\n                  </div>\r\n              </div>\r\n\r\n          </div>\r\n      </div>\r\n  </div>\r\n\r\n<div class=\"shadow card bg-light mx-auto\" *ngIf=\"this.displayCCR\">\r\n    <h1 class=\"px-3 text-primary\">CCR:</h1>\r\n    <div class=\"card-body\">\r\n        <h2 class=\"px-3 text-secondary\">Phase 1: </h2><br>\r\n        <p class=\"px-3\">\r\n            ID: {{this.initiatedRFC[this.selectedIndex].ID}}<br>\r\n            User: {{this.selectedUser}}<br>\r\n            Request: {{this.initiatedRFC[this.selectedIndex].requested_change}}<br>\r\n            Description: {{this.initiatedRFC[this.selectedIndex].description}}<br>\r\n            Start Time: {{this.initiatedRFC[this.selectedIndex].start_time}}<br>\r\n        </p><br>\r\n        <h2 class=\"px-3 text-secondary\" *ngIf=\"this.phase2RFCs[this.selectedIndex].ID !== 0\">Phase 2:</h2>\r\n        <p class=\"px-3\" *ngIf=\"this.phase2RFCs[this.selectedIndex].ID !== 0\">\r\n            Phase 2 ID: {{this.phase2RFCs[this.selectedIndex].ID}}<br>\r\n            Specialist: {{this.specialist}}<br>\r\n            TCB ID: {{this.phase2RFCs[this.selectedIndex].tcb_crf_ID}}<br>\r\n            Configuration description: {{this.phase2RFCs[this.selectedIndex].configurationDescr}}\r\n        </p>\r\n        <button class=\"btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0\" (click)=\"this.hideCCR()\">Back</button>\r\n    </div>\r\n</div>\r\n\r\n    <div *ngIf=\"this.showSpecialist\">\r\n        <div class=\"shadow card bg-light mx-auto\">\r\n            <div class=\"card-body\">\r\n                <h2 class=\"px-3 pt-1 text-primary card-title\">Select the new specialist</h2>\r\n                <select class=\"px-3 pt-2 card-text rounded w-100 form-control\" name=\"selectedSpecialist\" id=\"selectedSpecialist\" (click)=\"this.selectedSpecialist($event)\"\r\n                >\r\n                    <option *ngFor=\"let specialist of this.specialists, index as i\" value=\"{{specialist[0]}}\">{{specialist[2]}} ({{specialist[1]}})</option>\r\n                </select><br>\r\n\r\n                <button class=\"btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0\" (click)=\"this.setSpecialist()\">Reassign Specialist</button><button class=\"ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0\" (click)=\"this.hideSpecialist()\">Back</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n<div class=\"form-group\" *ngIf=\"this.edit\" style=\"background-color: #ffffff;\">\r\n    <app-create-rfcs *ngIf=\"this.selectedPhase === 'Phase1'\"></app-create-rfcs><br>\r\n    <app-phase2 *ngIf=\"this.selectedPhase === 'Phase2'\"></app-phase2><br>\r\n    <app-phase3 *ngIf=\"this.selectedPhase === 'Phase3'\"></app-phase3><br>\r\n    <button *ngIf=\"this.edit\" class=\"mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0\" (click)=\"this.back()\">Back</button><br>\r\n</div>\r\n\r\n\r\n<!--Created By Blaine Viljoen-->\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/admin-dashboard/admin-dashboard.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/pages/admin-dashboard/admin-dashboard.component.ts ***!
+  \********************************************************************/
+/*! exports provided: AdminDashboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminDashboardComponent", function() { return AdminDashboardComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_adminDashboard_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/adminDashboard.service */ "./src/app/services/adminDashboard.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_phase1_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/phase1.service */ "./src/app/services/phase1.service.ts");
+/* harmony import */ var _services_phase2_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/phase2.service */ "./src/app/services/phase2.service.ts");
+/* harmony import */ var _services_phase3_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/phase3.service */ "./src/app/services/phase3.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_6__);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var AdminDashboardComponent = /** @class */ (function () {
+    function AdminDashboardComponent(adminDashboardService, router, phase1, phase2, phase3) {
+        this.adminDashboardService = adminDashboardService;
+        this.router = router;
+        this.phase1 = phase1;
+        this.phase2 = phase2;
+        this.phase3 = phase3;
+        this.rfcs = [
+            { id: 1, request: 'something', reason: 'Cause I said so ...', site: 'FABL' },
+            { id: 2, request: 'something else', reason: 'Same as the last one ...', site: 'FABL' },
+            { id: 3, request: 'one last thing', reason: 'Just do it ...', site: 'FABL' }
+        ];
+        this.selectedIndex = 0;
+        this.initiatedRFC = [];
+        this.phase2RFCs = [];
+        this.phase3RFCS = [];
+        this.sites = [];
+        this.users = [];
+        this.displayCCR = false;
+        this.showSpecialist = false;
+        this.edit = false;
+        this.selectedPhase = '';
+        this.specialists = ['Liam McCabe'];
+        this.specialist = '';
+    }
+    AdminDashboardComponent.prototype.showCCR = function (index) {
+        this.displayCCR = true;
+        this.selectedIndex = index;
+        this.specialist = '';
+        for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].ID === this.initiatedRFC[index].user_ID) {
+                this.selectedUser = this.users[i].name;
+            }
+        }
+        if (this.phase2RFCs[index].ID !== 0) {
+            for (var i = 0; i < this.users.length; i++) {
+                if (this.users[i].ID === this.phase2RFCs[index].spec_ID) {
+                    this.specialist = this.users[i].name;
+                }
+            }
+        }
+    };
+    AdminDashboardComponent.prototype.hideCCR = function () {
+        this.displayCCR = false;
+    };
+    AdminDashboardComponent.prototype.selectedSpecialist = function (event) {
+        this.specialist = event.target.value;
+    };
+    AdminDashboardComponent.prototype.revealSpecialist = function (i) {
+        console.log(i);
+        if (this.phase2RFCs[i].ID !== 0) {
+            this.showSpecialist = true;
+            this.selectedCCR = this.phase2RFCs[i].ID;
+        }
+        else {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()('Failure', 'A specialist has not yet processed this CCR', 'error');
+        }
+    };
+    AdminDashboardComponent.prototype.hideSpecialist = function () {
+        this.showSpecialist = false;
+    };
+    AdminDashboardComponent.prototype.setSpecialist = function () {
+        this.showSpecialist = false;
+        this.adminDashboardService.setNewSpecialist(this.selectedCCR, this.specialist).subscribe(function (data) {
+            if (data.success) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()('Success', data.message, 'success');
+            }
+            else {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_6___default()('Failure', data.message, 'error');
+            }
+        });
+    };
+    AdminDashboardComponent.prototype.editCCR = function (index, phase) {
+        this.selectedPhase = phase;
+        this.selectedCCR = this.initiatedRFC[index];
+        this.edit = true;
+        var siteID = 0;
+        if (this.selectedPhase === 'Phase1') {
+            for (var i = 0; i < this.sites.length; i++) {
+                if (this.initiatedRFC[i].user_ID === this.sites[i].user_ID) {
+                    siteID = this.sites[i].site_ID;
+                }
+            }
+            this.phase1.setobj(this.initiatedRFC[index], siteID);
+        }
+        else if (this.selectedPhase === 'Phase2') {
+            var user = '';
+            for (var i = 0; i < this.users.length; i++) {
+                if (this.initiatedRFC[index].user_ID === this.users[i].ID) {
+                    user = this.users[i].name;
+                }
+            }
+            for (var i = 0; i < this.sites.length; i++) {
+                if (this.initiatedRFC[i].user_ID === this.sites[i].user_ID) {
+                    siteID = this.sites[i].site_ID;
+                }
+            }
+            this.phase2.setObj(this.phase2RFCs[index], this.initiatedRFC[index], user);
+        }
+        else if (this.selectedPhase === 'Phase3') {
+            this.phase3.setObj(this.initiatedRFC[index]);
+        }
+        console.log(this.initiatedRFC);
+        console.log(this.phase2RFCs);
+        console.log(this.phase3RFCS);
+    };
+    AdminDashboardComponent.prototype.back = function () {
+        this.selectedPhase = '';
+        this.edit = false;
+        this.phase1.setobj(null, 0);
+        this.phase2.setObj(null, null, null);
+        this.phase3.setObj(null);
+        this.setUp();
+    };
+    AdminDashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.adminDashboardService.getCSRFToken().subscribe(function (data) {
+            _this.Token = data.tokenValue;
+        });
+        this.adminDashboardService.getSpecialistData().subscribe(function (data) {
+            _this.specialists = data[0];
+        });
+        this.setUp();
+    };
+    AdminDashboardComponent.prototype.setUp = function () {
+        var _this = this;
+        this.adminDashboardService.getPageData().toPromise().then(function (data) {
+            _this.initiatedRFC = data[0];
+            _this.phase2RFCs = data[1];
+            _this.phase3RFCS = data[2];
+            _this.sites = data[3];
+            _this.users = data[4];
+            for (var i = 0; i < _this.initiatedRFC.length; i++) {
+                if (_this.phase2RFCs.length !== _this.initiatedRFC.length) {
+                    _this.phase2RFCs.push({ ID: 0, phase1_ID: 0 });
+                }
+                if (_this.phase3RFCS.length !== _this.initiatedRFC.length) {
+                    _this.phase3RFCS.push({ ID: 0, phase1_ID: 0 });
+                }
+            }
+            for (var i = 0; i < _this.initiatedRFC.length; i++) {
+                for (var x = 0; x < _this.phase2RFCs.length; x++) {
+                    if (_this.initiatedRFC[i].ID === _this.phase2RFCs[x].phase1_ID) {
+                        _this.phase2RFCs.splice(i, 0, _this.phase2RFCs.splice(x, 1)[0]);
+                    }
+                }
+            }
+            for (var i = 0; i < _this.initiatedRFC.length; i++) {
+                for (var x = 0; x < _this.phase3RFCS.length; x++) {
+                    if (_this.initiatedRFC[i].ID === _this.phase3RFCS[x].CCR_ID) {
+                        _this.phase3RFCS.splice(i, 0, _this.phase3RFCS.splice(x, 1)[0]);
+                    }
+                }
+            }
+        });
+    };
+    AdminDashboardComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-admin-dashboard',
+            template: __webpack_require__(/*! ./admin-dashboard.component.html */ "./src/app/pages/admin-dashboard/admin-dashboard.component.html"),
+            styles: [__webpack_require__(/*! ./admin-dashboard.component.css */ "./src/app/pages/admin-dashboard/admin-dashboard.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_adminDashboard_service__WEBPACK_IMPORTED_MODULE_1__["AdminDashboardService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _services_phase1_service__WEBPACK_IMPORTED_MODULE_3__["Phase1Service"], _services_phase2_service__WEBPACK_IMPORTED_MODULE_4__["Phase2Service"], _services_phase3_service__WEBPACK_IMPORTED_MODULE_5__["Phase3Service"]])
+    ], AdminDashboardComponent);
+    return AdminDashboardComponent;
+}());
+
+// Created by Blaine Viljoen
 
 
 /***/ }),
@@ -612,7 +852,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--Created by Blaine Viljoen(28023374)-->\r\n\r\n<form>\r\n    <div *ngFor=\"let rfc of rfcs; index as i\">\r\n        <div class=\"shadow card bg-light mx-auto\" (click)=\"onClick(i)\" style=\"cursor: pointer;\">\r\n            <div class=\"form group\">\r\n                <h2 class=\"px-3 pt-1 text-primary\">CCR ID: {{rfc[0]}}</h2><br>\r\n                <h3 class=\"px-3 text-secondary\">Request: {{rfc[1]}}</h3>\r\n                <h3 class=\"px-3 text-secondary\">Reason: {{rfc[2]}}</h3>\r\n            </div>\r\n        </div>\r\n        <br>\r\n    </div>\r\n\r\n    <h3 id=\"test\" class=\"pt-3 px-3 text-primary\"></h3>\r\n</form>\r\n\r\n<!--Created by Blaine Viljoen(28023374)-->\r\n"
+module.exports = "<!-- Page Features -->\r\n<div *ngIf=\"!this.displayPhase3 && !this.displayPhase2\">\r\n    <div class=\"row text-center\">\r\n        <div class=\"col mb-4\">\r\n            <h2 class=\"px-3 text-secondary\">Initiated requests:</h2><br>\r\n        </div>\r\n        <div class=\"col mb-4\">\r\n            <h2 class=\"px-3 text-secondary\">CCR's in Phase 2:</h2>\r\n        </div>\r\n        <div class=\"col mb-4\">\r\n            <h2 class=\"px-3 text-secondary\">CCR's in Phase 3:</h2>\r\n        </div>\r\n    </div>\r\n    <div class=\"row text-center\" *ngFor=\"let ccr of myCCRs\" >\r\n        <div class=\"col mb-4\">\r\n            <div class=\"card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h4 class=\"card-title\">{{ccr[0][0].ID}}</h4>\r\n                    <label>CCR Initiated: </label>\r\n                    <p class=\"card-text\"> {{ccr[0][0].start_time}}</p>\r\n                    <label>User ID</label>\r\n                    <p class=\"card-text\">{{ccr[0][0].user_ID}}</p>\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <button class=\"btn btn-primary\" *ngIf=\"!ccr[1][0]\" (click)=\"configureCCR(ccr[0][0])\">Configure CCR</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col mb-4\">\r\n            <div class=\"card h-100\" *ngIf=\"ccr[1][0]\">\r\n                <div class=\"card-body\">\r\n                    <h4 class=\"card-title\">{{ccr[1][0].ID}}</h4>\r\n                    <p class=\"card-text\">TCB CRF ID: {{ccr[1][0].tcb_crf_ID}}</p>\r\n                    <p class=\"card-text\">Started: {{ccr[1][0].startDate}}</p>\r\n                </div>\r\n                <div class=\"card-footer\"  *ngIf=\" !ccr[2][0]\">\r\n                    <button class=\"btn btn-primary\" (click)=\"implementCCR(ccr)\">Implement CCR</button>\r\n                </div>\r\n                <div class=\"card-footer\"  *ngIf=\"ccr[2][0]\">\r\n<!--                    <button class=\"btn btn-primary\" *ngIf=\"ccr[2][0]\" (click)=\"implementCCR(ccr)\">Implement CCR</button>-->\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col mb-4\">\r\n            <div class=\"card h-100\" *ngIf=\"ccr[2][0]\">\r\n                <div class=\"card-body\">\r\n                    <h4 class=\"card-title\">{{ccr[2][0].ID}}</h4>\r\n                    <p class=\"card-text\" *ngIf=\"ccr[2][0].start_tcb_evaluation_date !== '0000-00-00'\">\r\n                        <label>TCB evaluation start date: </label>\r\n                        {{ccr[2][0].start_tcb_evaluation_date}}\r\n                    </p>\r\n                    <p class=\"card-text\" *ngIf=\"ccr[2][0].close_out_confirmed === '1'\">This CCR has been closed out </p>\r\n                    <p class=\"card-text\" *ngIf=\"ccr[2][0].close_out_confirmed === '0'\">This CCR has not been closed out </p>\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <button class=\"btn btn-primary\" *ngIf=\"ccr[2][0].close_out_confirmed === '0'\" (click)=\"implementCCR(ccr)\">Implement CCR</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n    <app-phase2 *ngIf=\"this.displayPhase2\"></app-phase2><br>\r\n    <app-phase3 *ngIf=\"this.displayPhase3\"></app-phase3><br>\r\n\r\n"
 
 /***/ }),
 
@@ -627,7 +867,92 @@ module.exports = "<!--Created by Blaine Viljoen(28023374)-->\r\n\r\n<form>\r\n  
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrentRFCSComponent", function() { return CurrentRFCSComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_currentRfcs_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/currentRfcs.service */ "./src/app/services/currentRfcs.service.ts");
+/* harmony import */ var _services_current_ccrs_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/current-ccrs.service */ "./src/app/services/current-ccrs.service.ts");
+/* harmony import */ var _services_phase2_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/phase2.service */ "./src/app/services/phase2.service.ts");
+/* harmony import */ var _services_phase3_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/phase3.service */ "./src/app/services/phase3.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+// Created by Blaine Viljoen
+
+
+
+
+var CurrentRFCSComponent = /** @class */ (function () {
+    function CurrentRFCSComponent(currentccrsService, phase2service, phase3service) {
+        this.currentccrsService = currentccrsService;
+        this.phase2service = phase2service;
+        this.phase3service = phase3service;
+    }
+    CurrentRFCSComponent.prototype.configureCCR = function (ccr) {
+        this.phase2service.setObj(null, ccr, null);
+        this.displayPhase2 = true;
+    };
+    CurrentRFCSComponent.prototype.implementCCR = function (ccr) {
+        this.phase3service.setphases(ccr);
+        this.displayPhase3 = true;
+    };
+    CurrentRFCSComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.currentccrsService.getMyCCRs().subscribe(function (data) {
+            _this.myCCRs = data;
+            console.log(_this.myCCRs);
+        });
+    };
+    CurrentRFCSComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-current-rfcs',
+            template: __webpack_require__(/*! ./current-rfcs.component.html */ "./src/app/pages/current-rfcs/current-rfcs.component.html"),
+            styles: [__webpack_require__(/*! ./current-rfcs.component.css */ "./src/app/pages/current-rfcs/current-rfcs.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_current_ccrs_service__WEBPACK_IMPORTED_MODULE_1__["CurrentCcrsService"], _services_phase2_service__WEBPACK_IMPORTED_MODULE_2__["Phase2Service"], _services_phase3_service__WEBPACK_IMPORTED_MODULE_3__["Phase3Service"]])
+    ], CurrentRFCSComponent);
+    return CurrentRFCSComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/forgot-password/forgot-password.component.css":
+/*!*********************************************************************!*\
+  !*** ./src/app/pages/forgot-password/forgot-password.component.css ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/pages/forgot-password/forgot-password.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/pages/forgot-password/forgot-password.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  forgot-password works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/forgot-password/forgot-password.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/pages/forgot-password/forgot-password.component.ts ***!
+  \********************************************************************/
+/*! exports provided: ForgotPasswordComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForgotPasswordComponent", function() { return ForgotPasswordComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -638,39 +963,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
-var CurrentRFCSComponent = /** @class */ (function () {
-    function CurrentRFCSComponent(currentRfcsService) {
-        this.currentRfcsService = currentRfcsService;
-        this.Token = null;
-        this.rfcs = [
-            { id: 1, request: 'something', reason: 'Cause I said so ...' },
-            { id: 2, request: 'something else', reason: 'Same as the last one ...' },
-            { id: 3, request: 'one last thing', reason: 'Just do it ...' }
-        ];
+var ForgotPasswordComponent = /** @class */ (function () {
+    function ForgotPasswordComponent() {
     }
-    CurrentRFCSComponent.prototype.onClick = function (index) {
-        document.getElementById('test').innerHTML = 'You selected the card with id: ' + this.rfcs[index][0];
+    ForgotPasswordComponent.prototype.ngOnInit = function () {
     };
-    CurrentRFCSComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.currentRfcsService.getCSRFToken().subscribe(function (data) {
-            _this.Token = data.tokenValue;
-        });
-        this.currentRfcsService.getPageData().subscribe(function (data) {
-            _this.rfcs = data[0];
-            console.log(_this.rfcs);
-        });
-    };
-    CurrentRFCSComponent = __decorate([
+    ForgotPasswordComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-current-rfcs',
-            template: __webpack_require__(/*! ./current-rfcs.component.html */ "./src/app/pages/current-rfcs/current-rfcs.component.html"),
-            styles: [__webpack_require__(/*! ./current-rfcs.component.css */ "./src/app/pages/current-rfcs/current-rfcs.component.css")]
+            selector: 'app-forgot-password',
+            template: __webpack_require__(/*! ./forgot-password.component.html */ "./src/app/pages/forgot-password/forgot-password.component.html"),
+            styles: [__webpack_require__(/*! ./forgot-password.component.css */ "./src/app/pages/forgot-password/forgot-password.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_currentRfcs_service__WEBPACK_IMPORTED_MODULE_1__["CurrentRfcsService"]])
-    ], CurrentRFCSComponent);
-    return CurrentRFCSComponent;
+        __metadata("design:paramtypes", [])
+    ], ForgotPasswordComponent);
+    return ForgotPasswordComponent;
 }());
 
 
@@ -788,7 +1094,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Created by : Liam Gordon McCabe-->\n<!-- Student number: 27455211-->\n<div class=\"card mx-auto\" style=\"width: 45rem;\">\n\n  <h5 class=\"card-header info-color white-text text-center py-4\">\n    <strong>Sign in</strong>\n  </h5>\n\n  <div class=\"card-body px-lg-5 pt-0\">\n    <form class=\"md-form\" style=\"color: #757575;\">\n      <label for=\"username\">User Name</label>\n      <input type=\"email\" id=\"username\"  name=\"username\" class=\"form-control\" [(ngModel)]=\"user\" (input)=\"setUsername(user)\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" id=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"pass\"  (input)=\"setPassword(pass)\">\n      <div class=\"d-flex align-items-center justify-content-between\">\n        <div class=\"form-check\">\n          <input type=\"checkbox\" class=\"form-check-input\" id=\"materialLoginFormRemember\" >\n          <label class=\"form-check-label\" for=\"materialLoginFormRemember\">Remember me</label>\n        </div>\n        <div>\n          <a href=\"\">Forgot password?</a>\n        </div>\n      </div>\n\n      <button class=\"btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0\" type=\"submit\"  (click)=\"onLogin($event)\">Sign in</button>\n\n      <div class=\"text-center\">\n        <p>Not a member?\n          <a href=\"#\" routerLink=\"/register\" routerLinkActive=\"active\">Register</a>\n        </p>\n\n      </div>\n      <input type=\"hidden\"  value=\"{{this.Token}}\">\n    </form>\n  </div>\n</div>\n"
+module.exports = "<!-- Created by : Liam Gordon McCabe-->\n<!-- Student number: 27455211-->\n<div class=\"card mx-auto\" style=\"width: 45rem;\">\n\n  <h5 class=\"card-header info-color white-text text-center py-4\">\n    <strong>Sign in</strong>\n  </h5>\n\n  <div class=\"card-body px-lg-5 pt-0\">\n    <form class=\"md-form\" style=\"color: #757575;\">\n      <label for=\"username\">User Name</label>\n      <input type=\"email\" id=\"username\"  name=\"username\" class=\"form-control\" [(ngModel)]=\"user\" (input)=\"setUsername(user)\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" id=\"password\" name=\"password\" class=\"form-control\" [(ngModel)]=\"pass\"  (input)=\"setPassword(pass)\">\n      <div class=\"d-flex align-items-center justify-content-between\">\n        <div>\n          <a href=\"\">Forgot password?</a>\n        </div>\n      </div>\n\n      <button class=\"btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0\" type=\"submit\"  (click)=\"onLogin($event)\">Sign in</button>\n\n      <div class=\"text-center\">\n        <p>Not a member?\n          <a href=\"#\" routerLink=\"/register\" routerLinkActive=\"active\">Register</a>\n        </p>\n\n      </div>\n      <input type=\"hidden\"  value=\"{{this.Token}}\">\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -900,7 +1206,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n  <div class=\"card bg-light\">\n    hello im a card\n  </div>\n</form>"
+module.exports = "<!--Created by Blaine Viljoen(28023374)-->\r\n\r\n<form>\r\n  <div *ngFor=\"let rfc of rfcs; index as i\">\r\n    <div class=\"shadow card bg-light mx-auto\" (click)=\"onClick(i)\" style=\"cursor: pointer;\">\r\n      <div class=\"form group\">\r\n        <h2 class=\"px-3 pt-1 text-primary\">CCR ID: {{rfc[0]}}</h2><br>\r\n        <h3 class=\"px-3 text-secondary\">Request: {{rfc[1]}}</h3>\r\n        <h3 class=\"px-3 text-secondary\">Reason: {{rfc[2]}}</h3>\r\n        <h3 class=\"px-3 text-secondary\">Files:</h3>\r\n        <div *ngFor=\"let link of links\">\r\n          <a class=\"px-3\" href=\"{{link}}\">{{link}}</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <br>\r\n  </div>\r\n\r\n  <h3 id=\"test\" class=\"pt-3 px-3 text-primary\"></h3>\r\n</form>\r\n\r\n<!--Created by Blaine Viljoen(28023374)-->\r\n"
 
 /***/ }),
 
@@ -926,6 +1232,10 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyRFCSComponent", function() { return MyRFCSComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_MyRfcs_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/MyRfcs.service */ "./src/app/services/MyRfcs.service.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.es5.js");
+/* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
+/* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jwt_decode__WEBPACK_IMPORTED_MODULE_3__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -935,11 +1245,40 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// Created by Blaine Viljoen
+
+
+
 
 var MyRFCSComponent = /** @class */ (function () {
-    function MyRFCSComponent() {
+    function MyRFCSComponent(myRfcsService, cookieService) {
+        this.myRfcsService = myRfcsService;
+        this.cookieService = cookieService;
+        this.links = [];
+        this.Token = null;
+        this.rfcs = [
+            { id: 1, request: 'something', reason: 'Cause I said so ...' },
+            { id: 2, request: 'something else', reason: 'Same as the last one ...' },
+            { id: 3, request: 'one last thing', reason: 'Just do it ...' }
+        ];
     }
+    MyRFCSComponent.prototype.onClick = function (index) {
+        document.getElementById('test').innerHTML = 'You selected the card with id: ' + this.rfcs[index][0];
+    };
     MyRFCSComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var jwt = this.cookieService.get('jwt');
+        var decodedToken = jwt_decode__WEBPACK_IMPORTED_MODULE_3___default()(jwt);
+        this.userID = decodedToken.data.id;
+        this.myRfcsService.getCSRFToken().subscribe(function (data) {
+            _this.Token = data.tokenValue;
+        });
+        this.myRfcsService.getPageData(this.userID.toString()).subscribe(function (data) {
+            _this.rfcs = data[0];
+        });
+        this.myRfcsService.getFiles().subscribe(function (data) {
+            _this.links = data[0];
+        });
     };
     MyRFCSComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -947,11 +1286,12 @@ var MyRFCSComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./my-rfcs.component.html */ "./src/app/pages/my-rfcs/my-rfcs.component.html"),
             styles: [__webpack_require__(/*! ./my-rfcs.component.scss */ "./src/app/pages/my-rfcs/my-rfcs.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_MyRfcs_service__WEBPACK_IMPORTED_MODULE_1__["MyRfcsService"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_2__["CookieService"]])
     ], MyRFCSComponent);
     return MyRFCSComponent;
 }());
 
+// Created by Blaine Viljoen
 
 
 /***/ }),
@@ -974,7 +1314,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Created by : Liam Gordon McCabe-->\r\n<!-- Student number: 27455211-->\r\n  <form class=\"card mx-auto secondary-color\" type=\"GET\">\r\n    <div class=\"form-group px-3 pt-3\">\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label for= \"site\">Select your site</label></div>\r\n        <div class=\"col\">\r\n          <select ngbPopover=\"Select from the drop down list The site you want to make your request within\" triggers=\"mouseenter:mouseleave\" placement=\"bottom\" popoverTitle=\"SELECT SITE\"\r\n              class=\"rounded w-100 form-control\"\r\n              name=\"site\"\r\n              id=\"site\"\r\n              (change)=\"onSelectSite($event)\" >\r\n            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n            <option *ngFor=\"let site of usersSites\"  [value]=\"site[0]\" >{{site[1]}}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group px-3 pt-3\">\r\n      <label for= \"requestedChange\">Change Request</label>\r\n      <textarea rows=\"8\" class=\"form-control rounded\"\r\n                type=\"text\"\r\n                name=\"requestedChange\"\r\n                id=\"requestedChange\"\r\n                (input)=\"requestedChange()\"\r\n                [(ngModel)]=\"RFC.requestedChange\">\r\n      </textarea>\r\n    </div>\r\n    <div class=\"form-group px-3\">\r\n      <label for=\"description\">Description</label>\r\n      <textarea rows=\"8\" class=\"form-control rounded\"\r\n                type=\"text\"\r\n                name=\"description\"\r\n                id=\"description\"\r\n                (input)=\"description()\"\r\n                [(ngModel)]=\"RFC.description\"\r\n      ></textarea>\r\n    </div>\r\n\r\n    <br>\r\n\r\n    <div class=\"row px-3\">\r\n      <div class=\"col\"></div>\r\n      <div class=\"col\">\r\n        <button\r\n                type=\"cancel\"\r\n                id=\"cancel\"\r\n                class=\"btn btn-outline-danger btn-rounded w-100 mx-auto   my-4 waves-effect z-depth-0\" (click)=\"onCancel()\"\r\n        >Cancel</button>\r\n      </div>\r\n      <div class=\"col\"></div>\r\n      <div class=\"col\">\r\n        <button\r\n                type=\"submit\"\r\n                id=\"submit\"\r\n                class=\"btn btn-outline-info btn-rounded w-100 mx-auto my-4 waves-effect z-depth-0 disabled\" [disabled]=\"!this.enableSubmitButton\" (click)=\"onSubmit()\"\r\n        >Submit</button>\r\n      </div>\r\n      <div class=\"col\"></div>\r\n    </div>\r\n  </form>\r\n"
+module.exports = "<!-- Created by : Liam Gordon McCabe-->\r\n<!-- Student number: 27455211-->\r\n  <form class=\"card mx-auto secondary-color\">\r\n    <div class=\"form-group px-3 pt-3\">\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label for= \"site\">Select your site</label></div>\r\n        <div class=\"col\">\r\n          <select ngbPopover=\"Select from the drop down list The site you want to make your request within\" triggers=\"mouseenter:mouseleave\" placement=\"bottom\" popoverTitle=\"SELECT SITE\"\r\n                  class=\"rounded w-100 form-control\"\r\n                  name=\"site\"\r\n                  id=\"site\"\r\n                  (change)=\"onSelectSite($event)\" >\r\n            <option id=\"default\" selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n            <option *ngFor=\"let site of usersSites\"  [value]=\"site[0]\" [selected]=\"this.RFC.site_ID == site[0]\" >{{site[1]}}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group px-3 pt-3\" *ngIf=\"this.displayNotifyManager\">\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label>Would you like to notify a manager?</label></div>\r\n        <div class=\"col\">\r\n          <Label class=\"radio-inline px-3\">\r\n            <input type=\"radio\"\r\n                   name=\"notifyManager\"\r\n                   value=\"yes\"\r\n                   (click)=\"onSelectNotifyManager($event)\">\r\n            Yes\r\n          </Label>\r\n          <Label class=\"radio-inline px-3\">\r\n            <input type=\"radio\"\r\n                   name=\"notifyManager\"\r\n                   value=\"no\"\r\n                   (click)=\"onSelectNotifyManager($event)\" >\r\n            No\r\n          </Label>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group px-3 pt-3\" *ngIf=\"this.displayNoManagers\">\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label for= \"managerSelect\">How many Managers?</label></div>\r\n        <div class=\"col\">\r\n          <select ngbPopover=\"Select from the drop down list The site you want to make your request within\" triggers=\"mouseenter:mouseleave\" placement=\"bottom\" popoverTitle=\"SELECT SITE\"\r\n                  class=\"rounded w-100 form-control\"\r\n                  name=\"managerSelect\"\r\n                  id=\"managerSelect\"\r\n                  (change)=\"onSelectNoManagers($event)\" >\r\n            <option  selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n            <option *ngFor=\"let noManager of noManagers\"  [value]=\"noManager\"  >{{noManager}}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group px-3 pt-3\"*ngIf=\"this.displayManagerSelect1\" >\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label for= \"manager1\">Select a Manager to notify</label></div>\r\n        <div class=\"col\">\r\n          <select ngbPopover=\"Select from the drop down list The site you want to make your request within\" triggers=\"mouseenter:mouseleave\" placement=\"bottom\" popoverTitle=\"SELECT SITE\"\r\n                  class=\"rounded w-100 form-control\"\r\n                  name=\"manager1\"\r\n                  id=\"manager1\"\r\n                  (change)=\"onSelectManager1($event)\" >\r\n            <option  selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n            <option *ngFor=\"let manager of managers\"  [value]=\"manager[0]\"  >{{manager[1] + ' ' + manager[2]}}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group px-3 pt-3\" *ngIf=\"this.displayManagerSelect2\">\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label for= \"manager2\">Select a Manager to notify</label></div>\r\n        <div class=\"col\">\r\n          <select ngbPopover=\"Select from the drop down list The site you want to make your request within\" triggers=\"mouseenter:mouseleave\" placement=\"bottom\" popoverTitle=\"SELECT SITE\"\r\n                  class=\"rounded w-100 form-control\"\r\n                  name=\"manager2\"\r\n                  id=\"manager2\"\r\n                  (change)=\"onSelectManager2($event)\" >\r\n            <option  selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n            <option *ngFor=\"let manager of managers\"  [value]=\"manager[0]\"  >{{manager[1] + ' ' + manager[2]}}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group px-3 pt-3\" *ngIf=\"this.displayManagerSelect3\">\r\n      <div class=\"row\">\r\n        <div class=\"col\"> <label for= \"manager3\">Select a Manager to notify</label></div>\r\n        <div class=\"col\">\r\n          <select ngbPopover=\"Select from the drop down list The site you want to make your request within\" triggers=\"mouseenter:mouseleave\" placement=\"bottom\" popoverTitle=\"SELECT SITE\"\r\n                  class=\"rounded w-100 form-control\"\r\n                  name=\"manager3\"\r\n                  id=\"manager3\"\r\n                  (change)=\"onSelectManager3($event)\" >\r\n            <option  selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n            <option *ngFor=\"let manager of managers\"  [value]=\"manager[0]\"  >{{manager[1] + ' ' + manager[2]}}</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group px-3 pt-3\" *ngIf=\"this.displayRequestDescription\">\r\n      <label for= \"requestedChange\">Change Request Description</label>\r\n      <textarea rows=\"8\"\r\n                class=\"form-control rounded\"\r\n                type=\"text\"\r\n                name=\"requestedChange\"\r\n                id=\"requestedChange\"\r\n                maxlength=\"255\"\r\n                (input)=\"requestedChange()\"\r\n                [(ngModel)]=\"RFC.requestDescription\">\r\n      </textarea>\r\n    </div>\r\n    <div class=\"form-group px-3\" *ngIf=\"this.displayReasonForRequest\">\r\n      <label for=\"description\">Reason For Request</label>\r\n      <textarea rows=\"8\"\r\n                class=\"form-control rounded\"\r\n                type=\"text\"\r\n                name=\"description\"\r\n                id=\"description\"\r\n                maxlength=\"255\"\r\n                (input)=\"description()\"\r\n                [(ngModel)]=\"RFC.reasonForRequest\"\r\n      ></textarea>\r\n    </div>\r\n\r\n    <br>\r\n\r\n    <div class=\"row px-3\">\r\n      <div class=\"col\"></div>\r\n      <div class=\"col\">\r\n        <button\r\n                type=\"cancel\"\r\n                id=\"cancel\"\r\n                class=\"btn btn-outline-danger btn-rounded w-100 mx-auto   my-4 waves-effect z-depth-0\" (click)=\"onCancel()\"\r\n        >Cancel</button>\r\n      </div>\r\n      <div class=\"col\"></div>\r\n      <div class=\"col\">\r\n        <button\r\n                type=\"submit\"\r\n                id=\"submit\"\r\n                class=\"btn btn-outline-info btn-rounded w-100 mx-auto my-4 waves-effect z-depth-0 disabled\" [disabled]=\"!this.enableSubmitButton\" (click)=\"onSubmit()\"\r\n        >Submit</button>\r\n      </div>\r\n      <div class=\"col\"></div>\r\n    </div>\r\n  </form>\r\n"
 
 /***/ }),
 
@@ -1013,30 +1353,66 @@ var Phase1Component = /** @class */ (function () {
     function Phase1Component(phase1Service, router) {
         this.phase1Service = phase1Service;
         this.router = router;
-        this.enableSubmitButton = false;
+        this.noManagers = [1, 2, 3];
         this.RFC = {
             dateRequested: undefined,
-            requestedChange: undefined,
-            description: undefined
+            requestDescription: undefined,
+            reasonForRequest: undefined,
+            CSRF_token: undefined,
+            site_ID: undefined
         };
     }
-    // User: User = {title: undefined,
-    //   site: undefined,
-    //   name: undefined,
-    //   surname: undefined,
-    //   employeeId: undefined,
-    //   contactNumber: undefined,
-    //   email: undefined,
-    //   password: undefined
-    // };
     Phase1Component.prototype.onSelectSite = function ($event) {
-        this.selectedSite = $event.target.value;
+        this.RFC.site_ID = $event.target.value;
+        console.log($event.target.value);
+        localStorage.setItem('site', $event.target.value);
+        this.displayNotifyManager = true;
+    };
+    Phase1Component.prototype.onSelectNotifyManager = function ($event) {
+        switch ($event.target.value) {
+            case 'yes':
+                this.displayNoManagers = true;
+                break;
+            case 'no':
+                this.displayRequestDescription = true;
+        }
+    };
+    Phase1Component.prototype.onSelectNoManagers = function ($event) {
+        switch ($event.target.value) {
+            case '1':
+                this.displayManagerSelect1 = true;
+                this.displayManagerSelect2 = false;
+                this.displayManagerSelect3 = false;
+                break;
+            case '2':
+                this.displayManagerSelect1 = true;
+                this.displayManagerSelect2 = true;
+                this.displayManagerSelect3 = false;
+                break;
+            case '3':
+                this.displayManagerSelect1 = true;
+                this.displayManagerSelect2 = true;
+                this.displayManagerSelect3 = true;
+                break;
+        }
+    };
+    Phase1Component.prototype.onSelectManager1 = function ($event) {
+        this.displayRequestDescription = true;
+    };
+    Phase1Component.prototype.onSelectManager2 = function ($event) {
+        this.displayRequestDescription = true;
+    };
+    Phase1Component.prototype.onSelectManager3 = function ($event) {
+        this.displayRequestDescription = true;
     };
     Phase1Component.prototype.requestedChange = function () {
+        this.displayReasonForRequest = true;
+        localStorage.setItem('request', this.RFC.requestDescription);
     };
     Phase1Component.prototype.description = function () {
+        localStorage.setItem('description', this.RFC.reasonForRequest);
         var submitButton = document.getElementById('submit');
-        if (this.RFC.requestedChange !== undefined && this.RFC.description !== undefined && this.selectedSite !== undefined) {
+        if (this.RFC.requestDescription !== undefined && this.RFC.reasonForRequest !== undefined && this.RFC.site_ID !== undefined) {
             submitButton.classList.remove('disabled');
             this.enableSubmitButton = true;
         }
@@ -1055,6 +1431,9 @@ var Phase1Component = /** @class */ (function () {
             reverseButtons: true
         }).then(function (result) {
             if (result.value) {
+                localStorage.removeItem('request');
+                localStorage.removeItem('description');
+                localStorage.removeItem('site');
                 _this.router.navigate(['home/myRFCS']);
             }
             else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.DismissReason.cancel) {
@@ -1072,7 +1451,7 @@ var Phase1Component = /** @class */ (function () {
         var _this = this;
         sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
             title: 'Are you sure?',
-            text: "You won't be able make changes to your submission",
+            text: 'You won\'t be able make changes to your submission',
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Submit',
@@ -1082,18 +1461,37 @@ var Phase1Component = /** @class */ (function () {
             reverseButtons: true
         }).then(function (result) {
             if (result.value) {
-                _this.phase1Service.submitRequest(_this.RFC, _this.Token, _this.selectedSite).subscribe(function (data) {
-                    if (data.success) {
-                        _this.router.navigate(['home']);
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()('Success', data.message, 'success');
-                    }
-                    else {
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()('Failure', data.message, 'error');
-                        if (data.message === 'Session expired') {
-                            _this.router.navigate(['login']);
+                if (_this.localOBJ !== null) {
+                    _this.phase1Service.updateRequest(_this.RFC, _this.localOBJ.ID).subscribe(function (data) {
+                        if (data.success) {
+                            _this.localOBJ = null;
+                            localStorage.removeItem('request');
+                            localStorage.removeItem('description');
+                            localStorage.removeItem('site');
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()('Success', data.message, 'success');
                         }
-                    }
-                });
+                        else {
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()('Failure', data.message, 'error');
+                        }
+                    });
+                }
+                else {
+                    _this.phase1Service.submitRequest(_this.RFC).subscribe(function (data) {
+                        if (data.success) {
+                            localStorage.removeItem('request');
+                            localStorage.removeItem('description');
+                            localStorage.removeItem('site');
+                            _this.router.navigate(['home']);
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()('Success', data.message, 'success');
+                        }
+                        else {
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()('Failure', data.message, 'error');
+                            if (data.message === 'Session expired') {
+                                _this.router.navigate(['login']);
+                            }
+                        }
+                    });
+                }
             }
             else if (
             /* Read more about handling dismissals below */
@@ -1111,11 +1509,37 @@ var Phase1Component = /** @class */ (function () {
     Phase1Component.prototype.ngOnInit = function () {
         var _this = this;
         this.phase1Service.getCSRFToken().subscribe(function (data) {
-            _this.Token = data.tokenValue;
+            _this.RFC.CSRF_token = data.tokenValue;
         });
         this.phase1Service.getPageData().subscribe(function (data) {
-            _this.usersSites = data;
+            _this.usersSites = data[0];
+            _this.managers = data[1];
         });
+        this.localOBJ = this.phase1Service.getobj();
+        if (this.localOBJ !== null) {
+            localStorage.setItem('request', this.localOBJ.requested_change);
+            localStorage.setItem('description', this.localOBJ.description);
+            localStorage.setItem('site', this.phase1Service.getSite().toString());
+            this.enableSubmitButton = true;
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            document.getElementById('cancel').classList.add('invisible');
+        }
+        else {
+            this.RFC.requestDescription = localStorage.getItem('request');
+            this.RFC.reasonForRequest = localStorage.getItem('description');
+            this.RFC.site_ID = localStorage.getItem('site');
+            if (this.RFC.site_ID !== null || undefined) {
+                this.displayNotifyManager = true;
+            }
+            if (this.RFC.requestDescription !== null || undefined) {
+                this.displayRequestDescription = true;
+            }
+            if (this.RFC.reasonForRequest !== null || undefined) {
+                this.displayReasonForRequest = true;
+                this.enableSubmitButton = true;
+            }
+        }
     };
     Phase1Component = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1150,7 +1574,7 @@ module.exports = "import\r\n.special {\r\n    font-weight: bold !important;\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Created by : Liam Gordon McCabe-->\n<!-- Student number: 27455211-->\n<form>\n    <div class=\"card secondary-color\">\n        <h3 class=\"px-3 text-primary\">Request for Change</h3>\n        <div>\n            <label class=\"px-3 d-inline-block\">Name of Initiator: </label>\n            <p class=\" px-3 d-inline-block\"></p>\n            <label class=\"px-3 d-inline-block\">Date Requested: </label>\n            <p class=\"px-3 d-inline-block\"></p>\n        </div>\n        <div>\n            <label class=\"px-3 d-inline-block\">Department:</label>\n            <p class=\"px-3 d-inline-block\"></p>\n        </div>\n        <label class=\"px-3 \">Request: </label>\n        <p class=\"px-3\">{{this.RFC.requestedChange}}</p>\n        <label class=\"px-3\">Reason: </label>\n        <p class=\"px-3\">{{this.RFC.description}}</p>\n    </div>\n    <div class=\" shadow card bg-light mx-auto\">\n        <div class=\"form-group\">\n            <h3 class=\"px-3 text-primary\"> CCR specialist phase 1</h3>\n            <div class=\"row\">\n                <div class=\"col-sm\">\n                    <label class=\"px-3\" for=\"priority\">Request Priority</label>\n                </div>\n                <div class=\"col-sm\">\n                    <select ngbPopover=\"Select from the drop down list whether the change request is an EMERGENCY or NON-EMERGENCY (NORMAL).\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"CHANGE REQUEST PRIORITY\"\n                            class=\"rounded w-100 form-control\"\n                            name=\"priority\"\n                            id=\"priority\"\n                            (change)=\"onSelectPriority($event)\" >\n                        <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                        <option *ngFor=\"let priority of availablePriorities\"  [value]=\"priority[0]\" >{{priority[1]}}</option>\n                    </select>\n                </div>\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayPredictedRisks\">\n                        <label class=\"px-3\"  for=\"predictedImpact\"> Predicted Risk/s </label>\n                    </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayPredictedRisks\">\n                        <ngx-select-dropdown\n                                ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\n                                id=\"predictedImpact\"\n                                name=\"predictedImpact\"\n                                (change)=\"onSelectImpact($event)\"\n                                [multiple]=\"true\"\n                                [(ngModel)]=\"this.phase1.predictedImpact\"\n                                [options]=\"availableImpacts\">\n                        </ngx-select-dropdown>\n\n                    </div>\n                </div>\n                <div class=\"col-sm \"></div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayChangePeriod\">\n            <div class=\"row\" >\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayChangePeriod\">\n                        <label class=\"px-3\" for=\"changePeriod\" >Change Period</label>\n                    </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayChangePeriod\">\n                        <select ngbPopover=\"Specify whether the requested change will be permanent or just temporary by selecting an option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"CHANGE PERIOD\"\n                                class=\"rounded w-100 form-control\"\n                                name=\"changePeriod\"\n                                id=\"changePeriod\"\n                                (change)=\"onSelectChangePeriod($event)\">\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                            <option *ngFor=\"let period of availablePeriods\"  [value]=\"period[0]\" >{{period[1]}}</option>\n                        </select>\n                     </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div  *ngIf=\"this.displaySelectTemporaryAmountOfDays\">\n                        <label class=\"px-3\" for=\"changePeriod\" >Temporary period number of days</label>\n                    </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div  *ngIf=\"displaySelectTemporaryAmountOfDays\">\n                        <select ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\n                                class=\"rounded w-100 form-control\"\n                                name=\"temporaryNoDays\"\n                                id=\"temporaryNoDays\"\n                                (change)=\"onSelectNumberOfTemporaryDays($event)\" >\n                            <option selected=\"selected\" disabled=\"disabled\">Select no. of days</option>\n                            <option  *ngFor=\"let day of availableNumberOfTemporaryDays\" value=\"{{day}}\">{{day}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class=\"col-sm\"></div>\n            </div>\n            <div class=\"row pt-3\" *ngIf=\"displayTemporaryDateSelection\">\n                <div class=\"col-sm\">\n                    <label class=\"px-3\" for=\"temporaryStartPeriod\" >Temporary period start date:</label>\n                </div>\n                <div class=\"col-sm \">\n                    <input class=\"rounded w-100 form-control\"\n                           type=\"text\"\n                           id=\"temporaryStartPeriod\"\n                           name=\"temporaryStartPeriod\"\n                           bsDatepicker\n                           [bsConfig]=\"datepickerConfig\"\n                           [(ngModel)]=\"this.phase1.temporaryPeriodStartDate\"\n                           (ngModelChange)=\"onSelectTemporaryStartDate($event)\"\n                           >\n                </div>\n                <div class=\"col-sm \"> <label class=\"px-3\" for=\"temporaryEndPeriod\" >Temporary period end date:</label></div>\n                <div class=\"col-sm \"><input  class=\"rounded w-100 form-control\"\n                                             type=\"text\"\n                                             id=\"temporaryEndPeriod\"\n                                             name=\"temporaryEndPeriod\"\n                                             bsDatepicker\n                                             [bsConfig]=\"datepickerConfig\"\n                                             [(ngModel)]=\"this.phase1.temporaryPeriodEndDate\"\n                                             disabled\n                                             readonly>\n                </div>\n                <div class=\"col-sm \"></div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayNatureOfChange\">\n            <div class=\"row\" *ngIf=\"this.displayNatureOfChange\">\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayNatureOfChange\">\n                        <label class=\"px-3\" for=\"natureOfChange\">Nature of the change</label>\n                    </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayNatureOfChange\">\n                        <select popoverTitle=\"SELECT NATURE OF CHANGE\" ngbPopover=\"Select an option from the drop down list. National = Change affects both Northern and Southern regions. Regional = Either Northern or Southern is affected, but not both. Local = any ATCC or TCU or RT\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                                class=\"rounded w-100 form-control\"\n                                name=\"natureOfChange\"\n                                id=\"natureOfChange\"\n                                (change)=\"onSelectNatureOfChange($event)\"\n                                [(ngModel)]=\"this.phase1.natureOfChange\">\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                            <option *ngFor=\"let change of availableNatureOfChange\"  [value]=\"change[0]\" >{{change[1]}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayEOSystem\">\n                        <label class=\"px-3\"  for=\"eosSystem\">EOS system</label>\n                    </div>\n                </div>\n                <div class=\"col-sm\">\n                    <div *ngIf=\"this.displayEOSystem\">\n                        <select popoverTitle=\"SELECT EOS SYSTEM\" ngbPopover=\"Please select from the drop down list the Essential Operational System (EOS) to which the Trusted Computing Base (TCB) change will be applied.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                                class=\"w-100 rounded form-control\"\n                                name=\"eosSystem\"\n                                id=\"eosSystem\"\n                                (change)=\"onSelectEosSystem($event)\" >\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                            <option *ngFor=\"let eos of availableEosSystems\"  [value]=\"eos[0]\" >{{eos[1]}}</option>\n                        </select>\n                    </div>\n                </div>\n                <div class=\"col-sm \"></div>\n            </div>\n        </div>\n<!--</div>-->\n<!--    <div class=\"card\">-->\n        <div class=\"form-group\" *ngIf=\"this.displayTCB_CRF_ID\">\n            <div class=\"row\" *ngIf=\"this.displayTCB_CRF_ID\">\n                <div class=\"col-sm\">\n                    <label class=\"px-3\" for=\"tcbID\">TCB-CRF ID:</label>\n                </div>\n                <div class=\"col-sm\">\n                    <input popoverTitle=\"CHANGE REQUEST IDENTIFICATION\" ngbPopover=\"The TCB-CRF ID is an unique number relative to an EOS system issued by the TCB-CRF Administrator for every change request submitted for approval and implementation.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                           class=\"rounded form-control\"\n                           id=\"tcbID\"\n                           name=\"tcbID\"\n                           type=\"text\"\n                           [(ngModel)]=\"this.phase1.TCB_CRF_ID\"  >\n                </div>\n                <div class=\"col-sm\"></div>\n                <div class=\"col-sm\"></div>\n                <div class=\"col-sm\"></div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayConfigurationItems\">\n            <div *ngIf=\"this.displayConfigurationItems\">\n                <div class=\"row\">\n                    <div class=\"col-sm\">\n                        <label class=\"px-3\" for=\"configurationItems\">Configuration Items: </label>\n                    </div>\n                    <div class=\"col\"></div>\n                </div>\n                <div class=\"px-3\">\n                    <input  popoverTitle=\"ENTER ALL CONFIGURATION ITEMS\" ngbPopover=\"TECH: Enter any sub system or system component that will be subject to the change e.g. EXTRA HDD, SW VERS., RADAR FEED, DATASET- ANY CHANGE TO THE TCB NEEDS TO BE APPROVED. OPS: Enter short description of the request.  Maximum 250 characters allowed\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                            maxlength=\"250\"\n                            class=\"rounded w-75 form-control\"\n                            id=\"configurationItems\"\n                            name=\"configurationItems\"\n                            type=\"text\"\n                            (input)=\"this.displayChangeType = true\"\n                            [(ngModel)]=\"this.phase1.configurationItems\">\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <div class=\"row\">\n                <div class=\"col\">\n                    <div *ngIf=\"this.displayChangeType\">\n                        <label class=\"px-3\">Change Type: </label>\n                    </div>\n                </div>\n                <div class=\"col\"\n                     popoverTitle=\"CHANGE TYPE\" ngbPopover=\"Select the type of change. Hardware (HW), Software (SW) or Firmware (FW). One or more of these options must be ticked if affected by the change.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                >\n                    <div *ngIf=\"this.displayChangeType\">\n                        <label class=\"checkbox-inline px-3\">\n                            <input type=\"checkbox\"\n                                   value=\"HW\"\n                                   (click)=\"onSelectChangeTypeHW($event)\" >\n                            Hardware\n                        </label>\n                        <label class=\"checkbox-inline px-3\">\n                            <input type=\"checkbox\"\n                                   value=\"SW\"\n                                   (click)=\"onSelectChangeTypeSW($event)\">\n                            Software\n                        </label>\n                        <label class=\"checkbox-inline px-3\">\n                            <input type=\"checkbox\"\n                                   value=\"FW\"\n                                   (click)=\"onSelectChangeTypeFW($event)\">\n                            Firmware\n                        </label>\n                    </div>\n                </div>\n                <div class=\"col\"></div>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <div *ngIf=\"this.displayAdditionalAttachedDocuments\">\n                <div class=\"row\">\n                    <div class=\"col\">\n                        <label class=\"px-3 \">Additional attached Documents: </label>\n                    </div>\n                    <div class=\"col\"\n                     popoverTitle=\"ADDITIONAL DOCUMENTS ATTACHED\" ngbPopover=\"Tick the box next to the appropriate answer whether additional documents are attached for Phase-1. Normally there should be documents attached explaining why the change is requested and what pre-testing and evaluation has been done. \" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                    >\n                        <Label class=\"radio-inline px-3\">\n                            <input type=\"radio\"\n                                   name=\"additionalDocs\"\n                                   value=\"yes\"\n                                   (click)=\"onSelectAdditionalDocuments($event)\">\n                            Yes\n                        </Label>\n                        <Label class=\"radio-inline px-3\">\n                            <input type=\"radio\"\n                                   name=\"additionalDocs\"\n                                   value=\"no\"\n                                   (click)=\"onSelectAdditionalDocuments($event)\" >\n                            No\n                        </Label>\n                    </div>\n                    <div class=\"col\"></div>\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.phase1.additionalDocuments === true\">\n            <div class=\"row\">\n                <div class=\"col\">\n                    <label class=\"px-3\" for=\"numberOfPages\">Number of Pages (Documents): </label>\n                </div>\n                <div class=\"col\">\n                    <input class=\"px-3 form-control rounded\"\n                           type=\"number\"\n                           name=\"numberOfPages\"\n                           id=\"numberOfPages\"\n                           [(ngModel)]=\"this.phase1.numberOfPages\">\n                </div>\n                <div class=\"col\"></div>\n            </div>\n            <div class=\"px-3\">\n                <ngx-file-drop multiple dropZoneLabel=\"Drop files here\" (onFileDrop)=\"dropped($event)\"\n                               (onFileOver)=\"fileOver($event)\" (onFileLeave)=\"fileLeave($event)\">\n                    <ng-template  ngx-file-drop-content-tmp let-openFileSelector=\"openFileSelector\">\n                        Please drag and drop your additional files here\n                        <button type=\"button\" (click)=\"openFileSelector()\">Browse Files</button>\n                    </ng-template>\n                </ngx-file-drop>\n                <div class=\"upload-table px-3\">\n                    <table class=\"table\">\n                        <thead>\n                        <tr>\n                            <th>Name</th>\n                        </tr>\n                        </thead>\n                        <tbody class=\"upload-name-style\">\n                        <tr *ngFor=\"let item of files\">\n                            <td><strong>{{ item[0].relativePath }}</strong></td>\n                        </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayEstimatedImpact\">\n            <label class=\"px-3\">Estimated Impact: </label>\n            <div class=\"px-3\">\n                <div *ngIf=\"this.displayEstimatedImpactOps\">\n                    <label for=\"operationsImpact\" class=\"\">Operations: </label>\n                    <br>\n                    <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Operations: e.g. NORM mode will be down, Redundency lost, No new FPLs, Operator Handbooks\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                           class=\"w-75 rounded form-control\"\n                           type=\"text\"\n                           id=\"operationsImpact\"\n                           name=\"operationsImpact\"\n                           (input)=\"estimatedImpact($event)\"\n                           [(ngModel)]=\"this.phase1.estimatedImpacts.operations\">\n                </div>\n                <div *ngIf=\"this.displayEstimatedImpactClients\">\n                    <label for=\"clientsImpact\" class=\"\">Clients: </label>\n                    <br>\n                    <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Clients: External and Internal - loss of service such as slot information, procedural changes, etc.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                           class=\" w-75 rounded form-control\"\n                           type=\"text\"\n                           id=\"clientsImpact\"\n                           name=\"clientsImpact\"\n                           (input)=\"estimatedImpact($event)\"\n                           [(ngModel)]=\"this.phase1.estimatedImpacts.clients\">\n                </div>\n                <div *ngIf=\"this.displayEstimatedImpactTech\">\n                    <label for=\"technicalImpact\" class=\"\">Technical: </label>\n                    <br>\n                    <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Technical: Node Down, LAN switch down, Documents\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                           class=\" w-75 rounded form-control\"\n                           type=\"text\"\n                           id=\"technicalImpact\"\n                           name=\"technicalImpact\"\n                           (input)=\"estimatedImpact($event)\"\n                           [(ngModel)]=\"this.phase1.estimatedImpacts.technical\">\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayProblemReportRaised\">\n            <div class=\"row\">\n                <div class=\"col\">\n                    <label class=\"px-3\">Problem Report raised with Contractor?</label>\n                </div>\n                <div class=\"col\"\n                     popoverTitle=\"PROBLEM REPORT RAISED?\" ngbPopover=\"Specify yes or no whether a problem request or report has been raised with the contractor by selecting the appropriate check box with a left-mouse-button click.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                >\n                    <Label class=\"radio-inline px-3\">\n                        <input type=\"radio\"\n                               name=\"reportRaised\"\n                               value=\"yes\"\n                               (click)=\"onSelectReportRaised($event)\">\n                        Yes\n                    </Label>\n                    <Label class=\"radio-inline px-3\">\n                        <input type=\"radio\"\n                               name=\"reportRaised\"\n                               value=\"no\"\n                               (click)=\"onSelectReportRaised($event)\" >\n                        No\n                    </Label>\n                </div>\n                <div class=\"col\"></div>\n            </div>\n            <div *ngIf=\"this.phase1.problemReportRaised\" >\n                <div class=\"row\">\n                    <div class=\"col\">\n                        <label for=\"problemReportRef\" class=\"px-3\">Problem Report Reference Number: </label>\n                    </div>\n                    <div class=\"col\">\n                        <input popoverTitle=\"PROBLEM REPORT REFERENCE\" ngbPopover=\"Enter the problem report reference number here. The problem report refers to a report that was sent to the contractor to improve a functionality or solve a problem on the system. Can be a PR, ECR, PCR, CR, etc.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                               class=\"w-100 rounded form-control\"\n                               type=\"text\"\n                               name=\"problemReportRef\"\n                               id=\"problemReportRef\"\n                               (input)=\"onInputProblemReportRef()\"\n                               [(ngModel)]=\"this.phase1.problemReportRef\">\n                    </div>\n                    <div class=\"col\"></div>\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayChangePreTested\">\n            <div *ngIf=\"this.displayChangePreTested\">\n                <div class=\"row\">\n                    <div class=\"col\">\n                        <label class=\"px-3\">Change successfully pre-tested ?</label>\n                    </div>\n                    <div class=\"col\"\n                         popoverTitle=\"CHANGE SUCCESSFULLY PRE-TESTED ?\" ngbPopover=\"Specify whether pre-tests or validations concerning the change were successful by selecting a check box accordingly with the left-mouse button.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                    >\n                        <Label class=\"radio-inline px-3\">\n                            <input type=\"radio\"\n                                   name=\"preTested\"\n                                   value=\"yes\"\n                                   (click)=\"onSelectPreTested($event)\">\n                            Yes\n                        </Label>\n                        <Label class=\"radio-inline px-3\">\n                            <input type=\"radio\"\n                                   name=\"preTested\"\n                                   value=\"no\"\n                                   (click)=\"onSelectPreTested($event)\" >\n                            No\n                        </Label>\n                        <Label class=\"radio-inline px-3\">\n                            <input type=\"radio\"\n                                   name=\"preTested\"\n                                   value=\"na\"\n                                   (click)=\"onSelectPreTested($event)\" >\n                            N/A\n                        </Label>\n                    </div>\n                    <div class=\"col\"></div>\n                </div>\n                <div class=\"px-3\" *ngIf=\"this.displayChangeNotSuccessfullyTestedReason\">\n                    <div class=\"row\">\n                        <div class=\"col\">\n                            <label for=\"changeNotSuccessfullyTestedReason\" class=\"\">Reason for unsuccessful test: </label>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col\">\n                            <input popoverTitle=\"Reason for unsuccessful testing\" ngbPopover=\"If the tests were unsuccessful please provide the reason here\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\n                                   class=\"w-75 rounded form-control\"\n                                   type=\"text\"\n                                   id=\"changeNotSuccessfullyTestedReason\"\n                                   name=\"changeNotSuccessfullyTestedReason\"\n                                   (input)=\"onUnsuccessfulTestReason()\"\n                                   [(ngModel)]=\"this.phase1.changeNotSuccessfullyTestedReason\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n<!--        <div class=\"form-group\">-->\n<!--            <div class=\"row\">-->\n<!--                <div class=\"col\">-->\n<!--                    <label class=\"px-3\">Request submitted to all concerned parties ?</label>-->\n<!--                </div>-->\n<!--                <div class=\"col\">-->\n<!--                    <Label class=\"radio-inline px-3\"><input type=\"radio\" name=\"submittedToAll\" value=\"yes\"  (click)=\"onSelectSubmittedToAllConcerned($event)\">Yes</Label>-->\n<!--                    <Label class=\"radio-inline px-3\"><input type=\"radio\" name=\"submittedToAll\" value=\"no\"   (click)=\"onSelectSubmittedToAllConcerned($event)\" >No</Label>-->\n<!--                </div>-->\n<!--                <div class=\"col\"></div>-->\n<!--            </div>-->\n\n<!--            <div  class=\"px-3\" *ngIf=\"!this.phase2.submittedToAllParties\">-->\n<!--                <div class=\"row\">-->\n<!--                    <div class=\"col\">-->\n<!--                        <label class=\"\">Reason why not submitted to all concerned parties?</label>-->\n<!--                    </div>-->\n<!--                </div>-->\n<!--                <div class=\"row\">-->\n<!--                    <div class=\"col\">-->\n<!--                        <input class=\" w-75 rounded form-control\" type=\"text\" name=\"requestNotSubmittedToAllParties\" [(ngModel)]=\"this.phase2.notSubmittedToAllPartiesReason\">-->\n<!--                    </div>-->\n<!--                </div>-->\n<!--            </div>-->\n<!--        </div>-->\n\n        <div class=\"form-group\" *ngIf=\"this.displaySpecialistComments\">\n            <div class=\"px-3\" >\n                <div class=\"row\" *ngIf=\"this.displaySpecialistComments\">\n                    <div class=\"col\">\n                        <label for=\"specialistComments\" >Specialist comments</label>\n                    </div>\n                </div>\n                <div class=\"row\" *ngIf=\"this.displaySpecialistComments\">\n                    <div class=\"col\">\n                        <input\n                                class=\"px-3 w-75 rounded form-control\"\n                                type=\"text\"\n                                name=\"specialistComments\"\n                                id=\"specialistComments\"\n                                (input)=\"onInputSpecialistComment()\"\n                                [(ngModel)]=\"this.phase1.specialistComment\">\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"form-group\"  *ngIf=\"this.displaySpecialistComments && !this.displaySelectTemporaryAmountOfDays\" >\n            <div class=\"py-3\">\n                <div class=\"row\" >\n                    <div class=\"col\">\n                        <label class=\"px-3\" for=\"proposedDate\">Proposed Implementation Date: </label>\n                    </div>\n                    <div class=\"col\">\n                        <input class=\" px-3 rounded w-75 form-control\"\n                               type=\"text\"\n                               id=\"proposedDate\"\n                               name=\"proposedDate\"\n                               [bsConfig]=\"datepickerConfig\"\n                               (click)=\"onSelectProposedImplementationDate()\"\n                               [(ngModel)]=\"this.phase1.proposedImplementationDate\"  bsDatepicker>\n                    </div>\n\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\" *ngIf=\"this.displayRecommendOrOppose || this.emergencySelected\">\n            <div class=\"row\" >\n                <div class=\"col\">\n                    <label class=\"px-3\" for=\"recommend/oppose\">Recommend Or Oppose change:</label>\n                </div>\n                <div class=\"col\">\n\n                    <select class=\"px-3 rounded w-75 form-control\"\n                            id=\"recommend/oppose\"\n                            name=\"recommend/oppose\"\n                            (change)=\"onSelectRecommendOrOppose($event)\" >\n                        <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                        <option  value=\"Recommend\" >Recommend</option>\n                        <option value=\"Oppose\">Oppose</option>\n                        <<option value=\"re-test\">Re-Test</option>\n                    </select>\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <div  class=\"row px-3\">\n                <div class=\"col\"></div>\n                <div class=\"col\">\n                    <button class=\"btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0\"\n                            (click)=\"onSubmit()\"> Cancel\n                    </button>\n                </div>\n                <div class=\"col\"></div>\n                <div class=\"col\" >\n                    <button [disabled]=\"!this.activateSubmitButton\"\n                            class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled\"\n                            id=\"submit\"\n                            (click)=\"onSubmit()\"> Submit\n                    </button>\n                </div>\n                <div class=\"col\"></div>\n            </div>\n        </div>\n    </div>\n</form>\n"
+module.exports = "<!-- Created by : Liam Gordon McCabe-->\r\n<!-- Student number: 27455211-->\r\n<form>\r\n    <div class=\"card secondary-color\">\r\n        <h3 class=\"px-3 text-primary\">Request for Change</h3>\r\n        <div>\r\n            <label class=\"px-3 d-inline-block\">Name of Initiator: {{this.user}}</label>\r\n            <p class=\" px-3 d-inline-block\"></p>\r\n            <label class=\"px-3 d-inline-block\">Date Requested: {{this.RFC.dateRequested}}</label>\r\n            <p class=\"px-3 d-inline-block\"></p>\r\n        </div>\r\n        <label class=\"px-3 \">Requested Change Description: </label>\r\n        <p class=\"px-3\">{{this.RFC.requestDescription}}</p>\r\n        <label class=\"px-3\">Reason for request: </label>\r\n        <p class=\"px-3\">{{this.RFC.reasonForRequest}}</p>\r\n    </div>\r\n    <div id=\"phase2\" style=\"\" class=\"shadow card bg-light mx-auto\">\r\n        <div class=\"form-group\">\r\n            <h3 class=\"px-3 text-primary\"> CCR specialist phase 1</h3>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\" for=\"priority\">Request Priority</label>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <select ngbPopover=\"Select from the drop down list whether the change request is an EMERGENCY or NON-EMERGENCY (NORMAL).\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"CHANGE REQUEST PRIORITY\"\r\n                            class=\"rounded w-100 form-control\"\r\n                            name=\"priority\"\r\n                            id=\"priority\"\r\n                            (change)=\"onSelectPriority($event)\" >\r\n                        <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                        <option *ngFor=\"let priority of availablePriorities\"  [value]=\"priority[0]\" [selected]=\"this.phase2.requestPriority === priority[0]\">{{priority[1]}}</option>\r\n                    </select>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayPredictedRisks\">\r\n                        <label class=\"px-3\"  for=\"predictedImpact\"> Predicted Risk/s </label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayPredictedRisks\">\r\n                        <select ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\r\n                                class=\"rounded w-100 form-control\"\r\n                                name=\"predictedImpact\"\r\n                                id=\"predictedImpact\"\r\n                                (change)=\"onSelectImpact($event)\" >\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                            <option *ngFor=\"let impacts of availableImpacts\" [selected]=\"this.phase2.predictedImpact === impacts[0]\"  [value]=\"impacts[0]\" >{{impacts[1]}}</option>\r\n                        </select>\r\n<!--                        <ngx-select-dropdown-->\r\n<!--                                ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"-->\r\n<!--                                id=\"predictedImpact\"-->\r\n<!--                                name=\"predictedImpact\"-->\r\n<!--                                (change)=\"onSelectImpact($event)\"-->\r\n<!--                                [multiple]=\"true\"-->\r\n<!--                                [(ngModel)]=\"this.phase2.predictedImpact\"-->\r\n<!--                                [options]=\"availableImpacts\">-->\r\n<!--                        </ngx-select-dropdown>-->\r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm \"></div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayChangePeriod\">\r\n            <div class=\"row\" >\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayChangePeriod\">\r\n                        <label class=\"px-3\" for=\"changePeriod\" >Change Period</label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayChangePeriod\">\r\n                        <select ngbPopover=\"Specify whether the requested change will be permanent or just temporary by selecting an option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"CHANGE PERIOD\"\r\n                                class=\"rounded w-100 form-control\"\r\n                                name=\"changePeriod\"\r\n                                id=\"changePeriod\"\r\n                                (change)=\"onSelectChangePeriod($event)\">\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                            <option *ngFor=\"let period of availablePeriods\"  [value]=\"period[0]\" [selected]=\"this.phase2.changePeriod === period[0]\">{{period[1]}}</option>\r\n                        </select>\r\n                     </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div  *ngIf=\"this.displaySelectTemporaryAmountOfDays\">\r\n                        <label class=\"px-3\" for=\"changePeriod\" >Temporary period number of days</label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div  *ngIf=\"displaySelectTemporaryAmountOfDays\">\r\n                        <select ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\r\n                                class=\"rounded w-100 form-control\"\r\n                                name=\"temporaryNoDays\"\r\n                                id=\"temporaryNoDays\"\r\n                                (change)=\"onSelectNumberOfTemporaryDays($event)\" >\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select no. of days</option>\r\n                            <option  *ngFor=\"let day of availableNumberOfTemporaryDays\" [selected]=\"this.phase2.temporaryPeriodNumberOfDays ===  day\" value=\"{{day}}\">{{day}}</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\"></div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"displayTemporaryDateSelection\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\" for=\"temporaryStartPeriod\" >Temporary period start date:</label>\r\n                </div>\r\n                <div class=\"col-sm \">\r\n                    <input class=\"rounded w-100 form-control\"\r\n                           type=\"text\"\r\n                           id=\"temporaryStartPeriod\"\r\n                           name=\"temporaryStartPeriod\"\r\n                           autocomplete=\"off\"\r\n                           bsDatepicker\r\n                           [bsConfig]=\"datepickerConfig\"\r\n                           [(ngModel)]=\"this.phase2.temporaryPeriodStartDate\"\r\n                           (ngModelChange)=\"onSelectTemporaryStartDate($event)\"\r\n                           >\r\n                </div>\r\n                <div class=\"col-sm \"> <label class=\"px-3\" for=\"temporaryEndPeriod\" >Temporary period end date:</label></div>\r\n                <div class=\"col-sm \">\r\n                    <input  class=\"rounded w-100 form-control\"\r\n                            type=\"text\"\r\n                            id=\"temporaryEndPeriod\"\r\n                            name=\"temporaryEndPeriod\"\r\n                            autocomplete=\"off\"\r\n                            bsDatepicker\r\n                            [bsConfig]=\"datepickerConfig\"\r\n                            [(ngModel)]=\"this.phase2.temporaryPeriodEndDate\"\r\n                            disabled\r\n                            readonly>\r\n                </div>\r\n                <div class=\"col-sm \"></div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayNatureOfChange\">\r\n            <div class=\"row\" *ngIf=\"this.displayNatureOfChange\">\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayNatureOfChange\">\r\n                        <label class=\"px-3\" for=\"natureOfChange\">Nature of the change</label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayNatureOfChange\">\r\n                        <select popoverTitle=\"SELECT NATURE OF CHANGE\" ngbPopover=\"Select an option from the drop down list. National = Change affects both Northern and Southern regions. Regional = Either Northern or Southern is affected, but not both. Local = any ATCC or TCU or RT\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                class=\"rounded w-100 form-control\"\r\n                                name=\"natureOfChange\"\r\n                                id=\"natureOfChange\"\r\n                                (change)=\"onSelectNatureOfChange($event)\"\r\n                                [(ngModel)]=\"this.phase2.natureOfChange\">\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                            <option *ngFor=\"let change of availableNatureOfChange\"  [value]=\"change[0]\" [selected]=\"this.phase2.natureOfChange === change[0]\">{{change[1]}}</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayEOSystem\">\r\n                        <label class=\"px-3\"  for=\"eosSystem\">EOS system</label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div *ngIf=\"this.displayEOSystem\">\r\n                        <select popoverTitle=\"SELECT EOS SYSTEM\" ngbPopover=\"Please select from the drop down list the Essential Operational System (EOS) to which the Trusted Computing Base (TCB) change will be applied.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                class=\"w-100 rounded form-control\"\r\n                                name=\"eosSystem\"\r\n                                id=\"eosSystem\"\r\n                                (change)=\"onSelectEosSystem($event)\" >\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                            <option *ngFor=\"let eos of availableEosSystems\"  [value]=\"eos[0]\" [selected]=\"this.phase2.eosSystem === eos[0]\" >{{eos[1]}}</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm \"></div>\r\n            </div>\r\n        </div>\r\n<!--</div>-->\r\n<!--    <div class=\"card\">-->\r\n        <div class=\"form-group\" *ngIf=\"this.displayTCB_CRF_ID\">\r\n            <div class=\"row\" *ngIf=\"this.displayTCB_CRF_ID\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\" for=\"tcbID\">TCB-CRF ID:</label>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <input popoverTitle=\"CHANGE REQUEST IDENTIFICATION\" ngbPopover=\"The TCB-CRF ID is an unique number relative to an EOS system issued by the TCB-CRF Administrator for every change request submitted for approval and implementation.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                           class=\"rounded form-control\"\r\n                           id=\"tcbID\"\r\n                           name=\"tcbID\"\r\n                           type=\"text\"\r\n                           disabled\r\n                           [(ngModel)]=\"this.phase2.TCB_CRF_ID\"  >\r\n                </div>\r\n                <div class=\"col-sm\"></div>\r\n                <div class=\"col-sm\"></div>\r\n                <div class=\"col-sm\"></div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayConfigurationItems\">\r\n            <div *ngIf=\"this.displayConfigurationItems\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm\">\r\n                        <label class=\"px-3\" for=\"configurationItems\">Configuration Items: </label>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n                <div class=\"px-3\">\r\n                    <input  popoverTitle=\"ENTER ALL CONFIGURATION ITEMS\" ngbPopover=\"TECH: Enter any sub system or system component that will be subject to the change e.g. EXTRA HDD, SW VERS., RADAR FEED, DATASET- ANY CHANGE TO THE TCB NEEDS TO BE APPROVED. OPS: Enter short description of the request.  Maximum 250 characters allowed\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                            maxlength=\"250\"\r\n                            class=\"rounded w-75 form-control\"\r\n                            id=\"configurationItems\"\r\n                            name=\"configurationItems\"\r\n                            type=\"text\"\r\n                            (input)=\"this.displayChangeType = true\"\r\n                            [(ngModel)]=\"this.phase2.configurationItems\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <div class=\"col\">\r\n                    <div *ngIf=\"this.displayChangeType\">\r\n                        <label class=\"px-3\">Change Type: </label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col\"\r\n                     popoverTitle=\"CHANGE TYPE\" ngbPopover=\"Select the type of change. Hardware (HW), Software (SW) or Firmware (FW). One or more of these options must be ticked if affected by the change.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                >\r\n                    <div *ngIf=\"this.displayChangeType\">\r\n                        <label class=\"checkbox-inline px-3\">\r\n                            <input type=\"checkbox\"\r\n                                   value=\"HW\"\r\n                                   (click)=\"onSelectChangeTypeHW($event)\" [checked]=\"this.phase2.change.hardware\">\r\n                            Hardware\r\n                        </label>\r\n                        <label class=\"checkbox-inline px-3\">\r\n                            <input type=\"checkbox\"\r\n                                   value=\"SW\"\r\n                                   (click)=\"onSelectChangeTypeSW($event)\" [checked]=\"this.phase2.change.software\">\r\n                            Software\r\n                        </label>\r\n                        <label class=\"checkbox-inline px-3\">\r\n                            <input type=\"checkbox\"\r\n                                   value=\"FW\"\r\n                                   (click)=\"onSelectChangeTypeFW($event)\" [checked]=\"this.phase2.change.firmware\">\r\n                            Firmware\r\n                        </label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div *ngIf=\"this.displayAdditionalAttachedDocuments\">\r\n                <div class=\"row\">\r\n                    <div class=\"col\">\r\n                        <label class=\"px-3 \">Additional attached Documents: </label>\r\n                    </div>\r\n                    <div class=\"col\"\r\n                     popoverTitle=\"ADDITIONAL DOCUMENTS ATTACHED\" ngbPopover=\"Tick the box next to the appropriate answer whether additional documents are attached for Phase-1. Normally there should be documents attached explaining why the change is requested and what pre-testing and evaluation has been done. \" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                    >\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"additionalDocs\"\r\n                                   value=\"yes\"\r\n                                   (click)=\"onSelectAdditionalDocuments($event)\">\r\n                            Yes\r\n                        </Label>\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"additionalDocs\"\r\n                                   value=\"no\"\r\n                                   (click)=\"onSelectAdditionalDocuments($event)\" >\r\n                            No\r\n                        </Label>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.phase2.additionalDocuments === true\">\r\n            <div class=\"row pb-3\">\r\n                <div class=\"col\">\r\n                    <label class=\"px-3\" for=\"numberOfPages\">Number of Pages (Documents): </label>\r\n                </div>\r\n                <div class=\"col\">\r\n                    <input class=\"px-3 form-control rounded\"\r\n                           disabled=\"true\"\r\n                           type=\"number\"\r\n                           name=\"numberOfPages\"\r\n                           id=\"numberOfPages\"\r\n                           [(ngModel)]=\"this.filesForUpload.length\">\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"px-3\">\r\n                <ngx-file-drop multiple=\"true\" dropZoneLabel=\"Drop files here\" (onFileDrop)=\"dropped($event)\"\r\n                               (onFileOver)=\"fileOver($event)\" (onFileLeave)=\"fileLeave($event)\">\r\n                    <ng-template  ngx-file-drop-content-tmp let-openFileSelector=\"openFileSelector\">\r\n                        Please drag and drop your additional files here\r\n                        <button type=\"button\" (click)=\"openFileSelector()\">Browse Files</button>\r\n                    </ng-template>\r\n                </ngx-file-drop>\r\n                <div class=\"upload-table px-3\">\r\n                    <table class=\"table\">\r\n                        <thead>\r\n                        <tr>\r\n                            <th>Name:</th>\r\n                        </tr>\r\n                        </thead>\r\n                        <tbody class=\"upload-name-style\">\r\n                        <tr *ngFor=\"let item of filesForUpload, index as i\">\r\n                            <td><strong>{{ item.name }}</strong></td>\r\n                            <td class=\"px-3\" (click)=\"removeFile(i)\" style=\"cursor: pointer;\">&#10005;</td>\r\n                        </tr>\r\n                        </tbody>\r\n                    </table>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayEstimatedImpact\">\r\n            <label class=\"px-3\">Estimated Impact: </label>\r\n            <div class=\"px-3\">\r\n                <div *ngIf=\"this.displayEstimatedImpactOps\">\r\n                    <label for=\"operationsImpact\" class=\"\">Operations: </label>\r\n                    <br>\r\n                    <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Operations: e.g. NORM mode will be down, Redundency lost, No new FPLs, Operator Handbooks\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                           class=\"w-75 rounded form-control\"\r\n                           type=\"text\"\r\n                           id=\"operationsImpact\"\r\n                           name=\"operationsImpact\"\r\n                           (input)=\"estimatedImpact($event)\"\r\n                           [(ngModel)]=\"this.phase2.estimatedImpacts.operations\">\r\n                </div>\r\n                <div *ngIf=\"this.displayEstimatedImpactClients\">\r\n                    <label for=\"clientsImpact\" class=\"\">Clients: </label>\r\n                    <br>\r\n                    <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Clients: External and Internal - loss of service such as slot information, procedural changes, etc.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                           class=\" w-75 rounded form-control\"\r\n                           type=\"text\"\r\n                           id=\"clientsImpact\"\r\n                           name=\"clientsImpact\"\r\n                           (input)=\"estimatedImpact($event)\"\r\n                           [(ngModel)]=\"this.phase2.estimatedImpacts.clients\">\r\n                </div>\r\n                <div *ngIf=\"this.displayEstimatedImpactTech\">\r\n                    <label for=\"technicalImpact\" class=\"\">Technical: </label>\r\n                    <br>\r\n                    <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Technical: Node Down, LAN switch down, Documents\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                           class=\" w-75 rounded form-control\"\r\n                           type=\"text\"\r\n                           id=\"technicalImpact\"\r\n                           name=\"technicalImpact\"\r\n                           (input)=\"estimatedImpact($event)\"\r\n                           [(ngModel)]=\"this.phase2.estimatedImpacts.technical\">\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayProblemReportRaised && this.displayEstimatedImpact\">\r\n            <div class=\"row\">\r\n                <div class=\"col\">\r\n                    <label class=\"px-3\">Problem Report raised with Contractor?</label>\r\n                </div>\r\n                <div class=\"col\"\r\n                     popoverTitle=\"PROBLEM REPORT RAISED?\" ngbPopover=\"Specify yes or no whether a problem request or report has been raised with the contractor by selecting the appropriate check box with a left-mouse-button click.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                >\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"reportRaised\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectReportRaised($event)\" [checked]=\"this.phase2.problemReportRaised\">\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"reportRaised\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectReportRaised($event)\" [checked]=\"!this.phase2.problemReportRaised\">\r\n                        No\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div *ngIf=\"this.phase2.problemReportRaised\" >\r\n                <div class=\"row\">\r\n                    <div class=\"col\">\r\n                        <label for=\"problemReportRef\" class=\"px-3\">Problem Report Reference Number: </label>\r\n                    </div>\r\n                    <div class=\"col\">\r\n                        <input popoverTitle=\"PROBLEM REPORT REFERENCE\" ngbPopover=\"Enter the problem report reference number here. The problem report refers to a report that was sent to the contractor to improve a functionality or solve a problem on the system. Can be a PR, ECR, PCR, CR, etc.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                               class=\"w-100 rounded form-control\"\r\n                               type=\"text\"\r\n                               name=\"problemReportRef\"\r\n                               id=\"problemReportRef\"\r\n                               (input)=\"onInputProblemReportRef()\"\r\n                               [(ngModel)]=\"this.phase2.problemReportRef\">\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayChangePreTested\">\r\n            <div *ngIf=\"this.displayChangePreTested\">\r\n                <div class=\"row\">\r\n                    <div class=\"col\">\r\n                        <label class=\"px-3\">Change successfully pre-tested ?</label>\r\n                    </div>\r\n                    <div class=\"col\"\r\n                         popoverTitle=\"CHANGE SUCCESSFULLY PRE-TESTED ?\" ngbPopover=\"Specify whether pre-tests or validations concerning the change were successful by selecting a check box accordingly with the left-mouse button.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                    >\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"preTested\"\r\n                                   value=\"yes\"\r\n                                   (click)=\"onSelectPreTested($event)\" [checked]=\"this.phase2.changeSuccessfullyTested === 'yes'\">\r\n                            Yes\r\n                        </Label>\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"preTested\"\r\n                                   value=\"no\"\r\n                                   (click)=\"onSelectPreTested($event)\" [checked]=\"this.phase2.changeSuccessfullyTested === 'no'\">\r\n                            No\r\n                        </Label>\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"preTested\"\r\n                                   value=\"na\"\r\n                                   (click)=\"onSelectPreTested($event)\" [checked]=\"this.phase2.changeSuccessfullyTested === 'na'\">\r\n                            N/A\r\n                        </Label>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n                <div class=\"px-3\" *ngIf=\"this.displayChangeNotSuccessfullyTestedReason\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col\">\r\n                            <label for=\"changeNotSuccessfullyTestedReason\" class=\"\">Reason for unsuccessful test: </label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col\">\r\n                            <input popoverTitle=\"Reason for unsuccessful testing\" ngbPopover=\"If the tests were unsuccessful please provide the reason here\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                   class=\"w-75 rounded form-control\"\r\n                                   type=\"text\"\r\n                                   id=\"changeNotSuccessfullyTestedReason\"\r\n                                   name=\"changeNotSuccessfullyTestedReason\"\r\n                                   (input)=\"onUnsuccessfulTestReason()\"\r\n                                   [(ngModel)]=\"this.phase2.changeNotSuccessfullyTestedReason\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n<!--        <div class=\"form-group\">-->\r\n<!--            <div class=\"row\">-->\r\n<!--                <div class=\"col\">-->\r\n<!--                    <label class=\"px-3\">Request submitted to all concerned parties ?</label>-->\r\n<!--                </div>-->\r\n<!--                <div class=\"col\">-->\r\n<!--                    <Label class=\"radio-inline px-3\"><input type=\"radio\" name=\"submittedToAll\" value=\"yes\"  (click)=\"onSelectSubmittedToAllConcerned($event)\">Yes</Label>-->\r\n<!--                    <Label class=\"radio-inline px-3\"><input type=\"radio\" name=\"submittedToAll\" value=\"no\"   (click)=\"onSelectSubmittedToAllConcerned($event)\" >No</Label>-->\r\n<!--                </div>-->\r\n<!--                <div class=\"col\"></div>-->\r\n<!--            </div>-->\r\n\r\n<!--            <div  class=\"px-3\" *ngIf=\"!this.phase2.submittedToAllParties\">-->\r\n<!--                <div class=\"row\">-->\r\n<!--                    <div class=\"col\">-->\r\n<!--                        <label class=\"\">Reason why not submitted to all concerned parties?</label>-->\r\n<!--                    </div>-->\r\n<!--                </div>-->\r\n<!--                <div class=\"row\">-->\r\n<!--                    <div class=\"col\">-->\r\n<!--                        <input class=\" w-75 rounded form-control\" type=\"text\" name=\"requestNotSubmittedToAllParties\" [(ngModel)]=\"this.phase2.notSubmittedToAllPartiesReason\">-->\r\n<!--                    </div>-->\r\n<!--                </div>-->\r\n<!--            </div>-->\r\n<!--        </div>-->\r\n\r\n        <div class=\"form-group\" *ngIf=\"this.displaySpecialistComments\">\r\n            <div class=\"px-3\" >\r\n                <div class=\"row\" *ngIf=\"this.displaySpecialistComments\">\r\n                    <div class=\"col\">\r\n                        <label for=\"specialistComments\" >Specialist comments</label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" *ngIf=\"this.displaySpecialistComments\">\r\n                    <div class=\"col\">\r\n                        <input\r\n                                class=\"px-3 w-75 rounded form-control\"\r\n                                type=\"text\"\r\n                                name=\"specialistComments\"\r\n                                id=\"specialistComments\"\r\n                                (input)=\"onInputSpecialistComment()\"\r\n                                [(ngModel)]=\"this.phase2.specialistComment\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"form-group\"  *ngIf=\"this.displaySpecialistComments && !this.displaySelectTemporaryAmountOfDays\" >\r\n            <div class=\"py-3\">\r\n                <div class=\"row\" >\r\n                    <div class=\"col\">\r\n                        <label class=\"px-3\" for=\"proposedDate\">Proposed Implementation Date: </label>\r\n                    </div>\r\n                    <div class=\"col\">\r\n                        <input class=\" px-3 rounded w-75 form-control\"\r\n                               type=\"text\"\r\n                               id=\"proposedDate\"\r\n                               name=\"proposedDate\"\r\n                               autocomplete=\"off\"\r\n                               bsDatepicker\r\n                               [bsConfig]=\"datepickerConfig\"\r\n                               (click)=\"onSelectProposedImplementationDate()\"\r\n                               [(ngModel)]=\"this.phase2.proposedImplementationDate\"  >\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.displayRecommendOrOppose || this.emergencySelected\">\r\n            <div class=\"row\" >\r\n                <div class=\"col\">\r\n                    <label class=\"px-3\" for=\"recommend/oppose\">Recommend Or Oppose change:</label>\r\n                </div>\r\n                <div class=\"col\">\r\n\r\n                    <select class=\"px-3 rounded w-75 form-control\"\r\n                            id=\"recommend/oppose\"\r\n                            name=\"recommend/oppose\"\r\n                            (change)=\"onSelectRecommendOrOppose($event)\" >\r\n                        <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                        <option [disabled]=\"this.phase2.changeSuccessfullyTested === 'no'\" value=\"Recommend\" >Recommend</option>\r\n                        <option [disabled]=\"this.phase2.changeSuccessfullyTested === 'no'\" value=\"Oppose\">Oppose</option>\r\n                        <<option value=\"re-test\">Re-Test</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div  class=\"row px-3\">\r\n                <div class=\"col\"></div>\r\n                <div class=\"col\">\r\n                    <button class=\"btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0\"\r\n                            id=\"cancel\"\r\n                            (click)=\"onCancel()\"> Cancel\r\n                    </button>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n                <div class=\"col\" >\r\n                    <button [disabled]=\"!this.activateSubmitButton\"\r\n                            class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled\"\r\n                            id=\"submit\"\r\n                            (click)=\"onSubmit()\"> Submit\r\n                    </button>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -1167,7 +1591,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_phase2_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/phase2.service */ "./src/app/services/phase2.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_phase2_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/phase2.service */ "./src/app/services/phase2.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1183,12 +1608,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var Phase2Component = /** @class */ (function () {
-    function Phase2Component(phase2) {
-        this.phase2 = phase2;
+    function Phase2Component(phase2service, router) {
+        this.phase2service = phase2service;
+        this.router = router;
+        this.formData = new FormData();
         this.files = [];
-        this.availableNumberOfTemporaryDays = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
-            '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+        this.filesForUpload = [];
+        this.availableNumberOfTemporaryDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
         this.availablePriorities = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
         this.availablePeriods = ['Permanent', 'Temporary', 'Trial'];
         this.availableImpacts = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
@@ -1198,13 +1627,16 @@ var Phase2Component = /** @class */ (function () {
             'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
         this.RFC = {
             dateRequested: undefined,
-            requestedChange: undefined,
-            description: undefined
+            requestDescription: undefined,
+            reasonForRequest: undefined,
+            CSRF_token: undefined,
+            site_ID: undefined
         };
-        this.phase1 = {
+        this.phase2 = {
+            CCR_ID: undefined,
             TCB_CRF_ID: undefined,
             requestPriority: undefined,
-            predictedImpact: [],
+            predictedImpact: undefined,
             changePeriod: undefined,
             temporaryPeriodStartDate: undefined,
             temporaryPeriodNumberOfDays: undefined,
@@ -1218,6 +1650,7 @@ var Phase2Component = /** @class */ (function () {
                 firmware: false
             },
             additionalDocuments: false,
+            documentIds: undefined,
             numberOfPages: undefined,
             estimatedImpacts: {
                 operations: undefined,
@@ -1230,7 +1663,8 @@ var Phase2Component = /** @class */ (function () {
             changeNotSuccessfullyTestedReason: undefined,
             specialistComment: undefined,
             proposedImplementationDate: undefined,
-            recommend_oppose: undefined
+            recommend_oppose: undefined,
+            CSRF_token: undefined
         };
         var minDate = new Date();
         this.datepickerConfig = Object.assign({}, { containerClass: 'theme-dark-blue' }, { dateInputFormat: 'YYYY-MM-DD' }, { showWeekNumbers: false }, { minDate: minDate });
@@ -1271,7 +1705,7 @@ var Phase2Component = /** @class */ (function () {
             this.displaySpecialistComments = false;
             this.emergencySelected = false;
         }
-        this.phase1.requestPriority = $event.target.value;
+        this.phase2.requestPriority = $event.target.value;
     };
     Phase2Component.prototype.onSelectChangePeriod = function ($event) {
         switch ($event.target.value) {
@@ -1288,38 +1722,83 @@ var Phase2Component = /** @class */ (function () {
                 this.displaySelectTemporaryAmountOfDays = true;
                 break;
         }
-        this.phase1.changePeriod = $event.target.value;
+        this.phase2.changePeriod = $event.target.value;
     };
     Phase2Component.prototype.onSelectNumberOfTemporaryDays = function ($event) {
-        this.phase1.temporaryPeriodNumberOfDays = $event.target.value;
+        this.phase2.temporaryPeriodNumberOfDays = $event.target.value;
         this.displayTemporaryDateSelection = true;
     };
     Phase2Component.prototype.onSelectTemporaryStartDate = function ($event) {
         var maxDate = new Date();
-        maxDate.setDate($event.getDate() + parseInt('' + this.phase1.temporaryPeriodNumberOfDays, 10));
-        this.phase1.temporaryPeriodEndDate = maxDate;
+        maxDate.setDate($event.getDate() + parseInt('' + this.phase2.temporaryPeriodNumberOfDays, 10));
+        this.phase2.temporaryPeriodEndDate = maxDate;
         this.displayNatureOfChange = true;
     };
     Phase2Component.prototype.onSelectImpact = function ($event) {
-        if (this.phase1.predictedImpact !== []) {
+        this.phase2.predictedImpact = $event.target.value;
+        if (this.phase2.predictedImpact !== undefined) {
             this.displayChangePeriod = true;
-            if (this.phase1.predictedImpact.includes('CLIENTS')) {
-                this.displayEstimatedImpactClients = true;
-            }
-            else {
-                this.displayEstimatedImpactClients = false;
-            }
-            if (this.phase1.predictedImpact.includes('TECHNICAL')) {
-                this.displayEstimatedImpactTech = true;
-            }
-            else {
-                this.displayEstimatedImpactTech = false;
-            }
-            if (this.phase1.predictedImpact.includes('OPERATIONS')) {
-                this.displayEstimatedImpactOps = true;
-            }
-            else {
-                this.displayEstimatedImpactOps = false;
+            switch (this.phase2.predictedImpact) {
+                case '1':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
+                case '2':
+                    this.displayProblemReportRaised = true;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
+                case '3':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = true;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    break;
+                case '4':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = false;
+                    this.displayEstimatedImpactOps = true;
+                    this.phase2.estimatedImpacts.technical = undefined;
+                    break;
+                case '5':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = true;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    break;
+                case '6':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = true;
+                    break;
+                case '7':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = true;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
+                case '8':
+                    this.displayProblemReportRaised = false;
+                    this.displayEstimatedImpactClients = false;
+                    this.displayEstimatedImpactTech = true;
+                    this.displayEstimatedImpactOps = false;
+                    this.phase2.estimatedImpacts.clients = undefined;
+                    this.phase2.estimatedImpacts.operations = undefined;
+                    break;
             }
         }
         else {
@@ -1327,7 +1806,7 @@ var Phase2Component = /** @class */ (function () {
         }
     };
     Phase2Component.prototype.onSelectNatureOfChange = function ($event) {
-        if (this.phase1.natureOfChange !== undefined) {
+        if (this.phase2.natureOfChange !== undefined) {
             this.displayEOSystem = true;
         }
         else {
@@ -1335,19 +1814,30 @@ var Phase2Component = /** @class */ (function () {
         }
     };
     Phase2Component.prototype.onSelectEosSystem = function ($event) {
-        this.phase1.eosSystem = $event.target.value;
-        this.phase1.TCB_CRF_ID = $event.target.value + '0001'; // database reference to eos tcb number + 1
+        var _this = this;
+        this.phase2.eosSystem = $event.target.value;
+        this.phase2service.getEOSTCBNumber(this.phase2.eosSystem).subscribe(function (data) {
+            var tcb = parseInt(data.latest_TCB_number, 10);
+            tcb += 1;
+            for (var _i = 0, _a = _this.availableEosSystems; _i < _a.length; _i++) {
+                var eos = _a[_i];
+                if (eos[0] === $event.target.value) {
+                    _this.phase2.TCB_CRF_ID = eos[1] + tcb;
+                }
+            }
+        });
+        // database reference to eos tcb number + 1
         this.displayTCB_CRF_ID = true;
         this.displayConfigurationItems = true;
     };
     Phase2Component.prototype.onSelectChangeTypeHW = function (e) {
         if (e.target.checked) {
-            this.phase1.change.hardware = true;
+            this.phase2.change.hardware = true;
         }
         else {
-            this.phase1.change.hardware = false;
+            this.phase2.change.hardware = false;
         }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware) {
+        if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware) {
             this.displayAdditionalAttachedDocuments = true;
         }
         else {
@@ -1356,12 +1846,12 @@ var Phase2Component = /** @class */ (function () {
     };
     Phase2Component.prototype.onSelectChangeTypeSW = function (e) {
         if (e.target.checked) {
-            this.phase1.change.software = true;
+            this.phase2.change.software = true;
         }
         else {
-            this.phase1.change.software = false;
+            this.phase2.change.software = false;
         }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware) {
+        if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware) {
             this.displayAdditionalAttachedDocuments = true;
         }
         else {
@@ -1370,12 +1860,12 @@ var Phase2Component = /** @class */ (function () {
     };
     Phase2Component.prototype.onSelectChangeTypeFW = function (e) {
         if (e.target.checked) {
-            this.phase1.change.firmware = true;
+            this.phase2.change.firmware = true;
         }
         else {
-            this.phase1.change.firmware = false;
+            this.phase2.change.firmware = false;
         }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware) {
+        if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware) {
             this.displayAdditionalAttachedDocuments = true;
         }
         else {
@@ -1384,65 +1874,54 @@ var Phase2Component = /** @class */ (function () {
     };
     Phase2Component.prototype.onSelectAdditionalDocuments = function (e) {
         if (e.target.value === 'yes') {
-            this.phase1.additionalDocuments = true;
+            this.phase2.additionalDocuments = true;
             this.displayEstimatedImpact = false;
         }
         else if (e.target.value === 'no') {
-            this.files = [];
-            this.phase1.additionalDocuments = false;
-            this.phase1.numberOfPages = undefined;
+            // this.files = [];
+            this.phase2.additionalDocuments = false;
+            this.phase2.numberOfPages = undefined;
             this.displayEstimatedImpact = true;
         }
     };
+    // first file uploader start
     Phase2Component.prototype.dropped = function (files) {
+        var _this = this;
         this.displayEstimatedImpact = true;
         // this.files = files;
         this.files.push(files);
-        var _loop_1 = function (droppedFile) {
+        for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
+            var droppedFile = files_1[_i];
             // Is it a file?
             if (droppedFile.fileEntry.isFile) {
                 var fileEntry = droppedFile.fileEntry;
                 fileEntry.file(function (file) {
-                    // Here you can access the real file
-                    console.log(droppedFile.relativePath, file);
-                    /**
-                     // You could upload it like this:
-                     const formData = new FormData()
-                     formData.append('logo', file, relativePath)
-
-                     // Headers
-                     const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-                     this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-                     .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-                     **/
+                    _this.filesForUpload.push(file);
                 });
             }
             else {
                 // It was a directory (empty directories are added, otherwise only files)
                 var fileEntry = droppedFile.fileEntry;
-                console.log(droppedFile.relativePath, fileEntry);
             }
-        };
-        for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
-            var droppedFile = files_1[_i];
-            _loop_1(droppedFile);
         }
     };
     Phase2Component.prototype.fileOver = function (event) {
-        console.log(event);
+    };
+    Phase2Component.prototype.populateForm = function () {
+        for (var i = 0; i < this.filesForUpload.length; i++) {
+            this.formData.append('file[]', this.filesForUpload[i], this.filesForUpload[i].name);
+        }
+    };
+    Phase2Component.prototype.removeFile = function (index) {
+        this.filesForUpload.splice(index, 1);
     };
     Phase2Component.prototype.fileLeave = function (event) {
-        console.log(event);
     };
+    // first file uploader end
     Phase2Component.prototype.estimatedImpact = function ($event) {
-        if (this.phase1.estimatedImpacts.technical !== undefined ||
-            this.phase1.estimatedImpacts.clients !== undefined ||
-            this.phase1.estimatedImpacts.operations !== undefined) {
+        if (this.phase2.estimatedImpacts.technical !== undefined ||
+            this.phase2.estimatedImpacts.clients !== undefined ||
+            this.phase2.estimatedImpacts.operations !== undefined) {
             this.displayProblemReportRaised = true;
         }
         else {
@@ -1452,12 +1931,12 @@ var Phase2Component = /** @class */ (function () {
     Phase2Component.prototype.onSelectReportRaised = function (e) {
         if (e.target.value === 'yes') {
             this.displayChangePreTested = false;
-            this.phase1.problemReportRaised = true;
+            this.phase2.problemReportRaised = true;
         }
         else if (e.target.value === 'no') {
             this.displayChangePreTested = true;
-            this.phase1.problemReportRef = undefined;
-            this.phase1.problemReportRaised = false;
+            this.phase2.problemReportRef = undefined;
+            this.phase2.problemReportRaised = false;
         }
     };
     Phase2Component.prototype.onInputProblemReportRef = function () {
@@ -1465,26 +1944,26 @@ var Phase2Component = /** @class */ (function () {
     };
     Phase2Component.prototype.onSelectPreTested = function (e) {
         if (e.target.value === 'yes') {
-            this.phase1.changeSuccessfullyTested = 'yes';
+            this.phase2.changeSuccessfullyTested = 'yes';
             this.displayChangeNotSuccessfullyTestedReason = false;
             this.displaySpecialistComments = true;
-            this.phase1.changeNotSuccessfullyTestedReason = undefined;
+            this.phase2.changeNotSuccessfullyTestedReason = undefined;
             if (this.displaySelectTemporaryAmountOfDays) {
                 this.displayRecommendOrOppose = true;
             }
         }
         else if (e.target.value === 'no') {
-            this.phase1.changeNotSuccessfullyTestedReason = undefined;
-            this.phase1.changeSuccessfullyTested = 'no';
+            this.phase2.changeNotSuccessfullyTestedReason = undefined;
+            this.phase2.changeSuccessfullyTested = 'no';
             this.displayChangeNotSuccessfullyTestedReason = true;
             this.displaySpecialistComments = false;
             this.displayRecommendOrOppose = false;
         }
         else if (e.target.value === 'na') {
-            this.phase1.changeSuccessfullyTested = 'na';
+            this.phase2.changeSuccessfullyTested = 'na';
             this.displayChangeNotSuccessfullyTestedReason = false;
             this.displaySpecialistComments = true;
-            this.phase1.changeNotSuccessfullyTestedReason = undefined;
+            this.phase2.changeNotSuccessfullyTestedReason = undefined;
             if (this.displaySelectTemporaryAmountOfDays) {
                 this.displayRecommendOrOppose = true;
             }
@@ -1503,24 +1982,43 @@ var Phase2Component = /** @class */ (function () {
         this.displayRecommendOrOppose = true;
     };
     Phase2Component.prototype.onSelectRecommendOrOppose = function ($event) {
-        this.phase1.recommend_oppose = $event.target.value;
+        this.phase2.recommend_oppose = $event.target.value;
         var submitButton = document.getElementById('submit');
         submitButton.classList.remove('disabled');
         this.activateSubmitButton = true;
     };
-    // onSelectSubmittedToAllConcerned (e) {
-    //     if (e.target.value === 'yes') {
-    //         this.phase2.submittedToAllParties = true;
-    //     } else if (e.target.value === 'no') {
-    //         this.phase2.notSubmittedToAllPartiesReason = undefined;
-    //         this.phase2.submittedToAllParties = false;
-    //     }
-    // }
+    Phase2Component.prototype.onCancel = function () {
+        var _this = this;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
+            title: 'Are you sure?',
+            text: 'You will lose all progress on this form',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                _this.router.navigate(['home']);
+            }
+            else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.DismissReason.cancel) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    };
     Phase2Component.prototype.onSubmit = function () {
         var _this = this;
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
             title: 'Are you sure?',
-            text: "You won't be able make changes to your submission",
+            text: 'You won\'t be able make changes to your submission',
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Submit',
@@ -1530,12 +2028,52 @@ var Phase2Component = /** @class */ (function () {
             reverseButtons: true
         }).then(function (result) {
             if (result.value) {
-                // perform post with service
-                _this.phase2.submitPhase2(_this.phase1, _this.Token).subscribe(function (data) {
-                    if (data.success) {
+                _this.phase2service.submitPhase2(_this.phase2).subscribe(function (data1) {
+                    if (data1.success) {
+                        if (_this.phase2.additionalDocuments === true) {
+                            _this.populateForm();
+                            _this.phase2service.upload(_this.formData).subscribe(function (data) {
+                                if (data.success) {
+                                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
+                                        title: 'Received',
+                                        text: 'Your files have been received',
+                                        type: 'success',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                                else {
+                                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
+                                        title: 'Files not uploaded',
+                                        text: data.message,
+                                        type: 'error',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
+                                title: 'Received',
+                                text: 'Thank you for your Upload all relevant personal have been updated',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            _this.router.navigate(['home']);
+                        }
+                    }
+                    else {
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
+                            title: 'Failed',
+                            text: data1.message,
+                            type: 'error',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                     }
                 });
-                console.log(JSON.stringify(_this.phase1));
             }
             else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.DismissReason.cancel) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()({
@@ -1550,27 +2088,275 @@ var Phase2Component = /** @class */ (function () {
     };
     Phase2Component.prototype.ngOnInit = function () {
         var _this = this;
-        this.phase2.getCSRFToken().subscribe(function (data) {
-            _this.Token = data.tokenValue;
+        this.phase2service.getCSRFToken().subscribe(function (data) {
+            _this.phase2.CSRF_token = data.tokenValue;
         });
-        this.phase2.getPageData().subscribe(function (data) {
+        this.phase2service.getPageData().subscribe(function (data) {
             _this.availablePriorities = data[0];
             _this.availableImpacts = data[1];
             _this.availablePeriods = data[2];
             _this.availableNatureOfChange = data[3];
             _this.availableEosSystems = data[4];
         });
-        this.RFC.requestedChange = 'We need new laptops for engineering';
-        this.RFC.description = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
-        this.phase1.TCB_CRF_ID = 'Undefined';
+        this.phase1 = this.phase2service.getPhase1();
+        if (this.user == null) {
+            this.phase2service.getUserByID(this.phase1.user_ID).subscribe(function (data) {
+                _this.user = data.firstName + ' ' + data.lastName;
+            });
+        }
+        this.localObj = this.phase2service.getObj();
+        if (this.phase1 != null) {
+            this.RFC.requestDescription = this.phase1.requested_change;
+            this.RFC.reasonForRequest = this.phase1.description;
+            this.RFC.dateRequested = this.phase1.start_time;
+            this.phase2.CCR_ID = this.phase1.ID;
+            this.user = this.phase2service.getUser();
+        }
+        if (this.localObj !== null) {
+            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_id;
+            this.phase2.requestPriority = this.localObj.requestPriority_ID;
+            if (this.phase2.requestPriority === '1') {
+                document.getElementById('priority').classList.add('text-danger');
+                this.emergencySelected = true;
+                this.displaySpecialistComments = true;
+                this.displayPredictedRisks = false;
+                this.displayPredictedRisks = false;
+                this.displayChangePeriod = false;
+                this.displayNatureOfChange = false;
+                this.displayEOSystem = false;
+                this.displayTCB_CRF_ID = false;
+                this.displayConfigurationItems = false;
+                this.displayChangeType = false;
+                this.displayTemporaryDateSelection = false;
+                this.displayAdditionalAttachedDocuments = false;
+                this.displayEstimatedImpact = false;
+                this.displayEstimatedImpactOps = false;
+                this.displayEstimatedImpactClients = false;
+                this.displayEstimatedImpactTech = false;
+                this.displayProblemReportRaised = false;
+                this.displayChangePreTested = false;
+                this.displayChangeNotSuccessfullyTestedReason = false;
+                this.displayProposedImplementationDate = false;
+            }
+            else if (document.getElementById('priority').classList.contains('text-danger') && this.phase2.requestPriority !== 'Emergency') {
+                this.displayPredictedRisks = true;
+                this.displaySpecialistComments = false;
+                this.emergencySelected = false;
+                document.getElementById('priority').classList.remove('text-danger');
+            }
+            else {
+                this.displayPredictedRisks = true;
+                this.displaySpecialistComments = false;
+                this.emergencySelected = false;
+            }
+            this.phase2.predictedImpact = this.localObj.impactRisks_ID;
+            if (this.phase2.predictedImpact !== undefined) {
+                this.displayChangePeriod = true;
+                switch (this.phase2.predictedImpact) {
+                    case '1':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = true;
+                        this.displayEstimatedImpactTech = false;
+                        this.displayEstimatedImpactOps = false;
+                        this.phase2.estimatedImpacts.technical = undefined;
+                        this.phase2.estimatedImpacts.operations = undefined;
+                        break;
+                    case '2':
+                        this.displayProblemReportRaised = true;
+                        this.displayEstimatedImpactClients = false;
+                        this.displayEstimatedImpactTech = false;
+                        this.displayEstimatedImpactOps = false;
+                        this.phase2.estimatedImpacts.clients = undefined;
+                        this.phase2.estimatedImpacts.technical = undefined;
+                        this.phase2.estimatedImpacts.operations = undefined;
+                        break;
+                    case '3':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = false;
+                        this.displayEstimatedImpactTech = false;
+                        this.displayEstimatedImpactOps = true;
+                        this.phase2.estimatedImpacts.clients = undefined;
+                        this.phase2.estimatedImpacts.technical = undefined;
+                        break;
+                    case '4':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = true;
+                        this.displayEstimatedImpactTech = false;
+                        this.displayEstimatedImpactOps = true;
+                        this.phase2.estimatedImpacts.technical = undefined;
+                        break;
+                    case '5':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = false;
+                        this.displayEstimatedImpactTech = true;
+                        this.displayEstimatedImpactOps = true;
+                        this.phase2.estimatedImpacts.clients = undefined;
+                        break;
+                    case '6':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = true;
+                        this.displayEstimatedImpactTech = true;
+                        this.displayEstimatedImpactOps = true;
+                        break;
+                    case '7':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = true;
+                        this.displayEstimatedImpactTech = true;
+                        this.displayEstimatedImpactOps = false;
+                        this.phase2.estimatedImpacts.operations = undefined;
+                        break;
+                    case '8':
+                        this.displayProblemReportRaised = false;
+                        this.displayEstimatedImpactClients = false;
+                        this.displayEstimatedImpactTech = true;
+                        this.displayEstimatedImpactOps = false;
+                        this.phase2.estimatedImpacts.clients = undefined;
+                        this.phase2.estimatedImpacts.operations = undefined;
+                        break;
+                }
+            }
+            this.phase2.changePeriod = this.localObj.changePeriod_ID;
+            switch (this.phase2.changePeriod) {
+                case '1':
+                    this.displayNatureOfChange = true;
+                    this.displaySelectTemporaryAmountOfDays = false;
+                    break;
+                case '2':
+                    this.displaySelectTemporaryAmountOfDays = true;
+                    this.displayNatureOfChange = false;
+                    break;
+                case '3':
+                    this.displayNatureOfChange = false;
+                    this.displaySelectTemporaryAmountOfDays = true;
+                    break;
+            }
+            if (this.localObj.temporaryStartDate !== null && this.localObj.temporaryEndDate !== null && this.localObj.temporaryNoOfDays !== null) {
+                this.phase2.temporaryPeriodStartDate = this.localObj.temporaryStartDate;
+                this.phase2.temporaryPeriodEndDate = this.localObj.temporaryEndDate;
+                this.phase2.temporaryPeriodNumberOfDays = parseInt(this.localObj.temporaryNoOfDays, 10);
+                console.log(this.localObj.temporaryNoOfDays);
+                this.displayTemporaryDateSelection = true;
+                this.displayNatureOfChange = true;
+            }
+            this.phase2.natureOfChange = this.localObj.natureChange_ID;
+            if (this.phase2.natureOfChange !== undefined) {
+                this.displayEOSystem = true;
+            }
+            else {
+                this.displayEOSystem = false;
+            }
+            this.phase2.eosSystem = this.localObj.eos_ID;
+            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_ID;
+            this.displayTCB_CRF_ID = true;
+            this.displayConfigurationItems = true;
+            this.phase2.configurationItems = this.localObj.configurationDescr;
+            if (this.localObj.changeTypeHW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.hardware = true;
+            }
+            else {
+                this.phase2.change.hardware = false;
+            }
+            if (this.localObj.changeTypeSW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.software = true;
+            }
+            else {
+                this.phase2.change.software = false;
+            }
+            if (this.localObj.changeTypeFW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.firmware = true;
+            }
+            else {
+                this.phase2.change.firmware = false;
+            }
+            if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware) {
+                this.displayAdditionalAttachedDocuments = true;
+            }
+            else {
+                this.displayAdditionalAttachedDocuments = false;
+            }
+            if (this.localObj.impactRisks_ID !== '2') {
+                this.displayEstimatedImpact = true;
+            }
+            if (this.localObj.impactOnClients !== null) {
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.clients = this.localObj.impactOnClients;
+            }
+            if (this.localObj.impactOnOperations !== null) {
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.operations = this.localObj.impactOnOperations;
+            }
+            if (this.localObj.impactonTech !== null) {
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.technical = this.localObj.impactonTech;
+            }
+            if (this.phase2.estimatedImpacts.technical !== undefined ||
+                this.phase2.estimatedImpacts.clients !== undefined ||
+                this.phase2.estimatedImpacts.operations !== undefined) {
+                this.displayProblemReportRaised = true;
+            }
+            else {
+                this.displayProblemReportRaised = false;
+            }
+            if (this.localObj.reportRaisedContractor === '1') {
+                this.phase2.problemReportRaised = true;
+            }
+            else {
+                this.phase2.problemReportRaised = false;
+            }
+            if (this.phase2.problemReportRaised) {
+                this.displayChangePreTested = false;
+            }
+            else if (!this.phase2.problemReportRaised) {
+                this.displayChangePreTested = true;
+                this.phase2.problemReportRef = undefined;
+            }
+            if (this.localObj.preTestSuccess) {
+                this.phase2.changeSuccessfullyTested = 'yes';
+            }
+            else if (this.localObj.preTestSuccess) {
+                this.phase2.changeSuccessfullyTested = 'no';
+            }
+            else {
+                this.phase2.changeSuccessfullyTested = 'na';
+            }
+            if (this.phase2.changeSuccessfullyTested === 'yes') {
+                this.displayChangeNotSuccessfullyTestedReason = false;
+                this.displaySpecialistComments = true;
+                this.phase2.changeNotSuccessfullyTestedReason = undefined;
+                if (this.displaySelectTemporaryAmountOfDays) {
+                    this.displayRecommendOrOppose = true;
+                }
+            }
+            else if (this.phase2.changeSuccessfullyTested === 'no') {
+                this.phase2.changeNotSuccessfullyTestedReason = this.localObj.reasonUnsucesTest;
+                this.displayChangeNotSuccessfullyTestedReason = true;
+                this.displaySpecialistComments = false;
+                this.displayRecommendOrOppose = false;
+            }
+            else if (this.phase2.changeSuccessfullyTested === 'na') {
+                this.displayChangeNotSuccessfullyTestedReason = false;
+                this.displaySpecialistComments = true;
+                this.phase2.changeNotSuccessfullyTestedReason = undefined;
+                if (this.displaySelectTemporaryAmountOfDays) {
+                    this.displayRecommendOrOppose = true;
+                }
+            }
+            this.activateSubmitButton = true;
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            document.getElementById('cancel').classList.add('invisible');
+        }
     };
     Phase2Component = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-phase1',
+            selector: 'app-phase2',
             template: __webpack_require__(/*! ./phase2.component.html */ "./src/app/pages/phase2/phase2.component.html"),
             styles: [__webpack_require__(/*! ./phase2.component.css */ "./src/app/pages/phase2/phase2.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_phase2_service__WEBPACK_IMPORTED_MODULE_2__["Phase2Service"]])
+        __metadata("design:paramtypes", [_services_phase2_service__WEBPACK_IMPORTED_MODULE_3__["Phase2Service"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], Phase2Component);
     return Phase2Component;
 }());
@@ -1586,7 +2372,7 @@ var Phase2Component = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "#drop-area {\r\n    border: 2px dashed #ccc;\r\n    border-radius: 20px;\r\n    width: 480px;\r\n    font-family: sans-serif;\r\n    margin: 100px auto;\r\n    padding: 20px;\r\n}\r\n#drop-area.highlight {\r\n    border-color: purple;\r\n}\r\np {\r\n    margin-top: 0;\r\n}\r\n.my-form {\r\n    margin-bottom: 10px;\r\n}\r\n#gallery {\r\n    margin-top: 10px;\r\n}\r\n#gallery img {\r\n    width: 150px;\r\n    margin-bottom: 10px;\r\n    margin-right: 10px;\r\n    vertical-align: middle;\r\n}\r\n.button {\r\n    display: inline-block;\r\n    padding: 10px;\r\n    background: #ccc;\r\n    cursor: pointer;\r\n    border-radius: 5px;\r\n    border: 1px solid #ccc;\r\n}\r\n.button:hover {\r\n    background: #ddd;\r\n}\r\n#fileElem {\r\n    display: none;\r\n}\r\n"
 
 /***/ }),
 
@@ -1597,7 +2383,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--Created by Blaine Viljoen(28023374)-->\r\n\r\n<form>\r\n    <div class=\"shadow card bg-light mx-auto\">\r\n        <div class=\"form-group\">\r\n            <h3 class=\"pt-3 px-3 text-primary\">CCR Phase 3: Sign Off</h3>\r\n\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Implementation successful?</label>\r\n                </div>\r\n                <div ngbPopover=\"Select 'Yes' or 'No' whether the change was successfully implemented or not. By left-mouse-button clicking on the appropriate check box the selection is made.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST SUCCESSFUL IMPLEMENTATION\"\r\n                        class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"implementationSuccess\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectImplementationSuccessful($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"implementationSuccess\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectImplementationSuccessful($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row pt-3 px-3\">\r\n                <div class=\"col\" *ngIf=\"!this.phase3.implementationSuccessful&&this.showImpChange\">\r\n                    <ngx-select-dropdown ngbPopover=\"Select from the drop down list whether the change request has either been Aborted or Regressed.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST ABORT/REGRESS\" id=\"abortRegress\" name=\"abortRegress\"\r\n                        (change)=\"onSelectAbortRegress($event)\"\r\n                        [multiple]=\"false\"\r\n                        [(ngModel)]=\"this.phase3.abortRegressReason\"\r\n                        [options]=\"abortOrRegress\"\r\n                    >\r\n                    </ngx-select-dropdown>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.abort||this.phase3.regress\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3 pt-2\" for=\"abortRegressReason\">Reason:</label>\r\n                </div>\r\n                <div ngbPopover=\"Please provide any relevant information as to why this change request was aborted/regressed.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST ABORT/REGRESS REASON\"\r\n                        class=\"col-sm\">\r\n                    <input type=\"text\" id=\"abortRegressReason\" name=\"abortRegressReason\" class=\"px-3 rounded form-control\" [(ngModel)]=\"this.phase3.impSuccessReason\">\r\n                </div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.regress\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Already Regressed?</label>\r\n                </div>\r\n                <div class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"alreadyRegressed\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectAlreadyRegressed($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"alreadyRegressed\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectAlreadyRegressed($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"!this.phase3.alreadyRegressed && this.showSched\">\r\n                <div class=\"col\">\r\n                    <label class=\"px-3\" for=\"schedRegressDate\">Scheduled Regression Date: </label>\r\n                </div>\r\n                <div ngbPopover=\"If for some reason a regression was required after the change was implemented but could not take place for whatever reason, it will be required to schedule a regression as soon as possible. Please select a date for the regression of the change request.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST REGRESSION DATE\"\r\n                        class=\"col\" >\r\n                    <input class=\"px-3 rounded w-75 form-control\"\r\n                           type=\"text\"\r\n                           id=\"schedRegressDate\"\r\n                           name=\"schedRegressDate\"\r\n                           [bsConfig]=\"datepickerConfig\"\r\n                           [(ngModel)]=\"this.phase3.schedRegressionDate\"  bsDatepicker>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3 pr-3\" *ngIf=\"this.phase3.implementationSuccessful&&this.showImpChange\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\" for=\"tcbEvalPeriod\" >Temporary period start date:</label>\r\n                </div>\r\n                <div ngbPopover=\"This field refers to an evaluation period required to validate the success of the change over a longer period of time. The TCBCP administrator must enter a start date and end date  not exceeding 31 days in total.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST TCB EVALUATION PERIOD\"\r\n                        class=\"col-sm\" >\r\n                    <input class=\"rounded w-100 form-control\"\r\n                           type=\"text\"\r\n                           id=\"tcbEvalPeriod\"\r\n                           name=\"tcbEvalPeriod\"\r\n                           bsDaterangepicker\r\n                           [bsConfig]=\"datepickerConfig\"\r\n                           [(ngModel)]=\"this.dateRangePicker\"\r\n                           (ngModelChange)=\"onSelectTCBEval($event)\"\r\n                    >\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.implementationSuccessful&&this.showImpChange\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Additional documents?</label>\r\n                </div>\r\n                <div class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"additionalDocs\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectAdditionalDocs($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"additionalDocs\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectAdditionalDocs($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.additionalDocs\">\r\n                <div class=\"px-3\" ngbPopover=\"Please drag and drop or select any relevant files that need to uploaded and linked with this respective change request\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST ADDITIONAL DOCUMENTS\">\r\n                    <ngx-file-drop  multiple dropZoneLabel=\"Drop files here\" (onFileDrop)=\"dropped($event)\"\r\n                                   (onFileOver)=\"fileOver($event)\" (onFileLeave)=\"fileLeave($event)\">\r\n                        <ng-template  ngx-file-drop-content-tmp let-openFileSelector=\"openFileSelector\">\r\n                            Please drag and drop your additional files here\r\n                            <button type=\"button\" (click)=\"openFileSelector()\">Browse Files</button>\r\n                        </ng-template>\r\n                    </ngx-file-drop>\r\n                    <div class=\"upload-table px-3\">\r\n                        <table class=\"table\">\r\n                            <thead>\r\n                            <tr>\r\n                                <th>Name</th>\r\n                            </tr>\r\n                            </thead>\r\n                            <tbody class=\"upload-name-style\">\r\n                            <tr *ngFor=\"let item of files\">\r\n                                <td><strong>{{ item[0].relativePath }}</strong></td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.additionalDocs\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">All Items Updated?</label>\r\n                </div>\r\n                <div ngbPopover=\"At the end of the update period select whether all update items were updated by selecting the 'Yes' check box with the left-mouse-button. It is important to adhere to the update period to achieve finalisation of the TCB-CRF.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST UPDATED ITEMS\"\r\n                        class=\"col\">\r\n                    <Label class=\"checkbox-inline px-3\">\r\n                        <input type=\"checkbox\"\r\n                               name=\"itemsUpdated\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectItemsUpdated($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.itemsUpdated\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Evaluation successful?</label>\r\n                </div>\r\n                <div ngbPopover=\"Please confirm whether or not the change request validation was successful by selecting the corresponding 'Yes' or 'No' options.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST SUCCESSFUL EVALUATION\"\r\n                        class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"evalSuccess\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectEvalSuccess($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"evalSuccess\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectEvalSuccess($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.evalSuccess\">\r\n                <div class=\"col-sm\">\r\n                    <label  class=\"px-3\">Confirm Close-out:</label>\r\n                </div>\r\n                <div ngbPopover=\"Please confirm or reject the current change request by selecting the corresponding 'Confirm' or 'Reject' options.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST CONFIRMATION\"\r\n                        class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"confirmChoice\"\r\n                               value=\"Confirm\"\r\n                               (click)=\"onSelectConfirm($event)\"\r\n                        >\r\n                        Confirm\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"confirmChoice\"\r\n                               value=\"Reject\"\r\n                               (click)=\"onSelectConfirm($event)\"\r\n                        >\r\n                        Reject\r\n                    </Label>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div  class=\"row px-3\">\r\n                    <div class=\"col\"></div>\r\n                    <div class=\"col\">\r\n                        <button class=\"btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0\"\r\n                                (click)=\"onSubmit()\"> Cancel\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                    <div class=\"col\" >\r\n                        <button\r\n                                class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled\"\r\n                                id=\"submit\"\r\n                                (click)=\"onSubmit()\"> Submit\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3 pr-3\" *ngIf=\"!this.phase3.evalSuccess&&this.showEvalChange\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3 pt-2\" for=\"evalFail\">Reason:</label>\r\n                </div>\r\n                <div ngbPopover=\"Please provide any relevant information as to why the evaluation of the change request was not successful.\" triggers=\"mouseenter:mouseleave\" placement=\"bottom-left\" popoverTitle=\"CHANGE REQUEST EVALUATION FAILURE REASON\"\r\n                        class=\"col-sm\">\r\n                    <input  type=\"text\" id=\"evalFail\" name=\"evalFail\" class=\"form-control\" [(ngModel)]=\"this.phase3.evalFailure\">\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <div class=\"form-group\" *ngIf=\"this.activateSubmitButton\">\r\n            <div  class=\"row px-3\">\r\n                <div class=\"col\"></div>\r\n                <div class=\"col\">\r\n                    <button class=\"btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0\"\r\n                            (click)=\"onSubmit()\"> Cancel\r\n                    </button>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n                <div class=\"col\" >\r\n                    <button class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0\"\r\n                            id=\"submit\"\r\n                            (click)=\"onSubmit()\"> Submit\r\n                    </button>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</form>\r\n\r\n<!--Created by Blaine Viljoen(28023374)-->\r\n"
+module.exports = "<!--Created by Blaine Viljoen(28023374)-->\r\n\r\n<form>\r\n    <div class=\"card secondary-color\">\r\n        <h3 class=\"px-3 text-primary\">Request for Change</h3>\r\n        <div>\r\n            <label class=\"px-3 d-inline-block\">Name of Initiator: {{this.user}}</label>\r\n            <p class=\" px-3 d-inline-block\"></p>\r\n            <label class=\"px-3 d-inline-block\">Date Requested: {{this.phase3Service.phaseData[0][0].start_time}}</label>\r\n            <p class=\"px-3 d-inline-block\"></p>\r\n        </div>\r\n        <label class=\"px-3 \">Requested Change Description: </label>\r\n        <p class=\"px-3\">{{this.phase3Service.phaseData[0][0].requested_change}}</p>\r\n        <label class=\"px-3\">Reason for request: </label>\r\n        <p class=\"px-3\">{{this.phase3Service.phaseData[0][0].description}}</p>\r\n    </div>\r\n        <div id=\"phase2\" style=\"\" class=\"shadow card bg-light mx-auto\">\r\n            <div class=\"form-group\">\r\n                <h3 class=\"px-3 text-primary\">Configuration Data</h3>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm\">\r\n                        <label class=\"px-3\" for=\"priority\">Request Priority</label>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <select ngbPopover=\"Select from the drop down list whether the change request is an EMERGENCY or NON-EMERGENCY (NORMAL).\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"CHANGE REQUEST PRIORITY\"\r\n                                class=\"rounded w-100 form-control\"\r\n                                name=\"priority\"\r\n                                id=\"priority\"\r\n                                disabled>\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                            <option *ngFor=\"let priority of availablePriorities\"  [value]=\"priority[0]\" [selected]=\"this.phase2.requestPriority === priority[0]\">{{priority[1]}}</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div>\r\n                            <label class=\"px-3\"  for=\"predictedImpact\"> Predicted Risk/s </label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div>\r\n                            <select ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\r\n                                    class=\"rounded w-100 form-control\"\r\n                                    name=\"predictedImpact\"\r\n                                    id=\"predictedImpact\"\r\n                                    disabled >\r\n                                <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                                <option *ngFor=\"let impacts of availableImpacts\" [selected]=\"this.phase2.predictedImpact === impacts[0]\"  [value]=\"impacts[0]\" >{{impacts[1]}}</option>\r\n                            </select>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm \"></div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"row\" >\r\n                    <div class=\"col-sm\">\r\n                        <div >\r\n                            <label class=\"px-3\" for=\"changePeriod\" >Change Period</label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div>\r\n                            <select ngbPopover=\"Specify whether the requested change will be permanent or just temporary by selecting an option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"CHANGE PERIOD\"\r\n                                    class=\"rounded w-100 form-control\"\r\n                                    name=\"changePeriod\"\r\n                                    id=\"changePeriod\"\r\n                                    disabled>\r\n                                <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                                <option *ngFor=\"let period of availablePeriods\"  [value]=\"period[0]\" [selected]=\"this.phase2.changePeriod === period[0]\">{{period[1]}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div >\r\n                            <label class=\"px-3\" for=\"changePeriod\" >Temporary period number of days</label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div >\r\n                            <select ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\r\n                                    class=\"rounded w-100 form-control\"\r\n                                    name=\"temporaryNoDays\"\r\n                                    id=\"temporaryNoDays\"\r\n                                    disabled >\r\n                                <option selected=\"selected\" disabled=\"disabled\">Select no. of days</option>\r\n                                <option  *ngFor=\"let day of availableNumberOfTemporaryDays\" [selected]=\"this.phase2.temporaryPeriodNumberOfDays ===  day\" value=\"{{day}}\">{{day}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\"></div>\r\n                </div>\r\n                <div class=\"row pt-3\">\r\n                    <div class=\"col-sm\">\r\n                        <label class=\"px-3\" for=\"temporaryStartPeriod\" >Temporary period start date:</label>\r\n                    </div>\r\n                    <div class=\"col-sm \">\r\n                        <input class=\"rounded w-100 form-control\"\r\n                               type=\"text\"\r\n                               id=\"temporaryStartPeriod\"\r\n                               name=\"temporaryStartPeriod\"\r\n                               autocomplete=\"off\"\r\n                               bsDatepicker\r\n                               [bsConfig]=\"datepickerConfig\"\r\n                               [(ngModel)]=\"this.phase2.temporaryPeriodStartDate\"\r\n                               disabled\r\n                        >\r\n                    </div>\r\n                    <div class=\"col-sm \"> <label class=\"px-3\" for=\"temporaryEndPeriod\" >Temporary period end date:</label></div>\r\n                    <div class=\"col-sm \">\r\n                        <input  class=\"rounded w-100 form-control\"\r\n                                type=\"text\"\r\n                                id=\"temporaryEndPeriod\"\r\n                                name=\"temporaryEndPeriod\"\r\n                                autocomplete=\"off\"\r\n                                bsDatepicker\r\n                                [bsConfig]=\"datepickerConfig\"\r\n                                [(ngModel)]=\"this.phase2.temporaryPeriodEndDate\"\r\n                                disabled\r\n                                readonly>\r\n                    </div>\r\n                    <div class=\"col-sm \"></div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" >\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm\">\r\n                        <div>\r\n                            <label class=\"px-3\" for=\"natureOfChange\">Nature of the change</label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div>\r\n                            <select popoverTitle=\"SELECT NATURE OF CHANGE\" ngbPopover=\"Select an option from the drop down list. National = Change affects both Northern and Southern regions. Regional = Either Northern or Southern is affected, but not both. Local = any ATCC or TCU or RT\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                    class=\"rounded w-100 form-control\"\r\n                                    name=\"natureOfChange\"\r\n                                    id=\"natureOfChange\"\r\n                                    disabled\r\n                                    [(ngModel)]=\"this.phase2.natureOfChange\">\r\n                                <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                                <option *ngFor=\"let change of availableNatureOfChange\"  [value]=\"change[0]\" [selected]=\"this.phase2.natureOfChange === change[0]\">{{change[1]}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div >\r\n                            <label class=\"px-3\"  for=\"eosSystem\">EOS system</label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <div >\r\n                            <select popoverTitle=\"SELECT EOS SYSTEM\" ngbPopover=\"Please select from the drop down list the Essential Operational System (EOS) to which the Trusted Computing Base (TCB) change will be applied.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                    class=\"w-100 rounded form-control\"\r\n                                    name=\"eosSystem\"\r\n                                    id=\"eosSystem\"\r\n                                    disabled >\r\n                                <option selected=\"selected\" disabled=\"disabled\">Select one</option>\r\n                                <option *ngFor=\"let eos of availableEosSystems\"  [value]=\"eos[0]\" [selected]=\"this.phase2.eosSystem === eos[0]\" >{{eos[1]}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm \"></div>\r\n                </div>\r\n            </div>\r\n            <!--</div>-->\r\n            <!--    <div class=\"card\">-->\r\n            <div class=\"form-group\">\r\n                <div class=\"row\" >\r\n                    <div class=\"col-sm\">\r\n                        <label class=\"px-3\" for=\"tcbID\">TCB-CRF ID:</label>\r\n                    </div>\r\n                    <div class=\"col-sm\">\r\n                        <input popoverTitle=\"CHANGE REQUEST IDENTIFICATION\" ngbPopover=\"The TCB-CRF ID is an unique number relative to an EOS system issued by the TCB-CRF Administrator for every change request submitted for approval and implementation.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                               class=\"rounded form-control\"\r\n                               id=\"tcbID\"\r\n                               name=\"tcbID\"\r\n                               type=\"text\"\r\n                               disabled\r\n                               [(ngModel)]=\"this.phase2.TCB_CRF_ID\"  >\r\n                    </div>\r\n                    <div class=\"col-sm\"></div>\r\n                    <div class=\"col-sm\"></div>\r\n                    <div class=\"col-sm\"></div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" >\r\n                <div >\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm\">\r\n                            <label class=\"px-3\" for=\"configurationItems\">Configuration Items: </label>\r\n                        </div>\r\n                        <div class=\"col\"></div>\r\n                    </div>\r\n                    <div class=\"px-3\">\r\n                        <input  popoverTitle=\"ENTER ALL CONFIGURATION ITEMS\" ngbPopover=\"TECH: Enter any sub system or system component that will be subject to the change e.g. EXTRA HDD, SW VERS., RADAR FEED, DATASET- ANY CHANGE TO THE TCB NEEDS TO BE APPROVED. OPS: Enter short description of the request.  Maximum 250 characters allowed\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                maxlength=\"250\"\r\n                                class=\"rounded w-75 form-control\"\r\n                                id=\"configurationItems\"\r\n                                name=\"configurationItems\"\r\n                                type=\"text\"\r\n                                disabled\r\n                                [(ngModel)]=\"this.phase2.configurationItems\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"row\">\r\n                    <div class=\"col\">\r\n                        <div >\r\n                            <label class=\"px-3\">Change Type: </label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col\"\r\n                         popoverTitle=\"CHANGE TYPE\" ngbPopover=\"Select the type of change. Hardware (HW), Software (SW) or Firmware (FW). One or more of these options must be ticked if affected by the change.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                    >\r\n                        <div>\r\n                            <label class=\"checkbox-inline px-3\">\r\n                                <input type=\"checkbox\"\r\n                                       value=\"HW\"\r\n                                       disabled\r\n                                       [checked]=\"this.phase2.change.hardware\">\r\n                                Hardware\r\n                            </label>\r\n                            <label class=\"checkbox-inline px-3\">\r\n                                <input type=\"checkbox\"\r\n                                       value=\"SW\"\r\n                                       disabled\r\n                                       [checked]=\"this.phase2.change.software\">\r\n                                Software\r\n                            </label>\r\n                            <label class=\"checkbox-inline px-3\">\r\n                                <input type=\"checkbox\"\r\n                                       value=\"FW\"\r\n                                       disabled\r\n                                       [checked]=\"this.phase2.change.firmware\">\r\n                                Firmware\r\n                            </label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"row pb-3\">\r\n                    <div class=\"col\">\r\n                        <label class=\"px-3\" for=\"numberOfPages\">Number of Pages (Documents): </label>\r\n                    </div>\r\n                    <div class=\"col\">\r\n                        <input class=\"px-3 form-control rounded\"\r\n                               disabled=\"true\"\r\n                               type=\"number\"\r\n                               name=\"numberOfPages\"\r\n                               id=\"numberOfPages\"\r\n                               [(ngModel)]=\"this.filesForUpload.length\">\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n                <div class=\"px-3\">\r\n                    <div class=\"upload-table px-3\">\r\n                        <table class=\"table\">\r\n                            <thead>\r\n                            <tr>\r\n                                <th>Name:</th>\r\n                            </tr>\r\n                            </thead>\r\n                            <tbody class=\"upload-name-style\">\r\n                            <tr *ngFor=\"let item of filesForUpload, index as i\">\r\n                                <td><strong>{{ item.name }}</strong></td>\r\n                                <td class=\"px-3\" (click)=\"removeFile(i)\" style=\"cursor: pointer;\">&#10005;</td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" >\r\n                <label class=\"px-3\">Estimated Impact: </label>\r\n                <div class=\"px-3\">\r\n                    <div>\r\n                        <label for=\"operationsImpact\" class=\"\">Operations: </label>\r\n                        <br>\r\n                        <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Operations: e.g. NORM mode will be down, Redundency lost, No new FPLs, Operator Handbooks\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                               class=\"w-75 rounded form-control\"\r\n                               type=\"text\"\r\n                               id=\"operationsImpact\"\r\n                               name=\"operationsImpact\"\r\n                               disabled\r\n                               [(ngModel)]=\"this.phase2.estimatedImpacts.operations\">\r\n                    </div>\r\n                    <div>\r\n                        <label for=\"clientsImpact\" class=\"\">Clients: </label>\r\n                        <br>\r\n                        <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Clients: External and Internal - loss of service such as slot information, procedural changes, etc.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                               class=\" w-75 rounded form-control\"\r\n                               type=\"text\"\r\n                               id=\"clientsImpact\"\r\n                               name=\"clientsImpact\"\r\n                               disabled\r\n                               [(ngModel)]=\"this.phase2.estimatedImpacts.clients\">\r\n                    </div>\r\n                    <div>\r\n                        <label for=\"technicalImpact\" class=\"\">Technical: </label>\r\n                        <br>\r\n                        <input popoverTitle=\"IMPACT=FUNCTIONAL/PROCEDURAL/etc\" ngbPopover=\"Technical: Node Down, LAN switch down, Documents\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                               class=\" w-75 rounded form-control\"\r\n                               type=\"text\"\r\n                               id=\"technicalImpact\"\r\n                               name=\"technicalImpact\"\r\n                               disabled\r\n                               [(ngModel)]=\"this.phase2.estimatedImpacts.technical\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"row\">\r\n                    <div class=\"col\">\r\n                        <label class=\"px-3\">Problem Report raised with Contractor?</label>\r\n                    </div>\r\n                    <div class=\"col\"\r\n                         popoverTitle=\"PROBLEM REPORT RAISED?\" ngbPopover=\"Specify yes or no whether a problem request or report has been raised with the contractor by selecting the appropriate check box with a left-mouse-button click.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                    >\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"reportRaised\"\r\n                                   value=\"yes\"\r\n                                   disabled\r\n                                   [checked]=\"this.phase2.problemReportRaised\">\r\n                            Yes\r\n                        </Label>\r\n                        <Label class=\"radio-inline px-3\">\r\n                            <input type=\"radio\"\r\n                                   name=\"reportRaised\"\r\n                                   value=\"no\"\r\n                                   disabled\r\n                                   [checked]=\"!this.phase2.problemReportRaised\">\r\n                            No\r\n                        </Label>\r\n                    </div>\r\n                    <div class=\"col\"></div>\r\n                </div>\r\n                <div >\r\n                    <div class=\"row\">\r\n                        <div class=\"col\">\r\n                            <label for=\"problemReportRef\" class=\"px-3\">Problem Report Reference Number: </label>\r\n                        </div>\r\n                        <div class=\"col\">\r\n                            <input popoverTitle=\"PROBLEM REPORT REFERENCE\" ngbPopover=\"Enter the problem report reference number here. The problem report refers to a report that was sent to the contractor to improve a functionality or solve a problem on the system. Can be a PR, ECR, PCR, CR, etc.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                   class=\"w-100 rounded form-control\"\r\n                                   type=\"text\"\r\n                                   name=\"problemReportRef\"\r\n                                   id=\"problemReportRef\"\r\n                                   disabled\r\n                                   [(ngModel)]=\"this.phase2.problemReportRef\">\r\n                        </div>\r\n                        <div class=\"col\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" >\r\n                <div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col\">\r\n                            <label class=\"px-3\">Change successfully pre-tested ?</label>\r\n                        </div>\r\n                        <div class=\"col\"\r\n                             popoverTitle=\"CHANGE SUCCESSFULLY PRE-TESTED ?\" ngbPopover=\"Specify whether pre-tests or validations concerning the change were successful by selecting a check box accordingly with the left-mouse button.\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                        >\r\n                            <Label class=\"radio-inline px-3\">\r\n                                <input type=\"radio\"\r\n                                       name=\"preTested\"\r\n                                       value=\"yes\"\r\n                                       disabled\r\n                                       [checked]=\"this.phase2.changeSuccessfullyTested === 'yes'\">\r\n                                Yes\r\n                            </Label>\r\n                            <Label class=\"radio-inline px-3\">\r\n                                <input type=\"radio\"\r\n                                       name=\"preTested\"\r\n                                       value=\"no\"\r\n                                       disabled\r\n                                       [checked]=\"this.phase2.changeSuccessfullyTested === 'no'\">\r\n                                No\r\n                            </Label>\r\n                            <Label class=\"radio-inline px-3\">\r\n                                <input type=\"radio\"\r\n                                       name=\"preTested\"\r\n                                       value=\"na\"\r\n                                       disabled\r\n                                       [checked]=\"this.phase2.changeSuccessfullyTested === 'na'\">\r\n                                N/A\r\n                            </Label>\r\n                        </div>\r\n                        <div class=\"col\"></div>\r\n                    </div>\r\n                    <div class=\"px-3\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col\">\r\n                                <label for=\"changeNotSuccessfullyTestedReason\" class=\"\">Reason for unsuccessful test: </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col\">\r\n                                <input popoverTitle=\"Reason for unsuccessful testing\" ngbPopover=\"If the tests were unsuccessful please provide the reason here\" triggers=\"mouseenter:mouseleave\" placement=\"right\"\r\n                                       class=\"w-75 rounded form-control\"\r\n                                       type=\"text\"\r\n                                       id=\"changeNotSuccessfullyTestedReason\"\r\n                                       name=\"changeNotSuccessfullyTestedReason\"\r\n                                       disabled\r\n                                       [(ngModel)]=\"this.phase2.changeNotSuccessfullyTestedReason\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!--        <div class=\"form-group\">-->\r\n            <!--            <div class=\"row\">-->\r\n            <!--                <div class=\"col\">-->\r\n            <!--                    <label class=\"px-3\">Request submitted to all concerned parties ?</label>-->\r\n            <!--                </div>-->\r\n            <!--                <div class=\"col\">-->\r\n            <!--                    <Label class=\"radio-inline px-3\"><input type=\"radio\" name=\"submittedToAll\" value=\"yes\"  (click)=\"onSelectSubmittedToAllConcerned($event)\">Yes</Label>-->\r\n            <!--                    <Label class=\"radio-inline px-3\"><input type=\"radio\" name=\"submittedToAll\" value=\"no\"   (click)=\"onSelectSubmittedToAllConcerned($event)\" >No</Label>-->\r\n            <!--                </div>-->\r\n            <!--                <div class=\"col\"></div>-->\r\n            <!--            </div>-->\r\n\r\n            <!--            <div  class=\"px-3\" *ngIf=\"!this.phase2.submittedToAllParties\">-->\r\n            <!--                <div class=\"row\">-->\r\n            <!--                    <div class=\"col\">-->\r\n            <!--                        <label class=\"\">Reason why not submitted to all concerned parties?</label>-->\r\n            <!--                    </div>-->\r\n            <!--                </div>-->\r\n            <!--                <div class=\"row\">-->\r\n            <!--                    <div class=\"col\">-->\r\n            <!--                        <input class=\" w-75 rounded form-control\" type=\"text\" name=\"requestNotSubmittedToAllParties\" [(ngModel)]=\"this.phase2.notSubmittedToAllPartiesReason\">-->\r\n            <!--                    </div>-->\r\n            <!--                </div>-->\r\n            <!--            </div>-->\r\n            <!--        </div>-->\r\n\r\n            <div class=\"form-group\">\r\n                <div class=\"px-3\" >\r\n                    <div class=\"row\" >\r\n                        <div class=\"col\">\r\n                            <label for=\"specialistComments\" >Specialist comments</label>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\" >\r\n                        <div class=\"col\">\r\n                            <input\r\n                                    class=\"px-3 w-75 rounded form-control\"\r\n                                    type=\"text\"\r\n                                    name=\"specialistComments\"\r\n                                    id=\"specialistComments\"\r\n                                    disabled\r\n                                    [(ngModel)]=\"this.phase2.specialistComment\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"form-group\"  >\r\n                <div class=\"py-3\">\r\n                    <div class=\"row\" >\r\n                        <div class=\"col\">\r\n                            <label class=\"px-3\" for=\"proposedDate\">Proposed Implementation Date: </label>\r\n                        </div>\r\n                        <div class=\"col\">\r\n                            <input class=\" px-3 rounded w-75 form-control\"\r\n                                   type=\"text\"\r\n                                   id=\"proposedDate\"\r\n                                   name=\"proposedDate\"\r\n                                   autocomplete=\"off\"\r\n                                   bsDatepicker\r\n                                   disabled\r\n                                   [bsConfig]=\"datepickerConfig\"\r\n                                   [(ngModel)]=\"this.phase2.proposedImplementationDate\"  >\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    <div class=\"shadow card bg-light mx-auto\">\r\n        <div class=\"form-group\">\r\n            <h3 class=\"pt-3 px-3 text-primary\">CCR Phase 3: Sign Off</h3>\r\n\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Implementation successful?</label>\r\n                </div>\r\n                <div ngbPopover=\"Select 'Yes' or 'No' whether the change was successfully implemented or not. By left-mouse-button clicking on the appropriate check box the selection is made.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST SUCCESSFUL IMPLEMENTATION\"\r\n                        class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"implementationSuccess\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectImplementationSuccessful($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"implementationSuccess\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectImplementationSuccessful($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3 px-3\" *ngIf=\"!this.phase3.implementationSuccessful&&this.showImpChange\">\r\n                    <div class=\"col\">\r\n                        <label for=\"abortRegress\">Select Aborted or Regressed: </label>\r\n                    </div>\r\n                    <div class=\"col pl-3\">\r\n                        <ngx-select-dropdown\r\n                                ngbPopover=\"Select from the drop down list whether the change request has either been Aborted or Regressed.\"\r\n                                triggers=\"mouseenter:mouseleave\"\r\n                                placement=\"right\"\r\n                                popoverTitle=\"CHANGE REQUEST ABORT/REGRESS\"\r\n                                id=\"abortRegress\"\r\n                                name=\"abortRegress\"\r\n                                (change)=\"onSelectAbortRegress($event)\"\r\n                                [multiple]=\"false\"\r\n                                [(ngModel)]=\"this.phase3.abortRegress\"\r\n                                [options]=\"abortOrRegress\"\r\n                        ></ngx-select-dropdown>\r\n                    </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.abort||this.phase3.regress\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3 pt-2\" for=\"abortRegressReason\">Reason:</label>\r\n                </div>\r\n                <div ngbPopover=\"Please provide any relevant information as to why this change request was aborted/regressed.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST ABORT/REGRESS REASON\"\r\n                        class=\"col-sm\">\r\n                    <textarea\r\n                            type=\"text\"\r\n                            id=\"abortRegressReason\"\r\n                            name=\"abortRegressReason\"\r\n                            class=\"px-3 rounded form-control\"\r\n                            rows=\"2\"\r\n                            [(ngModel)]=\"this.phase3.abortRegressReason\"\r\n                            (ngModelChange)=\"abortRegressReasonCheck()\"></textarea>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.regress\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Already Regressed?</label>\r\n                </div>\r\n                <div class=\"col\"\r\n                     ngbPopover=\"Please select if regression has already occurred\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST ALREADY REGRESSED?\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"alreadyRegressed\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectAlreadyRegressed($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"alreadyRegressed\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectAlreadyRegressed($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"!this.phase3.alreadyRegressed && this.showSched\">\r\n                <div class=\"col\">\r\n                    <label class=\"pl-3\" for=\"schedRegressDate\">Scheduled Regression Date: </label>\r\n                </div>\r\n                <div ngbPopover=\"If for some reason a regression was required after the change was implemented but could not take place for whatever reason, it will be required to schedule a regression as soon as possible. Please select a date for the regression of the change request.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST REGRESSION DATE\"\r\n                     class=\"col\" >\r\n                    <input class=\"rounded w-100 form-control\"\r\n                           type=\"text\"\r\n                           id=\"schedRegressDate\"\r\n                           name=\"schedRegressDate\"\r\n                           autocomplete=\"off\"\r\n                           [bsConfig]=\"datepickerConfig\"\r\n                           [(ngModel)]=\"this.phase3.schedRegressionDate\"\r\n                           bsDatepicker\r\n                           (ngModelChange)=\"schedRegressCheck()\">\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.implementationSuccessful&&this.showImpChange\">\r\n                <div class=\"col-sm\">\r\n                    <div >\r\n                        <label class=\"px-3\" for=\"NoDays\" >TCB number of days</label>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-sm\">\r\n                    <div>\r\n                        <select ngbPopover=\"Select the appropriate option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"PREDICTED RISK\"\r\n                                class=\"rounded w-100 form-control\"\r\n                                name=\"NoDays\"\r\n                                id=\"NoDays\"\r\n                                (change)=\"onSelectTCBNumberOfDays($event)\" >\r\n                            <option selected=\"selected\" disabled=\"disabled\">Select no. of days</option>\r\n                            <option  *ngFor=\"let day of numberOfDays\" value=\"{{day}}\">{{day}}</option>\r\n                        </select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.implementationSuccessful&&this.showTCBdatepicker\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\" for=\"tcbEvalPeriod\" >TCB evaluation start date:</label>\r\n                </div>\r\n                <div ngbPopover=\"This field refers to an evaluation period required to validate the success of the change over a longer period of time. The TCBCP administrator must enter a start date and end date  not exceeding 31 days in total.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST TCB EVALUATION PERIOD\"\r\n                     class=\"col-sm\" >\r\n                    <input class=\"rounded w-100 form-control\"\r\n                           type=\"text\"\r\n                           id=\"tcbEvalPeriod\"\r\n                           name=\"tcbEvalPeriod\"\r\n                           autocomplete=\"off\"\r\n                           bsDatepicker\r\n                           [bsConfig]=\"datepickerConfig\"\r\n                           [(ngModel)]=\"this.dateRangePicker\"\r\n                           (ngModelChange)=\"onSelectTCBEval($event)\"\r\n                    >\r\n                </div>\r\n                <div class=\"col-sm \">\r\n                    <input  class=\"rounded w-100 form-control\"\r\n                            type=\"text\"\r\n                            id=\"TCBEndPeriod\"\r\n                            name=\"TCBEndPeriod\"\r\n                            autocomplete=\"off\"\r\n                            bsDatepicker\r\n                            [bsConfig]=\"datepickerConfig\"\r\n                            [(ngModel)]=\"this.phase3.tcbEvalEnd\"\r\n                            disabled\r\n                            readonly>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.implementationSuccessful&&this.showTCBdatepicker\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Additional documents?</label>\r\n                </div>\r\n                <div class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"additionalDocs\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectAdditionalDocs($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"additionalDocs\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectAdditionalDocs($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.additionalDocs\">\r\n                <div class=\"px-3 w-100\"\r\n                     ngbPopover=\"Please drag and drop or select any relevant files that need to uploaded and linked with this respective change request\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST ADDITIONAL DOCUMENTS\">\r\n                    <ngx-file-drop multiple=\"true\" dropZoneLabel=\"Drop files here\" (onFileDrop)=\"dropped($event)\"\r\n                                   (onFileOver)=\"fileOver($event)\" (onFileLeave)=\"fileLeave($event)\">\r\n                        <ng-template  ngx-file-drop-content-tmp let-openFileSelector=\"openFileSelector\">\r\n                            Please drag and drop your additional files here\r\n                            <button type=\"button\" (click)=\"openFileSelector()\">Browse Files</button>\r\n                        </ng-template>\r\n                    </ngx-file-drop>\r\n                    <div class=\"upload-table px-3\">\r\n                        <table class=\"table\">\r\n                            <thead>\r\n                            <tr>\r\n                                <th>Name:</th>\r\n                            </tr>\r\n                            </thead>\r\n                            <tbody class=\"upload-name-style\">\r\n                            <tr *ngFor=\"let item of filesForUpload, index as i\">\r\n                                <td><strong>{{ item.name }}</strong></td>\r\n                                <td class=\"px-3\" (click)=\"removeFile(i)\" style=\"cursor: pointer;\">&#10005;</td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.additionalDocs\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">All Items Updated?</label>\r\n                </div>\r\n                <div ngbPopover=\"At the end of the update period select whether all update items were updated by selecting the 'Yes' check box with the left-mouse-button. It is important to adhere to the update period to achieve finalisation of the TCB-CRF.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST UPDATED ITEMS\"\r\n                     class=\"col\">\r\n                    <Label class=\"checkbox-inline px-3\">\r\n                        <input type=\"checkbox\"\r\n                               name=\"itemsUpdated\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectItemsUpdated($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.itemsUpdated\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3\">Evaluation successful?</label>\r\n                </div>\r\n                <div ngbPopover=\"Please confirm whether or not the change request validation was successful by selecting the corresponding 'Yes' or 'No' options.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST SUCCESSFUL EVALUATION\"\r\n                        class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"evalSuccess\"\r\n                               value=\"yes\"\r\n                               (click)=\"onSelectEvalSuccess($event)\"\r\n                        >\r\n                        Yes\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"evalSuccess\"\r\n                               value=\"no\"\r\n                               (click)=\"onSelectEvalSuccess($event)\"\r\n                        >\r\n                        No\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n\r\n            <div class=\"row pt-3\" *ngIf=\"this.phase3.evalSuccess\">\r\n                <div class=\"col-sm\">\r\n                    <label  class=\"px-3\">Confirm Close-out:</label>\r\n                </div>\r\n                <div ngbPopover=\"Please confirm or reject the current change request by selecting the corresponding 'Confirm' or 'Reject' options.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST CONFIRMATION\"\r\n                     class=\"col\">\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"confirmChoice\"\r\n                               value=\"Confirm\"\r\n                               (click)=\"onSelectConfirm($event)\"\r\n                        >\r\n                        Confirm\r\n                    </Label>\r\n                    <Label class=\"radio-inline px-3\">\r\n                        <input type=\"radio\"\r\n                               name=\"confirmChoice\"\r\n                               value=\"Reject\"\r\n                               (click)=\"onSelectConfirm($event)\"\r\n                        >\r\n                        Reject\r\n                    </Label>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n            <div class=\"row pt-3 pr-3\" *ngIf=\"!this.phase3.evalSuccess&&this.showEvalChange\">\r\n                <div class=\"col-sm\">\r\n                    <label class=\"px-3 pt-2\" for=\"evalFail\">Reason:</label>\r\n                </div>\r\n                <div ngbPopover=\"Please provide any relevant information as to why the evaluation of the change request was not successful.\"\r\n                     triggers=\"mouseenter:mouseleave\"\r\n                     placement=\"right\"\r\n                     popoverTitle=\"CHANGE REQUEST EVALUATION FAILURE REASON\"\r\n                     class=\"col-sm\">\r\n                    <textarea rows=\"2\"\r\n                              type=\"text\"\r\n                              id=\"evalFail\"\r\n                              name=\"evalFail\"\r\n                              class=\"form-control\"\r\n                              [(ngModel)]=\"this.phase3.evalFailure\"\r\n                              (ngModelChange)=\"evalReasonCheck()\"></textarea>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <div  class=\"row px-3\">\r\n                <div class=\"col\"></div>\r\n                <div class=\"col\">\r\n                    <button class=\"btn btn-outline-danger btn-rounded w-100  my-4 waves-effect z-depth-0\"\r\n                            (click)=\"onCancel()\"> Cancel\r\n                    </button>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n                <div class=\"col\" >\r\n                    <button class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0\"\r\n                            [disabled]=\"!this.disableSubmitButton\"\r\n                            id=\"submit\"\r\n                            (click)=\"onSubmit()\"> Submit\r\n                    </button>\r\n                </div>\r\n                <div class=\"col\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</form>\r\n<!--Created by Blaine Viljoen(28023374)-->\r\n"
 
 /***/ }),
 
@@ -1614,6 +2400,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_phase3_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/phase3.service */ "./src/app/services/phase3.service.ts");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_phase2_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/phase2.service */ "./src/app/services/phase2.service.ts");
 // Created by Blaine Viljoen 28023374
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1627,57 +2416,131 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var Phase3Component = /** @class */ (function () {
-    function Phase3Component(Phase3Service, router) {
-        this.Phase3Service = Phase3Service;
+    function Phase3Component(phase3Service, phsae2service, router) {
+        this.phase3Service = phase3Service;
+        this.phsae2service = phsae2service;
         this.router = router;
+        this.formData = new FormData();
         this.files = [];
+        this.filesForUpload = [];
+        this.numberOfDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+        this.availableNumberOfTemporaryDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+        this.availablePriorities = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
+        this.availablePeriods = ['Permanent', 'Temporary', 'Trial'];
+        this.availableImpacts = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
+        this.availableNatureOfChange = ['National', 'Local', 'Regional'];
+        this.availableEosSystems = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
+            'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
+            'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
         this.abortOrRegress = ['Abort', 'Regress'];
+        this.phase2 = {
+            CCR_ID: undefined,
+            TCB_CRF_ID: undefined,
+            requestPriority: undefined,
+            predictedImpact: undefined,
+            changePeriod: undefined,
+            temporaryPeriodStartDate: undefined,
+            temporaryPeriodNumberOfDays: undefined,
+            temporaryPeriodEndDate: undefined,
+            natureOfChange: undefined,
+            eosSystem: undefined,
+            configurationItems: undefined,
+            change: {
+                hardware: false,
+                software: false,
+                firmware: false
+            },
+            additionalDocuments: false,
+            documentIds: undefined,
+            numberOfPages: undefined,
+            estimatedImpacts: {
+                operations: undefined,
+                clients: undefined,
+                technical: undefined
+            },
+            problemReportRaised: false,
+            problemReportRef: undefined,
+            changeSuccessfullyTested: undefined,
+            changeNotSuccessfullyTestedReason: undefined,
+            specialistComment: undefined,
+            proposedImplementationDate: undefined,
+            recommend_oppose: undefined,
+            CSRF_token: undefined
+        };
         this.phase3 = {
+            CCR_ID: undefined,
             schedRegressionDate: undefined,
             tcbEvalStart: undefined,
             tcbEvalEnd: undefined,
-            implementorName: undefined,
             implementationSuccessful: true,
             abort: false,
             regress: false,
             abortRegressReason: undefined,
-            impSuccessReason: undefined,
+            abortRegress: undefined,
             alreadyRegressed: true,
             additionalDocs: false,
             itemsUpdated: false,
             evalSuccess: false,
             ccrConfirmation: false,
-            evalFailure: undefined
+            evalFailure: undefined,
+            documentIds: undefined,
+            CSRF_token: undefined
         };
         this.user = '';
         this.Token = null;
         this.datepickerConfig = Object.assign({}, { containerClass: 'theme-dark-blue' }, { dateInputFormat: 'YYYY-MM-DD' }, { showWeekNumbers: false }, { minDate: new Date() });
     }
+    Phase3Component.prototype.removeFile = function (index) {
+        this.filesForUpload.splice(index, 1);
+    };
+    Phase3Component.prototype.onSelectTCBNumberOfDays = function ($event) {
+        this.selectedNoDays = $event.target.value;
+        this.showTCBdatepicker = true;
+    };
     Phase3Component.prototype.onSelectTCBEval = function ($event) {
-        var startDate = $event[0];
-        var endDate = $event[1];
-        console.log(startDate);
-        console.log(endDate);
+        var startDate = $event;
+        var maxDate = new Date();
+        maxDate.setDate($event.getDate() + parseInt('' + this.selectedNoDays, 10));
         this.phase3.tcbEvalStart = startDate;
-        this.phase3.tcbEvalEnd = endDate;
+        this.phase3.tcbEvalEnd = maxDate;
     };
     Phase3Component.prototype.onSelectAbortRegress = function ($event) {
-        if (this.phase3.abortRegressReason !== undefined) {
-            if (this.phase3.abortRegressReason.includes('Abort')) {
+        if (this.phase3.abortRegress !== undefined) {
+            if (this.phase3.abortRegress.includes('Abort')) {
                 this.phase3.abort = true;
                 this.phase3.regress = false;
-                this.activateSubmitButton = true;
                 this.phase3.abortRegressReason = undefined;
                 this.phase3.alreadyRegressed = false;
                 this.phase3.schedRegressionDate = undefined;
             }
-            else if (this.phase3.abortRegressReason.includes('Regress')) {
+            else if (this.phase3.abortRegress.includes('Regress')) {
                 this.phase3.abort = false;
                 this.phase3.regress = true;
-                this.activateSubmitButton = false;
                 this.phase3.abortRegressReason = undefined;
             }
+        }
+    };
+    Phase3Component.prototype.abortRegressReasonCheck = function () {
+        if (this.phase3.abortRegressReason !== undefined && this.phase3.abortRegress.includes('Abort')) {
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            this.disableSubmitButton = true;
+        }
+        else if (this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed) {
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            this.disableSubmitButton = true;
+        }
+    };
+    Phase3Component.prototype.schedRegressCheck = function () {
+        if (this.phase3.schedRegressionDate !== undefined) {
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            this.disableSubmitButton = true;
         }
     };
     Phase3Component.prototype.onSelectImplementationSuccessful = function (e) {
@@ -1691,9 +2554,8 @@ var Phase3Component = /** @class */ (function () {
             this.phase3.abort = false;
             this.phase3.regress = false;
             this.phase3.abortRegressReason = undefined;
-            this.phase3.impSuccessReason = undefined;
+            this.phase3.abortRegress = undefined;
             this.phase3.alreadyRegressed = true;
-            this.activateSubmitButton = false;
         }
         else {
             this.phase3.implementationSuccessful = false;
@@ -1710,7 +2572,6 @@ var Phase3Component = /** @class */ (function () {
             this.phase3.ccrConfirmation = false;
             this.phase3.evalFailure = undefined;
             this.showEvalChange = false;
-            this.activateSubmitButton = false;
         }
     };
     Phase3Component.prototype.onSelectAdditionalDocs = function (e) {
@@ -1725,12 +2586,10 @@ var Phase3Component = /** @class */ (function () {
     Phase3Component.prototype.onSelectAlreadyRegressed = function (e) {
         if (e.target.value === 'yes') {
             this.phase3.alreadyRegressed = true;
-            this.activateSubmitButton = true;
             this.showSched = false;
         }
         else {
             this.phase3.alreadyRegressed = false;
-            this.activateSubmitButton = true;
             this.showSched = true;
         }
     };
@@ -1744,77 +2603,210 @@ var Phase3Component = /** @class */ (function () {
             this.phase3.evalSuccess = true;
             this.showEvalChange = true;
             this.phase3.evalFailure = undefined;
-            this.activateSubmitButton = false;
         }
         else {
             this.phase3.evalSuccess = false;
             this.showEvalChange = true;
             this.phase3.ccrConfirmation = false;
-            this.activateSubmitButton = true;
         }
     };
     Phase3Component.prototype.onSelectConfirm = function (e) {
         if (e.target.value === 'Confirm') {
             this.phase3.ccrConfirmation = true;
-            this.activateSubmitButton = true;
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            this.disableSubmitButton = true;
         }
         else {
             this.phase3.ccrConfirmation = false;
-            this.activateSubmitButton = true;
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            this.disableSubmitButton = true;
         }
     };
+    Phase3Component.prototype.onCancel = function () {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+            title: 'Are you sure?',
+            text: "You will lose all progress on this form",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+            }
+            else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.DismissReason.cancel) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    };
     Phase3Component.prototype.onSubmit = function () {
-        console.log(JSON.stringify(this.phase3));
+        var _this = this;
+        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+            title: 'Are you sure?',
+            text: 'You won\'t be able make changes to your submission',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#5bc0de',
+            cancelButtonColor: '#d9534f',
+            reverseButtons: true
+        }).then(function (result) {
+            if (result.value) {
+                _this.phase3Service.submitPhase3(_this.phase3).subscribe(function (data) {
+                    if (data.success) {
+                        console.log('we have post');
+                        if (_this.phase3.additionalDocs) {
+                            _this.populateForm();
+                            _this.phase3Service.upload(_this.formData).subscribe(function (data1) {
+                                if (data1.success) {
+                                    _this.phase3.documentIds = data.generatedName;
+                                    console.log(_this.phase3.documentIds);
+                                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+                                        title: 'Received',
+                                        text: 'Your files have been received',
+                                        type: 'success',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                                else {
+                                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+                                        title: 'Files not uploaded',
+                                        text: data.message,
+                                        type: 'error',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                }
+                            });
+                        }
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+                            title: 'Received',
+                            text: 'CCR Phase 3 submitted',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        _this.router.navigate(['home']);
+                    }
+                });
+            }
+            else if (result.dismiss === sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.DismissReason.cancel) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default()({
+                    title: 'Cancelled',
+                    text: 'Your may continue to make changes',
+                    type: 'error',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        });
+    };
+    Phase3Component.prototype.evalReasonCheck = function () {
+        if (this.phase3.evalFailure !== undefined) {
+            var submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            this.disableSubmitButton = true;
+        }
     };
     Phase3Component.prototype.ngOnInit = function () {
         var _this = this;
-        this.Token = this.Phase3Service.getCSRFToken().subscribe(function (data) {
-            _this.Token = data.tokenValue;
+        this.phsae2service.getPageData().subscribe(function (data) {
+            _this.availablePriorities = data[0];
+            _this.availableImpacts = data[1];
+            _this.availablePeriods = data[2];
+            _this.availableNatureOfChange = data[3];
+            _this.availableEosSystems = data[4];
         });
+        this.phase2.CCR_ID = this.phase3Service.phaseData[1][0].phase1_ID;
+        this.phase2.TCB_CRF_ID = this.phase3Service.phaseData[1][0].tcb_crf_ID;
+        this.phase2.requestPriority = this.phase3Service.phaseData[1][0].requestPriority_ID;
+        this.phase2.predictedImpact = this.phase3Service.phaseData[1][0].impactRisks_ID;
+        this.phase2.changePeriod = this.phase3Service.phaseData[1][0].changePeriod_ID;
+        this.phase2.temporaryPeriodStartDate = this.phase3Service.phaseData[1][0].temporaryStartDate;
+        this.phase2.temporaryPeriodNumberOfDays = this.phase3Service.phaseData[1][0].temporaryNoOfDays;
+        this.phase2.temporaryPeriodEndDate = this.phase3Service.phaseData[1][0].temporaryEndDate;
+        this.phase2.natureOfChange = this.phase3Service.phaseData[1][0].natureChange_ID;
+        this.phase2.eosSystem = this.phase3Service.phaseData[1][0].eos_ID;
+        this.phase2.configurationItems = this.phase3Service.phaseData[1][0].configurationDescr;
+        if (this.phase3Service.phaseData[1][0].changeTypeHW === '0') {
+            this.phase2.change.hardware = false;
+        }
+        else {
+            this.phase2.change.hardware = true;
+        }
+        if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
+            this.phase2.change.software = false;
+        }
+        else {
+            this.phase2.change.software = true;
+        }
+        if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
+            this.phase2.change.firmware = false;
+        }
+        else {
+            this.phase2.change.firmware = true;
+        }
+        this.phase2.estimatedImpacts.operations = this.phase3Service.phaseData[1][0].impactOnOperations;
+        this.phase2.estimatedImpacts.clients = this.phase3Service.phaseData[1][0].impactOnClients;
+        this.phase2.estimatedImpacts.technical = this.phase3Service.phaseData[1][0].impactOnTech;
+        this.phase2.problemReportRaised = this.phase3Service.phaseData[1][0].reportRaisedContractor;
+        this.phase2.problemReportRef = this.phase3Service.phaseData[1][0].contractor_report_ref;
+        this.phase2.changeSuccessfullyTested = this.phase3Service.phaseData[1][0].pre_testSucces;
+        this.phase2.changeNotSuccessfullyTestedReason = this.phase3Service.phaseData[1][0].reasonUnsuccesTest;
+        this.phase2.specialistComment = this.phase3Service.phaseData[1][0].specialist_comment;
+        this.phase2.proposedImplementationDate = this.phase3Service.phaseData[1][0].proposed_implementation_date;
+        this.phase3.CCR_ID = this.phase3Service.phaseData[1][0].ID;
+        this.disableSubmitButton = false;
+        var submitButton = document.getElementById('submit');
+        submitButton.classList.add('disabled');
+        this.Token = this.phase3Service.getCSRFToken().subscribe(function (data) {
+            _this.phase3.CSRF_token = data.tokenValue;
+        });
+        this.localObj = this.phase3Service.getObj();
+        if (this.localObj !== null) {
+            this.disableSubmitButton = true;
+            submitButton.classList.remove('disabled');
+            document.getElementById('cancel').classList.add('invisible');
+        }
     };
     Phase3Component.prototype.fileOver = function (event) {
-        console.log(event);
     };
     Phase3Component.prototype.fileLeave = function (event) {
-        console.log(event);
     };
     Phase3Component.prototype.dropped = function (files) {
-        // this.displayEstimatedImpact = true;
+        var _this = this;
         // this.files = files;
         this.files.push(files);
-        var _loop_1 = function (droppedFile) {
+        for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
+            var droppedFile = files_1[_i];
             // Is it a file?
             if (droppedFile.fileEntry.isFile) {
                 var fileEntry = droppedFile.fileEntry;
                 fileEntry.file(function (file) {
-                    // Here you can access the real file
-                    console.log(droppedFile.relativePath, file);
-                    /**
-                     // You could upload it like this:
-                     const formData = new FormData()
-                     formData.append('logo', file, relativePath)
-
-                     // Headers
-                     const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-                     this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-                     .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-                     **/
+                    _this.filesForUpload.push(file);
                 });
             }
             else {
                 // It was a directory (empty directories are added, otherwise only files)
                 var fileEntry = droppedFile.fileEntry;
-                console.log(droppedFile.relativePath, fileEntry);
             }
-        };
-        for (var _i = 0, files_1 = files; _i < files_1.length; _i++) {
-            var droppedFile = files_1[_i];
-            _loop_1(droppedFile);
+        }
+    };
+    Phase3Component.prototype.populateForm = function () {
+        for (var i = 0; i < this.filesForUpload.length; i++) {
+            this.formData.append('file[]', this.filesForUpload[i], this.filesForUpload[i].name);
         }
     };
     Phase3Component = __decorate([
@@ -1823,8 +2815,7 @@ var Phase3Component = /** @class */ (function () {
             template: __webpack_require__(/*! ./phase3.component.html */ "./src/app/pages/phase3/phase3.component.html"),
             styles: [__webpack_require__(/*! ./phase3.component.css */ "./src/app/pages/phase3/phase3.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_phase3_service__WEBPACK_IMPORTED_MODULE_2__["Phase3Service"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_services_phase3_service__WEBPACK_IMPORTED_MODULE_2__["Phase3Service"], _services_phase2_service__WEBPACK_IMPORTED_MODULE_4__["Phase2Service"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], Phase3Component);
     return Phase3Component;
 }());
@@ -1852,7 +2843,7 @@ module.exports = "\n\n\nhtml, body{\n  margin: 0;\n  padding: 0;\n  border: 0;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Created by : Liam Gordon McCabe-->\n<!-- Student number: 27455211-->\n<div class=\"card mx-auto\" style=\"width: 60rem;\">\n\n    <h5 class=\"card-header info-color white-text text-center py-4\">\n        <strong>Register</strong>\n    </h5>\n\n<div class=\"card-body px-lg-5 pt-3\">\n  <form class=\"registrationForm\" >\n\n    <div class=\"form-group\" style=\"color: #757575;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <label for=\"title\">Title</label>\n            </div>\n            <div class=\"col\">\n                <select\n                        ngbPopover=\"Select a title by selecting an option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"SELECT TITLE\"\n                        class=\"px-3 rounded form-control\"\n                        name=\"title\"\n                        id=\"title\"\n                        (change)=\"onSelectTitle($event)\"\n                        [(ngModel)]=\"this.User.title\"\n                >\n                    <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                    <option *ngFor=\"let title of availableTitles\"  [value]=\"title[0]\" >{{title[1]}}</option>\n                </select>\n            </div>\n            <div class=\"col\">\n                <label for=\"site\">Site</label>\n            </div>\n            <div class=\"col\">\n                <select\n                        ngbPopover=\"Select a site by selecting an option from the drop down list\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"SELECT SITE\"\n                        class=\"px-3 rounded form-control\"\n                        [(ngModel)]=\"this.User.site\"\n                        name=\"site\"\n                        id=\"site\"\n                        (change)=\"onSelectTitle($event)\"\n                >\n                    <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                    <option *ngFor=\"let site of availableSites\" [value]=\"site[0]\">{{site[1]}}</option>\n                </select>\n            </div>\n        </div>\n    </div>\n    <div class=\"form-group\" >\n      <label for=\"name\">Name</label>\n      <input\n              ngbPopover=\"Please enter your first name\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT FIRST NAME\"\n              required class=\"form-control\" [(ngModel)]=\"User.name\"\n              type=\"text\" name=\"name\" id=\"name\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"surname\">Surname</label>\n      <input\n              ngbPopover=\"Please enter your surname\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT SURNAME\"\n              required class=\"form-control\" [(ngModel)]=\"User.surname\"\n              type=\"text\" name=\"surname\" id=\"surname\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"employeeID\">Employee ID</label>\n      <input\n              ngbPopover=\"Please enter your employee ID\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT EMPLOYEE ID\"\n              class=\"form-control\" (input)=\"validateEmpId(User.employeeId)\"\n              [ngClass]=\"{'true': this.showEmpId, 'false':!this.showEmpId}\"\n              [(ngModel)]=\"User.employeeId\"\n              type=\"number\" name='EmployeeId' id=\"employeeID\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Contact Number</label>\n      <label *ngIf=\"this.showPhone == false\" style=\"color: red\">Invalid South African Number</label>\n      <label *ngIf=\"this.showPhone == true\" style=\"color: green\">Valid South African Number </label>\n      <input\n              ngbPopover=\"Please enter your phone number\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT PHONE NUMBER\"\n              (input)=\"validatePhoneNumber(this.User.contactNumber)\"\n              class=\"form-control\" [ngClass]=\"{'true': this.showPhone, 'false': !this.showPhone}\"\n              [(ngModel)]=\"this.User.contactNumber\"\n              type=\"text\"\n              name=\"contactNum\" required>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"username\">Username</label>\n      <label *ngIf=\"this.showEmail == false\" style=\"color: red\">Invalid</label>\n      <label *ngIf=\"this.showEmail == true\" style=\"color: green\">Valid\n      </label>\n      <input\n              ngbPopover=\"Please enter the username of your email before the @\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT USERNAME\"\n              (input)=\"validateEmail(User.email)\" class=\"form-control\"\n             [ngClass]=\"{'true': this.showEmail, 'false': !this.showEmail}\"\n             id=\"username\" name=\"username\" [(ngModel)]= User.email type=\"email\"\n             required>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input\n              ngbPopover=\"Password must be at least 8 characters in length containing  1 Uppercase, 1 Lowercase and 1 special character\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT PASSWORD\"\n             (input)=\"validatePassword(password)\"\n             [ngClass]=\"{'true': this.showPassword, 'false': !this.showPassword}\"\n             class=\"form-control\" id=\"password\" name=\"password\" [(ngModel)]=\"password\" type=\"password\" required>\n      <password-strength-meter [password]=\"password\"\n                               class=\"form-control\" id=\"passwordStrengthMeter\" name=\"passwordStrengthMeter\" >\n      </password-strength-meter>\n      <label for=\"passwordCheck\">Confirm Password</label>\n      <input\n              ngbPopover=\"Re-Enter your password\" triggers=\"mouseenter:mouseleave\" placement=\"right\" popoverTitle=\"INPUT PASSWORD AGAIN\"\n              (input)=\"confirmPassword(passwordCheck)\"\n             [ngClass]=\"{'true': this.showPasswordCheck, 'false': !this.showPasswordCheck}\"\n             class=\"form-control\" id=\"passwordCheck\" name=\"passwordCheck\" [(ngModel)]=\"passwordCheck\" type=\"password\">\n\n    </div>\n<!--    <div class=\"form-group\">-->\n<!--      <label for=\"permissionLevel\">Permission Level</label>-->\n<!--      <select title=\"Select your relevant Permission level\" required  (change)=\"onSelectPermission($event.target.value)\"-->\n<!--              name=\"permissionLevel\" id=\"permissionLevel\">-->\n<!--        <option *ngFor=\"let permission of availablePermissions\">{{permission}}</option>-->\n<!--      </select>-->\n<!--    </div>-->\n<!--    <div class=\"form-group\">-->\n<!--      <label for=\"region\">Region</label>-->\n<!--      <select title=\"Select your relevant region\" (change)=\"onSelectRegion($event.target.value)\" name=\"region\" id=\"region\">-->\n<!--        <option *ngFor=\"let region of availableRegions\">{{region}}</option>-->\n<!--      </select>-->\n<!--    </div>-->\n\n    <!--<div class=\"form-group\">-->\n      <!--<label>Submit</label>-->\n      <!--<textarea rows=\"4\" class=\"form-control\" [(ngModel)]=\"email.description\"-->\n                <!--type=\"text\" name=\"enquiry\"></textarea>-->\n    <!--</div>-->\n\n    <br>\n          <div class=\"row\">\n              <div class=\"col\"></div>\n              <div class=\"col\">\n                  <button\n                          type=\"submit\"\n                          value=\"Register\"\n                          class=\"btn btn-outline-danger btn-rounded w-100  my-4  waves-effect z-depth-0\"\n                          (click)=\"onCancel()\"\n                  >Cancel</button>\n              </div>\n              <div class=\"col\"></div>\n              <div class=\"col\">\n                  <button\n                          type=\"submit\"\n                          value=\"Register\"\n                          id=\"submit\"\n                          class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled\"\n                          [disabled]=\"!this.showRegisterButton\"\n                          (click)=\"onRegister()\"\n                  >Register</button>\n              </div>\n\n              <div class=\"col\"></div>\n          </div>\n  </form>\n</div>\n</div>\n"
+module.exports = "<!-- Created by : Liam Gordon McCabe-->\n<!-- Student number: 27455211-->\n<div class=\"card mx-auto\" style=\"width: 60rem;\">\n\n    <h5 class=\"card-header info-color white-text text-center py-4\">\n        <strong>Register</strong>\n    </h5>\n\n<div class=\"card-body px-lg-5 pt-3\">\n  <form class=\"registrationForm\" >\n\n    <div class=\"form-group\" style=\"color: #757575;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <label for=\"title\">Title</label>\n            </div>\n            <div class=\"col\">\n                <select\n                        ngbPopover=\"Select a title by selecting an option from the drop down list\"\n                        triggers=\"mouseenter:mouseleave\"\n                        placement=\"bottom-right\"\n                        popoverTitle=\"SELECT TITLE\"\n                        class=\"px-3 rounded form-control\"\n                        name=\"title\"\n                        id=\"title\"\n                        (change)=\"onSelectTitle($event)\"\n                        [(ngModel)]=\"this.User.title\"\n                >\n                    <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                    <option *ngFor=\"let title of availableTitles\"  [value]=\"title[0]\" >{{title[1]}}</option>\n                </select>\n            </div>\n            <div class=\"col\">\n                <label for=\"site\">Site</label>\n            </div>\n            <div class=\"col\">\n                <select\n                        ngbPopover=\"Select a site by selecting an option from the drop down list\"\n                        triggers=\"mouseenter:mouseleave\"\n                        placement=\"bottom-right\"\n                        popoverTitle=\"SELECT SITE\"\n                        class=\"px-3 rounded form-control\"\n                        [(ngModel)]=\"this.User.site\"\n                        name=\"site\"\n                        id=\"site\"\n                        (change)=\"onSelectTitle($event)\"\n                >\n                    <option selected=\"selected\" disabled=\"disabled\">Select one</option>\n                    <option *ngFor=\"let site of availableSites\" [value]=\"site[0]\">{{site[1]}}</option>\n                </select>\n            </div>\n        </div>\n    </div>\n    <div class=\"form-group\" >\n      <label for=\"name\">Name</label>\n      <input\n              ngbPopover=\"Please enter your first name\"\n              triggers=\"mouseenter:mouseleave\"\n              placement=\"bottom-right\"\n              popoverTitle=\"INPUT FIRST NAME\"\n              required class=\"form-control\" [(ngModel)]=\"User.name\"\n              type=\"text\" name=\"name\" id=\"name\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"surname\">Surname</label>\n      <input\n              ngbPopover=\"Please enter your surname\"\n              triggers=\"mouseenter:mouseleave\"\n              placement=\"bottom-right\"\n              popoverTitle=\"INPUT SURNAME\"\n              required class=\"form-control\" [(ngModel)]=\"User.surname\"\n              type=\"text\" name=\"surname\" id=\"surname\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"employeeID\">Employee ID</label>\n      <input\n              ngbPopover=\"Please enter your employee ID\"\n              triggers=\"mouseenter:mouseleave\"\n              placement=\"bottom-right\"\n              popoverTitle=\"INPUT EMPLOYEE ID\"\n              class=\"form-control\" (input)=\"validateEmpId(User.employeeId)\"\n              [ngClass]=\"{'true': this.showEmpId, 'false':!this.showEmpId}\"\n              [(ngModel)]=\"User.employeeId\"\n              type=\"number\" name='EmployeeId' id=\"employeeID\" required>\n    </div>\n    <div class=\"form-group\">\n      <label>Contact Number</label>\n      <label *ngIf=\"this.showPhone == false\" style=\"color: red\">Invalid South African Number</label>\n      <label *ngIf=\"this.showPhone == true\" style=\"color: green\">Valid South African Number </label>\n      <input\n              ngbPopover=\"Please enter your phone number\"\n              triggers=\"mouseenter:mouseleave\"\n              placement=\"bottom-right\"\n              popoverTitle=\"INPUT PHONE NUMBER\"\n              (input)=\"validatePhoneNumber(this.User.contactNumber)\"\n              class=\"form-control\" [ngClass]=\"{'true': this.showPhone, 'false': !this.showPhone}\"\n              [(ngModel)]=\"this.User.contactNumber\"\n              type=\"text\"\n              name=\"contactNum\" required>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"username\">Username</label>\n      <label *ngIf=\"this.showEmail == false\" style=\"color: red\">Invalid</label>\n      <label *ngIf=\"this.showEmail == true\" style=\"color: green\">Valid\n      </label>\n      <input\n              ngbPopover=\"Please enter the username of your email before the @\"\n              triggers=\"mouseenter:mouseleave\"\n              placement=\"bottom-right\"\n              popoverTitle=\"INPUT USERNAME\"\n              (input)=\"validateEmail(User.email)\" class=\"form-control\"\n             [ngClass]=\"{'true': this.showEmail, 'false': !this.showEmail}\"\n             id=\"username\" name=\"username\" [(ngModel)]= User.email type=\"email\"\n             required>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input ngbPopover=\"Password must be at least 8 characters in length containing  1 Uppercase, 1 Lowercase and 1 special character\"\n             triggers=\"mouseenter:mouseleave\"\n             placement=\"bottom-right\"\n             popoverTitle=\"INPUT PASSWORD\"\n             (input)=\"validatePassword(password)\"\n             [ngClass]=\"{'true': this.showPassword, 'false': !this.showPassword}\"\n             class=\"form-control\" id=\"password\" name=\"password\" [(ngModel)]=\"password\" type=\"password\" required>\n      <password-strength-meter [password]=\"password\"\n                               class=\"form-control\" id=\"passwordStrengthMeter\" name=\"passwordStrengthMeter\" >\n      </password-strength-meter>\n      <label for=\"passwordCheck\">Confirm Password</label>\n      <input\n              ngbPopover=\"Re-Enter your password\"\n              triggers=\"mouseenter:mouseleave\"\n              placement=\"bottom-right\"\n              popoverTitle=\"INPUT PASSWORD AGAIN\"\n              (input)=\"confirmPassword(passwordCheck)\"\n             [ngClass]=\"{'true': this.showPasswordCheck, 'false': !this.showPasswordCheck}\"\n             class=\"form-control\" id=\"passwordCheck\" name=\"passwordCheck\" [(ngModel)]=\"passwordCheck\" type=\"password\">\n\n    </div>\n<!--    <div class=\"form-group\">-->\n<!--      <label for=\"permissionLevel\">Permission Level</label>-->\n<!--      <select title=\"Select your relevant Permission level\" required  (change)=\"onSelectPermission($event.target.value)\"-->\n<!--              name=\"permissionLevel\" id=\"permissionLevel\">-->\n<!--        <option *ngFor=\"let permission of availablePermissions\">{{permission}}</option>-->\n<!--      </select>-->\n<!--    </div>-->\n<!--    <div class=\"form-group\">-->\n<!--      <label for=\"region\">Region</label>-->\n<!--      <select title=\"Select your relevant region\" (change)=\"onSelectRegion($event.target.value)\" name=\"region\" id=\"region\">-->\n<!--        <option *ngFor=\"let region of availableRegions\">{{region}}</option>-->\n<!--      </select>-->\n<!--    </div>-->\n\n    <!--<div class=\"form-group\">-->\n      <!--<label>Submit</label>-->\n      <!--<textarea rows=\"4\" class=\"form-control\" [(ngModel)]=\"email.description\"-->\n                <!--type=\"text\" name=\"enquiry\"></textarea>-->\n    <!--</div>-->\n\n    <br>\n          <div class=\"row\">\n              <div class=\"col\"></div>\n              <div class=\"col\">\n                  <button\n                          type=\"submit\"\n                          value=\"Register\"\n                          class=\"btn btn-outline-danger btn-rounded w-100  my-4  waves-effect z-depth-0\"\n                          (click)=\"onCancel()\"\n                  >Cancel</button>\n              </div>\n              <div class=\"col\"></div>\n              <div class=\"col\">\n                  <button\n                          type=\"submit\"\n                          value=\"Register\"\n                          id=\"submit\"\n                          class=\"btn btn-outline-info btn-rounded w-100 my-4  waves-effect z-depth-0 disabled\"\n                          [disabled]=\"!this.showRegisterButton\"\n                          (click)=\"onRegister()\"\n                  >Register</button>\n              </div>\n\n              <div class=\"col\"></div>\n          </div>\n  </form>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -1935,7 +2926,8 @@ var RegistrationComponent = /** @class */ (function () {
     };
     // Validates email input
     RegistrationComponent.prototype.validateEmail = function (email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var re = /[!@#$%^&*(),.?"'~`:;{}|<>_+=[ ]/g;
         if (re.test(String(email).toLowerCase()) === true) {
             this.showEmail = false;
         }
@@ -1976,7 +2968,11 @@ var RegistrationComponent = /** @class */ (function () {
                 !(this.User.contactNumber === undefined) &&
                 !(this.User.name === undefined) &&
                 !(this.User.surname === undefined) &&
-                !(this.password === undefined)) {
+                !(this.password === undefined) &&
+                (this.showEmail === true) &&
+                (this.showEmpId === true) &&
+                (this.showPassword === true) &&
+                (this.showPhone === true)) {
                 this.showRegisterButton = true;
             }
         }
@@ -2109,6 +3105,135 @@ var RFCsignoffComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/MyRfcs.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/MyRfcs.service.ts ***!
+  \********************************************/
+/*! exports provided: MyRfcsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MyRfcsService", function() { return MyRfcsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+// Created by Blaine Viljoen
+
+
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }),
+};
+var MyRfcsService = /** @class */ (function () {
+    function MyRfcsService(http) {
+        this.http = http;
+    }
+    MyRfcsService.prototype.getCSRFToken = function () {
+        return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php', httpOptions);
+    };
+    MyRfcsService.prototype.getPageData = function (userIDInput) {
+        var obj = {
+            dataSelection: 'myRfcs',
+            userID: userIDInput
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    };
+    MyRfcsService.prototype.getFiles = function () {
+        var obj = {
+            fileSelection: 'images'
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/retrieveFiles.php', obj, httpOptions);
+    };
+    MyRfcsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], MyRfcsService);
+    return MyRfcsService;
+}());
+
+// Created by Blaine Viljoen
+
+
+/***/ }),
+
+/***/ "./src/app/services/adminDashboard.service.ts":
+/*!****************************************************!*\
+  !*** ./src/app/services/adminDashboard.service.ts ***!
+  \****************************************************/
+/*! exports provided: AdminDashboardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminDashboardService", function() { return AdminDashboardService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+// Created by Blaine Viljoen
+
+
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }),
+};
+var AdminDashboardService = /** @class */ (function () {
+    function AdminDashboardService(http) {
+        this.http = http;
+    }
+    AdminDashboardService.prototype.getCSRFToken = function () {
+        return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php', httpOptions);
+    };
+    AdminDashboardService.prototype.getSpecialistData = function () {
+        var obj = {
+            dataSelection: 'specialist'
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    };
+    AdminDashboardService.prototype.getPageData = function () {
+        var obj = {
+            dataSelection: 'allCCR'
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    };
+    AdminDashboardService.prototype.setNewSpecialist = function (id, specID) {
+        var obj = {
+            updateSelection: 'specialist',
+            ID: id,
+            specialist: specID
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+    };
+    AdminDashboardService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], AdminDashboardService);
+    return AdminDashboardService;
+}());
+
+// Created by Blaine Viljoen
+
+
+/***/ }),
+
 /***/ "./src/app/services/app.service.ts":
 /*!*****************************************!*\
   !*** ./src/app/services/app.service.ts ***!
@@ -2202,9 +3327,6 @@ var CcrHttpInterceptor = /** @class */ (function () {
         if (Authorization) {
             req = req.clone({ headers: req.headers.set('Authorization', Authorization) });
         }
-        if (!req.headers.has('Content-Type')) {
-            req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
-        }
         req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
         return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (event) {
             // req.headers.append('Authorization', 'Bearer ' + Authorization);
@@ -2224,16 +3346,16 @@ var CcrHttpInterceptor = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/services/currentRfcs.service.ts":
-/*!*************************************************!*\
-  !*** ./src/app/services/currentRfcs.service.ts ***!
-  \*************************************************/
-/*! exports provided: CurrentRfcsService */
+/***/ "./src/app/services/current-ccrs.service.ts":
+/*!**************************************************!*\
+  !*** ./src/app/services/current-ccrs.service.ts ***!
+  \**************************************************/
+/*! exports provided: CurrentCcrsService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrentRfcsService", function() { return CurrentRfcsService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrentCcrsService", function() { return CurrentCcrsService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -2250,26 +3372,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }),
 };
-var CurrentRfcsService = /** @class */ (function () {
-    function CurrentRfcsService(http) {
+var CurrentCcrsService = /** @class */ (function () {
+    function CurrentCcrsService(http) {
         this.http = http;
     }
-    CurrentRfcsService.prototype.getCSRFToken = function () {
+    CurrentCcrsService.prototype.getCSRFToken = function () {
         return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php', httpOptions);
     };
-    CurrentRfcsService.prototype.getPageData = function () {
+    CurrentCcrsService.prototype.getMyCCRs = function () {
         var obj = {
             dataSelection: 'currentRfcs'
         };
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     };
-    CurrentRfcsService = __decorate([
+    CurrentCcrsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], CurrentRfcsService);
-    return CurrentRfcsService;
+    ], CurrentCcrsService);
+    return CurrentCcrsService;
 }());
 
 
@@ -2377,16 +3499,15 @@ var httpOptions = {
 var Phase1Service = /** @class */ (function () {
     function Phase1Service(http) {
         this.http = http;
+        this.obj = null;
+        this.siteID = 0;
     }
-    Phase1Service.prototype.submitRequest = function (phase1, token, selectedSite) {
-        var obj = {
-            date: phase1.dateRequested,
-            change: phase1.requestedChange,
-            description: phase1.description,
-            site_ID: selectedSite,
-            CSRF_token: token
-        };
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', obj, httpOptions);
+    Phase1Service.prototype.submitRequest = function (phase1) {
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', phase1, httpOptions);
+    };
+    Phase1Service.prototype.updateRequest = function (phase1, ccrID) {
+        var obj = { phase1: phase1, updateSelection: 'phase1', ID: ccrID };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
     };
     Phase1Service.prototype.getPageData = function () {
         var obj = {
@@ -2396,6 +3517,16 @@ var Phase1Service = /** @class */ (function () {
     };
     Phase1Service.prototype.getCSRFToken = function () {
         return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php', httpOptions);
+    };
+    Phase1Service.prototype.setobj = function (obj, siteID) {
+        this.obj = obj;
+        this.siteID = siteID;
+    };
+    Phase1Service.prototype.getobj = function () {
+        return this.obj;
+    };
+    Phase1Service.prototype.getSite = function () {
+        return this.siteID;
     };
     Phase1Service = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -2439,6 +3570,9 @@ var httpOptions = {
 var Phase2Service = /** @class */ (function () {
     function Phase2Service(http) {
         this.http = http;
+        this.obj = null;
+        this.phase1 = null;
+        this.user = null;
     }
     Phase2Service.prototype.getCSRFToken = function () {
         return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php', httpOptions);
@@ -2449,40 +3583,44 @@ var Phase2Service = /** @class */ (function () {
         };
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     };
-    Phase2Service.prototype.submitPhase2 = function (phase2, token) {
+    Phase2Service.prototype.getEOSTCBNumber = function (eos_ID) {
         var obj = {
-            TCB_CRF_ID: phase2.TCB_CRF_ID,
-            requestPriority: phase2.requestPriority,
-            predictedImpact: phase2.predictedImpact,
-            changePeriod: phase2.changePeriod,
-            temporaryPeriodStartDate: undefined,
-            temporaryPeriodNumberOfDays: undefined,
-            temporaryPeriodEndDate: undefined,
-            natureOfChange: undefined,
-            eosSystem: undefined,
-            configurationItems: undefined,
-            change: {
-                hardware: false,
-                software: false,
-                firmware: false
-            },
-            additionalDocuments: false,
-            numberOfPages: undefined,
-            estimatedImpacts: {
-                operations: undefined,
-                clients: undefined,
-                technical: undefined
-            },
-            problemReportRaised: false,
-            problemReportRef: undefined,
-            changeSuccessfullyTested: undefined,
-            changeNotSuccessfullyTestedReason: undefined,
-            specialistComment: undefined,
-            proposedImplementationDate: undefined,
-            recommend_oppose: undefined,
-            token: token
+            dataSelection: 'eosTCB',
+            eos_ID: eos_ID
         };
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/phase2submit.php', obj, httpOptions);
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    };
+    Phase2Service.prototype.upload = function (formData) {
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php', formData);
+    };
+    Phase2Service.prototype.submitPhase2 = function (phase2) {
+        console.log(phase2);
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/specialistConfiguration.php', phase2, httpOptions);
+    };
+    Phase2Service.prototype.updatePhase2 = function (phase2, ccrID) {
+        var obj = { phase2: phase2, updateSelection: 'phase2', ID: ccrID };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+    };
+    Phase2Service.prototype.setObj = function (obj, phase1, user) {
+        this.obj = obj;
+        this.phase1 = phase1;
+        this.user = user;
+    };
+    Phase2Service.prototype.getObj = function () {
+        return this.obj;
+    };
+    Phase2Service.prototype.getPhase1 = function () {
+        return this.phase1;
+    };
+    Phase2Service.prototype.getUser = function () {
+        return this.user;
+    };
+    Phase2Service.prototype.getUserByID = function (user_ID) {
+        var obj = {
+            dataSelection: 'user',
+            user_ID: user_ID
+        };
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     };
     Phase2Service = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -2526,9 +3664,27 @@ var httpOptions = {
 var Phase3Service = /** @class */ (function () {
     function Phase3Service(http) {
         this.http = http;
+        this.obj = null;
+        this.phaseData = null;
     }
     Phase3Service.prototype.getCSRFToken = function () {
         return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php', httpOptions);
+    };
+    Phase3Service.prototype.upload = function (formData) {
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php', formData);
+    };
+    Phase3Service.prototype.submitPhase3 = function (phase3) {
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/specialistImplementation.php', phase3, httpOptions);
+    };
+    Phase3Service.prototype.setObj = function (obj) {
+        this.obj = obj;
+    };
+    Phase3Service.prototype.getObj = function () {
+        return this.obj;
+    };
+    Phase3Service.prototype.setphases = function (phaseData) {
+        this.phaseData = phaseData;
+        console.log(this.phaseData);
     };
     Phase3Service = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

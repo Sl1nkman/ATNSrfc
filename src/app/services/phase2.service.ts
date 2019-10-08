@@ -26,6 +26,14 @@ export class Phase2Service {
     };
     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
+
+  getEOSTCBNumber(eos_ID) {
+    const obj = {
+      dataSelection: 'eosTCB',
+      eos_ID: eos_ID
+    };
+    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+  }
   upload(formData: FormData) {
     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php' , formData);
   }
