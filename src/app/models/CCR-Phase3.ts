@@ -1,6 +1,7 @@
 // Created by Blaine Viljoen 28023374
 
 export interface CCRPhase3 {
+    CCR_ID: number;
     schedRegressionDate: Date;
     tcbEvalStart: Date;
     tcbEvalEnd: Date;

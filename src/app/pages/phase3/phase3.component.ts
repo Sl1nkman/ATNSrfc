@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
 import {CCRPhase3} from '../../models/CCR-Phase3';
 import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'ngx-file-drop';
-import {Data} from '@angular/router';
+import {Data, Router} from '@angular/router';
 import {Phase3Service} from '../../services/phase3.service';
 import swal from 'sweetalert2';
 import {CCRPhase2} from '../../models/CCR-Phase2';
@@ -82,6 +82,7 @@ export class Phase3Component implements OnInit {
     };
 
   phase3: CCRPhase3 = {
+    CCR_ID: undefined,
     schedRegressionDate: undefined,
     tcbEvalStart: undefined,
     tcbEvalEnd: undefined,
@@ -103,7 +104,7 @@ export class Phase3Component implements OnInit {
     user: String = '';
     Token = null ;
 
-  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service) {
+  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service, private router: Router) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,
@@ -313,6 +314,14 @@ export class Phase3Component implements OnInit {
                           }
                       });
                   }
+                  swal({
+                      title: 'Received',
+                      text: 'CCR Phase 3 submitted',
+                      type: 'success',
+                      showConfirmButton: false,
+                      timer: 1500
+                  });
+                  this.router.navigate(['home']);
               }
           });
 
@@ -382,6 +391,7 @@ export class Phase3Component implements OnInit {
       this.phase2.changeNotSuccessfullyTestedReason = this.phase3Service.phaseData[1][0].reasonUnsuccesTest;
       this.phase2.specialistComment                 = this.phase3Service.phaseData[1][0].specialist_comment;
       this.phase2.proposedImplementationDate        = this.phase3Service.phaseData[1][0].proposed_implementation_date;
+      this.phase3.CCR_ID                            = this.phase3Service.phaseData[1][0].ID;
       this.disableSubmitButton = false;
       const submitButton = document.getElementById('submit');
       submitButton.classList.add('disabled');
