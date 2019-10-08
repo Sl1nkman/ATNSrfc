@@ -27,6 +27,7 @@ export class Phase2Service {
     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
   upload(formData: FormData) {
+    formData.append('phase', 'phase2');
     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php' , formData);
   }
 
