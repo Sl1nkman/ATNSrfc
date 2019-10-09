@@ -15,11 +15,13 @@ import { RouteGuard } from '../guards/route.guard';
 import { AuthGuard } from '../guards/auth.guard';
 import { Phase3Component } from '../pages/phase3/phase3.component';
 import {AdminDashboardComponent} from '../pages/admin-dashboard/admin-dashboard.component';
+import {ForgotPasswordComponent} from '../pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login',        component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'home' ,        component: HomeComponent,
     canActivate: [AuthGuard] ,
     canActivateChild: [RouteGuard],
