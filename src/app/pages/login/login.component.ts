@@ -59,6 +59,9 @@ export class LoginComponent implements OnInit {
       });
 
   }
+  onForgotPassword($event) {
+    this.router.navigate(['forgotPassword']);
+  }
   ngOnInit() {
     this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
       this.Token = data.tokenValue ;
