@@ -119,6 +119,7 @@ export class Phase2Component implements OnInit {
         if ($event.target.value === '1') {
             prioritySelect.classList.add('text-danger');
             this.emergencySelected = true;
+            this.displayRecommendOrOppose = true;
             this.displaySpecialistComments = true;
             this.displayPredictedRisks = false;
             this.displayPredictedRisks = false;
@@ -496,7 +497,7 @@ export class Phase2Component implements OnInit {
                                     if (data1.success) {
                                         swal({
                                             title: 'Updated',
-                                            text: 'Phase 3 successfully updated',
+                                            text: 'Phase 2 successfully updated',
                                             type: 'success',
                                             showConfirmButton: false,
                                             timer: 1500
@@ -836,6 +837,9 @@ export class Phase2Component implements OnInit {
                         this.displayRecommendOrOppose = true;
                     }
                 }
+                this.phase2.specialistComment = this.localObj.specialist_comment;
+                this.phase2.proposedImplementationDate = this.localObj.proposed_implementation_date;
+                this.displayRecommendOrOppose = false;
 
                 this.activateSubmitButton = true;
                 const submitButton = document.getElementById('submit');

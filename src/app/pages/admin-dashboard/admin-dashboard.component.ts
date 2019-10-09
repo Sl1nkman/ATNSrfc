@@ -15,6 +15,7 @@ import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'n
 export class AdminDashboardComponent implements OnInit {
 
   private selectedIndex = 0;
+  private specialistPhase = '';
 
   private initiatedRFC = [];
   private phase2RFCs = [];
@@ -371,8 +372,13 @@ export class AdminDashboardComponent implements OnInit {
     if (this.phase2RFCs[i].ID !== -1) {
       this.showSpecialist = true;
       this.selectedCCR = this.phase2RFCs[i].ID;
+      this.selectedIndex = i;
+      this.specialistPhase = '2';
     } else {
-      swal('Failure' , 'A specialist has not yet processed this CCR' , 'error' );
+      this.showSpecialist = true;
+      this.selectedCCR = 0;
+      this.selectedIndex = i;
+      this.specialistPhase = '1';
     }
   }
 
@@ -382,7 +388,7 @@ export class AdminDashboardComponent implements OnInit {
 
   setSpecialist() {
     this.showSpecialist = false;
-    this.adminDashboardService.setNewSpecialist(this.selectedCCR, this.specialist).subscribe((data: Data) => {
+    this.adminDashboardService.setNewSpecialist(this.selectedCCR, this.specialist, this.specialistPhase, this.initiatedRFC[this.selectedIndex]).subscribe((data: Data) => {
       if (data.success) {
         swal('Success' , data.message , 'success' );
       } else {

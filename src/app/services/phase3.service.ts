@@ -44,6 +44,7 @@ export class Phase3Service {
     getObj() {
         return this.obj;
     }
+
     setphases(phaseData) {
         this.phaseData = phaseData ;
         console.log(this.phaseData);
