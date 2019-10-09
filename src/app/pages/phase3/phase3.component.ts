@@ -9,6 +9,7 @@ import {Phase3Service} from '../../services/phase3.service';
 import swal from 'sweetalert2';
 import {CCRPhase2} from '../../models/CCR-Phase2';
 import {Phase2Service} from '../../services/phase2.service';
+import {toInteger} from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
 @Component({
@@ -294,7 +295,7 @@ export class Phase3Component implements OnInit {
                   if(data.success){
                       if (this.phase3.additionalDocs) {
                           this.populateForm();
-                          this.formData.append('ID', this.phase3ID.toString());
+                          this.formData.append('passedID', this.localObj.ID);
                           this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
                               if (data1.success) {
                                   this.phase3.documentIds = data.generatedName;
@@ -325,7 +326,7 @@ export class Phase3Component implements OnInit {
                       console.log('we have post');
                       if (this.phase3.additionalDocs) {
                           this.populateForm();
-                          this.formData.append('ID', this.phase3ID.toString());
+                          this.formData.append('ID', this.phase2.CCR_ID);
                           this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
                               if (data1.success) {
                                   this.phase3.documentIds = data.generatedName;
@@ -383,42 +384,46 @@ export class Phase3Component implements OnInit {
           this.availableEosSystems = data[4];
 
       });
-      this.phase2.CCR_ID                            = this.phase3Service.phaseData[1][0].phase1_ID ;
-      this.phase2.TCB_CRF_ID                        = this.phase3Service.phaseData[1][0].tcb_crf_ID;
-      this.phase2.requestPriority                   = this.phase3Service.phaseData[1][0].requestPriority_ID;
-      this.phase2.predictedImpact                   = this.phase3Service.phaseData[1][0].impactRisks_ID;
-      this.phase2.changePeriod                      = this.phase3Service.phaseData[1][0].changePeriod_ID;
-      this.phase2.temporaryPeriodStartDate          = this.phase3Service.phaseData[1][0].temporaryStartDate;
-      this.phase2.temporaryPeriodNumberOfDays       = this.phase3Service.phaseData[1][0].temporaryNoOfDays;
-      this.phase2.temporaryPeriodEndDate            = this.phase3Service.phaseData[1][0].temporaryEndDate;
-      this.phase2.natureOfChange                    = this.phase3Service.phaseData[1][0].natureChange_ID;
-      this.phase2.eosSystem                         = this.phase3Service.phaseData[1][0].eos_ID;
-      this.phase2.configurationItems                = this.phase3Service.phaseData[1][0].configurationDescr;
-      if (this.phase3Service.phaseData[1][0].changeTypeHW === '0') {
-          this.phase2.change.hardware                   = false;
-      } else {
-          this.phase2.change.hardware                   = true ;
+
+      if (this.phase3Service.phaseData !== null){
+          this.phase2.CCR_ID                            = this.phase3Service.phaseData[1][0].phase1_ID ;
+          this.phase2.TCB_CRF_ID                        = this.phase3Service.phaseData[1][0].tcb_crf_ID;
+          this.phase2.requestPriority                   = this.phase3Service.phaseData[1][0].requestPriority_ID;
+          this.phase2.predictedImpact                   = this.phase3Service.phaseData[1][0].impactRisks_ID;
+          this.phase2.changePeriod                      = this.phase3Service.phaseData[1][0].changePeriod_ID;
+          this.phase2.temporaryPeriodStartDate          = this.phase3Service.phaseData[1][0].temporaryStartDate;
+          this.phase2.temporaryPeriodNumberOfDays       = this.phase3Service.phaseData[1][0].temporaryNoOfDays;
+          this.phase2.temporaryPeriodEndDate            = this.phase3Service.phaseData[1][0].temporaryEndDate;
+          this.phase2.natureOfChange                    = this.phase3Service.phaseData[1][0].natureChange_ID;
+          this.phase2.eosSystem                         = this.phase3Service.phaseData[1][0].eos_ID;
+          this.phase2.configurationItems                = this.phase3Service.phaseData[1][0].configurationDescr;
+          if (this.phase3Service.phaseData[1][0].changeTypeHW === '0') {
+              this.phase2.change.hardware                   = false;
+          } else {
+              this.phase2.change.hardware                   = true ;
+          }
+          if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
+              this.phase2.change.software                   = false;
+          } else {
+              this.phase2.change.software                   = true ;
+          }
+          if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
+              this.phase2.change.firmware                   = false;
+          } else {
+              this.phase2.change.firmware                   = true ;
+          }
+          this.phase2.estimatedImpacts.operations       = this.phase3Service.phaseData[1][0].impactOnOperations;
+          this.phase2.estimatedImpacts.clients          = this.phase3Service.phaseData[1][0].impactOnClients;
+          this.phase2.estimatedImpacts.technical        = this.phase3Service.phaseData[1][0].impactOnTech;
+          this.phase2.problemReportRaised               = this.phase3Service.phaseData[1][0].reportRaisedContractor;
+          this.phase2.problemReportRef                  = this.phase3Service.phaseData[1][0].contractor_report_ref;
+          this.phase2.changeSuccessfullyTested          = this.phase3Service.phaseData[1][0].pre_testSucces ;
+          this.phase2.changeNotSuccessfullyTestedReason = this.phase3Service.phaseData[1][0].reasonUnsuccesTest;
+          this.phase2.specialistComment                 = this.phase3Service.phaseData[1][0].specialist_comment;
+          this.phase2.proposedImplementationDate        = this.phase3Service.phaseData[1][0].proposed_implementation_date;
+          this.phase3.CCR_ID                            = this.phase3Service.phaseData[1][0].ID;
       }
-      if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
-          this.phase2.change.software                   = false;
-      } else {
-          this.phase2.change.software                   = true ;
-      }
-      if (this.phase3Service.phaseData[1][0].changeTypeSW === '0') {
-          this.phase2.change.firmware                   = false;
-      } else {
-          this.phase2.change.firmware                   = true ;
-      }
-      this.phase2.estimatedImpacts.operations       = this.phase3Service.phaseData[1][0].impactOnOperations;
-      this.phase2.estimatedImpacts.clients          = this.phase3Service.phaseData[1][0].impactOnClients;
-      this.phase2.estimatedImpacts.technical        = this.phase3Service.phaseData[1][0].impactOnTech;
-      this.phase2.problemReportRaised               = this.phase3Service.phaseData[1][0].reportRaisedContractor;
-      this.phase2.problemReportRef                  = this.phase3Service.phaseData[1][0].contractor_report_ref;
-      this.phase2.changeSuccessfullyTested          = this.phase3Service.phaseData[1][0].pre_testSucces ;
-      this.phase2.changeNotSuccessfullyTestedReason = this.phase3Service.phaseData[1][0].reasonUnsuccesTest;
-      this.phase2.specialistComment                 = this.phase3Service.phaseData[1][0].specialist_comment;
-      this.phase2.proposedImplementationDate        = this.phase3Service.phaseData[1][0].proposed_implementation_date;
-      this.phase3.CCR_ID                            = this.phase3Service.phaseData[1][0].ID;
+
       this.disableSubmitButton = false;
       const submitButton = document.getElementById('submit');
       submitButton.classList.add('disabled');
@@ -434,6 +439,9 @@ export class Phase3Component implements OnInit {
           this.disableSubmitButton = true;
           submitButton.classList.remove('disabled');
           document.getElementById('cancel').classList.add('invisible');
+
+          // tslint:disable-next-line:radix
+          this.phase3ID = parseInt(this.localObj.ID);
 
           if(this.localObj.implementation_successful === '1'){
               this.phase3.implementationSuccessful = true;
@@ -470,7 +478,7 @@ export class Phase3Component implements OnInit {
               this.showEvalChange = false;
           }
 
-          if(this.localObj.aborted_regressed !== null){
+          if(this.localObj.aborted_regressed !== ''){
               this.phase3.abortRegress = this.localObj.aborted_regressed;
               if (this.phase3.abortRegress !== undefined) {
                   if (this.phase3.abortRegress.includes('Abort')) {
@@ -498,7 +506,7 @@ export class Phase3Component implements OnInit {
               this.phase3.abortRegressReason = this.localObj.reason_if_abort_regressed;
           }
 
-          if(this.localObj.aborted_regressed === null){
+          if(this.localObj.aborted_regressed === ''){
               this.phase3.tcbEvalStart = this.localObj.start_tcb_evaluation_date;
               this.phase3.tcbEvalEnd = this.localObj.end_tcb_evaluation_date;
               console.log(this.phase3.tcbEvalStart);

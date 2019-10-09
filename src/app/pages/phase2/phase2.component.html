@@ -1,7 +1,7 @@
 <!-- Created by : Liam Gordon McCabe-->
 <!-- Student number: 27455211-->
 <form>
-    <div class="card secondary-color">
+    <div class="card secondary-color" *ngIf="this.localObj === null">
         <h3 class="px-3 text-primary">Request for Change</h3>
         <div>
             <label class="px-3 d-inline-block">Name of Initiator: {{this.user}}</label>
@@ -517,7 +517,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" *ngIf="this.displayRecommendOrOppose || this.emergencySelected">
+        <div class="form-group" *ngIf="this.displayRecommendOrOppose">
             <div class="row" >
                 <div class="col">
                     <label class="px-3" for="recommend/oppose">Recommend Or Oppose change:</label>

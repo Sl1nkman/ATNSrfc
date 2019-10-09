@@ -1,7 +1,7 @@
 <!--Created by Blaine Viljoen(28023374)-->
 
 <form>
-    <div class="card secondary-color">
+    <div class="card secondary-color" *ngIf="this.phase3Service.phaseData !== null">
         <h3 class="px-3 text-primary">Request for Change</h3>
         <div>
             <label class="px-3 d-inline-block">Name of Initiator: {{this.user}}</label>
@@ -14,7 +14,7 @@
         <label class="px-3">Reason for request: </label>
         <p class="px-3">{{this.phase3Service.phaseData[0][0].description}}</p>
     </div>
-        <div id="phase2" style="" class="shadow card bg-light mx-auto">
+        <div id="phase2" style="" class="shadow card bg-light mx-auto" *ngIf="this.phase3Service.phaseData !== null">
             <div class="form-group">
                 <h3 class="px-3 text-primary">Configuration Data</h3>
                 <div class="row">

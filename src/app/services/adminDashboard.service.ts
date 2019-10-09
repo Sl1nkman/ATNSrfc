@@ -52,11 +52,13 @@ export class AdminDashboardService{
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    setNewSpecialist(id, specID) {
+    setNewSpecialist(id, specID, phase, CCR) {
         const obj = {
             updateSelection: 'specialist',
             ID: id,
-            specialist: specID
+            specialist: specID,
+            phase: phase,
+            CCR: CCR
         };
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
     }
