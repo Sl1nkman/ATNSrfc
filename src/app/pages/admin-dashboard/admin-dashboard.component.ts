@@ -101,6 +101,7 @@ export class AdminDashboardComponent implements OnInit {
           const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
         }
       }
+      console.log(this.phase2Upload);
     } else {
       for (const droppedFile of files) {
         // Is it a file?
@@ -234,7 +235,6 @@ export class AdminDashboardComponent implements OnInit {
       const obj = {deleteSelection: 'phase2', document: this.phase2Docs[index]};
       this.adminDashboardService.deleteDoc(obj).toPromise().then((data: Data) => {
         if (data.success) {
-          this.phase2Docs.splice(index, 1);
           swal({
             title: 'Deleted',
             text: 'Your file has been deleted',
@@ -252,16 +252,11 @@ export class AdminDashboardComponent implements OnInit {
           });
         }
       });
-      this.adminDashboardService.getPhase2Docs(this.phase2RFCs[index].ID).toPromise().then((data => {
-        if (data !== null) {
-          this.phase2Docs = data[0];
-        }
-      }));
+      this.phase2Docs.splice(index, 1);
     } else {
       const obj = {deleteSelection: 'phase3', document: this.phase3Docs[index]};
       this.adminDashboardService.deleteDoc(obj).toPromise().then((data: Data) => {
         if (data.success) {
-          this.phase3Docs.splice(index, 1);
           swal({
             title: 'Deleted',
             text: 'Your file has been deleted',
@@ -279,11 +274,7 @@ export class AdminDashboardComponent implements OnInit {
           });
         }
       });
-      this.adminDashboardService.getPhase3Docs(this.phase3RFCS[index].ID).toPromise().then(data => {
-        if (data !== null) {
-          this.phase3Docs = data[0];
-        }
-      });
+      this.phase3Docs.splice(index, 1);
     }
   }
 
