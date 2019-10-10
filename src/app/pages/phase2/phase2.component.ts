@@ -523,13 +523,7 @@ export class Phase2Component implements OnInit {
                                 this.phase2service.upload(this.formData).subscribe((data: Data) => {
                                     if (data.success) {
                                         this.phase2.documentIds = data.generatedName;
-                                        swal({
-                                            title: 'Received',
-                                            text: 'Your files have been received',
-                                            type: 'success',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        });
+                                        swal('Success' , data.message , 'success' );
 
                                     } else {
                                         swal({
@@ -541,6 +535,8 @@ export class Phase2Component implements OnInit {
                                         });
                                     }
                                 });
+                            } else {
+                                swal('Success' , data1.message , 'success' );
                             }
 
                         } else {
@@ -552,15 +548,6 @@ export class Phase2Component implements OnInit {
                                 timer: 1500
                             });
                         }
-                            swal({
-                                title: 'Received',
-                                text: 'Thank you for your Upload all relevant personal have been updated',
-                                type: 'success',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            this.router.navigate(['home']);
-
                     });
                 }
             } else if (
