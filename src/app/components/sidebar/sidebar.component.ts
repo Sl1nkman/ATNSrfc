@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
          if (i === decodedToken.data.roles.length - 1 ) {
            this.roles += decodedToken.data.roles[i] ;
         } else {
-           this.roles += decodedToken.data.roles[i] + '/' ;
+           this.roles += decodedToken.data.roles[i] + '\n' ;
          }
       }
     }

@@ -3,7 +3,7 @@
 */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule  } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 // imports for bootstrap forms
 import { HttpClientModule , HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';

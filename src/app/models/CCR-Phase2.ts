@@ -32,6 +32,6 @@ export interface CCRPhase2 {
     changeNotSuccessfullyTestedReason: string;
     specialistComment: string;
     proposedImplementationDate: Date;
-    recommend_oppose: {};
+    recommend_oppose: string;
     CSRF_token: string ;
 }

@@ -4,19 +4,19 @@
     <div class="card secondary-color" *ngIf="this.localObj === null">
         <h3 class="px-3 text-primary">Request for Change</h3>
         <div>
-            <label class="px-3 d-inline-block">Name of Initiator: {{this.user}}</label>
+            <label class="px-3 d-inline-block"><h4 class="d-inline">Name of Initiator: {{this.user}}</h4></label>
             <p class=" px-3 d-inline-block"></p>
-            <label class="px-3 d-inline-block">Date Requested: {{this.RFC.dateRequested}}</label>
+            <label class="px-3 d-inline-block"><h4 class="d-inline">Date Requested: {{this.RFC.dateRequested}}</h4></label>
             <p class="px-3 d-inline-block"></p>
         </div>
-        <label class="px-3 ">Requested Change Description: </label>
+        <label class="px-3 "><h4>Requested Change Description:</h4> </label>
         <p class="px-3">{{this.RFC.requestDescription}}</p>
-        <label class="px-3">Reason for request: </label>
+        <label class="px-3"><h4>Reason for request: </h4></label>
         <p class="px-3">{{this.RFC.reasonForRequest}}</p>
     </div>
     <div id="phase2" style="" class="shadow card bg-light mx-auto">
         <div class="form-group">
-            <h3 class="px-3 text-primary"> CCR specialist phase 1</h3>
+            <h3 class="px-3 text-primary"> CCR specialist phase 2 Document</h3>
             <div class="row">
                 <div class="col-sm">
                     <label class="px-3" for="priority">Request Priority</label>

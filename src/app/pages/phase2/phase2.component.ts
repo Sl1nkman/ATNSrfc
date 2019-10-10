@@ -9,6 +9,8 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import swal from 'sweetalert2';
 import {Data, Router} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
+import {DATE} from 'ngx-bootstrap/chronos/units/constants';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-phase2',
@@ -524,19 +526,15 @@ export class Phase2Component implements OnInit {
                                     if (data.success) {
                                         this.phase2.documentIds = data.generatedName;
                                         swal('Success' , data.message , 'success' );
+                                        this.router.navigate(['home']);
 
                                     } else {
-                                        swal({
-                                            title: 'Files not uploaded',
-                                            text: data.message,
-                                            type: 'error',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        });
+                                        swal('Error' , data.message , 'error' );
                                     }
                                 });
                             } else {
                                 swal('Success' , data1.message , 'success' );
+                                this.router.navigate(['home']);
                             }
 
                         } else {
@@ -588,7 +586,7 @@ export class Phase2Component implements OnInit {
         if (this.phase1 != null) {
             this.RFC.requestDescription = this.phase1.requested_change;
             this.RFC.reasonForRequest = this.phase1.description;
-            this.RFC.dateRequested = this.phase1.start_time;
+            this.RFC.dateRequested =  this.phase1.start_time;
             this.phase2.CCR_ID = this.phase1.ID;
             this.user = this.phase2service.getUser();
 
