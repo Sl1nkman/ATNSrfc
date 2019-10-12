@@ -13,8 +13,8 @@
     </div>
     <div class="row text-center" *ngFor="let ccr of myCCRs" >
         <div class="col mb-4">
-            <div class="card h-100">
-                <div class="card-body">
+            <div class="card h-100" >
+                <div class="card-body" (click)="viewCcrPhase1(ccr[0][0])">
                     <label>CCR Initiated: </label>
                     <p class="card-text"> {{ccr[0][0].start_time}}</p>
                     <label>User ID</label>
@@ -27,7 +27,7 @@
         </div>
         <div class="col mb-4">
             <div class="card h-100" *ngIf="ccr[1][0]">
-                <div class="card-body">
+                <div class="card-body" (click)="viewCcrPhase2(ccr[1][0])">
                     <h6>TCB CRF ID: </h6>
                     <p class="card-text">{{ccr[1][0].tcb_crf_ID}}</p>
                     <h6>Started: </h6>

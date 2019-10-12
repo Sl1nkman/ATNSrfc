@@ -385,7 +385,7 @@ export class Phase3Component implements OnInit {
 
       });
 
-      if (this.phase3Service.phaseData !== null){
+      if (this.phase3Service.phaseData !== null) {
           this.phase2.CCR_ID                            = this.phase3Service.phaseData[1][0].phase1_ID ;
           this.phase2.TCB_CRF_ID                        = this.phase3Service.phaseData[1][0].tcb_crf_ID;
           this.phase2.requestPriority                   = this.phase3Service.phaseData[1][0].requestPriority_ID;

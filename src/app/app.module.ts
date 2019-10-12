@@ -7,7 +7,7 @@ import {CommonModule, DatePipe} from '@angular/common';
 // imports for bootstrap forms
 import { HttpClientModule , HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalModule, NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
@@ -30,6 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 import { Phase2Component } from './pages/phase2/phase2.component';
 import { Phase3Component } from './pages/phase3/phase3.component';
+import { Ccrphase1ContentComponent } from './pages/current-rfcs/ccrphase1-content/ccrphase1-content.component';
 // Routing guards, module and auth service
 import { AuthGuard } from './guards/auth.guard';
 import { RouteGuard } from './guards/route.guard';
@@ -38,6 +39,8 @@ import { RouteAuthorisationService } from './services/route-authorisation.servic
 import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { Ccrphase2ContentComponent } from './pages/current-rfcs/ccrphase2-content/ccrphase2-content.component';
+
 
 @NgModule({
   declarations: [
@@ -55,6 +58,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     Phase3Component,
     AdminDashboardComponent,
     ForgotPasswordComponent,
+    Ccrphase1ContentComponent,
+    Ccrphase2ContentComponent,
 
   ],
     imports: [
@@ -71,10 +76,12 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
         NgxFileDropModule,
         NgbPopoverModule,
         SelectDropDownModule,
+        NgbModalModule
     ],
-  providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard ,
+    providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard ,
       { provide: HTTP_INTERCEPTORS, useClass: CcrHttpInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent] ,
+    entryComponents: [ Ccrphase1ContentComponent , Ccrphase2ContentComponent  ]
 })
 export class AppModule {
 }
