@@ -14,13 +14,51 @@ import {FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry} from 'n
 })
 export class AdminDashboardComponent implements OnInit {
 
+
+  constructor(private adminDashboardService: AdminDashboardService, private router: Router, private phase1: Phase1Service, private phase2: Phase2Service, private phase3: Phase3Service) {}
+
+  private managers = [];
+  private showManagerEdit = false;
+  private managerJob = null;
+  private managerSite = null;
+  private managerFirst = null;
+  private managerLast = null;
+  private managerPhone;
+  private managerEmail;
+  private selectedManager;
+  private showPhone;
+  private showEmail;
+
+  private eosType;
+  private eosDescription;
+  private editEOS = false;
+
+  private showAssignEOS = false;
+  private eosUser = [];
+
+  private titles = [];
+  private titleType;
+  private titleDescription;
+  private showTitleEdit = false;
+  private selectedTitle;
+
+  private showAssignSite = false;
+  private allSites = [];
+  private selectedSite;
+
   private selectedIndex = 0;
   private specialistPhase = '';
+
+  private currentRoles = [];
+  private currentUserRoles = [];
+  private editUserRole = false;
+  private deleteUserRole = false;
+  private operation = '';
 
   private initiatedRFC = [];
   private phase2RFCs = [];
   private phase3RFCS = [];
-  private sites = [];
+  private userSites = [];
   private users = [];
   private impactRisks = [];
   private eos = [];
@@ -30,6 +68,7 @@ export class AdminDashboardComponent implements OnInit {
   private phase2Docs = [];
   private phase3Docs = [];
   private selectedUser;
+  private selectedRole;
   private displayCCR = false;
 
   private phase2Upload = [];
@@ -61,12 +100,27 @@ export class AdminDashboardComponent implements OnInit {
   private specialist = '';
   private specialistComm = 'none';
 
+  validatePhoneNumber(phone: string) {
+    const re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (re.test(phone)) {
+      this.showPhone = true;
+    } else {
+      this.showPhone = false;
+    }
+  }
 
-  constructor(private adminDashboardService: AdminDashboardService, private router: Router, private phase1: Phase1Service, private phase2: Phase2Service, private phase3: Phase3Service) {}
+  validateEmail(email: string) {
+    const re = /[!@#$%^&*(),.?"'~`:;{}|<>_+=[ ]/g;
+    if (re.test(String(email).toLowerCase()) === true) {
+      this.showEmail = false;
+    } else {
+      this.showEmail = true;
+    }
+  }
 
-  public redirectSQL(){
+  public redirectSQL() {
     const url = 'http://localhost/phpmyadmin/db_sql.php?db=test';
-    window.open(url, '_blank')
+    window.open(url, '_blank');
   }
 
   public fileOver(event) {
@@ -234,7 +288,6 @@ export class AdminDashboardComponent implements OnInit {
       const obj = {deleteSelection: 'phase2', document: this.phase2Docs[index]};
       this.adminDashboardService.deleteDoc(obj).toPromise().then((data: Data) => {
         if (data.success) {
-          this.phase2Docs.splice(index, 1);
           swal({
             title: 'Deleted',
             text: 'Your file has been deleted',
@@ -252,16 +305,11 @@ export class AdminDashboardComponent implements OnInit {
           });
         }
       });
-      this.adminDashboardService.getPhase2Docs(this.phase2RFCs[index].ID).toPromise().then((data => {
-        if (data !== null) {
-          this.phase2Docs = data[0];
-        }
-      }));
+      this.phase2Docs.splice(index, 1);
     } else {
       const obj = {deleteSelection: 'phase3', document: this.phase3Docs[index]};
       this.adminDashboardService.deleteDoc(obj).toPromise().then((data: Data) => {
         if (data.success) {
-          this.phase3Docs.splice(index, 1);
           swal({
             title: 'Deleted',
             text: 'Your file has been deleted',
@@ -279,11 +327,7 @@ export class AdminDashboardComponent implements OnInit {
           });
         }
       });
-      this.adminDashboardService.getPhase3Docs(this.phase3RFCS[index].ID).toPromise().then(data => {
-        if (data !== null) {
-          this.phase3Docs = data[0];
-        }
-      });
+      this.phase3Docs.splice(index, 1);
     }
   }
 
@@ -404,9 +448,9 @@ export class AdminDashboardComponent implements OnInit {
     let siteID = 0;
 
     if (this.selectedPhase === 'Phase1') {
-      for (let i = 0; i < this.sites.length; i++) {
-        if (this.initiatedRFC[i].user_ID === this.sites[i].user_ID) {
-          siteID = this.sites[i].site_ID;
+      for (let i = 0; i < this.userSites.length; i++) {
+        if (this.initiatedRFC[i].user_ID === this.userSites[i].user_ID) {
+          siteID = this.userSites[i].site_ID;
         }
       }
       this.phase1.setobj(this.initiatedRFC[index], siteID);
@@ -417,9 +461,9 @@ export class AdminDashboardComponent implements OnInit {
           user = this.users[i].name;
         }
       }
-      for (let i = 0; i < this.sites.length; i++) {
-        if (this.initiatedRFC[i].user_ID === this.sites[i].user_ID) {
-          siteID = this.sites[i].site_ID;
+      for (let i = 0; i < this.userSites.length; i++) {
+        if (this.initiatedRFC[i].user_ID === this.userSites[i].user_ID) {
+          siteID = this.userSites[i].site_ID;
         }
       }
       this.phase2.setObj(this.phase2RFCs[index], this.initiatedRFC[index], user);
@@ -437,6 +481,339 @@ export class AdminDashboardComponent implements OnInit {
     this.phase3.setObj(null);
 
     this.setUp();
+  }
+
+  selectUser($event) {
+    this.selectedUser = $event.target.value;
+  }
+
+  selectRole($event) {
+    this.selectedRole = $event.target.value;
+  }
+
+  revealAssignSite(operation) {
+    this.showAssignSite = true;
+    this.operation = operation;
+  }
+
+  hideAssignSite(operattion) {
+    this.showAssignSite = false;
+    this.selectedUser = null;
+    this.selectedSite = null;
+  }
+
+  assignSite() {
+    if (this.operation === 'add') {
+      for (let i = 0; i < this.userSites.length; i++) {
+        if (this.userSites[i].user_ID === this.selectedUser && this.userSites[i].site_ID === this.selectedSite) {
+          swal('Failure' , 'The user already has this site' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.assignSite(this.selectedUser, this.selectedSite, this.operation).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The user has been assigned the site successfully' , 'success' );
+          this.adminDashboardService.getSiteUser().toPromise().then(result => {
+            this.userSites = result[0];
+          });
+        } else {
+          swal('Failure' , 'There was a problem assigning the user the site' , 'error' );
+        }
+      });
+
+    } else {
+      let check = false;
+      for (let i = 0; i < this.userSites.length; i++) {
+        if (this.userSites[i].user_ID === this.selectedUser && this.userSites[i].site_ID === this.selectedSite) {
+          check = true;
+        }
+      }
+
+      if (!check) {
+        swal('Failure' , 'The user does not have this site' , 'error' );
+        return;
+      }
+
+      this.adminDashboardService.assignSite(this.selectedUser, this.selectedSite, this.operation).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The user\'s site has been removed successfully' , 'success' );
+          this.adminDashboardService.getSiteUser().toPromise().then(result => {
+            this.userSites = result[0];
+          });
+        } else {
+          swal('Failure' , 'There was a problem removing the user\'s site' , 'error' );
+        }
+      });
+    }
+  }
+
+  showManager(operation) {
+    this.showManagerEdit = true;
+    this.operation = operation;
+  }
+
+  hideManager() {
+    this.showManagerEdit = false;
+    this.managerLast = null;
+    this.managerFirst = null;
+    this.managerSite = null;
+    this.managerJob = null;
+    this.managerEmail = null;
+    this.managerPhone = null;
+    this.selectedManager = null;
+  }
+
+  editManager() {
+    if (this.operation === 'add') {
+      for (let i = 0; i < this.managers.length; i++) {
+        if (this.managers[i].firstname === this.managerFirst && this.managers[i].lastname === this.managerLast) {
+          swal('Failure' , 'The manager already exists' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.insertManager(this.managerJob, this.managerSite, this.managerFirst, this.managerLast, this.managerPhone, this.managerEmail).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The manager has been added to the system' , 'success' );
+          this.adminDashboardService.getManager().toPromise().then(result => {
+            this.managers = result[0];
+          });
+        } else {
+          swal('Failure' , 'There was a problem adding the manager' , 'error' );
+        }
+      });
+    } else {
+      this.adminDashboardService.deleteManager(this.selectedManager).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The manager was removed successfully' , 'success' );
+          this.adminDashboardService.getManager().toPromise().then(result => {
+            this.managers = result[0];
+          });
+        } else {
+          swal('Failure' , 'There was a problem removing the manager' , 'error' );
+        }
+      });
+    }
+  }
+
+  revealAssignEOS(operation) {
+    this.showAssignEOS = true;
+    this.operation = operation;
+  }
+
+  hideAssignEOS() {
+    this.showAssignEOS = false;
+    this.selectedUser = null;
+    this.selectedEOS = null;
+  }
+
+  assignEOS() {
+    if (this.operation === 'add') {
+      for (let i = 0; i < this.eosUser.length; i++) {
+        if (this.eosUser[i].user_ID === this.selectedUser && this.eosUser[i].eos_ID === this.selectedEOS) {
+          swal('Failure' , 'The user already has this system' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.assignEOS(this.selectedUser, this.selectedEOS, this.operation).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The user has been assigned the EOS successfully' , 'success' );
+          this.adminDashboardService.getEOSUser().toPromise().then(result => {
+            this.eosUser = result[0];
+          });
+        } else {
+          swal('Failure' , 'There was a problem assigning the user the EOS' , 'error' );
+        }
+      });
+    } else {
+      let check = false;
+      for (let i = 0; i < this.eosUser.length; i++) {
+        if (this.eosUser[i].user_ID === this.selectedUser && this.eosUser[i].eos_ID === this.selectedEOS) {
+          check = true;
+        }
+      }
+
+      if (!check) {
+        swal('Failure' , 'The user does not have this EOS' , 'error' );
+        return;
+      }
+
+      this.adminDashboardService.assignEOS(this.selectedUser, this.selectedEOS, this.operation).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The user\'s EOS has been removed successfully' , 'success' );
+          this.adminDashboardService.getEOSUser().toPromise().then(result => {
+            this.eosUser = result[0];
+          });
+        } else {
+          swal('Failure' , 'There was a problem removing the user\'s EOS' , 'error' );
+        }
+      });
+    }
+  }
+
+  editRole(operation) {
+    if (operation === 'add') {
+      for (let i = 0; i < this.currentUserRoles.length; i++) {
+        if (this.currentUserRoles[i].user_ID === this.selectedUser && this.currentUserRoles[i].role_ID === this.selectedRole) {
+          swal('Failure' , 'The user already has this role' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.editUserRole(this.selectedUser, this.selectedRole, 'add').subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The user has been assigned the role successfully' , 'success' );
+        } else {
+          swal('Failure' , 'There was a problem assigning the user the role' , 'error' );
+        }
+      });
+    } else {
+      let check = false;
+      for (let i = 0; i < this.currentUserRoles.length; i++) {
+        if (this.currentUserRoles[i].user_ID === this.selectedUser && this.currentUserRoles[i].role_ID === this.selectedRole) {
+          check = true;
+        }
+      }
+
+      if (!check) {
+        swal('Failure' , 'The user does not have this role' , 'error' );
+        return;
+      }
+
+      this.adminDashboardService.editUserRole(this.selectedUser, this.selectedRole, 'delete').subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The user\'s role has been removed successfully' , 'success' );
+        } else {
+          swal('Failure' , 'There was a problem removing the user\'s role' , 'error' );
+        }
+      });
+    }
+
+  }
+
+  titleShow(operation) {
+    this.operation = operation;
+    this.showTitleEdit = true;
+  }
+
+  hideTitle() {
+    this.showTitleEdit = false;
+    this.titleType = null;
+    this.titleDescription = null;
+    this.selectedTitle = null;
+  }
+
+  editTitle() {
+    if (this.operation === 'add') {
+      for (let i = 0; i < this.titles.length; i++) {
+        if (this.titles[i].type === this.titleType) {
+          swal('Failure' , 'Title already exists' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.insertTitle(this.titleType, this.titleDescription).subscribe((data: Data) => {
+          if (data.success) {
+            swal('Success' , 'The title has been added successfully' , 'success' );
+            this.adminDashboardService.getTitle().toPromise().then(result => {
+              this.titles = result[0];
+            });
+          } else {
+            swal('Failure' , 'The title has not been added successfully' , 'error' );
+          }
+      });
+    } else {
+      let check = false;
+      for (let i = 0; i < this.titles.length; i++) {
+        if (this.titles[i].ID === this.selectedTitle) {
+          check = true;
+        }
+      }
+
+      if (!check) {
+        swal('Failure' , 'Title does not exist' , 'error' );
+        return;
+      }
+
+      this.adminDashboardService.deleteTitle(this.selectedTitle).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The title has been deleted successfully' , 'success' );
+          this.adminDashboardService.getTitle().toPromise().then(result => {
+            this.titles = result[0];
+          });
+        } else {
+          swal('Failure' , 'The title has not been deleted successfully' , 'error' );
+        }
+      });
+    }
+  }
+
+  eosShow(operation) {
+    this.operation = operation;
+    this.editEOS = true;
+  }
+
+  hideEOS() {
+    this.editEOS = false;
+    console.log(this.eosType);
+    this.eosType = null;
+    this.eosDescription = null;
+  }
+
+  editEOSSystems() {
+    if (this.operation === 'add') {
+      for (let i = 0; i < this.eos.length; i++) {
+        if (this.eos[i].type === this.eosType) {
+          swal('Failure' , 'System already exists' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.insertEOS(this.eosType, this.eosDescription).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The EOS has been added successfully' , 'success' );
+          this.adminDashboardService.getEOS().toPromise().then(result => {
+            this.eos = result[0];
+          });
+        } else {
+          swal('Failure' , 'The EOS has not been added successfully' , 'error' );
+        }
+      });
+    } else {
+      let id = -1;
+      for (let i = 0; i < this.eos.length; i++) {
+        if (this.eos[i].type === this.eosType) {
+          id = this.eos[i].ID;
+        }
+      }
+
+      if (id === -1) {
+        swal('Failure' , 'System does not exist' , 'error' );
+        return;
+      }
+      console.log(id);
+      this.adminDashboardService.deleteEOS(id).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The EOS has been deleted successfully' , 'success' );
+          this.adminDashboardService.getEOS().toPromise().then(result => {
+            this.eos = result[0];
+          });
+        } else {
+          swal('Failure' , 'The EOS has not been deleted successfully' , 'error' );
+        }
+      });
+    }
+  }
+
+  userRoleShow(operation) {
+    this.operation = operation;
+    this.editUserRole = true;
+  }
+
+  hideUserRole() {
+    this.editUserRole = false;
   }
 
   ngOnInit() {
@@ -458,13 +835,19 @@ export class AdminDashboardComponent implements OnInit {
       this.initiatedRFC = data[0];
       this.phase2RFCs = data[1];
       this.phase3RFCS = data[2];
-      this.sites = data[3];
+      this.userSites = data[3];
       this.users = data[4];
       this.impactRisks = data[5];
       this.eos = data[6];
       this.priority = data[7];
       this.changePeriods = data[8];
       this.natureChange = data[9];
+      this.currentRoles = data[10];
+      this.currentUserRoles = data[11];
+      this.eosUser = data[12];
+      this.allSites = data[13];
+      this.titles = data[14];
+      this.managers = data[15];
 
       for (let i = 0; i < this.initiatedRFC.length; i++) {
         if (this.phase2RFCs.length !== this.initiatedRFC.length) {

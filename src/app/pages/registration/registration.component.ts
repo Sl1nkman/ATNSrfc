@@ -141,7 +141,6 @@ if (this.password === value) {
     if (this.showRegisterButton === true) {
       // const hash = crypto.MD5(this.passwordCheck);
       this.User.password = this.passwordCheck;
-      console.log(this.User);
       this.registration.registerUser(this.User , this.Token).subscribe((data: Data) => {
         if (data.success) {
           swal('Success!', data.message, 'success');

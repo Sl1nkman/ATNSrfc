@@ -1,9 +1,33 @@
 <!--Created By Blaine Viljoen-->
-<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs">
-    <button class="btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button>
+<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.editUserRole && !this.deleteUserRole && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
+    <div class="row h-10">
+        <div class="col md-2">
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('add')">Assign EOS to user</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('delete')">Remove EOS system</button>
+        </div>
+        <div class="col md-2">
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('add')">Assign role to user</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('delete')">Remove EOS from user</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('add')">Add manager</button>
+        </div>
+        <div class="col md-2">
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('delete')">Remove role from user</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('add')">Add Title</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('delete')">Remove manager</button>
+        </div>
+        <div class="col md-2">
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('add')">Assign User to site</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('delete')">Remove Title</button>
+        </div>
+        <div class="col md-2">
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('delete')">Remove User from site</button>
+            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('add')">Add EOS system</button>
+        </div>
+    </div>
 </div><br>
 <div *ngFor="let rfc of initiatedRFC; index as i">
-    <div class="row h-100" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs" >
+    <div class="row h-100" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.editUserRole && !this.deleteUserRole && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS" >
         <div class="col mb-4">
             <h2 class="px-3 text-secondary" *ngIf="i === 0">Initiated requests:</h2><br>
                 <div class="card h-100">
@@ -135,6 +159,7 @@
                 <h2 class="px-3 pt-1 text-primary card-title">Select the new specialist</h2>
                 <select class="px-3 pt-2 card-text rounded w-100 form-control" name="selectedSpecialist" id="selectedSpecialist" (click)="this.selectedSpecialist($event)"
                 >
+                    <option selected="selected" disabled="disabled">Select one</option>
                     <option *ngFor="let specialist of this.specialists, index as i" value="{{specialist[0]}}">{{specialist[2]}} ({{specialist[1]}})</option>
                 </select><br>
 
@@ -216,6 +241,154 @@
         <a class="px-3 text-primary" (click)="this.openLink(i, '3')" style="cursor: pointer">{{doc.document_name}}</a><button (click)="this.deleteDoc(i, '3')" class="px-3 btn btn-outline-danger btn-rounded w-40  my-4 waves-effect z-depth-0">Delete Document</button>
     </div><br>
     <button class="px-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideDocs()">Back</button>
+</div>
+
+<div *ngIf="this.editUserRole">
+    <label for="user">User: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="user" (click)="this.selectUser($event)">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let user of this.users" value="{{user.ID}}">{{user.name}}</option>
+    </select><br>
+
+    <label for="role">Role: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="role" (click)="this.selectRole($event)">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let role of this.currentRoles" value="{{role.ID}}">{{role.name}}</option>
+    </select><br>
+
+    <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.editRole('add')" *ngIf="this.operation === 'add'">Save</button><br><br>
+    <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.editRole('delete')" *ngIf="this.operation === 'delete'">Remove</button><br><br>
+
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideUserRole()">Back</button>
+</div>
+
+<div *ngIf="this.editEOS">
+    <label for="type" *ngIf="this.operation === 'add'">Type: </label>
+    <input id="type" type="text" class="rounded w-75 form-control" [(ngModel)]="this.eosType" *ngIf="this.operation === 'add'"><br *ngIf="this.operation === 'add'">
+    <label for="desc" *ngIf="this.operation === 'add'">Description: </label>
+    <input id="desc" type="text" class="rounded w-75 form-control" [(ngModel)]="this.eosDescription" *ngIf="this.operation === 'add'"><br *ngIf="this.operation === 'add'">
+
+    <label for="eosSystem" *ngIf="this.operation === 'delete'">EOS System: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="eosSystem" [(ngModel)]="this.eosType"  *ngIf="this.operation === 'delete'">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let eos of this.eos" value="{{eos.type}}">{{eos.type}}</option>
+    </select><br>
+
+    <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.editEOSSystems()" *ngIf="this.operation === 'add'">Save</button><br *ngIf="this.operation === 'add'"><br *ngIf="this.operation === 'add'">
+    <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.editEOSSystems()" *ngIf="this.operation === 'delete'">Remove</button><br *ngIf="this.operation === 'delete'"><br *ngIf="this.operation === 'delete'">
+
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideEOS()">Back</button>
+</div>
+
+<div *ngIf="this.showAssignEOS">
+    <label for="userAssign">User: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="userAssign" [(ngModel)]="this.selectedUser">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let user of this.users" value="{{user.ID}}">{{user.name}}</option>
+    </select><br>
+
+    <label for="eosAssign">EOS: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="eosAssign" [(ngModel)]="this.selectedEOS">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let eos of this.eos" value="{{eos.ID}}">{{eos.type}}</option>
+    </select><br>
+
+    <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.assignEOS()" *ngIf="this.operation === 'add'">Save</button><br><br>
+    <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.assignEOS()" *ngIf="this.operation === 'delete'">Remove</button><br><br>
+
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideAssignEOS()">Back</button>
+</div>
+
+<div *ngIf="this.showAssignSite">
+    <label for="userAssignSite">User: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="userAssignSite" [(ngModel)]="this.selectedUser">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let user of this.users" value="{{user.ID}}">{{user.name}}</option>
+    </select><br>
+
+    <label for="siteAssign">Site: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="siteAssign" [(ngModel)]="this.selectedSite">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let site of this.allSites" value="{{site.ID}}">{{site.description}} ({{site.code}})</option>
+    </select><br>
+
+    <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.assignSite()" *ngIf="this.operation === 'add'">Save</button><br><br>
+    <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.assignSite()" *ngIf="this.operation === 'delete'">Remove</button><br><br>
+
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideAssignSite()">Back</button>
+</div>
+
+<div *ngIf="this.showTitleEdit">
+    <label for="typeTitle" *ngIf="this.operation === 'add'">Type: </label>
+    <input id="typeTitle" type="text" class="rounded w-75 form-control" [(ngModel)]="this.titleType" *ngIf="this.operation === 'add'"><br *ngIf="this.operation === 'add'">
+    <label for="descTitle" *ngIf="this.operation === 'add'">Description: </label>
+    <input id="descTitle" type="text" class="rounded w-75 form-control" [(ngModel)]="this.titleDescription" *ngIf="this.operation === 'add'"><br *ngIf="this.operation === 'add'">
+
+    <label for="titleSelect" *ngIf="this.operation === 'delete'">Title: </label>
+    <select class="px-3 pt-2 card-text rounded w-100 form-control" id="titleSelect" [(ngModel)]="this.selectedTitle"  *ngIf="this.operation === 'delete'">
+        <option selected="selected" disabled="disabled">Select one</option>
+        <option *ngFor="let title of this.titles" value="{{title.ID}}">{{title.title}}</option>
+    </select><br>
+
+    <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.editTitle()" *ngIf="this.operation === 'add'">Save</button><br *ngIf="this.operation === 'add'"><br *ngIf="this.operation === 'add'">
+    <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.editTitle()" *ngIf="this.operation === 'delete'">Remove</button><br *ngIf="this.operation === 'delete'"><br *ngIf="this.operation === 'delete'">
+
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideTitle()">Back</button>
+</div>
+
+<div *ngIf="this.showManagerEdit">
+    <div *ngIf="this.operation === 'add'">
+        <label for="titleManager">Title: </label>
+        <select class="px-3 pt-2 card-text rounded w-100 form-control" id="titleManager" [(ngModel)]="this.managerJob">
+            <option selected="selected" disabled="disabled">Select one</option>
+            <option *ngFor="let title of this.titles" value="{{title.ID}}">{{title.title}}</option>
+        </select><br>
+        <label for="siteManager">Site: </label>
+        <select class="px-3 pt-2 card-text rounded w-100 form-control" id="siteManager" [(ngModel)]="this.managerSite">
+            <option selected="selected" disabled="disabled">Select one</option>
+            <option *ngFor="let site of this.allSites" value="{{site.ID}}">{{site.description}} ({{site.code}})</option>
+        </select><br>
+        <label for="managerFirst">First Name: </label>
+        <input type="text" id="managerFirst" [(ngModel)]="this.managerFirst" class="form-control"><br>
+        <label for="managerLast">Last Name:</label>
+        <input type="text" id="managerLast" [(ngModel)]="this.managerLast" class="form-control"><br>
+        <label for="contactNum">Contact Number</label>
+        <label *ngIf="this.showPhone == false" style="color: red">Invalid South African Number</label>
+        <label *ngIf="this.showPhone == true" style="color: green">Valid South African Number </label>
+        <input
+                ngbPopover="Please enter your phone number"
+                triggers="mouseenter:mouseleave"
+                placement="bottom-right"
+                popoverTitle="INPUT PHONE NUMBER"
+                (input)="validatePhoneNumber(this.managerPhone)"
+                class="form-control" [ngClass]="{'true': this.showPhone, 'false': !this.showPhone}"
+                [(ngModel)]="this.managerPhone"
+                type="text"
+                id="contactNum" required><br>
+        <label for="username">Username</label>
+        <label *ngIf="this.showEmail == false" style="color: red">Invalid</label>
+        <label *ngIf="this.showEmail == true" style="color: green">Valid
+        </label>
+        <input
+                ngbPopover="Please enter the username of your email before the @"
+                triggers="mouseenter:mouseleave"
+                placement="bottom-right"
+                popoverTitle="INPUT USERNAME"
+                (input)="validateEmail(this.managerEmail)" class="form-control"
+                [ngClass]="{'true': this.showEmail, 'false': !this.showEmail}"
+                id="username" name="username" [(ngModel)]= this.managerEmail type="email"
+                required><br>
+        <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.editManager()">Save</button><br>
+    </div>
+    <div *ngIf="this.operation === 'delete'">
+        <label for="manager">Manager: </label>
+        <select class="px-3 pt-2 card-text rounded w-100 form-control" id="manager" [(ngModel)]="this.selectedManager"  *ngIf="this.operation === 'delete'">
+            <option selected="selected" disabled="disabled">Select one</option>
+            <option *ngFor="let man of this.managers" value="{{man.ID}}">{{man.firstname}} {{man.lastname}} ({{man.emailAddress}})</option>
+        </select><br>
+        <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.editManager()">Remove</button><br><br>
+    </div>
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideManager()">Back</button>
 </div>
 
 

@@ -299,7 +299,6 @@ export class Phase3Component implements OnInit {
                           this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
                               if (data1.success) {
                                   this.phase3.documentIds = data.generatedName;
-                                  console.log(this.phase3.documentIds);
                                   swal({
                                       title: 'Updated',
                                       text: 'Phase 3 successfully updated',
@@ -323,14 +322,12 @@ export class Phase3Component implements OnInit {
           } else {
               this.phase3Service.submitPhase3(this.phase3).subscribe( (data: Data) => {
                   if (data.success) {
-                      console.log('we have post');
                       if (this.phase3.additionalDocs) {
                           this.populateForm();
                           this.formData.append('ID', this.phase2.CCR_ID);
                           this.phase3Service.upload(this.formData).subscribe((data1: Data) => {
                               if (data1.success) {
                                   this.phase3.documentIds = data.generatedName;
-                                  console.log(this.phase3.documentIds);
                                   swal({
                                       title: 'Submitted',
                                       text: 'Phase 2 configuration has been submitted',
@@ -435,7 +432,6 @@ export class Phase3Component implements OnInit {
 
       this.localObj = this.phase3Service.getObj();
       if (this.localObj !== null) {
-          console.log(this.localObj);
           this.disableSubmitButton = true;
           submitButton.classList.remove('disabled');
           document.getElementById('cancel').classList.add('invisible');
@@ -445,10 +441,8 @@ export class Phase3Component implements OnInit {
 
           if(this.localObj.implementation_successful === '1'){
               this.phase3.implementationSuccessful = true;
-              console.log(this.phase3.implementationSuccessful);
           } else {
               this.phase3.implementationSuccessful = false;
-              console.log(this.phase3.implementationSuccessful);
           }
           if (this.phase3.implementationSuccessful) {
               this.displayImpSuccess = false;
@@ -509,7 +503,6 @@ export class Phase3Component implements OnInit {
           if(this.localObj.aborted_regressed === ''){
               this.phase3.tcbEvalStart = this.localObj.start_tcb_evaluation_date;
               this.phase3.tcbEvalEnd = this.localObj.end_tcb_evaluation_date;
-              console.log(this.phase3.tcbEvalStart);
 
               if (this.localObj.items_updated === '1') {
                   this.phase3.itemsUpdated = true;

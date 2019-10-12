@@ -715,7 +715,6 @@ export class Phase2Component implements OnInit {
                     this.phase2.temporaryPeriodStartDate = this.localObj.temporaryStartDate;
                     this.phase2.temporaryPeriodEndDate = this.localObj.temporaryEndDate;
                     this.phase2.temporaryPeriodNumberOfDays = parseInt(this.localObj.temporaryNoOfDays , 10);
-                    console.log(this.localObj.temporaryNoOfDays);
                     this.displayTemporaryDateSelection = true;
                     this.displayNatureOfChange = true;
                 }
