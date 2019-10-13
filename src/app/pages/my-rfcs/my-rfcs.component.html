@@ -1,22 +1,48 @@
-<!--Created by Blaine Viljoen(28023374)-->
-
-<form>
-  <div *ngFor="let rfc of rfcs; index as i">
-    <div class="shadow card bg-light mx-auto" (click)="onClick(i)" style="cursor: pointer;">
-      <div class="form group">
-        <h2 class="px-3 pt-1 text-primary">CCR ID: {{rfc[0]}}</h2><br>
-        <h3 class="px-3 text-secondary">Request: {{rfc[1]}}</h3>
-        <h3 class="px-3 text-secondary">Reason: {{rfc[2]}}</h3>
-        <h3 class="px-3 text-secondary">Files:</h3>
-        <div *ngFor="let link of links">
-          <a class="px-3" href="{{link}}">{{link}}</a>
+<div *ngIf="!this.displayPhase3 && !this.displayPhase2">
+  <div class="row text-center">
+    <div class="col mb-4">
+      <h2 class="px-3 text-secondary">Initiated requests:</h2><br>
+    </div>
+    <div class="col mb-4">
+      <h2 class="px-3 text-secondary">CCR's in Phase 2:</h2>
+    </div>
+    <div class="col mb-4">
+      <h2 class="px-3 text-secondary">CCR's in Phase 3:</h2>
+    </div>
+  </div>
+  <div class="row text-center" *ngFor="let ccr of myCCRs" >
+    <div class="col mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h4 class="card-title">{{ccr[0][0].ID}}</h4>
+          <label>CCR Initiated: </label>
+          <p class="card-text"> {{ccr[0][0].start_time}}</p>
+          <label>User ID</label>
+          <p class="card-text">{{ccr[0][0].user_ID}}</p>
         </div>
       </div>
     </div>
-    <br>
+    <div class="col mb-4">
+      <div class="card h-100" *ngIf="ccr[1][0]">
+        <div class="card-body">
+          <h4 class="card-title">{{ccr[1][0].ID}}</h4>
+          <p class="card-text">TCB CRF ID: {{ccr[1][0].tcb_crf_ID}}</p>
+          <p class="card-text">Started: {{ccr[1][0].startDate}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col mb-4">
+      <div class="card h-100" *ngIf="ccr[2][0]">
+        <div class="card-body">
+          <h4 class="card-title">{{ccr[2][0].ID}}</h4>
+          <p class="card-text" *ngIf="ccr[2][0].start_tcb_evaluation_date !== '0000-00-00'">
+            <label>TCB evaluation start date: </label>
+            {{ccr[2][0].start_tcb_evaluation_date}}
+          </p>
+          <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '1'">This CCR has been closed out </p>
+          <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '0'">This CCR has not been closed out </p>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <h3 id="test" class="pt-3 px-3 text-primary"></h3>
-</form>
-
-<!--Created by Blaine Viljoen(28023374)-->
+</div>

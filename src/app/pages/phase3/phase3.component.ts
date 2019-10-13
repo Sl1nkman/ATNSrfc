@@ -10,6 +10,7 @@ import swal from 'sweetalert2';
 import {CCRPhase2} from '../../models/CCR-Phase2';
 import {Phase2Service} from '../../services/phase2.service';
 import {toInteger} from '@ng-bootstrap/ng-bootstrap/util/util';
+import {loadQueryList} from '@angular/core/src/render3/instructions';
 
 
 @Component({
@@ -21,8 +22,7 @@ export class Phase3Component implements OnInit {
   private  formData = new FormData();
 
   private localObj = null;
-
-  private phase3ID = 2;
+  private phase3ID = null;
 
   datepickerConfig: Partial<BsDatepickerConfig> ;
   dateRangePicker: Date;
@@ -89,16 +89,16 @@ export class Phase3Component implements OnInit {
     schedRegressionDate: undefined,
     tcbEvalStart: undefined,
     tcbEvalEnd: undefined,
-    implementationSuccessful: true,
-    abort: false,
-    regress: false,
+    implementationSuccessful: undefined,
+    abort: undefined,
+    regress: undefined,
     abortRegressReason: undefined,
     abortRegress: undefined,
-    alreadyRegressed: true,
-    additionalDocs: false,
-    itemsUpdated: false,
-    evalSuccess: false,
-    ccrConfirmation: false,
+    alreadyRegressed: undefined,
+    additionalDocs: undefined,
+    itemsUpdated: undefined,
+    evalSuccess: undefined,
+    ccrConfirmation: undefined,
     evalFailure: undefined,
     documentIds: undefined,
     CSRF_token: undefined
@@ -107,7 +107,7 @@ export class Phase3Component implements OnInit {
     user: String = '';
     Token = null ;
 
-  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service, private router: Router) {
+  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,
@@ -121,6 +121,7 @@ export class Phase3Component implements OnInit {
 
     onSelectTCBNumberOfDays($event) {
       this.selectedNoDays = $event.target.value;
+      localStorage.setItem('noDays', $event.target.value);
       this.showTCBdatepicker = true;
     }
 
@@ -129,10 +130,13 @@ export class Phase3Component implements OnInit {
       const maxDate = new Date();
       maxDate.setDate($event.getDate() + parseInt( '' + this.selectedNoDays, 10));
       this.phase3.tcbEvalStart = startDate;
+      localStorage.setItem('tcbEvalStart', this.phase3.tcbEvalStart.toString());
       this.phase3.tcbEvalEnd = maxDate;
+      localStorage.setItem('tcbEvalEnd', this.phase3.tcbEvalEnd.toString());
   }
 
   onSelectAbortRegress($event) {
+      localStorage.setItem('abortRegress', this.phase3.abortRegress);
     if (this.phase3.abortRegress !== undefined) {
       if (this.phase3.abortRegress.includes('Abort')) {
         this.phase3.abort = true;
@@ -153,10 +157,12 @@ export class Phase3Component implements OnInit {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
+          localStorage.setItem('abortRegressReason', this.phase3.abortRegressReason);
       } else if (this.phase3.abortRegressReason !== undefined && this.phase3.alreadyRegressed) {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
+          localStorage.setItem('abortRegressReason', this.phase3.abortRegressReason);
       }
   }
 
@@ -165,11 +171,19 @@ export class Phase3Component implements OnInit {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
+          localStorage.setItem('schedRegressionDate', this.phase3.schedRegressionDate.toString());
       }
   }
 
   onSelectImplementationSuccessful(e) {
+      localStorage.setItem('implementationSuccessful', e.target.value);
     if (e.target.value === 'yes') {
+        localStorage.removeItem('abortRegress');
+        localStorage.removeItem('abortRegressReason');
+        localStorage.removeItem('schedRegressionDate');
+        localStorage.removeItem('alreadyRegressed');
+        localStorage.removeItem('schedRegressionDate');
+        localStorage.removeItem('abortRegressReason');
       this.phase3.implementationSuccessful = true;
       this.displayImpSuccess = false;
       this.phase3.abort = false;
@@ -182,6 +196,15 @@ export class Phase3Component implements OnInit {
       this.phase3.abortRegress = undefined;
       this.phase3.alreadyRegressed = true;
     } else {
+        localStorage.removeItem('additionalDocs');
+        localStorage.removeItem('itemsUpdated');
+        localStorage.removeItem('evalSuccess');
+        localStorage.removeItem('confirm');
+        localStorage.removeItem('evalFailure');
+        localStorage.removeItem('noDays');
+        localStorage.removeItem('tcbEvalStart');
+        localStorage.removeItem('tcbEvalEnd');
+        localStorage.removeItem('evalFailure');
       this.phase3.implementationSuccessful = false;
       this.displayImpSuccess = true;
       this.showImpChange = true;
@@ -200,6 +223,7 @@ export class Phase3Component implements OnInit {
   }
   
   onSelectAdditionalDocs(e) {
+      localStorage.setItem('additionalDocs', e.target.value);
       if (e.target.value === 'yes') {
           this.phase3.additionalDocs = true;
       } else {
@@ -209,6 +233,7 @@ export class Phase3Component implements OnInit {
   }
 
   onSelectAlreadyRegressed(e) {
+      localStorage.setItem('alreadyRegressed', e.target.value);
       if (e.target.value === 'yes') {
           this.phase3.alreadyRegressed = true;
           this.showSched = false;
@@ -220,12 +245,14 @@ export class Phase3Component implements OnInit {
   }
 
   onSelectItemsUpdated(e) {
+      localStorage.setItem('itemsUpdated', e.target.value);
       if (e.target.value === 'yes') {
           this.phase3.itemsUpdated = true;
       }
   }
 
   onSelectEvalSuccess(e) {
+      localStorage.setItem('evalSuccess', e.target.value);
       if (e.target.value === 'yes') {
           this.phase3.evalSuccess = true;
           this.showEvalChange = true;
@@ -238,6 +265,7 @@ export class Phase3Component implements OnInit {
   }
 
   onSelectConfirm(e) {
+      localStorage.setItem('confirm', e.target.value);
       if (e.target.value === 'Confirm') {
           this.phase3.ccrConfirmation = true;
           const submitButton = document.getElementById('submit');
@@ -263,7 +291,7 @@ export class Phase3Component implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-
+                localStorage.clear();
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
@@ -306,6 +334,7 @@ export class Phase3Component implements OnInit {
                                       showConfirmButton: false,
                                       timer: 1500
                                   });
+                                  localStorage.clear();
                               } else {
                                   swal({
                                       title: 'Failure',
@@ -335,6 +364,7 @@ export class Phase3Component implements OnInit {
                                       showConfirmButton: false,
                                       timer: 1500
                                   });
+                                  localStorage.clear();
                               } else {
                                   swal({
                                       title: 'Failure',
@@ -369,6 +399,7 @@ export class Phase3Component implements OnInit {
           const submitButton = document.getElementById('submit');
           submitButton.classList.remove('disabled');
           this.disableSubmitButton = true;
+          localStorage.setItem('evalFailure', this.phase3.evalFailure);
       }
   }
 
@@ -525,6 +556,59 @@ export class Phase3Component implements OnInit {
               }
 
           }
+      } else {
+          const event = {target: {value: null}};
+
+          event.target.value = localStorage.getItem('implementationSuccessful');
+          if(event.target.value !== null){
+              this.onSelectImplementationSuccessful(event);
+          }
+
+          if(localStorage.getItem('abortRegress') !== null){
+              this.phase3.abortRegress = localStorage.getItem('abortRegress');
+              this.onSelectAbortRegress(null);
+
+              this.phase3.abortRegressReason = localStorage.getItem('abortRegressReason');
+          }
+
+          event.target.value = localStorage.getItem('alreadyRegressed');
+          if(event.target.value !== null){
+              this.onSelectAlreadyRegressed(event);
+              if(!this.phase3.alreadyRegressed){
+                  this.phase3.schedRegressionDate = new Date(localStorage.getItem('schedRegressionDate'));
+              }
+          }
+
+          event.target.value = localStorage.getItem('noDays');
+          if(event.target.value !== null){
+              this.onSelectTCBNumberOfDays(event);
+              this.phase3.tcbEvalStart = new Date(localStorage.getItem('tcbEvalStart'));
+              this.phase3.tcbEvalEnd = new Date(localStorage.getItem('tcbEvalEnd'));
+          }
+
+          event.target.value = localStorage.getItem('additionalDocs');
+          if(event.target.value !== null){
+              this.onSelectAdditionalDocs(event);
+          }
+
+          event.target.value = localStorage.getItem('itemsUpdated');
+          if(event.target.value !== null){
+              this.onSelectItemsUpdated(event);
+          }
+
+          event.target.value = localStorage.getItem('evalSuccess');
+          if(event.target.value !== null){
+              this.onSelectEvalSuccess(event);
+              if(!this.phase3.evalSuccess){
+                  this.phase3.evalFailure = localStorage.getItem('evalFailure');
+              }
+          }
+
+          event.target.value = localStorage.getItem('confirm');
+          if(event.target.value !== null){
+              this.onSelectConfirm(event);
+          }
+
       }
   }
 

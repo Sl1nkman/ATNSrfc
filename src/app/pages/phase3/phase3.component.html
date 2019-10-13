@@ -624,7 +624,7 @@
                                 id="NoDays"
                                 (change)="onSelectTCBNumberOfDays($event)" >
                             <option selected="selected" disabled="disabled">Select no. of days</option>
-                            <option  *ngFor="let day of numberOfDays" value="{{day}}">{{day}}</option>
+                            <option  *ngFor="let day of numberOfDays" value="{{day}}" [selected]="this.selectedNoDays == day">{{day}}</option>
                         </select>
                     </div>
                 </div>
@@ -674,6 +674,7 @@
                                name="additionalDocs"
                                value="yes"
                                (click)="onSelectAdditionalDocs($event)"
+                               [checked]="this.phase3.additionalDocs"
                         >
                         Yes
                     </Label>
@@ -682,6 +683,7 @@
                                name="additionalDocs"
                                value="no"
                                (click)="onSelectAdditionalDocs($event)"
+                               [checked]="!this.phase3.additionalDocs"
                         >
                         No
                     </Label>

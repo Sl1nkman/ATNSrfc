@@ -48,6 +48,6 @@ export class Phase1Service {
   }
 
   getSite() {
-    return this.siteID;
+    return this.siteID.toString();
   }
 }

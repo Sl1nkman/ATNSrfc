@@ -208,7 +208,8 @@
                             name="configurationItems"
                             type="text"
                             (input)="this.displayChangeType = true"
-                            [(ngModel)]="this.phase2.configurationItems">
+                            [(ngModel)]="this.phase2.configurationItems"
+                            (change)="setStrings()">
                 </div>
             </div>
         </div>
@@ -259,14 +260,16 @@
                             <input type="radio"
                                    name="additionalDocs"
                                    value="yes"
-                                   (click)="onSelectAdditionalDocuments($event)">
+                                   (click)="onSelectAdditionalDocuments($event)"
+                                    [checked]="this.phase2.additionalDocuments">
                             Yes
                         </Label>
                         <Label class="radio-inline px-3">
                             <input type="radio"
                                    name="additionalDocs"
                                    value="no"
-                                   (click)="onSelectAdditionalDocuments($event)" >
+                                   (click)="onSelectAdditionalDocuments($event)"
+                                   [checked]="!this.phase2.additionalDocuments">
                             No
                         </Label>
                     </div>
@@ -443,7 +446,8 @@
                                    id="changeNotSuccessfullyTestedReason"
                                    name="changeNotSuccessfullyTestedReason"
                                    (input)="onUnsuccessfulTestReason()"
-                                   [(ngModel)]="this.phase2.changeNotSuccessfullyTestedReason">
+                                   [(ngModel)]="this.phase2.changeNotSuccessfullyTestedReason"
+                                   (change)="setStrings()">
                         </div>
                     </div>
                 </div>
@@ -490,7 +494,8 @@
                                 name="specialistComments"
                                 id="specialistComments"
                                 (input)="onInputSpecialistComment()"
-                                [(ngModel)]="this.phase2.specialistComment">
+                                [(ngModel)]="this.phase2.specialistComment"
+                                (change)="setStrings()">
                     </div>
                 </div>
             </div>
@@ -529,9 +534,9 @@
                             name="recommend/oppose"
                             (change)="onSelectRecommendOrOppose($event)" >
                         <option selected="selected" disabled="disabled">Select one</option>
-                        <option [disabled]="this.phase2.changeSuccessfullyTested === 'no'" value="Recommend" >Recommend</option>
-                        <option [disabled]="this.phase2.changeSuccessfullyTested === 'no'" value="Oppose">Oppose</option>
-                        <<option value="re-test">Re-Test</option>
+                        <option [disabled]="this.phase2.changeSuccessfullyTested === 'no'" value="Recommend" [selected]="this.phase2.recommend_oppose === 'Recommend'">Recommend</option>
+                        <option [disabled]="this.phase2.changeSuccessfullyTested === 'no'" value="Oppose" [selected]="this.phase2.recommend_oppose === 'Oppose'">Oppose</option>
+                        <<option value="re-test" [selected]="this.phase2.recommend_oppose === 're-test'">Re-Test</option>
                     </select>
                 </div>
             </div>

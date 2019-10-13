@@ -19,7 +19,7 @@ export class Phase1Component implements OnInit {
   private localOBJ = null;
   private enableSubmitButton: boolean;
   private displayNotifyManager: boolean;
-  private displayRequestDescription: boolean;
+  private displayRequestDescription: true;
   private displayReasonForRequest: boolean;
   private displayNoManagers: boolean;
   private noManagers: number [] = [1, 2, 3];
@@ -194,7 +194,23 @@ export class Phase1Component implements OnInit {
     if (this.localOBJ !== null) {
       localStorage.setItem('request', this.localOBJ.requested_change);
       localStorage.setItem('description', this.localOBJ.description);
-      localStorage.setItem('site', this.phase1Service.getSite().toString());
+      localStorage.setItem('site', this.phase1Service.getSite());
+      this.RFC.requestDescription = this.localOBJ.requested_change;
+      this.RFC.reasonForRequest = this.localOBJ.description;
+      this.RFC.site_ID = this.phase1Service.getSite();
+      console.log(this.RFC.site_ID);
+
+      if ( this.RFC.site_ID !== null || undefined) {
+        this.displayNotifyManager = true;
+      }
+      if (this.RFC.requestDescription !== null || undefined) {
+        this.displayRequestDescription = true;
+      }
+      if (this.RFC.reasonForRequest !== null || undefined) {
+        this.displayReasonForRequest = true;
+        this.enableSubmitButton = true;
+      }
+
       this.enableSubmitButton = true;
       const submitButton = document.getElementById('submit');
       submitButton.classList.remove('disabled');

@@ -29,6 +29,12 @@ export class AdminDashboardComponent implements OnInit {
   private showPhone;
   private showEmail;
 
+  private alerts = [];
+  private alertMessage;
+  private alertFreq;
+  private selectedAlert;
+  private showEditAlert = false;
+
   private eosType;
   private eosDescription;
   private editEOS = false;
@@ -491,6 +497,30 @@ export class AdminDashboardComponent implements OnInit {
     this.selectedRole = $event.target.value;
   }
 
+  revealEditAlert(){
+    this.showEditAlert = true;
+  }
+
+  hideEditAlert(){
+    this.alertMessage = null;
+    this.alertFreq = null;
+    this.showEditAlert = false;
+    this.selectedAlert = null;
+  }
+
+  editAlert(){
+    this.adminDashboardService.editAlert(this.selectedAlert, this.alertMessage, this.alertFreq).subscribe((data: Data) => {
+      if(data.success){
+        swal('Success' , 'The alert has been edited successfully' , 'success' );
+        this.adminDashboardService.getAlert().toPromise().then(result => {
+          this.alerts = result[0];
+        });
+      } else {
+        swal('Failure' , 'There was a problem editing the alert' , 'error' );
+      }
+    });
+  }
+
   revealAssignSite(operation) {
     this.showAssignSite = true;
     this.operation = operation;
@@ -848,6 +878,7 @@ export class AdminDashboardComponent implements OnInit {
       this.allSites = data[13];
       this.titles = data[14];
       this.managers = data[15];
+      this.alerts = data[16];
 
       for (let i = 0; i < this.initiatedRFC.length; i++) {
         if (this.phase2RFCs.length !== this.initiatedRFC.length) {

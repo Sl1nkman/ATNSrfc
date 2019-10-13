@@ -41,6 +41,16 @@ export class AdminDashboardService{
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
     }
 
+    editAlert(id, message, freq){
+        const obj = {updateSelection: 'alert', ID: id, message: message, frequency: freq};
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+    }
+
+    getAlert(){
+        const obj = {dataSelection: 'alert'};
+        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    }
+
     deleteDoc(obj){
         return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/removeFiles.php', obj, httpOptions);
     }

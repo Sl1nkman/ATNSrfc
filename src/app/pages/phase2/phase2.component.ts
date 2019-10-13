@@ -84,7 +84,7 @@ export class Phase2Component implements OnInit {
             software: false,
             firmware: false
         },
-        additionalDocuments: false,
+        additionalDocuments: undefined,
         documentIds: undefined,
         numberOfPages: undefined,
         estimatedImpacts: {
@@ -92,7 +92,7 @@ export class Phase2Component implements OnInit {
             clients: undefined,
             technical: undefined
         },
-        problemReportRaised: false,
+        problemReportRaised: undefined,
         problemReportRef: undefined,
         changeSuccessfullyTested: undefined,
         changeNotSuccessfullyTestedReason: undefined,
@@ -119,6 +119,7 @@ export class Phase2Component implements OnInit {
         if ($event.target.value === '1') {
             prioritySelect.classList.add('text-danger');
             this.emergencySelected = true;
+            this.phase2.additionalDocuments = false;
             this.displayRecommendOrOppose = true;
             this.displaySpecialistComments = true;
             this.displayPredictedRisks = false;
@@ -143,13 +144,16 @@ export class Phase2Component implements OnInit {
             this.displayPredictedRisks = true;
             this.displaySpecialistComments = false;
             this.emergencySelected = false;
+            this.displayRecommendOrOppose = false;
             prioritySelect.classList.remove('text-danger');
         } else {
             this.displayPredictedRisks = true;
             this.displaySpecialistComments = false;
             this.emergencySelected = false;
+            this.displayRecommendOrOppose = false;
         }
         this.phase2.requestPriority = $event.target.value;
+        localStorage.setItem('requestPriority', $event.target.value);
     }
 
     public onSelectChangePeriod($event) {
@@ -169,10 +173,12 @@ export class Phase2Component implements OnInit {
                 break;
         }
         this.phase2.changePeriod = $event.target.value;
+        localStorage.setItem('changePeriod', $event.target.value);
     }
 
     public onSelectNumberOfTemporaryDays($event) {
         this.phase2.temporaryPeriodNumberOfDays = $event.target.value;
+        localStorage.setItem('temporaryPeriodNumberOfDays', $event.target.value);
         this.displayTemporaryDateSelection = true;
     }
 
@@ -180,12 +186,15 @@ export class Phase2Component implements OnInit {
         const maxDate = new Date();
         maxDate.setDate($event.getDate() + parseInt('' + this.phase2.temporaryPeriodNumberOfDays, 10));
         this.phase2.temporaryPeriodEndDate = maxDate;
+        localStorage.setItem('temporaryPeriodStartDate', this.phase2.temporaryPeriodStartDate.toString());
+        localStorage.setItem('temporaryPeriodEndDate', maxDate.toString());
         this.displayNatureOfChange = true;
 
     }
 
     public onSelectImpact($event) {
         this.phase2.predictedImpact = $event.target.value;
+        localStorage.setItem('predictedImpact', $event.target.value);
         if (this.phase2.predictedImpact !== undefined) {
             this.displayChangePeriod = true;
             switch (this.phase2.predictedImpact) {
@@ -254,7 +263,9 @@ export class Phase2Component implements OnInit {
         } else {
             this.displayChangePeriod = false;
         }
-
+        localStorage.setItem('clients', this.phase2.estimatedImpacts.clients);
+        localStorage.setItem('operations', this.phase2.estimatedImpacts.operations);
+        localStorage.setItem('technical', this.phase2.estimatedImpacts.technical);
 
     }
 
@@ -262,6 +273,7 @@ export class Phase2Component implements OnInit {
 
         if (this.phase2.natureOfChange !== undefined) {
             this.displayEOSystem = true;
+            localStorage.setItem('natureOfChange', this.phase2.natureOfChange);
         } else {
             this.displayEOSystem = false;
         }
@@ -269,12 +281,14 @@ export class Phase2Component implements OnInit {
 
     public onSelectEosSystem($event) {
         this.phase2.eosSystem = $event.target.value;
+        localStorage.setItem('eosSystem', $event.target.value);
         this.phase2service.getEOSTCBNumber(this.phase2.eosSystem).subscribe( (data: Data) => {
             let tcb = parseInt(data.latest_TCB_number , 10);
             tcb += 1;
             for (const eos of this.availableEosSystems) {
                 if (eos[0] === $event.target.value ) {
                     this.phase2.TCB_CRF_ID = eos[1] + tcb;
+                    localStorage.setItem('tcb', this.phase2.TCB_CRF_ID);
                 }
             }
         });
@@ -285,7 +299,7 @@ export class Phase2Component implements OnInit {
     }
 
     public onSelectChangeTypeHW(e) {
-
+        localStorage.setItem('changeHW', e.target.checked);
         if (e.target.checked) {
             this.phase2.change.hardware = true;
         } else {
@@ -299,6 +313,7 @@ export class Phase2Component implements OnInit {
     }
 
     public onSelectChangeTypeSW(e) {
+        localStorage.setItem('changeSW', e.target.checked);
         if (e.target.checked) {
             this.phase2.change.software = true;
         } else {
@@ -312,6 +327,7 @@ export class Phase2Component implements OnInit {
     }
 
     public onSelectChangeTypeFW(e) {
+        localStorage.setItem('changeFW', e.target.checked);
         if (e.target.checked) {
             this.phase2.change.firmware = true;
         } else {
@@ -334,6 +350,7 @@ export class Phase2Component implements OnInit {
             this.phase2.numberOfPages = undefined;
             this.displayEstimatedImpact = true;
         }
+        localStorage.setItem('additionalDocuments', e.target.value);
     }
 
     // first file uploader start
@@ -384,6 +401,7 @@ export class Phase2Component implements OnInit {
     }
 
     public onSelectReportRaised(e) {
+        localStorage.setItem('problemReportRaised', e.target.value);
         if (e.target.value === 'yes') {
             this.displayChangePreTested = false;
             this.phase2.problemReportRaised = true;
@@ -399,6 +417,7 @@ export class Phase2Component implements OnInit {
     }
 
     public onSelectPreTested(e) {
+        localStorage.setItem('preTested', e.target.value);
         if (e.target.value === 'yes') {
             this.phase2.changeSuccessfullyTested = 'yes';
             this.displayChangeNotSuccessfullyTestedReason = false;
@@ -440,6 +459,7 @@ export class Phase2Component implements OnInit {
     }
 
     public onSelectRecommendOrOppose($event) {
+        localStorage.setItem('recommendOppose', $event.target.value);
         this.phase2.recommend_oppose = $event.target.value;
         const submitButton = document.getElementById('submit');
         submitButton.classList.remove('disabled');
@@ -460,6 +480,7 @@ export class Phase2Component implements OnInit {
         }).then((result) => {
             if (result.value) {
                 this.router.navigate(['home']);
+                localStorage.clear();
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
@@ -502,6 +523,7 @@ export class Phase2Component implements OnInit {
                                             showConfirmButton: false,
                                             timer: 1500
                                         });
+                                        localStorage.clear();
                                     } else {
                                         swal({
                                             title: 'Failure',
@@ -530,6 +552,7 @@ export class Phase2Component implements OnInit {
                                             showConfirmButton: false,
                                             timer: 1500
                                         });
+                                        localStorage.clear();
 
                                     } else {
                                         swal({
@@ -844,7 +867,104 @@ export class Phase2Component implements OnInit {
                 const submitButton = document.getElementById('submit');
                 submitButton.classList.remove('disabled');
                 document.getElementById('cancel').classList.add('invisible');
-            }
+            } else {
+                const event = {target: {value: null, checked: null}};
+                event.target.value = localStorage.getItem('requestPriority');
+                if(event.target.value !== null){
+                    this.onSelectPriority(event);
+                }
+                event.target.value = localStorage.getItem('changePeriod');
+                if(event.target.value !== null){
+                    this.onSelectChangePeriod(event);
+                }
+                event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
+                if(event.target.value !== null){
+                    this.onSelectNumberOfTemporaryDays(event);
+                }
+                if(localStorage.getItem('temporaryPeriodStartDate') !== null){
+                    this.phase2.temporaryPeriodStartDate = new Date(localStorage.getItem('temporaryPeriodStartDate'));
+                    this.phase2.temporaryPeriodEndDate = new Date(localStorage.getItem('temporaryPeriodEndDate'));
+                    this.displayNatureOfChange = true;
+                }
+
+                if(localStorage.getItem('clients') !== null){
+                    this.phase2.estimatedImpacts.clients = localStorage.getItem('clients');
+                    this.displayEstimatedImpactClients = true;
+                }
+                if(localStorage.getItem('operations') !== null){
+                    this.phase2.estimatedImpacts.operations = localStorage.getItem('operations');
+                    this.displayEstimatedImpactOps = true;
+                }
+                if(localStorage.getItem('technical') !== null){
+                    this.phase2.estimatedImpacts.technical = localStorage.getItem('technical');
+                    this.displayEstimatedImpactTech = true;
+                }
+                event.target.value = localStorage.getItem('predictedImpact');
+                if(event.target.value !== null){
+                    this.onSelectImpact(event);
+                }
+                this.estimatedImpact(null);
+
+                this.phase2.natureOfChange = localStorage.getItem('natureOfChange');
+                if(this.phase2.natureOfChange !== null){
+                    this.onSelectNatureOfChange(null);
+                }
+
+                event.target.value = localStorage.getItem('eosSystem');
+                if(event.target.value !== null){
+                    this.onSelectEosSystem(event);
+                    this.phase2.TCB_CRF_ID = localStorage.getItem('tcb');
+                }
+
+                event.target.checked = JSON.parse(localStorage.getItem('changeHW'));
+                if(event.target.checked !== null){
+                    this.displayChangeType = true;
+                    this.onSelectChangeTypeHW(event);
+                }
+
+                event.target.checked = JSON.parse(localStorage.getItem('changeSW'));
+                if(event.target.checked !== null){
+                    this.displayChangeType = true;
+                    this.onSelectChangeTypeSW(event);
+                }
+
+                event.target.checked = JSON.parse(localStorage.getItem('changeFW'));
+                if(event.target.checked !== null){
+                    this.displayChangeType = true;
+                    this.onSelectChangeTypeFW(event);
+                }
+
+                console.log(localStorage.getItem('additionalDocuments'))
+                event.target.value = localStorage.getItem('additionalDocuments');
+                if(event.target.value !== null){
+                    this.onSelectAdditionalDocuments(event);
+                }
+
+                event.target.value = localStorage.getItem('problemReportRaised');
+                if (event.target.value !== null){
+                    this.onSelectReportRaised(event);
+                }
+
+                event.target.value = localStorage.getItem('preTested');
+                if (event.target.value !== null){
+                    this.onSelectPreTested(event);
+                }
+
+                event.target.value = localStorage.getItem('recommendOppose');
+                if (event.target.value !== null){
+                    this.onSelectRecommendOrOppose(event);
+                }
+
+                this.phase2.configurationItems = localStorage.getItem('config');
+                this.phase2.specialistComment = localStorage.getItem('comment');
+                this.phase2.changeNotSuccessfullyTestedReason = localStorage.getItem('reasonUnsuccess');
+        }
+        }
+
+        setStrings(){
+            localStorage.setItem('config', this.phase2.configurationItems);
+            localStorage.setItem('reasonUnsuccess', this.phase2.changeNotSuccessfullyTestedReason);
+            localStorage.setItem('comment', this.phase2.specialistComment);
         }
 
     }
