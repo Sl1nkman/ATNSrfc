@@ -13,32 +13,36 @@
   <div class="row text-center" *ngFor="let ccr of myCCRs" >
     <div class="col mb-4">
       <div class="card h-100">
-        <div class="card-body">
+        <div class="card-body" (click)="viewCcrPhase1(ccr[0][0])">
           <h4 class="card-title">{{ccr[0][0].ID}}</h4>
           <label>CCR Initiated: </label>
           <p class="card-text"> {{ccr[0][0].start_time}}</p>
-          <label>User ID</label>
-          <p class="card-text">{{ccr[0][0].user_ID}}</p>
+          <label>Initiator Name</label>
+          <p class="card-text">{{ccr[0][0].initiatorName.firstName}}  {{ccr[0][0].initiatorName.lastName }}</p>
         </div>
       </div>
     </div>
     <div class="col mb-4">
       <div class="card h-100" *ngIf="ccr[1][0]">
-        <div class="card-body">
-          <h4 class="card-title">{{ccr[1][0].ID}}</h4>
-          <p class="card-text">TCB CRF ID: {{ccr[1][0].tcb_crf_ID}}</p>
-          <p class="card-text">Started: {{ccr[1][0].startDate}}</p>
+        <div class="card-body" (click)="viewCcrPhase2(ccr[1][0])">
+          <h6>TCB CRF ID: </h6>
+          <p class="card-text">{{ccr[1][0].tcb_crf_ID}}</p>
+          <h6>Started: </h6>
+          <p class="card-text">{{ccr[1][0].startDate}}</p>
         </div>
       </div>
     </div>
     <div class="col mb-4">
       <div class="card h-100" *ngIf="ccr[2][0]">
         <div class="card-body">
-          <h4 class="card-title">{{ccr[2][0].ID}}</h4>
-          <p class="card-text" *ngIf="ccr[2][0].start_tcb_evaluation_date !== '0000-00-00'">
-            <label>TCB evaluation start date: </label>
-            {{ccr[2][0].start_tcb_evaluation_date}}
-          </p>
+          <a class="card-text" *ngIf="ccr[2][0].start_tcb_evaluation_date !== '0000-00-00'">
+            <h6>TCB evaluation start date: </h6>
+            <p>{{ccr[2][0].start_tcb_evaluation_date}}</p>
+          </a>
+          <a class="card-text" *ngIf="ccr[2][0].end_tcb_evaluation_date !== '0000-00-00'">
+            <h6>TCB evaluation end date: </h6>
+            <p>{{ccr[2][0].start_tcb_evaluation_date}}</p>
+          </a>
           <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '1'">This CCR has been closed out </p>
           <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '0'">This CCR has not been closed out </p>
         </div>
