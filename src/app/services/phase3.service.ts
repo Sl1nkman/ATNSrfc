@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CCRPhase3} from '../models/CCR-Phase3';
-import {CCRPhase2} from '../models/CCR-Phase2';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
