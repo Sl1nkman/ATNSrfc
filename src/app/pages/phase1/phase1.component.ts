@@ -39,6 +39,7 @@ export class Phase1Component implements OnInit {
     this.RFC.site_ID = $event.target.value;
     localStorage.setItem('site' , $event.target.value);
     this.displayNotifyManager = true;
+    this.displayRequestDescription = true;
   }
   onSelectNotifyManager($event) {
     switch ($event.target.value) {

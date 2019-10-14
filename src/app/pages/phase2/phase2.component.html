@@ -21,7 +21,7 @@
                 <div class="col-sm">
                     <label class="px-3" for="priority">Request Priority</label>
                 </div>
-                <div class="col-sm">
+                <div class="col-lg-3">
                     <select ngbPopover="Select from the drop down list whether the change request is an EMERGENCY or NON-EMERGENCY (NORMAL)." triggers="mouseenter:mouseleave" placement="right" popoverTitle="CHANGE REQUEST PRIORITY"
                             class="rounded w-100 form-control"
                             name="priority"
@@ -36,7 +36,7 @@
                         <label class="px-3"  for="predictedImpact"> Predicted Risk/s </label>
                     </div>
                 </div>
-                <div class="col-sm">
+                <div class="col-lg-3">
                     <div *ngIf="this.displayPredictedRisks">
                         <select ngbPopover="Select the appropriate option from the drop down list" triggers="mouseenter:mouseleave" placement="right" popoverTitle="PREDICTED RISK"
                                 class="rounded w-100 form-control"

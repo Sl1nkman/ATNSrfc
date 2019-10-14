@@ -253,7 +253,7 @@ export class Phase3Component implements OnInit {
     public onCancel() {
         swal({
             title: 'Are you sure?',
-            text: "You will lose all progress on this form",
+            text: 'You will lose all progress on this form',
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Confirm',
@@ -291,8 +291,8 @@ export class Phase3Component implements OnInit {
           reverseButtons: true
       }).then((result) => { if (result.value) {
           if(this.localObj !== null){
-              this.phase3Service.updatePhase3(this.phase3, this.localObj.ID).subscribe((data: Data)=>{
-                  if(data.success){
+              this.phase3Service.updatePhase3(this.phase3, this.localObj.ID).subscribe((data: Data) => {
+                  if (data.success){
                       if (this.phase3.additionalDocs) {
                           this.populateForm();
                           this.formData.append('passedID', this.localObj.ID);
@@ -439,7 +439,7 @@ export class Phase3Component implements OnInit {
           // tslint:disable-next-line:radix
           this.phase3ID = parseInt(this.localObj.ID);
 
-          if(this.localObj.implementation_successful === '1'){
+          if (this.localObj.implementation_successful === '1') {
               this.phase3.implementationSuccessful = true;
           } else {
               this.phase3.implementationSuccessful = false;
@@ -471,8 +471,7 @@ export class Phase3Component implements OnInit {
               this.phase3.evalFailure = undefined;
               this.showEvalChange = false;
           }
-
-          if(this.localObj.aborted_regressed !== ''){
+          if (this.localObj.aborted_regressed !== '') {
               this.phase3.abortRegress = this.localObj.aborted_regressed;
               if (this.phase3.abortRegress !== undefined) {
                   if (this.phase3.abortRegress.includes('Abort')) {
@@ -500,7 +499,7 @@ export class Phase3Component implements OnInit {
               this.phase3.abortRegressReason = this.localObj.reason_if_abort_regressed;
           }
 
-          if(this.localObj.aborted_regressed === ''){
+          if (this.localObj.aborted_regressed === '') {
               this.phase3.tcbEvalStart = this.localObj.start_tcb_evaluation_date;
               this.phase3.tcbEvalEnd = this.localObj.end_tcb_evaluation_date;
 
@@ -508,7 +507,7 @@ export class Phase3Component implements OnInit {
                   this.phase3.itemsUpdated = true;
               }
 
-              if(this.localObj.evaluation_success === '1'){
+              if (this.localObj.evaluation_success === '1') {
                   this.phase3.evalSuccess = true;
                   this.showEvalChange = true;
                   this.phase3.evalFailure = undefined;

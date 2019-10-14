@@ -17,12 +17,13 @@
                 <div class="card-body" (click)="viewCcrPhase1(ccr[0][0])">
                     <label>CCR Initiated: </label>
                     <p class="card-text"> {{ccr[0][0].start_time}}</p>
-                    <label>User ID</label>
-                    <p class="card-text">{{ccr[0][0].user_ID}}</p>
+                    <label>Initiator Name</label>
+                    <p class="card-text">{{ccr[0][0].initiatorName.firstName}}  {{ccr[0][0].initiatorName.lastName }}</p>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary" *ngIf="!ccr[1][0]" (click)="configureCCR(ccr[0][0])">Configure CCR</button>
                 </div>
+
             </div>
         </div>
         <div class="col mb-4">
