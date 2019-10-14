@@ -11,7 +11,6 @@ import {Data, Router} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
 import {DATE} from 'ngx-bootstrap/chronos/units/constants';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
     selector: 'app-phase2',
     templateUrl: './phase2.component.html',
@@ -159,6 +158,9 @@ export class Phase2Component implements OnInit {
             case '1' :
                 this.displayNatureOfChange = true;
                 this.displaySelectTemporaryAmountOfDays = false;
+                this.phase2.temporaryPeriodNumberOfDays = 0 ;
+                this.phase2.temporaryPeriodStartDate = undefined;
+                this.phase2.temporaryPeriodEndDate = undefined;
                 break;
             case '2' :
                 this.displaySelectTemporaryAmountOfDays = true;
@@ -180,7 +182,7 @@ export class Phase2Component implements OnInit {
 
     public onSelectTemporaryStartDate($event) {
         const maxDate = new Date();
-        maxDate.setDate($event.getDate() + parseInt('' + this.phase2.temporaryPeriodNumberOfDays, 10));
+        maxDate.setDate($event.getDate() + parseInt( this.phase2.temporaryPeriodNumberOfDays + '', 10));
         this.phase2.temporaryPeriodEndDate = maxDate;
         this.displayNatureOfChange = true;
 
@@ -524,7 +526,6 @@ export class Phase2Component implements OnInit {
                                 this.populateForm();
                                 this.phase2service.upload(this.formData).subscribe((data: Data) => {
                                     if (data.success) {
-                                        this.phase2.documentIds = data.generatedName;
                                         swal('Success' , data.message , 'success' );
                                         this.router.navigate(['home']);
 
