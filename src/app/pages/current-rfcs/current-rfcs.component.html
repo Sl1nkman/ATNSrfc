@@ -44,7 +44,7 @@
         </div>
         <div class="col mb-4">
             <div class="card h-100" *ngIf="ccr[2][0]">
-                <div class="card-body">
+                <div class="card-body" (click)="viewCcrPhase3(ccr[2][0])">
                     <a class="card-text" *ngIf="ccr[2][0].start_tcb_evaluation_date !== '0000-00-00'">
                         <h6>TCB evaluation start date: </h6>
                     <p>{{ccr[2][0].start_tcb_evaluation_date}}</p>

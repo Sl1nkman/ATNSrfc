@@ -1,100 +1,141 @@
 <!--Created By Blaine Viljoen-->
 <div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.editUserRole && !this.deleteUserRole && !this.showEditAlert && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
-    <div class="row h-10">
-        <div class="col md-2">
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('add')">Assign EOS to user</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('delete')">Remove EOS system</button><br>
+    <div class="row">
+        <div class="col">
+            <div class="mat-card">
+                <div class="mat-card-header pl-3">
+                    <a class="mat-h4 text-center">User Actions</a>
+                </div>
+                <div class="mat-card-content">
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('add')">Assign EOS to user</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('delete')">Remove EOS from user</button><br>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('add')">Assign role to user</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('delete')">Remove role from user</button><br>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('add')">Assign User to site</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('delete')">Remove User from site</button><br>
+                </div>
+            </div>
         </div>
-        <div class="col md-2">
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('add')">Assign role to user</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('delete')">Remove EOS from user</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('add')">Add manager</button><br>
-        </div>
-        <div class="col md-2">
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('delete')">Remove role from user</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('add')">Add Title</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('delete')">Remove manager</button><br>
-        </div>
-        <div class="col md-2">
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('add')">Assign User to site</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('delete')">Remove Title</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealEditAlert()">Edit alert</button><br>
-        </div>
-        <div class="col md-2">
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('delete')">Remove User from site</button><br>
-            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('add')">Add EOS system</button><br>
+        <div class="col">
+            <div class="mat-card">
+                <div class="mat-card-header">
+                    <a class="mat-h4 pl-3 text-center">System Actions</a>
+                </div>
+                <div class="mat-card-content">
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('add')">Add EOS system</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('delete')">Remove EOS system</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('add')">Add Title</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('delete')">Remove Title</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('add')">Add manager</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('delete')">Remove manager</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealEditAlert()">Edit alert</button><br>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+
+<!--    <div class="row h-10">-->
+<!--        <div class="col md-2">-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('add')">Assign EOS to user</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('delete')">Remove EOS system</button><br>-->
+<!--        </div>-->
+<!--        <div class="col md-2">-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('add')">Assign role to user</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignEOS('delete')">Remove EOS from user</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('add')">Add manager</button><br>-->
+<!--        </div>-->
+<!--        <div class="col md-2">-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.userRoleShow('delete')">Remove role from user</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('add')">Add Title</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('delete')">Remove manager</button><br>-->
+<!--        </div>-->
+<!--        <div class="col md-2">-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('add')">Assign User to site</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('delete')">Remove Title</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealEditAlert()">Edit alert</button><br>-->
+<!--        </div>-->
+<!--        <div class="col md-2">-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealAssignSite('delete')">Remove User from site</button><br>-->
+<!--            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('add')">Add EOS system</button><br>-->
+<!--        </div>-->
+<!--    </div>-->
 </div><br>
-<div *ngFor="let rfc of initiatedRFC; index as i">
-    <div class="row h-100" *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.showEditAlert && !this.editUserRole && !this.deleteUserRole && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS" >
-        <div class="col mb-4">
-            <h2 class="px-3 text-secondary" *ngIf="i === 0">Initiated requests:</h2><br>
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
-                        <p class="card-text"> Request: {{rfc.requested_change}}</p>
-                        <p class="card-text"> Reason: {{rfc.description}}</p>
+<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.showEditAlert && !this.editUserRole && !this.deleteUserRole && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
+    <div *ngFor="let rfc of initiatedRFC; index as i" >
+        <div class="row h-100"  >
+            <div class="col mb-4">
+                <h2 class="px-3 text-secondary" *ngIf="i === 0">Initiated requests:</h2><br>
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
+                            <p class="card-text"> Request: {{rfc.requested_change}}</p>
+                            <p class="card-text"> Reason: {{rfc.description}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist(i)">Reassign Specialist</button>
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="reassignSpec" (click)="revealSpecialist(i)">Reassign Specialist</button>
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" id="editCCR" (click)="this.editCCR(i, 'Phase1')">Edit CCR</button>
+            </div>
+            <div class="col mb-4">
+                <h2 class="px-3 text-secondary" *ngIf="i === 0">CCR's in Phase 2:</h2><br>
+                    <div class="card h-100" *ngIf="this.phase2RFCs[i].ID === -1" >
+                        <div class="card-body">
+                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase2RFCs[i].ID}}</h2>
+                            <p class="card-text"> Phase 2 not yet processed</p>
+                        </div>
+                        <div class="card-footer">
+                        </div>
                     </div>
-                </div>
-        </div>
-        <div class="col mb-4">
-            <h2 class="px-3 text-secondary" *ngIf="i === 0">CCR's in Phase 2:</h2><br>
-                <div class="card h-100" *ngIf="this.phase2RFCs[i].ID === -1" >
-                    <div class="card-body">
-                        <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase2RFCs[i].ID}}</h2>
-                        <p class="card-text"> Phase 2 not yet processed</p>
-                    </div>
-                    <div class="card-footer">
-                    </div>
-                </div>
 
-                <div class="card h-100" *ngIf="this.phase2RFCs[i].ID !== -1" >
-                    <div class="card-body">
-                        <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase2RFCs[i].ID}}</h2>
-                        <p class="card-text"> Phase 1 ID: {{this.phase2RFCs[i].phase1_ID}}</p>
-                        <p class="card-text"> Specialist ID: {{this.phase2RFCs[i].spec_ID}}</p>
+                    <div class="card h-100" *ngIf="this.phase2RFCs[i].ID !== -1" >
+                        <div class="card-body">
+                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase2RFCs[i].ID}}</h2>
+                            <p class="card-text"> Phase 1 ID: {{this.phase2RFCs[i].phase1_ID}}</p>
+                            <p class="card-text"> Specialist ID: {{this.phase2RFCs[i].spec_ID}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button>
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editDocs(i)">Edit Documents</button>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button>
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase2')">Edit CCR</button>
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editDocs(i)">Edit Documents</button>
-                    </div>
-                </div>
 
-        </div>
+            </div>
 
 
-        <div class="col mb-4">
-            <h2 class="px-3 text-secondary" *ngIf="i === 0">CCR's in Phase 3:</h2><br>
-                <div class="card h-10" *ngIf="this.phase3RFCS[i].ID === -1" style="height: 28vh">
-                    <div class="card-body">
-                        <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h2>
-                        <p class="card-text"> Phase 3 has not yet been processed</p>
+            <div class="col mb-4">
+                <h2 class="px-3 text-secondary" *ngIf="i === 0">CCR's in Phase 3:</h2><br>
+                    <div class="card h-10" *ngIf="this.phase3RFCS[i].ID === -1" style="height: 28vh">
+                        <div class="card-body">
+                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h2>
+                            <p class="card-text"> Phase 3 has not yet been processed</p>
+                        </div>
+                        <div class="card-footer">
+                        </div>
                     </div>
-                    <div class="card-footer">
-                    </div>
-                </div>
 
-                <div class="card h-100" *ngIf="this.phase3RFCS[i].ID !== -1" style="height: 28vh">
-                    <div class="card-body">
-                        <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h2>
-                        <p class="card-text"> CCR_ID: {{this.phase3RFCS[i].CCR_ID}}</p>
-                    </div>
-                    <div class="card-footer">
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button>
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase3')">Edit CCR</button>
-                        <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editDocs(i)">Edit Documents</button>
-                    </div>
-                </div> <br>
+                    <div class="card h-100" *ngIf="this.phase3RFCS[i].ID !== -1" style="height: 28vh">
+                        <div class="card-body">
+                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h2>
+                            <p class="card-text"> CCR_ID: {{this.phase3RFCS[i].CCR_ID}}</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="revealSpecialist(i)">Reassign Specialist</button>
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editCCR(i, 'Phase3')">Edit CCR</button>
+                            <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.editDocs(i)">Edit Documents</button>
+                        </div>
+                    </div> <br>
 
-        </div>
-    </div><br><br>
+            </div>
+        </div><br><br>
+    </div>
 </div>
 
 <div class="shadow card bg-light mx-auto" *ngIf="this.displayCCR">

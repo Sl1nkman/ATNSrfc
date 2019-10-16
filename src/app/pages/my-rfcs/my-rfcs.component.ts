@@ -10,6 +10,8 @@ import {Phase3Service} from '../../services/phase3.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Ccrphase1ContentComponent} from '../current-rfcs/ccrphase1-content/ccrphase1-content.component';
 import {Ccrphase2ContentComponent} from '../current-rfcs/ccrphase2-content/ccrphase2-content.component';
+import { SpecialistCommentsComponent } from '../current-rfcs/specialist-comments/specialist-comments.component';
+import {Ccrphase3ContentComponent} from '../current-rfcs/ccrphase3-content/ccrphase3-content.component';
 
 @Component({
   selector: 'app-my-rfcs',
@@ -29,10 +31,21 @@ export class MyRFCSComponent implements OnInit {
         const modalRef = this.modalService.open(Ccrphase1ContentComponent , { centered: true });
         modalRef.componentInstance.phase1 = phase1;
     }
+
     viewCcrPhase2(phase2) {
         const modalRef = this.modalService.open(Ccrphase2ContentComponent , { centered: true , size: 'lg'});
         modalRef.componentInstance.phase2 = phase2;
     }
+    viewCcrPhase3(phase3) {
+        const modalRef = this.modalService.open(Ccrphase3ContentComponent , { centered: true , size: 'lg'});
+        modalRef.componentInstance.CCRPhase3Data = phase3;
+    }
+
+    viewSpecialistResponses(specialistResponses) {
+        const modalRef = this.modalService.open(SpecialistCommentsComponent, { centered: true , size: 'lg'});
+        modalRef.componentInstance.specialistResponses = specialistResponses;
+    }
+
 
   ngOnInit() {
     this.myRfcsService.getMyCCRs().subscribe( (data: Data) => {

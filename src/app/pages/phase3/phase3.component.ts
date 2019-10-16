@@ -1,4 +1,4 @@
-// Created by Blaine Viljoen 28023374
+// Created by Blaine Viljoen 28023374 edited by Liam Mccabe 27455211
 
 import { Component, OnInit } from '@angular/core';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
@@ -25,7 +25,6 @@ export class Phase3Component implements OnInit {
   private phase3ID = null;
 
   datepickerConfig: Partial<BsDatepickerConfig> ;
-  dateRangePicker: Date;
   displayImpSuccess: boolean;
   showImpChange: boolean;
   showTCBdatepicker: boolean;
@@ -107,7 +106,7 @@ export class Phase3Component implements OnInit {
     user: String = '';
     Token = null ;
 
-  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service) {
+  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service , private router: Router) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,
@@ -292,6 +291,7 @@ export class Phase3Component implements OnInit {
         }).then((result) => {
             if (result.value) {
                 localStorage.clear();
+                this.router.navigate(['home']);
             } else if (
                 result.dismiss === swal.DismissReason.cancel
             ) {
@@ -318,9 +318,9 @@ export class Phase3Component implements OnInit {
           cancelButtonColor: '#d9534f' ,
           reverseButtons: true
       }).then((result) => { if (result.value) {
-          if(this.localObj !== null){
+          if (this.localObj !== null) {
               this.phase3Service.updatePhase3(this.phase3, this.localObj.ID).subscribe((data: Data) => {
-                  if (data.success){
+                  if (data.success) {
                       if (this.phase3.additionalDocs) {
                           this.populateForm();
                           this.formData.append('passedID', this.localObj.ID);
@@ -359,23 +359,36 @@ export class Phase3Component implements OnInit {
                                   this.phase3.documentIds = data.generatedName;
                                   swal({
                                       title: 'Submitted',
-                                      text: 'Phase 2 configuration has been submitted',
+                                      text: data1.message,
                                       type: 'success',
                                       showConfirmButton: false,
                                       timer: 1500
                                   });
                                   localStorage.clear();
+                                  this.router.navigate(['home']);
                               } else {
                                   swal({
                                       title: 'Failure',
-                                      text: data.message,
+                                      text: data1.message,
                                       type: 'error',
                                       showConfirmButton: false,
                                       timer: 1500
                                   });
                               }
                           });
+                      } else {
+                          swal('Success' , data.message , 'success' );
+                          localStorage.clear();
+                          this.router.navigate(['home']);
                       }
+                  } else {
+                      swal({
+                          title: 'Failure',
+                          text: data.message,
+                          type: 'error',
+                          showConfirmButton: false,
+                          timer: 1500
+                      });
                   }
               });
           }
@@ -559,11 +572,11 @@ export class Phase3Component implements OnInit {
           const event = {target: {value: null}};
 
           event.target.value = localStorage.getItem('implementationSuccessful');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectImplementationSuccessful(event);
           }
 
-          if(localStorage.getItem('abortRegress') !== null){
+          if (localStorage.getItem('abortRegress') !== null) {
               this.phase3.abortRegress = localStorage.getItem('abortRegress');
               this.onSelectAbortRegress(null);
 
@@ -571,40 +584,40 @@ export class Phase3Component implements OnInit {
           }
 
           event.target.value = localStorage.getItem('alreadyRegressed');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectAlreadyRegressed(event);
-              if(!this.phase3.alreadyRegressed){
+              if (!this.phase3.alreadyRegressed) {
                   this.phase3.schedRegressionDate = new Date(localStorage.getItem('schedRegressionDate'));
               }
           }
 
           event.target.value = localStorage.getItem('noDays');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectTCBNumberOfDays(event);
               this.phase3.tcbEvalStart = new Date(localStorage.getItem('tcbEvalStart'));
               this.phase3.tcbEvalEnd = new Date(localStorage.getItem('tcbEvalEnd'));
           }
 
           event.target.value = localStorage.getItem('additionalDocs');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectAdditionalDocs(event);
           }
 
           event.target.value = localStorage.getItem('itemsUpdated');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectItemsUpdated(event);
           }
 
           event.target.value = localStorage.getItem('evalSuccess');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectEvalSuccess(event);
-              if(!this.phase3.evalSuccess){
+              if (!this.phase3.evalSuccess) {
                   this.phase3.evalFailure = localStorage.getItem('evalFailure');
               }
           }
 
           event.target.value = localStorage.getItem('confirm');
-          if(event.target.value !== null){
+          if (event.target.value !== null) {
               this.onSelectConfirm(event);
           }
 
@@ -643,4 +656,4 @@ export class Phase3Component implements OnInit {
 
 }
 
-// Created by Blaine Viljoen 28023374
+// Created by Blaine Viljoen 28023374 and edited by Liam Mccabe 27455211

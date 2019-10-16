@@ -862,88 +862,88 @@ export class Phase2Component implements OnInit {
             } else {
                 const event = {target: {value: null, checked: null}};
                 event.target.value = localStorage.getItem('requestPriority');
-                if(event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectPriority(event);
                 }
                 event.target.value = localStorage.getItem('changePeriod');
-                if(event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectChangePeriod(event);
                 }
                 event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
-                if(event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectNumberOfTemporaryDays(event);
                 }
-                if(localStorage.getItem('temporaryPeriodStartDate') !== null){
+                if (localStorage.getItem('temporaryPeriodStartDate') !== null) {
                     this.phase2.temporaryPeriodStartDate = new Date(localStorage.getItem('temporaryPeriodStartDate'));
                     this.phase2.temporaryPeriodEndDate = new Date(localStorage.getItem('temporaryPeriodEndDate'));
                     this.displayNatureOfChange = true;
                 }
 
-                if(localStorage.getItem('clients') !== null){
+                if (localStorage.getItem('clients') !== null) {
                     this.phase2.estimatedImpacts.clients = localStorage.getItem('clients');
                     this.displayEstimatedImpactClients = true;
                 }
-                if(localStorage.getItem('operations') !== null){
+                if (localStorage.getItem('operations') !== null) {
                     this.phase2.estimatedImpacts.operations = localStorage.getItem('operations');
                     this.displayEstimatedImpactOps = true;
                 }
-                if(localStorage.getItem('technical') !== null){
+                if (localStorage.getItem('technical') !== null) {
                     this.phase2.estimatedImpacts.technical = localStorage.getItem('technical');
                     this.displayEstimatedImpactTech = true;
                 }
                 event.target.value = localStorage.getItem('predictedImpact');
-                if(event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectImpact(event);
                 }
                 this.estimatedImpact(null);
 
                 this.phase2.natureOfChange = localStorage.getItem('natureOfChange');
-                if(this.phase2.natureOfChange !== null){
+                if (this.phase2.natureOfChange !== null) {
                     this.onSelectNatureOfChange(null);
                 }
 
                 event.target.value = localStorage.getItem('eosSystem');
-                if(event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectEosSystem(event);
                     this.phase2.TCB_CRF_ID = localStorage.getItem('tcb');
                 }
 
                 event.target.checked = JSON.parse(localStorage.getItem('changeHW'));
-                if(event.target.checked !== null){
+                if (event.target.checked !== null) {
                     this.displayChangeType = true;
                     this.onSelectChangeTypeHW(event);
                 }
 
                 event.target.checked = JSON.parse(localStorage.getItem('changeSW'));
-                if(event.target.checked !== null){
+                if (event.target.checked !== null) {
                     this.displayChangeType = true;
                     this.onSelectChangeTypeSW(event);
                 }
 
                 event.target.checked = JSON.parse(localStorage.getItem('changeFW'));
-                if(event.target.checked !== null){
+                if (event.target.checked !== null) {
                     this.displayChangeType = true;
                     this.onSelectChangeTypeFW(event);
                 }
 
-                console.log(localStorage.getItem('additionalDocuments'))
+                console.log(localStorage.getItem('additionalDocuments'));
                 event.target.value = localStorage.getItem('additionalDocuments');
-                if(event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectAdditionalDocuments(event);
                 }
 
                 event.target.value = localStorage.getItem('problemReportRaised');
-                if (event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectReportRaised(event);
                 }
 
                 event.target.value = localStorage.getItem('preTested');
-                if (event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectPreTested(event);
                 }
 
                 event.target.value = localStorage.getItem('recommendOppose');
-                if (event.target.value !== null){
+                if (event.target.value !== null) {
                     this.onSelectRecommendOrOppose(event);
                 }
 
@@ -953,7 +953,7 @@ export class Phase2Component implements OnInit {
         }
         }
 
-        setStrings(){
+        setStrings() {
             localStorage.setItem('config', this.phase2.configurationItems);
             localStorage.setItem('reasonUnsuccess', this.phase2.changeNotSuccessfullyTestedReason);
             localStorage.setItem('comment', this.phase2.specialistComment);

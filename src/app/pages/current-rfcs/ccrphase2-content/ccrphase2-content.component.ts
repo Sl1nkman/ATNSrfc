@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, Input , OnInit } from '@angular/core';
 import {CCRPhase2} from '../../../models/CCR-Phase2';
 import {BsDatepickerConfig} from 'ngx-bootstrap';
@@ -103,10 +106,15 @@ export class Ccrphase2ContentComponent implements OnInit {
       } else {
         this.phase2Data.change.firmware = true;
       }
+      if ( this.phase2.reportRaisedContractor === '1') {
+        this.phase2Data.problemReportRaised = true;
+      } else {
+        this.phase2Data.problemReportRaised = false;
+      }
       this.phase2Data.estimatedImpacts.operations = this.phase2.impactOnOperations;
       this.phase2Data.estimatedImpacts.clients = this.phase2.impactOnClients;
       this.phase2Data.estimatedImpacts.technical = this.phase2.impactOnTech;
-      this.phase2Data.problemReportRaised = this.phase2.reportRaisedContractor;
+
       this.phase2Data.problemReportRef = this.phase2.contractor_report_ref;
       this.phase2Data.changeSuccessfullyTested = this.phase2.pre_testSucces;
       this.phase2Data.changeNotSuccessfullyTestedReason = this.phase2.reasonUnsuccesTest;

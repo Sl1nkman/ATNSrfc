@@ -70,7 +70,7 @@
                 id="temporaryNoDays"
                 disabled >
           <option selected="selected" disabled="disabled">Select no. of days</option>
-          <option  *ngFor="let day of availableNumberOfTemporaryDays" [selected]="this.phase2Data.temporaryPeriodNumberOfDays ===  day" value="{{day}}">{{day}}</option>
+          <option  *ngFor="let day of availableNumberOfTemporaryDays" [selected]="this.phase2Data.temporaryPeriodNumberOfDays ==  day" value="{{day}}">{{day}}</option>
         </select>
       </div>
     </div>

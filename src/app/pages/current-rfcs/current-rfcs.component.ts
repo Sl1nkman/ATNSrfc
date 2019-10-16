@@ -7,17 +7,12 @@ import {Phase3Service} from '../../services/phase3.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Ccrphase1ContentComponent } from './ccrphase1-content/ccrphase1-content.component';
 import { Ccrphase2ContentComponent } from './ccrphase2-content/ccrphase2-content.component';
+import {Ccrphase3ContentComponent} from './ccrphase3-content/ccrphase3-content.component';
 
 @Component({
   selector: 'app-current-rfcs',
   templateUrl: './current-rfcs.component.html',
   styleUrls: ['./current-rfcs.component.css'],
-  styles: [`
-    .modal-dialog{
-      max-width: 100% !important;
-      width: 100% !important;}
-  `
-  ]
 })
 export class CurrentRFCSComponent implements OnInit {
   private myCCRs ;
@@ -43,6 +38,10 @@ export class CurrentRFCSComponent implements OnInit {
   viewCcrPhase2(phase2) {
     const modalRef = this.modalService.open(Ccrphase2ContentComponent , { centered: true , size: 'lg'});
     modalRef.componentInstance.phase2 = phase2;
+  }
+  viewCcrPhase3(phase3) {
+    const modalRef = this.modalService.open(Ccrphase3ContentComponent , { centered: true , size: 'lg'});
+    modalRef.componentInstance.CCRPhase3Data = phase3;
   }
   ngOnInit() {
     this.currentccrsService.getMyCCRs().subscribe( (data: Data) => {

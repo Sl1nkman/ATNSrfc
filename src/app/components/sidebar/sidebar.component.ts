@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
     } else {
       for (let i = 0 ; i < decodedToken.data.roles.length; i++) {
          if (i === decodedToken.data.roles.length - 1 ) {
-           this.roles += decodedToken.data.roles[i] ;
+           this.roles += decodedToken.data.roles[i] + '\n';
         } else {
            this.roles += decodedToken.data.roles[i] + '\n' ;
          }

@@ -31,15 +31,18 @@ import { RFCsignoffComponent } from './pages/rfcsignoff/rfcsignoff.component';
 import { Phase2Component } from './pages/phase2/phase2.component';
 import { Phase3Component } from './pages/phase3/phase3.component';
 import { Ccrphase1ContentComponent } from './pages/current-rfcs/ccrphase1-content/ccrphase1-content.component';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { Ccrphase2ContentComponent } from './pages/current-rfcs/ccrphase2-content/ccrphase2-content.component';
+import { SpecialistCommentsComponent } from './pages/current-rfcs/specialist-comments/specialist-comments.component';
 // Routing guards, module and auth service
 import { AuthGuard } from './guards/auth.guard';
 import { RouteGuard } from './guards/route.guard';
 import { AppRoutingModule } from './models/app-routing.module';
 import { RouteAuthorisationService } from './services/route-authorisation.service';
 import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
-import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-import { Ccrphase2ContentComponent } from './pages/current-rfcs/ccrphase2-content/ccrphase2-content.component';
+import { Ccrphase3ContentComponent } from './pages/current-rfcs/ccrphase3-content/ccrphase3-content.component';
+
 
 
 @NgModule({
@@ -60,6 +63,8 @@ import { Ccrphase2ContentComponent } from './pages/current-rfcs/ccrphase2-conten
     ForgotPasswordComponent,
     Ccrphase1ContentComponent,
     Ccrphase2ContentComponent,
+    SpecialistCommentsComponent,
+    Ccrphase3ContentComponent,
 
   ],
     imports: [
@@ -81,7 +86,7 @@ import { Ccrphase2ContentComponent } from './pages/current-rfcs/ccrphase2-conten
     providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard ,
       { provide: HTTP_INTERCEPTORS, useClass: CcrHttpInterceptor, multi: true }],
     bootstrap: [AppComponent] ,
-    entryComponents: [ Ccrphase1ContentComponent , Ccrphase2ContentComponent  ]
+    entryComponents: [ Ccrphase1ContentComponent , Ccrphase2ContentComponent, Ccrphase3ContentComponent , SpecialistCommentsComponent ]
 })
 export class AppModule {
 }
