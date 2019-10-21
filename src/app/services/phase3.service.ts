@@ -18,22 +18,22 @@ export class Phase3Service {
     }
 
     getCSRFToken() {
-        return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+        return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
     }
 
 
     upload(formData: FormData) {
         formData.append('phase', 'phase3');
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php' , formData  );
+        return this.http.post('/ATNSCCR_PHP/backend/api2/files.php' , formData  );
     }
 
     submitPhase3(phase3: CCRPhase3 ) {
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/specialistImplementation.php' , phase3 , httpOptions);
+        return this.http.post('/ATNSCCR_PHP/backend/api2/specialistImplementation.php' , phase3 , httpOptions);
     }
 
     updatePhase3(phase3: CCRPhase3, ccrID) {
         const obj = {phase3: phase3, updateSelection: 'phase3', ID: ccrID};
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+        return this.http.post('/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
     }
 
     setObj(obj) {

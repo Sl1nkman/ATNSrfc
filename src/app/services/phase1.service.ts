@@ -19,23 +19,23 @@ export class Phase1Service {
 
   submitRequest(phase1: RFC ) {
 
-     return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/initiateRequest.php', phase1 , httpOptions);
+     return this.http.post('/ATNSCCR_PHP/backend/api2/initiateRequest.php', phase1 , httpOptions);
   }
 
   updateRequest(phase1: RFC, ccrID) {
     const obj = {phase1: phase1, updateSelection: 'phase1', ID: ccrID};
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
   }
 
   getPageData() {
     const obj = {
       dataSelection: 'initiateCCR'
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
 
   }
   getCSRFToken() {
-    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+    return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
 
   setobj(obj, siteID) {

@@ -19,6 +19,6 @@ export class UserService {
 
   isLoggedIn(): Observable<isLoggedIn> {
 
-    return this.http.post<isLoggedIn>('http://localhost/ATNSCCR_PHP/backend/api2/isloggedin.php', httpOptions );
+    return this.http.post<isLoggedIn>('/ATNSCCR_PHP/backend/api2/isloggedin.php', httpOptions );
   }
 }

@@ -11,12 +11,12 @@ export class CurrentCcrsService {
   constructor(private http: HttpClient) {
   }
   getCSRFToken() {
-    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+    return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
   getMyCCRs() {
     const obj = {
       dataSelection: 'currentRfcs'
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
 }

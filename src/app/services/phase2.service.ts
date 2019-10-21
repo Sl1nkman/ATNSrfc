@@ -17,13 +17,13 @@ export class Phase2Service {
   constructor(private http: HttpClient ) { }
 
   getCSRFToken() {
-    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+    return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
   getPageData() {
     const obj = {
       dataSelection: 'phase2'
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
 
   getEOSTCBNumber(eos_ID) {
@@ -31,21 +31,21 @@ export class Phase2Service {
       dataSelection: 'eosTCB',
       eos_ID: eos_ID
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
   upload(formData: FormData) {
     formData.append('phase', 'phase2');
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/files.php' , formData);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/files.php' , formData);
   }
 
   submitPhase2(phase2: CCRPhase2 ) {
     console.log(phase2);
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/specialistConfiguration.php' , phase2 , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/specialistConfiguration.php' , phase2 , httpOptions);
   }
 
   updatePhase2(phase2: CCRPhase2, ccrID) {
     const obj = {phase2: phase2, updateSelection: 'phase2', ID: ccrID};
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
   }
 
   setObj(obj, phase1, user) {
@@ -71,6 +71,6 @@ export class Phase2Service {
       dataSelection: 'user' ,
       user_ID: user_ID
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
 }

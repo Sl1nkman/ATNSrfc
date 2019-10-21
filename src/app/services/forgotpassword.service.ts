@@ -14,7 +14,7 @@ export class ForgotpasswordService {
     const obj = {
       username: username
     };
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/requestPasswordChange.php' , obj , httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/requestPasswordChange.php' , obj , httpOptions);
   }
 
 }

@@ -15,14 +15,14 @@ export class MyRfcsService{
     }
 
     getCSRFToken() {
-        return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+        return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
     }
 
     getMyCCRs() {
         const obj = {
             dataSelection: 'myRfcs'
         };
-        return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
+        return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
     }
 }
 // Created by Blaine Viljoen
