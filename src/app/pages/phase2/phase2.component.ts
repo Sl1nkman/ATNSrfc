@@ -528,6 +528,7 @@ export class Phase2Component implements OnInit {
                                             timer: 1500
                                         });
                                         localStorage.clear();
+                                        this.router.navigate(['home']);
                                     } else {
                                         swal({
                                             title: 'Failure',
@@ -557,7 +558,7 @@ export class Phase2Component implements OnInit {
                                             timer: 1500
                                         });
                                         localStorage.clear();
-
+                                        this.router.navigate(['home']);
                                     } else {
                                         swal('Error' , data.message , 'error' );
                                     }
@@ -566,7 +567,6 @@ export class Phase2Component implements OnInit {
                                 swal('Success' , data1.message , 'success' );
                                 this.router.navigate(['home']);
                             }
-
                         } else {
                             swal({
                                 title: 'Failed',
@@ -591,8 +591,6 @@ export class Phase2Component implements OnInit {
             }
         });
     }
-
-
     ngOnInit() {
         this.phase2service.getCSRFToken().subscribe((data: Data) => {
             this.phase2.CSRF_token = data.tokenValue;

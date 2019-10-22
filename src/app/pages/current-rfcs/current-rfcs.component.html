@@ -11,9 +11,9 @@
             <h2 class="px-3 text-secondary">CCR's in Phase 3:</h2>
         </div>
     </div>
-    <div class="row text-center" *ngFor="let ccr of myCCRs" >
+    <div class="row text-center" *ngFor="let ccr of myCCRs">
         <div class="col mb-4">
-            <div class="card h-100" >
+            <div class="card h-100">
                 <div class="card-body" (click)="viewCcrPhase1(ccr[0][0])">
                     <label>CCR Initiated: </label>
                     <p class="card-text"> {{ccr[0][0].start_time}}</p>
@@ -21,7 +21,8 @@
                     <p class="card-text">{{ccr[0][0].initiatorName.firstName}}  {{ccr[0][0].initiatorName.lastName }}</p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary" *ngIf="!ccr[1][0]" (click)="configureCCR(ccr[0][0])">Configure CCR</button>
+                    <button class="btn btn-primary" *ngIf="!ccr[1][0]" (click)="configureCCR(ccr[0][0])">Configure CCR
+                    </button>
                 </div>
 
             </div>
@@ -33,12 +34,24 @@
                     <p class="card-text">{{ccr[1][0].tcb_crf_ID}}</p>
                     <h6>Started: </h6>
                     <p class="card-text">{{ccr[1][0].startDate}}</p>
+
                 </div>
-                <div class="card-footer"  *ngIf=" !ccr[2][0]">
-                    <button class="btn btn-primary" (click)="implementCCR(ccr)">Implement CCR</button>
+                <div class="card-footer" *ngIf=" !ccr[2][0]">
+                    <button class="btn btn-primary" [disabled]="!ccr[1][0].specialistPhase3Access" (click)="implementCCR(ccr)">Implement CCR</button>
+                    <button class="btn btn-primary mt-1" *ngIf="ccr[1][0].specialistResponses.length > 0"
+                            (click)="viewSpecialistResponses(ccr[1][0].specialistResponses)">View Specialist Responses
+                    </button>
+                    <button class="btn btn-primary mt-1" *ngIf="ccr[1][0].managerResponses.length > 0"
+                            (click)="viewSpecialistResponses(ccr[1][0].specialistResponses)">View Manager Responses
+                    </button>
                 </div>
-                <div class="card-footer"  *ngIf="ccr[2][0]">
-<!--                    <button class="btn btn-primary" *ngIf="ccr[2][0]" (click)="implementCCR(ccr)">Implement CCR</button>-->
+                <div class="card-footer" *ngIf="ccr[2][0]">
+                    <button class="btn btn-primary mt-1" *ngIf="ccr[1][0].specialistResponses.length > 0"
+                            (click)="viewSpecialistResponses(ccr[1][0].specialistResponses)">View Specialist Responses
+                    </button>
+                    <button class="btn btn-primary mt-1" *ngIf="ccr[1][0].managerResponses.length > 0"
+                            (click)="viewSpecialistResponses(ccr[1][0].specialistResponses)">View Manager Responses
+                    </button>
                 </div>
             </div>
         </div>
@@ -47,22 +60,25 @@
                 <div class="card-body" (click)="viewCcrPhase3(ccr[2][0])">
                     <a class="card-text" *ngIf="ccr[2][0].start_tcb_evaluation_date !== '0000-00-00'">
                         <h6>TCB evaluation start date: </h6>
-                    <p>{{ccr[2][0].start_tcb_evaluation_date}}</p>
+                        <p>{{ccr[2][0].start_tcb_evaluation_date}}</p>
                     </a>
                     <a class="card-text" *ngIf="ccr[2][0].end_tcb_evaluation_date !== '0000-00-00'">
                         <h6>TCB evaluation end date: </h6>
                         <p>{{ccr[2][0].start_tcb_evaluation_date}}</p>
                     </a>
                     <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '1'">This CCR has been closed out </p>
-                    <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '0'">This CCR has not been closed out </p>
+                    <p class="card-text" *ngIf="ccr[2][0].close_out_confirmed === '0'">This CCR has not been closed
+                        out </p>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary" *ngIf="ccr[2][0].close_out_confirmed === '0'" (click)="implementCCR(ccr)">Implement CCR</button>
+                    <button class="btn btn-primary" *ngIf="ccr[2][0].close_out_confirmed === '0'"
+                            (click)="implementCCR(ccr)">Implement CCR
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    <app-phase2 *ngIf="this.displayPhase2"></app-phase2><br>
-    <app-phase3 *ngIf="this.displayPhase3"></app-phase3><br>
+<app-phase2 *ngIf="this.displayPhase2"></app-phase2><br>
+<app-phase3 *ngIf="this.displayPhase3"></app-phase3><br>
 

@@ -1,147 +1,153 @@
 <!-- Created by : Liam Gordon McCabe-->
 <!-- Student number: 27455211-->
-  <form class="card mx-auto secondary-color">
+<form class="card mx-auto secondary-color">
     <div class="form-group px-3 pt-3">
-      <div class="row">
-        <div class="col"> <label for= "site">Select your site</label></div>
-        <div class="col">
-          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"
-                  class="rounded w-100 form-control"
-                  name="site"
-                  id="site"
-                  (change)="onSelectSite($event)" >
-            <option id="default" selected="selected" disabled="disabled">Select one</option>
-            <option *ngFor="let site of usersSites"  [value]="site[0]" [selected]="this.RFC.site_ID == site[0]" >{{site[1]}}</option>
-          </select>
+        <div class="row">
+            <div class="col"><label for="site">Select your site</label></div>
+            <div class="col">
+                <select ngbPopover="Select from the drop down list The site you want to make your request within"
+                        triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"
+                        class="rounded w-100 form-control"
+                        name="site"
+                        id="site"
+                        (change)="onSelectSite($event)">
+                    <option id="default" selected="selected" disabled="disabled">Select one</option>
+                    <option *ngFor="let site of usersSites" [value]="site[0]"
+                            [selected]="this.RFC.site_ID == site[0]">{{site[1]}}</option>
+                </select>
+            </div>
         </div>
-      </div>
     </div>
 
-<!--    <div class="form-group px-3 pt-3" *ngIf="this.displayNotifyManager">-->
-<!--      <div class="row">-->
-<!--        <div class="col"> <label>Would you like to notify a manager?</label></div>-->
-<!--        <div class="col">-->
-<!--          <Label class="radio-inline px-3">-->
-<!--            <input type="radio"-->
-<!--                   name="notifyManager"-->
-<!--                   value="yes"-->
-<!--                   (click)="onSelectNotifyManager($event)">-->
-<!--            Yes-->
-<!--          </Label>-->
-<!--          <Label class="radio-inline px-3">-->
-<!--            <input type="radio"-->
-<!--                   name="notifyManager"-->
-<!--                   value="no"-->
-<!--                   (click)="onSelectNotifyManager($event)" >-->
-<!--            No-->
-<!--          </Label>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="form-group px-3 pt-3" *ngIf="this.displayNoManagers">-->
-<!--      <div class="row">-->
-<!--        <div class="col"> <label for= "managerSelect">How many Managers?</label></div>-->
-<!--        <div class="col">-->
-<!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
-<!--                  class="rounded w-100 form-control"-->
-<!--                  name="managerSelect"-->
-<!--                  id="managerSelect"-->
-<!--                  (change)="onSelectNoManagers($event)" >-->
-<!--            <option  selected="selected" disabled="disabled">Select one</option>-->
-<!--            <option *ngFor="let noManager of noManagers"  [value]="noManager"  >{{noManager}}</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="form-group px-3 pt-3"*ngIf="this.displayManagerSelect1" >-->
-<!--      <div class="row">-->
-<!--        <div class="col"> <label for= "manager1">Select a Manager to notify</label></div>-->
-<!--        <div class="col">-->
-<!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
-<!--                  class="rounded w-100 form-control"-->
-<!--                  name="manager1"-->
-<!--                  id="manager1"-->
-<!--                  (change)="onSelectManager1($event)" >-->
-<!--            <option  selected="selected" disabled="disabled">Select one</option>-->
-<!--            <option *ngFor="let manager of managers"  [value]="manager[0]"  >{{manager[1] + ' ' + manager[2]}}</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="form-group px-3 pt-3" *ngIf="this.displayManagerSelect2">-->
-<!--      <div class="row">-->
-<!--        <div class="col"> <label for= "manager2">Select a Manager to notify</label></div>-->
-<!--        <div class="col">-->
-<!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
-<!--                  class="rounded w-100 form-control"-->
-<!--                  name="manager2"-->
-<!--                  id="manager2"-->
-<!--                  (change)="onSelectManager2($event)" >-->
-<!--            <option  selected="selected" disabled="disabled">Select one</option>-->
-<!--            <option *ngFor="let manager of managers"  [value]="manager[0]"  >{{manager[1] + ' ' + manager[2]}}</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="form-group px-3 pt-3" *ngIf="this.displayManagerSelect3">-->
-<!--      <div class="row">-->
-<!--        <div class="col"> <label for= "manager3">Select a Manager to notify</label></div>-->
-<!--        <div class="col">-->
-<!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
-<!--                  class="rounded w-100 form-control"-->
-<!--                  name="manager3"-->
-<!--                  id="manager3"-->
-<!--                  (change)="onSelectManager3($event)" >-->
-<!--            <option  selected="selected" disabled="disabled">Select one</option>-->
-<!--            <option *ngFor="let manager of managers"  [value]="manager[0]"  >{{manager[1] + ' ' + manager[2]}}</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="form-group px-3 pt-3" *ngIf="this.displayNotifyManager">-->
+    <!--      <div class="row">-->
+    <!--        <div class="col"> <label>Would you like to notify a manager?</label></div>-->
+    <!--        <div class="col">-->
+    <!--          <Label class="radio-inline px-3">-->
+    <!--            <input type="radio"-->
+    <!--                   name="notifyManager"-->
+    <!--                   value="yes"-->
+    <!--                   (click)="onSelectNotifyManager($event)">-->
+    <!--            Yes-->
+    <!--          </Label>-->
+    <!--          <Label class="radio-inline px-3">-->
+    <!--            <input type="radio"-->
+    <!--                   name="notifyManager"-->
+    <!--                   value="no"-->
+    <!--                   (click)="onSelectNotifyManager($event)" >-->
+    <!--            No-->
+    <!--          </Label>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="form-group px-3 pt-3" *ngIf="this.displayNoManagers">-->
+    <!--      <div class="row">-->
+    <!--        <div class="col"> <label for= "managerSelect">How many Managers?</label></div>-->
+    <!--        <div class="col">-->
+    <!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
+    <!--                  class="rounded w-100 form-control"-->
+    <!--                  name="managerSelect"-->
+    <!--                  id="managerSelect"-->
+    <!--                  (change)="onSelectNoManagers($event)" >-->
+    <!--            <option  selected="selected" disabled="disabled">Select one</option>-->
+    <!--            <option *ngFor="let noManager of noManagers"  [value]="noManager"  >{{noManager}}</option>-->
+    <!--          </select>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="form-group px-3 pt-3"*ngIf="this.displayManagerSelect1" >-->
+    <!--      <div class="row">-->
+    <!--        <div class="col"> <label for= "manager1">Select a Manager to notify</label></div>-->
+    <!--        <div class="col">-->
+    <!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
+    <!--                  class="rounded w-100 form-control"-->
+    <!--                  name="manager1"-->
+    <!--                  id="manager1"-->
+    <!--                  (change)="onSelectManager1($event)" >-->
+    <!--            <option  selected="selected" disabled="disabled">Select one</option>-->
+    <!--            <option *ngFor="let manager of managers"  [value]="manager[0]"  >{{manager[1] + ' ' + manager[2]}}</option>-->
+    <!--          </select>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="form-group px-3 pt-3" *ngIf="this.displayManagerSelect2">-->
+    <!--      <div class="row">-->
+    <!--        <div class="col"> <label for= "manager2">Select a Manager to notify</label></div>-->
+    <!--        <div class="col">-->
+    <!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
+    <!--                  class="rounded w-100 form-control"-->
+    <!--                  name="manager2"-->
+    <!--                  id="manager2"-->
+    <!--                  (change)="onSelectManager2($event)" >-->
+    <!--            <option  selected="selected" disabled="disabled">Select one</option>-->
+    <!--            <option *ngFor="let manager of managers"  [value]="manager[0]"  >{{manager[1] + ' ' + manager[2]}}</option>-->
+    <!--          </select>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="form-group px-3 pt-3" *ngIf="this.displayManagerSelect3">-->
+    <!--      <div class="row">-->
+    <!--        <div class="col"> <label for= "manager3">Select a Manager to notify</label></div>-->
+    <!--        <div class="col">-->
+    <!--          <select ngbPopover="Select from the drop down list The site you want to make your request within" triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="SELECT SITE"-->
+    <!--                  class="rounded w-100 form-control"-->
+    <!--                  name="manager3"-->
+    <!--                  id="manager3"-->
+    <!--                  (change)="onSelectManager3($event)" >-->
+    <!--            <option  selected="selected" disabled="disabled">Select one</option>-->
+    <!--            <option *ngFor="let manager of managers"  [value]="manager[0]"  >{{manager[1] + ' ' + manager[2]}}</option>-->
+    <!--          </select>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="form-group px-3 pt-3" *ngIf="this.displayRequestDescription">
-      <label for= "requestedChange">Change Request Description</label>
-      <textarea rows="8"
-                class="form-control rounded"
-                type="text"
-                name="requestedChange"
-                id="requestedChange"
-                maxlength="255"
-                (input)="requestedChange()"
-                [(ngModel)]="RFC.requestDescription">
+        <label for="requestedChange">Change Request Description</label>
+        <textarea rows="8"
+                  class="form-control rounded"
+                  type="text"
+                  name="requestedChange"
+                  id="requestedChange"
+                  maxlength="255"
+                  (input)="requestedChange()"
+                  [(ngModel)]="RFC.requestDescription">
       </textarea>
     </div>
     <div class="form-group px-3" *ngIf="this.displayReasonForRequest">
-      <label for="description">Reason For Request</label>
-      <textarea rows="8"
-                class="form-control rounded"
-                type="text"
-                name="description"
-                id="description"
-                maxlength="255"
-                (input)="description()"
-                [(ngModel)]="RFC.reasonForRequest"
-      ></textarea>
+        <label for="description">Reason For Request</label>
+        <textarea rows="8"
+                  class="form-control rounded"
+                  type="text"
+                  name="description"
+                  id="description"
+                  maxlength="255"
+                  (input)="description()"
+                  [(ngModel)]="RFC.reasonForRequest"
+        ></textarea>
     </div>
 
     <br>
 
     <div class="row px-3">
-      <div class="col"></div>
-      <div class="col">
-        <button
-                type="cancel"
-                id="cancel"
-                class="btn btn-outline-danger btn-rounded w-100 mx-auto   my-4 waves-effect z-depth-0" (click)="onCancel()"
-        >Cancel</button>
-      </div>
-      <div class="col"></div>
-      <div class="col">
-        <button
-                type="submit"
-                id="submit"
-                class="btn btn-outline-info btn-rounded w-100 mx-auto my-4 waves-effect z-depth-0 disabled" [disabled]="!this.enableSubmitButton" (click)="onSubmit()"
-        >Submit</button>
-      </div>
-      <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <button
+                    type="cancel"
+                    id="cancel"
+                    class="btn btn-outline-danger btn-rounded w-100 mx-auto   my-4 waves-effect z-depth-0"
+                    (click)="onCancel()"
+            >Cancel
+            </button>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+            <button
+                    type="submit"
+                    id="submit"
+                    class="btn btn-outline-info btn-rounded w-100 mx-auto my-4 waves-effect z-depth-0 disabled"
+                    [disabled]="!this.enableSubmitButton" (click)="onSubmit()"
+            >Submit
+            </button>
+        </div>
+        <div class="col"></div>
     </div>
-  </form>
+</form>

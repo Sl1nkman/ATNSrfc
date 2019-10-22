@@ -18,6 +18,7 @@ import {Ccrphase3ContentComponent} from '../current-rfcs/ccrphase3-content/ccrph
   templateUrl: './my-rfcs.component.html',
   styleUrls: ['./my-rfcs.component.scss']
 })
+
 export class MyRFCSComponent implements OnInit {
 
   private myCCRs ;
@@ -54,6 +55,5 @@ export class MyRFCSComponent implements OnInit {
         }
     );
   }
-
 }
 // Created by Blaine Viljoen
