@@ -9,6 +9,7 @@ import {Ccrphase1ContentComponent} from './ccrphase1-content/ccrphase1-content.c
 import {Ccrphase2ContentComponent} from './ccrphase2-content/ccrphase2-content.component';
 import {Ccrphase3ContentComponent} from './ccrphase3-content/ccrphase3-content.component';
 import {SpecialistCommentsComponent} from './specialist-comments/specialist-comments.component';
+import {ManagerCommentsComponent} from './manager-comments/manager-comments.component';
 
 @Component({
     selector: 'app-current-rfcs',
@@ -52,6 +53,10 @@ export class CurrentRFCSComponent implements OnInit {
     viewSpecialistResponses(specialistResponses) {
         const modalRef = this.modalService.open(SpecialistCommentsComponent, {centered: true, size: 'lg'});
         modalRef.componentInstance.specialistResponses = specialistResponses;
+    }
+    viewManagerResponses(managerResponses) {
+        const modalRef = this.modalService.open(ManagerCommentsComponent, {centered: true, size: 'lg'});
+        modalRef.componentInstance.managerResponses = managerResponses;
     }
 
     ngOnInit() {

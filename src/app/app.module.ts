@@ -42,6 +42,7 @@ import { AppRoutingModule } from './models/app-routing.module';
 import { RouteAuthorisationService } from './services/route-authorisation.service';
 import { CcrHttpInterceptor } from './services/ccr-http-interceptor';
 import { Ccrphase3ContentComponent } from './pages/current-rfcs/ccrphase3-content/ccrphase3-content.component';
+import { ManagerCommentsComponent } from './pages/current-rfcs/manager-comments/manager-comments.component';
 
 
 
@@ -65,6 +66,7 @@ import { Ccrphase3ContentComponent } from './pages/current-rfcs/ccrphase3-conten
     Ccrphase2ContentComponent,
     SpecialistCommentsComponent,
     Ccrphase3ContentComponent,
+    ManagerCommentsComponent,
 
   ],
     imports: [
@@ -86,7 +88,7 @@ import { Ccrphase3ContentComponent } from './pages/current-rfcs/ccrphase3-conten
     providers: [AuthGuard , CookieService , RouteAuthorisationService , RouteGuard ,
       { provide: HTTP_INTERCEPTORS, useClass: CcrHttpInterceptor, multi: true }],
     bootstrap: [AppComponent] ,
-    entryComponents: [ Ccrphase1ContentComponent , Ccrphase2ContentComponent, Ccrphase3ContentComponent , SpecialistCommentsComponent ]
+    entryComponents: [ Ccrphase1ContentComponent , Ccrphase2ContentComponent, Ccrphase3ContentComponent , SpecialistCommentsComponent, ManagerCommentsComponent ]
 })
 export class AppModule {
 }
