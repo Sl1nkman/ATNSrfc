@@ -100,7 +100,7 @@ export class Phase3Component implements OnInit {
     ccrConfirmation: undefined,
     evalFailure: undefined,
     documentIds: undefined,
-    CSRF_token: undefined
+    CSRF_token: undefined,
   };
 
     user: String = '';
@@ -347,6 +347,8 @@ export class Phase3Component implements OnInit {
                           });
                       }
                   }
+              }  , error => {
+                  console.log(error);
               });
           } else {
               this.phase3Service.submitPhase3(this.phase3).subscribe( (data: Data) => {
@@ -390,7 +392,9 @@ export class Phase3Component implements OnInit {
                           timer: 1500
                       });
                   }
-              });
+              } , error => {
+                  console.log(error);
+              }) ;
           }
 
       } else if (
@@ -539,18 +543,14 @@ export class Phase3Component implements OnInit {
                       }
                   }
               }
-
               this.phase3.abortRegressReason = this.localObj.reason_if_abort_regressed;
           }
-
           if (this.localObj.aborted_regressed === '') {
               this.phase3.tcbEvalStart = this.localObj.start_tcb_evaluation_date;
               this.phase3.tcbEvalEnd = this.localObj.end_tcb_evaluation_date;
-
               if (this.localObj.items_updated === '1') {
                   this.phase3.itemsUpdated = true;
               }
-
               if (this.localObj.evaluation_success === '1') {
                   this.phase3.evalSuccess = true;
                   this.showEvalChange = true;
@@ -566,61 +566,50 @@ export class Phase3Component implements OnInit {
                   this.phase3.ccrConfirmation = false;
                   this.phase3.evalFailure = this.localObj.evaluation_failure_reason;
               }
-
           }
       } else {
           const event = {target: {value: null}};
-
-          event.target.value = localStorage.getItem('implementationSuccessful');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('implementationSuccessful') !== null) {
+              event.target.value = localStorage.getItem('implementationSuccessful');
               this.onSelectImplementationSuccessful(event);
           }
-
           if (localStorage.getItem('abortRegress') !== null) {
               this.phase3.abortRegress = localStorage.getItem('abortRegress');
               this.onSelectAbortRegress(null);
-
               this.phase3.abortRegressReason = localStorage.getItem('abortRegressReason');
           }
-
-          event.target.value = localStorage.getItem('alreadyRegressed');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('alreadyRegressed') !== null) {
+              event.target.value = localStorage.getItem('alreadyRegressed');
               this.onSelectAlreadyRegressed(event);
               if (!this.phase3.alreadyRegressed) {
                   this.phase3.schedRegressionDate = new Date(localStorage.getItem('schedRegressionDate'));
               }
           }
-
-          event.target.value = localStorage.getItem('noDays');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('noDays') !== null) {
+              event.target.value = localStorage.getItem('noDays');
               this.onSelectTCBNumberOfDays(event);
               this.phase3.tcbEvalStart = new Date(localStorage.getItem('tcbEvalStart'));
               this.phase3.tcbEvalEnd = new Date(localStorage.getItem('tcbEvalEnd'));
           }
-
-          event.target.value = localStorage.getItem('additionalDocs');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('additionalDocs') !== null) {
+              event.target.value = localStorage.getItem('additionalDocs');
               this.onSelectAdditionalDocs(event);
           }
-
-          event.target.value = localStorage.getItem('itemsUpdated');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('itemsUpdated') !== null) {
+              event.target.value = localStorage.getItem('itemsUpdated');
               this.onSelectItemsUpdated(event);
           }
-
-          event.target.value = localStorage.getItem('evalSuccess');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('evalSuccess') !== null) {
+              event.target.value = localStorage.getItem('evalSuccess');
               this.onSelectEvalSuccess(event);
               if (!this.phase3.evalSuccess) {
                   this.phase3.evalFailure = localStorage.getItem('evalFailure');
               }
           }
-
-          event.target.value = localStorage.getItem('confirm');
-          if (event.target.value !== null) {
+          if (localStorage.getItem('confirm') !== null) {
+              event.target.value = localStorage.getItem('confirm');
               this.onSelectConfirm(event);
           }
-
       }
   }
 
