@@ -869,8 +869,9 @@ export class Phase2Component implements OnInit {
                 if (event.target.value !== null) {
                     this.onSelectChangePeriod(event);
                 }
-                event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
-                if (event.target.value !== null) {
+
+                if (localStorage.getItem('temporaryPeriodNumberOfDays') !== null) {
+                    event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
                     this.onSelectNumberOfTemporaryDays(event);
                 }
                 if (localStorage.getItem('temporaryPeriodStartDate') !== null) {
@@ -891,8 +892,9 @@ export class Phase2Component implements OnInit {
                     this.phase2.estimatedImpacts.technical = localStorage.getItem('technical');
                     this.displayEstimatedImpactTech = true;
                 }
-                event.target.value = localStorage.getItem('predictedImpact');
-                if (event.target.value !== null) {
+
+                if (localStorage.getItem('predictedImpact') !== null) {
+                    event.target.value = localStorage.getItem('predictedImpact');
                     this.onSelectImpact(event);
                 }
                 this.estimatedImpact(null);
