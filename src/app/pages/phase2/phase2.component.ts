@@ -100,6 +100,7 @@ export class Phase2Component implements OnInit {
         specialistComment: undefined,
         proposedImplementationDate: undefined,
         recommend_oppose: undefined,
+        reasonForRecommendOppose: undefined,
         CSRF_token: undefined
     };
 
@@ -465,6 +466,8 @@ export class Phase2Component implements OnInit {
     public onSelectRecommendOrOppose($event) {
         localStorage.setItem('recommendOppose', $event.target.value);
         this.phase2.recommend_oppose = $event.target.value;
+    }
+    onInputReasonRecommendOppose() {
         const submitButton = document.getElementById('submit');
         submitButton.classList.remove('disabled');
         this.activateSubmitButton = true;

@@ -67,6 +67,7 @@ export class Ccrphase2ContentComponent implements OnInit {
     specialistComment: undefined,
     proposedImplementationDate: undefined,
     recommend_oppose: undefined,
+    reasonForRecommendOppose: undefined,
     CSRF_token: undefined
   };
   ngOnInit() {

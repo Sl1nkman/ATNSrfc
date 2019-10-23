@@ -10,8 +10,6 @@ import swal from 'sweetalert2';
 import {CCRPhase2} from '../../models/CCR-Phase2';
 import {Phase2Service} from '../../services/phase2.service';
 
-
-
 @Component({
   selector: 'app-phase3',
   templateUrl: './phase3.component.html',
@@ -79,6 +77,7 @@ export class Phase3Component implements OnInit {
         specialistComment: undefined,
         proposedImplementationDate: undefined,
         recommend_oppose: undefined,
+        reasonForRecommendOppose: undefined,
         CSRF_token: undefined
     };
 

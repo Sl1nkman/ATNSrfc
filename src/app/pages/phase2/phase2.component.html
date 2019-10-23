@@ -540,6 +540,18 @@
                     </select>
                 </div>
             </div>
+            <div class="row mx-3">
+                <label for="technicalImpact" class="">Reason for Recommend or Oppose: </label>
+
+                <input
+                        class="px-3 pt-3 w-75 rounded form-control"
+                        type="text"
+                        name="reasonRecommendOppose"
+                        id="reasonRecommendOppose"
+                        (input)="onInputReasonRecommendOppose()"
+                        [(ngModel)]="this.phase2.reasonForRecommendOppose"
+                        >
+            </div>
         </div>
         <div class="form-group">
             <div  class="row px-3">

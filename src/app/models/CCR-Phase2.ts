@@ -33,5 +33,6 @@ export interface CCRPhase2 {
     specialistComment: string;
     proposedImplementationDate: Date;
     recommend_oppose: string;
+    reasonForRecommendOppose: string;
     CSRF_token: string ;
 }
