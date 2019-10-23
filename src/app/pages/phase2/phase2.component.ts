@@ -18,57 +18,57 @@ import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
 })
 export class Phase2Component implements OnInit {
 
-    private phase1;
-    private localObj = null;
-    private formData = new FormData();
-    private datepickerConfig: Partial<BsDatepickerConfig>;
-    private files: NgxFileDropEntry[] [] = [];
-    private filesForUpload = [];
-    private user ;
+    public phase1;
+    public localObj = null;
+    public formData = new FormData();
+    public datepickerConfig: Partial<BsDatepickerConfig>;
+    public files: NgxFileDropEntry[] [] = [];
+    public filesForUpload = [];
+    public user ;
 
 
-    private availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    public availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-    private availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
-    private availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
-    private availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
-    private availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
-    private availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
+    public availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
+    public availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
+    public availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
+    public availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
+    public availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
         'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
         'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
 
     // Form display boolean values
-    private emergencySelected: boolean;
-    private displayPredictedRisks: boolean;
-    private displayChangePeriod: boolean;
-    private displayNatureOfChange: boolean;
-    private displayEOSystem: boolean;
-    private displayTCB_CRF_ID: boolean;
-    private displayConfigurationItems: boolean;
-    private displayChangeType: boolean;
-    private displaySelectTemporaryAmountOfDays: boolean;
-    private displayTemporaryDateSelection: boolean;
-    private displayAdditionalAttachedDocuments: boolean;
-    private displayEstimatedImpact: boolean;
-    private displayEstimatedImpactOps: boolean;
-    private displayEstimatedImpactClients: boolean;
-    private displayEstimatedImpactTech: boolean;
-    private displayProblemReportRaised: boolean;
-    private displayChangePreTested: boolean;
-    private displayChangeNotSuccessfullyTestedReason: boolean;
-    private displaySpecialistComments: boolean;
-    private displayProposedImplementationDate: boolean;
-    private displayRecommendOrOppose: boolean;
-    private activateSubmitButton: boolean;
+    public emergencySelected: boolean;
+    public displayPredictedRisks: boolean;
+    public displayChangePeriod: boolean;
+    public displayNatureOfChange: boolean;
+    public displayEOSystem: boolean;
+    public displayTCB_CRF_ID: boolean;
+    public displayConfigurationItems: boolean;
+    public displayChangeType: boolean;
+    public displaySelectTemporaryAmountOfDays: boolean;
+    public displayTemporaryDateSelection: boolean;
+    public displayAdditionalAttachedDocuments: boolean;
+    public displayEstimatedImpact: boolean;
+    public displayEstimatedImpactOps: boolean;
+    public displayEstimatedImpactClients: boolean;
+    public displayEstimatedImpactTech: boolean;
+    public displayProblemReportRaised: boolean;
+    public displayChangePreTested: boolean;
+    public displayChangeNotSuccessfullyTestedReason: boolean;
+    public displaySpecialistComments: boolean;
+    public displayProposedImplementationDate: boolean;
+    public displayRecommendOrOppose: boolean;
+    public activateSubmitButton: boolean;
 
-    private RFC: RFC = {
+    public RFC: RFC = {
         dateRequested: undefined,
         requestDescription: undefined,
         reasonForRequest: undefined,
         CSRF_token: undefined,
         site_ID: undefined
     };
-    private phase2: CCRPhase2 = {
+    public phase2: CCRPhase2 = {
         CCR_ID: undefined,
         TCB_CRF_ID: undefined,
         requestPriority: undefined,

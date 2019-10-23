@@ -14,14 +14,14 @@ import {NgxFileDropEntry} from 'ngx-file-drop';
 })
 export class Ccrphase3ContentComponent implements OnInit {
 
-  private showImpChange: boolean ;
-  showEvalChange: boolean;
-  showSched: boolean;
-    private files: NgxFileDropEntry[] [] = []  ;
-  private filesForUpload = [];
+  public showImpChange: boolean ;
+  public showEvalChange: boolean;
+  public showSched: boolean;
+  private files: NgxFileDropEntry[] [] = []  ;
+  public filesForUpload = [];
 
-  abortOrRegress: String[] = ['Abort', 'Regress'];
-  private datepickerConfig: Partial<BsDatepickerConfig> ;
+  public abortOrRegress: String[] = ['Abort', 'Regress'];
+  public datepickerConfig: Partial<BsDatepickerConfig> ;
   constructor(public activeModal: NgbActiveModal ) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
@@ -31,7 +31,7 @@ export class Ccrphase3ContentComponent implements OnInit {
   }
 
   @Input() CCRPhase3Data;
-  phase3: CCRPhase3 = {
+  public phase3: CCRPhase3 = {
     CCR_ID: undefined,
     schedRegressionDate: undefined,
     tcbEvalStart: undefined,

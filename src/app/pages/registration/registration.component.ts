@@ -14,19 +14,19 @@ import {RegistrationService} from '../../services/registration.service';
 export class RegistrationComponent implements OnInit {
   // Boolean values for input validation
   private Token = null ;
-  showEmail: Boolean;
-  showPassword: Boolean;
-  showPasswordCheck: Boolean;
-  showRegisterButton: Boolean;
-  showPhone: Boolean;
-  showEmpId: Boolean;
+  public showEmail: Boolean;
+  public showPassword: Boolean;
+  public showPasswordCheck: Boolean;
+  public showRegisterButton: Boolean;
+  public showPhone: Boolean;
+  public showEmpId: Boolean;
 
   // Password variables to validate password integrity
-  password: string;
-  passwordCheck: string;
+  public password: string;
+  public passwordCheck: string;
 
   // Login object created from interface
-  User: User = {
+  public User: User = {
     title: undefined,
     surname: undefined,
     name: undefined,
@@ -37,10 +37,10 @@ export class RegistrationComponent implements OnInit {
     password: undefined ,
   };
 
-  availableTitles: String [] = ['Mr' , 'Ms' , 'Regional manager'];
-  availablePermissions: String [] = ['Specialist', 'Manager' , 'Employee']; // to be delegated to database
-  availableRegions: String [] = ['Northern', 'Southern', 'Both']; // to be delegated to database
-  availableSites: String [] = ['Site1' , 'Site2', 'Site3']; // to be delegated to database
+  public availableTitles: String [] = ['Mr' , 'Ms' , 'Regional manager'];
+  public availablePermissions: String [] = ['Specialist', 'Manager' , 'Employee']; // to be delegated to database
+  public availableRegions: String [] = ['Northern', 'Southern', 'Both']; // to be delegated to database
+  public availableSites: String [] = ['Site1' , 'Site2', 'Site3']; // to be delegated to database
   constructor( private router: Router , private registration: RegistrationService) { }
 
   onSelectTitle($event) {

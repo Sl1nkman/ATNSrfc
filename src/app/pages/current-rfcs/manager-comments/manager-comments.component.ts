@@ -8,7 +8,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ManagerCommentsComponent implements OnInit {
 
-  private managerResponses ;
+  public managerResponses ;
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {

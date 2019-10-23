@@ -14,20 +14,20 @@ import swal from 'sweetalert2';
   styleUrls: ['./phase1.component.css']
 })
 export class Phase1Component implements OnInit {
-  private usersSites ;
-  private managers;
-  private localOBJ = null;
-  private enableSubmitButton: boolean;
-  private displayNotifyManager: boolean;
-  private displayRequestDescription: true;
-  private displayReasonForRequest: boolean;
-  private displayNoManagers: boolean;
-  private noManagers: number [] = [1, 2, 3];
-  private displayManagerSelect1: boolean;
-  private displayManagerSelect2: boolean;
-  private displayManagerSelect3: boolean;
+  public usersSites ;
+  public managers;
+  public localOBJ = null;
+  public enableSubmitButton: boolean;
+  public displayNotifyManager: boolean;
+  public displayRequestDescription: true;
+  public displayReasonForRequest: boolean;
+  public displayNoManagers: boolean;
+  public noManagers: number [] = [1, 2, 3];
+  public displayManagerSelect1: boolean;
+  public displayManagerSelect2: boolean;
+  public displayManagerSelect3: boolean;
   constructor(private phase1Service: Phase1Service ,  private router: Router) { }
-  private RFC: RFC  = {
+  public RFC: RFC  = {
     dateRequested: undefined,
     requestDescription: undefined,
     reasonForRequest: undefined,

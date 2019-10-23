@@ -10,8 +10,8 @@ import decode from 'jwt-decode';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  private username ;
-  private roles = '' ;
+  public username ;
+  public roles = '' ;
   constructor(private cookieService: CookieService) { }
 
   ngOnInit() {

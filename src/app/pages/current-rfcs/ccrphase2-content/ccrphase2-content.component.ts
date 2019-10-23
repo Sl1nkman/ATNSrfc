@@ -14,14 +14,14 @@ import {Phase2Service} from '../../../services/phase2.service';
 })
 export class Ccrphase2ContentComponent implements OnInit {
 
-  datepickerConfig: Partial<BsDatepickerConfig> ;
-  private availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+  public datepickerConfig: Partial<BsDatepickerConfig> ;
+  public availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
     17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-  private availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
-  private availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
-  private availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
-  private availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
-  private availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
+  public availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
+  public availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
+  public availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
+  public availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
+  public availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
     'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
     'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
 
@@ -35,7 +35,7 @@ export class Ccrphase2ContentComponent implements OnInit {
   }
 
   @Input() public phase2;
-  private phase2Data: CCRPhase2 = {
+  public phase2Data: CCRPhase2 = {
     CCR_ID: undefined,
     TCB_CRF_ID: undefined,
     requestPriority: undefined,

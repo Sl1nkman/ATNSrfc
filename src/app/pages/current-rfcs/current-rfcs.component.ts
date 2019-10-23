@@ -22,8 +22,8 @@ export class CurrentRFCSComponent implements OnInit {
     constructor(private currentccrsService: CurrentCcrsService, private  phase2service: Phase2Service, private phase3service: Phase3Service, private modalService: NgbModal) {
     }
 
-    private displayPhase2: boolean;
-    private displayPhase3: boolean;
+    public displayPhase2: boolean;
+    public displayPhase3: boolean;
 
     configureCCR(ccr) {
         this.phase2service.setObj(null, ccr, null);

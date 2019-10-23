@@ -9,8 +9,7 @@ import {Phase3Service} from '../../services/phase3.service';
 import swal from 'sweetalert2';
 import {CCRPhase2} from '../../models/CCR-Phase2';
 import {Phase2Service} from '../../services/phase2.service';
-import {toInteger} from '@ng-bootstrap/ng-bootstrap/util/util';
-import {loadQueryList} from '@angular/core/src/render3/instructions';
+
 
 
 @Component({
@@ -21,34 +20,34 @@ import {loadQueryList} from '@angular/core/src/render3/instructions';
 export class Phase3Component implements OnInit {
   private  formData = new FormData();
 
-  private localObj = null;
-  private phase3ID = null;
+    public localObj = null;
+    public phase3ID = null;
 
-  datepickerConfig: Partial<BsDatepickerConfig> ;
-  displayImpSuccess: boolean;
-  showImpChange: boolean;
-  showTCBdatepicker: boolean;
-  showEvalChange: boolean;
-  showSched: boolean;
-  disableSubmitButton: boolean;
-  private files: NgxFileDropEntry[] [] = []  ;
-  private filesForUpload = [];
-  private numberOfDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 ];
-  private selectedNoDays: number;
+    public datepickerConfig: Partial<BsDatepickerConfig> ;
+    public displayImpSuccess: boolean;
+    public showImpChange: boolean;
+    public showTCBdatepicker: boolean;
+    public showEvalChange: boolean;
+    public showSched: boolean;
+    public disableSubmitButton: boolean;
+    public files: NgxFileDropEntry[] [] = []  ;
+    public filesForUpload = [];
+    public numberOfDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 ];
+    public selectedNoDays: number;
 
-    private availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    public availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-    private availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
-    private availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
-    private availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
-    private availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
-    private availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
+    public availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
+    public availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
+    public availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
+    public availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
+    public availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
         'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
         'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
 
 
     abortOrRegress: String[] = ['Abort', 'Regress'];
-    private phase2: CCRPhase2 = {
+    public phase2: CCRPhase2 = {
         CCR_ID: undefined,
         TCB_CRF_ID: undefined,
         requestPriority: undefined,
@@ -83,7 +82,7 @@ export class Phase3Component implements OnInit {
         CSRF_token: undefined
     };
 
-  phase3: CCRPhase3 = {
+    public phase3: CCRPhase3 = {
     CCR_ID: undefined,
     schedRegressionDate: undefined,
     tcbEvalStart: undefined,
@@ -106,7 +105,7 @@ export class Phase3Component implements OnInit {
     user: String = '';
     Token = null ;
 
-  constructor(private phase3Service: Phase3Service, private phsae2service: Phase2Service , private router: Router) {
+  constructor(public phase3Service: Phase3Service, private phsae2service: Phase2Service , private router: Router) {
     this.datepickerConfig = Object.assign({},
         {containerClass: 'theme-dark-blue'},
         { dateInputFormat: 'YYYY-MM-DD'} ,

@@ -7,7 +7,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SpecialistCommentsComponent implements OnInit {
 
-  private specialistResponses;
+  public specialistResponses;
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {

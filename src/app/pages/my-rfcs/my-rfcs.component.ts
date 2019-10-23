@@ -17,12 +17,12 @@ import {ManagerCommentsComponent} from '../current-rfcs/manager-comments/manager
 
 export class MyRFCSComponent implements OnInit {
 
-  private myCCRs ;
+  public myCCRs ;
 
   constructor(private myRfcsService: MyRfcsService , private modalService: NgbModal) { }
 
-  private displayPhase2: boolean;
-  private displayPhase3: boolean;
+    public displayPhase2: boolean;
+    public displayPhase3: boolean;
 
     viewCcrPhase1(phase1) {
         const modalRef = this.modalService.open(Ccrphase1ContentComponent , { centered: true });
