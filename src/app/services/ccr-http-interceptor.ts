@@ -1,4 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
+import { Injectable } from '@angular/core';
 import {
     HttpEvent,
     HttpInterceptor,
@@ -16,23 +19,17 @@ export class CcrHttpInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const Authorization = this.cookieService.get('jwt');
         if (Authorization) {
-            req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + Authorization) });
-        }
-
-        if (!req.headers.has('Content-Type')) {
-            req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+            req = req.clone({ headers: req.headers.set('authorization', Authorization) });
         }
 
         req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
 
         return next.handle(req).pipe(
             map((event: HttpEvent<any>) => {
+                 // req.headers.append('Authorization', 'Bearer ' + Authorization);
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
                 }
                 return event;
             }));
     }
-
-
 }

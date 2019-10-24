@@ -1,3 +1,5 @@
+<!-- Created by : Liam Gordon McCabe-->
+<!-- Student number: 27455211-->
 <div class="card mx-auto" style="width: 60rem;">
 
     <h5 class="card-header info-color white-text text-center py-4">
@@ -14,14 +16,18 @@
             </div>
             <div class="col">
                 <select
-                        class="px-3 rounded "
+                        ngbPopover="Select a title by selecting an option from the drop down list"
+                        triggers="mouseenter:mouseleave"
+                        placement="bottom-right"
+                        popoverTitle="SELECT TITLE"
+                        class="px-3 rounded form-control"
                         name="title"
                         id="title"
+                        (change)="onSelectTitle($event)"
                         [(ngModel)]="this.User.title"
-
                 >
                     <option selected="selected" disabled="disabled">Select one</option>
-                    <option *ngFor="let title of availableTitles">{{title}}</option>
+                    <option *ngFor="let title of availableTitles"  [value]="title[0]" >{{title[1]}}</option>
                 </select>
             </div>
             <div class="col">
@@ -29,39 +35,63 @@
             </div>
             <div class="col">
                 <select
-                        class="px-3 rounded "
+                        ngbPopover="Select a site by selecting an option from the drop down list"
+                        triggers="mouseenter:mouseleave"
+                        placement="bottom-right"
+                        popoverTitle="SELECT SITE"
+                        class="px-3 rounded form-control"
                         [(ngModel)]="this.User.site"
                         name="site"
-                        id="site">
+                        id="site"
+                        (change)="onSelectTitle($event)"
+                >
                     <option selected="selected" disabled="disabled">Select one</option>
-                    <option *ngFor="let site of availableSites">{{site}}</option>
+                    <option *ngFor="let site of availableSites" [value]="site[0]">{{site[1]}}</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="form-group" >
       <label for="name">Name</label>
-      <input title="Please enter your First names"  required class="form-control" [(ngModel)]="User.name"
-             type="text" name="name" id="name">
+      <input
+              ngbPopover="Please enter your first name"
+              triggers="mouseenter:mouseleave"
+              placement="bottom-right"
+              popoverTitle="INPUT FIRST NAME"
+              required class="form-control" [(ngModel)]="User.name"
+              type="text" name="name" id="name">
     </div>
     <div class="form-group">
       <label for="surname">Surname</label>
-      <input title="Please enter your Surname" required class="form-control" [(ngModel)]="User.surname"
-             type="text" name="surname" id="surname">
+      <input
+              ngbPopover="Please enter your surname"
+              triggers="mouseenter:mouseleave"
+              placement="bottom-right"
+              popoverTitle="INPUT SURNAME"
+              required class="form-control" [(ngModel)]="User.surname"
+              type="text" name="surname" id="surname">
     </div>
     <div class="form-group">
       <label for="employeeID">Employee ID</label>
-      <input title="Please enter your Employee ID" class="form-control" (input)="validateEmpId(User.employeeId)"
-             [ngClass]="{'true': this.showEmpId, 'false':
-            !this.showEmpId}"
-             [(ngModel)]="User.employeeId"
-             type="number" name='EmployeeId' id="employeeID" required>
+      <input
+              ngbPopover="Please enter your employee ID"
+              triggers="mouseenter:mouseleave"
+              placement="bottom-right"
+              popoverTitle="INPUT EMPLOYEE ID"
+              class="form-control" (input)="validateEmpId(User.employeeId)"
+              [ngClass]="{'true': this.showEmpId, 'false':!this.showEmpId}"
+              [(ngModel)]="User.employeeId"
+              type="number" name='EmployeeId' id="employeeID" required>
     </div>
     <div class="form-group">
       <label>Contact Number</label>
       <label *ngIf="this.showPhone == false" style="color: red">Invalid South African Number</label>
       <label *ngIf="this.showPhone == true" style="color: green">Valid South African Number </label>
       <input
+              ngbPopover="Please enter your phone number"
+              triggers="mouseenter:mouseleave"
+              placement="bottom-right"
+              popoverTitle="INPUT PHONE NUMBER"
               (input)="validatePhoneNumber(this.User.contactNumber)"
               class="form-control" [ngClass]="{'true': this.showPhone, 'false': !this.showPhone}"
               [(ngModel)]="this.User.contactNumber"
@@ -73,14 +103,22 @@
       <label *ngIf="this.showEmail == false" style="color: red">Invalid</label>
       <label *ngIf="this.showEmail == true" style="color: green">Valid
       </label>
-      <input title="Please enter the username of your email before the @" (input)="validateEmail(User.email)" class="form-control"
+      <input
+              ngbPopover="Please enter the username of your email before the @"
+              triggers="mouseenter:mouseleave"
+              placement="bottom-right"
+              popoverTitle="INPUT USERNAME"
+              (input)="validateEmail(User.email)" class="form-control"
              [ngClass]="{'true': this.showEmail, 'false': !this.showEmail}"
              id="username" name="username" [(ngModel)]= User.email type="email"
              required>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input title="Password must be at least 8 characters in length containing  1 Uppercase, 1 Lowercase and 1 special character"
+      <input ngbPopover="Password must be at least 8 characters in length containing  1 Uppercase, 1 Lowercase and 1 special character"
+             triggers="mouseenter:mouseleave"
+             placement="bottom-right"
+             popoverTitle="INPUT PASSWORD"
              (input)="validatePassword(password)"
              [ngClass]="{'true': this.showPassword, 'false': !this.showPassword}"
              class="form-control" id="password" name="password" [(ngModel)]="password" type="password" required>
@@ -88,7 +126,12 @@
                                class="form-control" id="passwordStrengthMeter" name="passwordStrengthMeter" >
       </password-strength-meter>
       <label for="passwordCheck">Confirm Password</label>
-      <input title="Re-Enter your password" (input)="confirmPassword(passwordCheck)"
+      <input
+              ngbPopover="Re-Enter your password"
+              triggers="mouseenter:mouseleave"
+              placement="bottom-right"
+              popoverTitle="INPUT PASSWORD AGAIN"
+              (input)="confirmPassword(passwordCheck)"
              [ngClass]="{'true': this.showPasswordCheck, 'false': !this.showPasswordCheck}"
              class="form-control" id="passwordCheck" name="passwordCheck" [(ngModel)]="passwordCheck" type="password">
 
@@ -138,7 +181,6 @@
 
               <div class="col"></div>
           </div>
-      <input type="hidden" value="{{this.Token}}">
   </form>
 </div>
 </div>

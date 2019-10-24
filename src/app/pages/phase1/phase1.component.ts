@@ -1,389 +1,237 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, OnInit } from '@angular/core';
-import {CCRPhase1} from '../../models/CCR-Phase1';
-import {RFC} from '../../models/RFC';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
+import { RFC } from '../../models/RFC';
+import {Phase1Service} from '../../services/phase1.service';
+import {Data, Router} from '@angular/router';
+import swal from 'sweetalert2';
 
 
 @Component({
-    selector: 'app-phase1',
-    templateUrl: './phase1.component.html',
-    styleUrls: ['./phase1.component.css']
+  selector: 'app-create-rfcs',
+  templateUrl: './phase1.component.html',
+  styleUrls: ['./phase1.component.css']
 })
 export class Phase1Component implements OnInit {
+  public usersSites ;
+  public managers;
+  public localOBJ = null;
+  public enableSubmitButton: boolean;
+  public displayNotifyManager: boolean;
+  public displayRequestDescription: true;
+  public displayReasonForRequest: boolean;
+  public displayNoManagers: boolean;
+  public noManagers: number [] = [1, 2, 3];
+  public displayManagerSelect1: boolean;
+  public displayManagerSelect2: boolean;
+  public displayManagerSelect3: boolean;
+  constructor(private phase1Service: Phase1Service ,  private router: Router) { }
+  public RFC: RFC  = {
+    dateRequested: undefined,
+    requestDescription: undefined,
+    reasonForRequest: undefined,
+    CSRF_token: undefined,
+    site_ID: undefined
+  };
 
-    datepickerConfig: Partial<BsDatepickerConfig> ;
-    startDate: Date;
-    endDate: Date;
-    dateRangePicker: Date;
-    public files: NgxFileDropEntry[] [] = []  ;
-
-
-    availableNumberOfTemporaryDays: String [] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16',
-        '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-    availablePriorities: String [] = ['EMERGENCY', 'Urgent', 'Safety', 'Improvement', 'Other'];
-    availablePeriods: String [] = ['Permanent', 'Temporary', 'Trial'];
-    availableImpacts: String [] = ['CLIENTS', 'OPERATIONS', 'TECHNICAL'];
-    availableNatureOfChange: String [] = ['National', 'Local', 'Regional'];
-    availableEosSystems: String [] = ['AFTN', 'AMHS', 'ANAIS', 'A-SMGCS', 'ATIS', 'AWOS', 'CAD', 'CAMU', 'DAID', 'DATIS', 'DIESEL BACKUP',
-        'DITTEL', 'DME', 'FRS', 'FWD RELAY', 'ILS', 'IVSAT', 'MLAT', 'NDB', 'OTN', 'OTN', 'RADAR', 'SATELLITE', 'SMR', 'SQUIB', 'TERNS',
-        'TITAN', 'TOPSKY', 'UPS', 'VCCS', 'VHF', 'VOR', 'VPN'];
-
-    // Form boolean values
-    emergencySelected: boolean;
-    displayPredictedRisks: boolean;
-    displayChangePeriod: boolean;
-    displayNatureOfChange: boolean;
-    displayEOSystem: boolean;
-    displayTCB_CRF_ID: boolean;
-    displayConfigurationItems: boolean;
-    displayChangeType: boolean;
-    displaySelectTemporaryAmountOfDays: boolean ;
-    displayTemporaryDateSelection: boolean;
-
-    displayAdditionalAttachedDocuments: boolean ;
-    displayEstimatedImpact: boolean ;
-    displayEstimatedImpactOps: boolean;
-    displayEstimatedImpactClients: boolean;
-    displayEstimatedImpactTech: boolean;
-    displayProblemReportRaised: boolean ;
-    displayChangePreTested: boolean ;
-    displayChangeNotSuccessfullyTestedReason: boolean ;
-    displaySpecialistComments: boolean ;
-    displayProposedImplementationDate: boolean ;
-    displayRecommendOrOppose: boolean ;
-    activateSubmitButton: boolean ;
-
-    RFC: RFC = {
-        dateRequested: undefined,
-        requestedChange: undefined,
-        description: undefined
-    };
-    phase1: CCRPhase1 = {
-        TCB_CRF_ID: undefined,
-        requestPriority: undefined,
-        predictedImpact: [],
-        changePeriod: undefined,
-        temporaryPeriodStartDate: undefined,
-        temporaryPeriodNumberOfDays: undefined,
-        temporaryPeriodEndDate: undefined ,
-        natureOfChange: undefined,
-        eosSystem: undefined,
-        configurationItems: undefined,
-        change: {
-            hardware: false,
-            software: false,
-            firmware: false
-        },
-        additionalDocuments: false,
-        numberOfPages: undefined,
-        estimatedImpacts: {
-            operations: undefined,
-            clients: undefined,
-            technical: undefined
-        },
-        problemReportRaised: false,
-        problemReportRef: undefined,
-        changeSuccessfullyTested: undefined,
-        changeNotSuccessfullyTestedReason: undefined,
-        specialistComment: undefined,
-        proposedImplementationDate: undefined,
-        recommend_oppose: undefined
-    };
-
-    constructor() {
-        this.datepickerConfig = Object.assign({},
-            {containerClass: 'theme-dark-blue'},
-            { dateInputFormat: 'YYYY-MM-DD'} ,
-            {showWeekNumbers: false},
-            {minDate: new Date()});
+  public onSelectSite($event) {
+    this.RFC.site_ID = $event.target.value;
+    localStorage.setItem('site' , $event.target.value);
+    this.displayNotifyManager = true;
+    this.displayRequestDescription = true;
+  }
+  onSelectNotifyManager($event) {
+    switch ($event.target.value) {
+      case 'yes':
+        this.displayNoManagers = true;
+        break;
+      case 'no' :
+        this.displayRequestDescription = true;
     }
-
-
-    onSelectPriority($event) {
-        const prioritySelect = document.getElementById('priority');
-        if ($event.target.value === 'EMERGENCY') {
-            prioritySelect.classList.add('text-danger');
-            this.emergencySelected = true;
-            this.displaySpecialistComments = true ;
-            this.displayPredictedRisks = false;
-            this.displayPredictedRisks = false;
-            this.displayChangePeriod = false;
-            this.displayNatureOfChange = false;
-            this.displayEOSystem = false;
-            this.displayTCB_CRF_ID = false;
-            this.displayConfigurationItems = false;
-            this.displayChangeType = false;
-            this.displayTemporaryDateSelection = false;
-            this.displayAdditionalAttachedDocuments = false ;
-            this.displayEstimatedImpact = false ;
-            this.displayEstimatedImpactOps = false;
-            this.displayEstimatedImpactClients = false;
-            this.displayEstimatedImpactTech = false;
-            this.displayProblemReportRaised = false ;
-            this.displayChangePreTested = false ;
-            this.displayChangeNotSuccessfullyTestedReason = false ;
-            this.displayProposedImplementationDate = false ;
-        } else if (prioritySelect.classList.contains('text-danger') && $event.target.value !== 'Emergency') {
-            this.displayPredictedRisks = true;
-            this.displaySpecialistComments = false ;
-            this.emergencySelected = false;
-            prioritySelect.classList.remove('text-danger');
-        } else {
-            this.displayPredictedRisks = true;
-            this.displaySpecialistComments = false ;
-            this.emergencySelected = false;
-        }
-        this.phase1.requestPriority = $event.target.value;
+  }
+  public onSelectNoManagers($event) {
+    switch ($event.target.value) {
+      case '1'  :
+        this.displayManagerSelect1 = true;
+        this.displayManagerSelect2 = false;
+        this.displayManagerSelect3 = false;
+        break;
+      case '2' :
+        this.displayManagerSelect1 = true;
+        this.displayManagerSelect2 = true;
+        this.displayManagerSelect3 = false;
+        break;
+      case '3' :
+        this.displayManagerSelect1 = true;
+        this.displayManagerSelect2 = true;
+        this.displayManagerSelect3 = true;
+        break;
     }
+  }
+  onSelectManager1($event) {
+    this.displayRequestDescription = true;
+  }
 
-    onSelectChangePeriod($event) {
-        switch ($event.target.value) {
-            case 'Temporary' :
-                this.displaySelectTemporaryAmountOfDays = true ;
-                this.displayNatureOfChange = false;
-                break;
-            case 'Trial':
-
-                this.displayNatureOfChange = false;
-                this.displaySelectTemporaryAmountOfDays = true ;
-                break;
-            case 'Permanent' :
-                this.displayNatureOfChange = true;
-                this.displaySelectTemporaryAmountOfDays = false ;
-                break;
-        }
-        this.phase1.changePeriod = $event.target.value;
-    }
-    onSelectNumberOfTemporaryDays($event) {
-        this.phase1.temporaryPeriodNumberOfDays = $event.target.value ;
-        this.displayTemporaryDateSelection = true ;
-    }
-    onSelectTemporaryStartDate($event) {
-        console.log($event);
-        this.startDate = $event[0];
-        this.endDate = $event[1];
-        this.phase1.temporaryPeriodStartDate = this.startDate;
-        this.phase1.temporaryPeriodEndDate = this.endDate;
-        this.displayNatureOfChange = true ;
-    }
-    onSelectImpact($event) {
-        console.log(this.phase1.predictedImpact)
-        if (this.phase1.predictedImpact !== []) {
-            this.displayChangePeriod = true;
-            if (this.phase1.predictedImpact.includes('CLIENTS')) {
-                this.displayEstimatedImpactClients = true;
-            } else {
-                this.displayEstimatedImpactClients = false;
-            }
-            if (this.phase1.predictedImpact.includes('TECHNICAL')) {
-                this.displayEstimatedImpactTech = true;
-            } else {
-                this.displayEstimatedImpactTech = false;
-            }
-            if (this.phase1.predictedImpact.includes('OPERATIONS')) {
-                this.displayEstimatedImpactOps = true;
-            } else {
-                this.displayEstimatedImpactOps = false;
-            }
-        } else {
-            this.displayChangePeriod = false;
-        }
+  onSelectManager2($event) {
+    this.displayRequestDescription = true;
+  }
+  onSelectManager3($event) {
+    this.displayRequestDescription = true;
+  }
 
 
-    }
-    onSelectNatureOfChange($event) {
-
-        if (this.phase1.natureOfChange !== undefined ) {
-            this.displayEOSystem = true ;
-        } else {
-            this.displayEOSystem = false ;
-        }
-    }
-
-    onSelectEosSystem($event) {
-        this.phase1.eosSystem = $event.target.value;
-        this.phase1.TCB_CRF_ID = $event.target.value + '0001'; // database reference to eos tcb number + 1
-        this.displayTCB_CRF_ID = true ;
-        this.displayConfigurationItems = true;
-    }
-
-    onSelectChangeTypeHW(e) {
-
-        if (e.target.checked) {
-            this.phase1.change.hardware = true;
-            console.log(this.phase1.change.hardware);
-        } else {
-            this.phase1.change.hardware = false ;
-            console.log(this.phase1.change.hardware);
-        }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
-            this.displayAdditionalAttachedDocuments = true ;
-        } else { this.displayAdditionalAttachedDocuments = false ; }
-    }
-
-    onSelectChangeTypeSW(e) {
-        if (e.target.checked) {
-            this.phase1.change.software = true;
-            console.log(this.phase1.change.software);
-        } else {
-            this.phase1.change.software = false ;
-            console.log(this.phase1.change.software);
-        }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
-            this.displayAdditionalAttachedDocuments = true ;
-        } else { this.displayAdditionalAttachedDocuments = false ; }
-    }
-
-    onSelectChangeTypeFW(e) {
-        if (e.target.checked) {
-            this.phase1.change.firmware = true;
-            console.log(this.phase1.change.firmware);
-        } else {
-            this.phase1.change.firmware = false ;
-            console.log(this.phase1.change.firmware);
-        }
-        if (this.phase1.change.firmware || this.phase1.change.software || this.phase1.change.hardware ) {
-            this.displayAdditionalAttachedDocuments = true ;
-        } else { this.displayAdditionalAttachedDocuments = false ; }
-    }
-    onSelectAdditionalDocuments(e) {
-        if (e.target.value === 'yes') {
-            this.phase1.additionalDocuments = true;
-            this.displayEstimatedImpact = false ;
-            console.log('We have additional work');
-        } else if (e.target.value === 'no') {
-            this.files = [];
-            this.phase1.additionalDocuments = false;
-            this.phase1.numberOfPages = undefined ;
-            this.displayEstimatedImpact = true ;
-            console.log('No additional work');
-        }
-    }
-    public dropped(files: NgxFileDropEntry[]) {
-        this.displayEstimatedImpact = true;
-        // this.files = files;
-        this.files.push(files);
-        for (const droppedFile of files) {
-
-            // Is it a file?
-            if (droppedFile.fileEntry.isFile) {
-                const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-                fileEntry.file((file: File) => {
-
-                    // Here you can access the real file
-                    console.log(droppedFile.relativePath, file);
-
-                    /**
-                     // You could upload it like this:
-                     const formData = new FormData()
-                     formData.append('logo', file, relativePath)
-
-                     // Headers
-                     const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-                     this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-                     .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-                     **/
-
-                });
-            } else {
-                // It was a directory (empty directories are added, otherwise only files)
-                const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-                console.log(droppedFile.relativePath, fileEntry);
-            }
-        }
-    }
-
-    public fileOver(event) {
-        console.log(event);
-    }
-
-    public fileLeave(event) {
-        console.log(event);
-    }
-    estimatedImpact($event) {
-        if ( this.phase1.estimatedImpacts.technical !== undefined   ||
-            this.phase1.estimatedImpacts.clients !== undefined   ||
-            this.phase1.estimatedImpacts.operations !== undefined  ) {
-             this.displayProblemReportRaised = true ;
-        } else {
-            this.displayProblemReportRaised = false ; }
-    }
-    onSelectReportRaised(e) {
-        if (e.target.value === 'yes') {
-            this.displayChangePreTested = false ;
-            this.phase1.problemReportRaised = true;
-        } else if (e.target.value === 'no') {
-            this.displayChangePreTested = true ;
-            this.phase1.problemReportRef = undefined;
-            this.phase1.problemReportRaised = false;
-        }
-    }
-    onInputProblemReportRef() {
-        this.displayChangePreTested = true;
-    }
-
-    onSelectPreTested(e) {
-        if (e.target.value === 'yes') {
-            this.phase1.changeSuccessfullyTested = 'yes';
-            this.displayChangeNotSuccessfullyTestedReason = false ;
-            this.displaySpecialistComments = true ;
-            this.phase1.changeNotSuccessfullyTestedReason = undefined ;
-        } else if (e.target.value === 'no') {
-            this.phase1.changeNotSuccessfullyTestedReason = undefined;
-            this.phase1.changeSuccessfullyTested = 'no';
-            this.displayChangeNotSuccessfullyTestedReason = true ;
-            this.displaySpecialistComments = false ;
-        } else if (e.target.value === 'na') {
-            this.phase1.changeSuccessfullyTested = 'na';
-            this.displayChangeNotSuccessfullyTestedReason = false ;
-            this.displaySpecialistComments = true ;
-            this.phase1.changeNotSuccessfullyTestedReason = undefined ;
-        }
-    }
-    onUnsuccessfulTestReason() {
-        this.displaySpecialistComments = true ;
-    }
-
-    onInputSpecialistComment() {
-        this.displayProposedImplementationDate = true ;
-    }
-
-    onSelectProposedImplementationDate() {
-        this.displayRecommendOrOppose = true ;
-    }
-    onSelectRecommendOrOppose($event) {
-        this.phase1.recommend_oppose = $event.target.value;
-        const submitButton = document.getElementById('submit');
+  public  requestedChange() {
+    this.displayReasonForRequest = true;
+    localStorage.setItem('request' , this.RFC.requestDescription);
+  }
+  public description() {
+    localStorage.setItem('description' , this.RFC.reasonForRequest);
+      const submitButton = document.getElementById('submit');
+      if (this.RFC.requestDescription !== undefined && this.RFC.reasonForRequest !== undefined && this.RFC.site_ID !== undefined) {
         submitButton.classList.remove('disabled');
-        this.activateSubmitButton = true;
+        this.enableSubmitButton = true;
+      }
+  }
+  public onCancel() {
+
+    swal({
+      title: 'Are you sure?',
+      text: 'You will lose this data',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#5bc0de',
+      cancelButtonColor: '#d9534f' ,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        localStorage.removeItem('request');
+        localStorage.removeItem('description');
+        localStorage.removeItem('site');
+        this.router.navigate(['home/myRFCS']);
+      } else if (
+          result.dismiss === swal.DismissReason.cancel
+      ) {
+        swal({
+          title: 'Cancelled',
+          text: 'Your may continue to make changes',
+          type: 'error',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+  }
+  public onSubmit() {
+
+    swal({
+      title: 'Are you sure?',
+      text: 'You won\'t be able make changes to your submission',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#5bc0de',
+      cancelButtonColor: '#d9534f' ,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        if (this.localOBJ !== null) {
+          this.phase1Service.updateRequest(this.RFC, this.localOBJ.ID).subscribe((data: Data) => {
+            if (data.success) {
+              this.localOBJ = null;
+              localStorage.removeItem('request');
+              localStorage.removeItem('description');
+              localStorage.removeItem('site');
+              swal('Success' , data.message , 'success' );
+            } else {
+              swal('Failure' , data.message , 'error' );
+            }
+          });
+        } else {
+          this.phase1Service.submitRequest( this.RFC ).subscribe( (data: Data) => {
+            if (data.success) {
+              localStorage.removeItem('request');
+              localStorage.removeItem('description');
+              localStorage.removeItem('site');
+              this.router.navigate(['home']);
+              swal('Success' , data.message , 'success' );
+            } else {
+              swal('Failure' , data.message , 'error' );
+              if (data.message === 'Session expired') {
+                this.router.navigate(['login']);
+              }
+            }
+          });
+        }
+      } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === swal.DismissReason.cancel
+      ) {
+        swal({
+          title: 'Cancelled',
+          text: 'Your may continue to make changes',
+          type: 'error',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    });
+  }
+  ngOnInit() {
+
+    this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
+      this.RFC.CSRF_token = data.tokenValue ;
+    });
+    this.phase1Service.getPageData().subscribe((data: Data) => {
+      this.usersSites = data[0];
+      this.managers = data[1];
+    });
+
+    this.localOBJ = this.phase1Service.getobj();
+
+    if (this.localOBJ !== null) {
+      localStorage.setItem('request', this.localOBJ.requested_change);
+      localStorage.setItem('description', this.localOBJ.description);
+      localStorage.setItem('site', this.phase1Service.getSite());
+      this.RFC.requestDescription = this.localOBJ.requested_change;
+      this.RFC.reasonForRequest = this.localOBJ.description;
+      this.RFC.site_ID = this.phase1Service.getSite();
+      console.log(this.RFC.site_ID);
+
+      if ( this.RFC.site_ID !== null || undefined) {
+        this.displayNotifyManager = true;
+      }
+      if (this.RFC.requestDescription !== null || undefined) {
+        this.displayRequestDescription = true;
+      }
+      if (this.RFC.reasonForRequest !== null || undefined) {
+        this.displayReasonForRequest = true;
+        this.enableSubmitButton = true;
+      }
+
+      this.enableSubmitButton = true;
+      const submitButton = document.getElementById('submit');
+      submitButton.classList.remove('disabled');
+      document.getElementById('cancel').classList.add('invisible');
+    } else {
+      this.RFC.requestDescription = localStorage.getItem('request');
+      this.RFC.reasonForRequest = localStorage.getItem('description');
+      this.RFC.site_ID = localStorage.getItem('site');
+      if ( this.RFC.site_ID !== null || undefined) {
+        this.displayNotifyManager = true;
+      }
+      if (this.RFC.requestDescription !== null || undefined) {
+        this.displayRequestDescription = true;
+      }
+      if (this.RFC.reasonForRequest !== null || undefined) {
+        this.displayReasonForRequest = true;
+        this.enableSubmitButton = true;
+      }
     }
-    // onSelectSubmittedToAllConcerned (e) {
-    //     if (e.target.value === 'yes') {
-    //         this.phase1.submittedToAllParties = true;
-    //     } else if (e.target.value === 'no') {
-    //         this.phase1.notSubmittedToAllPartiesReason = undefined;
-    //         this.phase1.submittedToAllParties = false;
-    //     }
-    // }
 
-    onSubmit() {
-
-        console.log(JSON.stringify(this.phase1));
-
-    }
-
-
-
-    ngOnInit() {
-        this.RFC.requestedChange = 'We need new laptops for engineering';
-        this.RFC.description = 'The reason for this is some blah blah software that can only run on blah blah nonsens give me new ones. Newones forever been asldfnadsnfgjSDBNVL;Sndv;ljNF;Lhnl;gvnW;LFHoefhoUIHEFOJKnefHWEV         ERFG   wef  ew fwef    wef     wegf    wef     ';
-        this.phase1.TCB_CRF_ID = 'Undefined' ;
-    }
+  }
 
 }

@@ -1,4 +1,5 @@
-
+<!-- Created by : Liam Gordon McCabe-->
+<!-- Student number: 27455211-->
 <div class="card mx-auto" style="width: 45rem;">
 
   <h5 class="card-header info-color white-text text-center py-4">
@@ -12,12 +13,8 @@
       <label for="password">Password</label>
       <input type="password" id="password" name="password" class="form-control" [(ngModel)]="pass"  (input)="setPassword(pass)">
       <div class="d-flex align-items-center justify-content-between">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="materialLoginFormRemember" >
-          <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
-        </div>
         <div>
-          <a href="">Forgot password?</a>
+          <a href="/forgotPassword">Forgot password?</a>
         </div>
       </div>
 

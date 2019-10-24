@@ -1,0 +1,7 @@
+{
+  "/ATNSCCR_PHP/*" : {
+    "target" : "http://localhost",
+    "secure": "false",
+    "logLevel" : "debug"
+  }
+}

@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Specialist Response</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card" *ngFor="let response of managerResponses">
+    <label class="px-3 ">Manager Comment: </label>
+    <p class="px-3 ">{{response.description}}</p>
+    <label class="px-3 ">Manager Decision: </label>
+    <p class="px-3 ">{{response.status}}</p>
+    <label class="px-3 ">Date Submitted: </label>
+    <p class="px-3 ">{{response.date}}</p>
+  </div>
+</div>

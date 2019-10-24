@@ -18,7 +18,7 @@ export class RegistrationService {
       title: user.title,
       surname: user.surname,
       name: user.name,
-      employeeID: user.employeeId ,
+      employee_ID: user.employeeId ,
       username : user.email,
       contactNum: user.contactNumber,
       site: user.site,
@@ -26,9 +26,15 @@ export class RegistrationService {
       CSRF_token : token
     };
 
-    return this.http.post('http://localhost/ATNSCCR_PHP/backend/api2/register.php', obj, httpOptions);
+    return this.http.post('/ATNSCCR_PHP/backend/api2/register.php', obj, httpOptions);
   }
   getCSRFToken() {
-    return this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+    return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+  }
+  getPageData() {
+    const obj = {
+      dataSelection: 'registration'
+    };
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
   }
 }

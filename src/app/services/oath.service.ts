@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import {Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 const httpOptions = {
@@ -8,7 +11,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class OathService {
-  public Token ;
   private loggedInStatus = false;
   constructor(private http: HttpClient ) { }
 
@@ -20,12 +22,18 @@ return this.loggedInStatus;
     this.loggedInStatus = value;
   }
 
-  getUserDetails(username , password , token) {
-    const obj = {username ,  password , token}
-    return this.http.post( 'http://localhost/ATNSCCR_PHP/backend/api2/login.php', obj , httpOptions); ;
+  getUserDetails(username , password , CSRF_token) {
+    const obj = {
+      username : username ,
+      password: password ,
+      CSRF_token: CSRF_token
+    };
+    return this.http.post( '/ATNSCCR_PHP/backend/api2/login.php', obj , httpOptions); ;
   }
 
   getCSRFToken() {
-    return  this.http.get('http://localhost/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
+    return  this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
+
+
 }

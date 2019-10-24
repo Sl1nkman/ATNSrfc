@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -15,7 +18,6 @@ export class RouteGuard implements CanActivate , CanActivateChild {
 
   constructor(
       private routeAuthorisationService: RouteAuthorisationService,
-      private router: Router
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -31,8 +33,8 @@ export class RouteGuard implements CanActivate , CanActivateChild {
   canActivateChild(
       childRoute: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const allowedRoles = childRoute.data.allowedRoles;
-    const isAuthorized = this.routeAuthorisationService.isAuthorized(allowedRoles);
+    const allowedPermission = childRoute.data.allowedPermission;
+    const isAuthorized = this.routeAuthorisationService.isAuthorized(allowedPermission);
     if (!isAuthorized) {
       // if not authorized, show access denied message
       swal('Unauthorised', 'Please contact your administrator', 'error');

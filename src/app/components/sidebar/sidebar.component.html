@@ -1,43 +1,32 @@
+<!-- Created by : Liam Gordon McCabe-->
+<!-- Student number: 27455211-->
 <aside class="sidebar shadow">
   <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
-    <div class="picture-wrapper mb-4">
-      <div class="user-picture m-auto">
-        <img src="../../../assets/images/atns_logo.png" class="img-fluid" alt="">
-      </div>
-    </div>
+<!--    <div class="picture-wrapper mb-3">-->
+<!--      <div class="logo-container m-auto">-->
+<!--        <img src="../../../assets/images/atns_logo.png" class="img-fluid" alt="">-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="profile-details text-center pb-4">
       <p class="mb-0 text-uppercase name">{{this.username}}</p>
-      <small class="text-uppercase role">Specialist/Manager/Employee</small>
+      <small class="text-uppercase role" >{{this.roles}}</small>
     </div>
   </div>
   <nav class="sidebar-menu pt-3 pb-3">
     <ul>
       <li class="active">
         <a  routerLink="/home/createRFC" routerLinkActive="active">
-          <i class="fa fa-pencil"></i>
-          <span>Create RFC</span>
+          <i class="fa fa-plus-circle "></i>
+          <span>Initiate CCR</span>
           <span class="badge badge-danger rounded-0 ml-auto text-light">New</span>
         </a>
       </li>
       <li class="active">
         <a  routerLink="/home/myRFCS" routerLinkActive="active" >
-          <i class="fa fa-archive"></i>
-          <span>My RFC'S</span>
+          <i class="fa fa-list"></i>
+          <span>My CCR'S</span>
         </a>
       </li>
-      <li>
-        <a href="#" routerLink="/home/phase1">
-          <i class="fa fa-table"></i>
-          <span>Tables</span>
-        </a>
-      </li>
-<!--      <li>-->
-        <!--<a href="#" routerLink="/typography">-->
-          <!--<i class="fa fa-align-center"></i>-->
-          <!--<span>Typography</span>-->
-        <!--</a>-->
-      <!--</li>-->
-      <!--<li>-->
         <!--<a href="#" routerLink="/maps">-->
           <!--<i class="fa fa-globe"></i>-->
           <!--<span>Maps</span>-->
@@ -60,10 +49,16 @@
           <!--<span class="badge badge-danger rounded-0 ml-auto text-light">New</span>-->
         </a>
       </li>
+<!--      <li class="active">-->
+<!--        <a  routerLink="/home/rfcsignoff" routerLinkActive="active">-->
+<!--          <i class="fa fa-leaf"></i>-->
+<!--          <span>CCR Sign Off</span>-->
+<!--        </a>-->
+<!--      </li>-->
       <li class="active">
-        <a  routerLink="/home/rfcsignoff" routerLinkActive="active">
-          <i class="fa fa-leaf"></i>
-          <span>CCR Sign Off</span>
+        <a routerLink="/home/adminDashboard" routerLinkActive="active">
+          <i class="fa fa-diamond"></i>
+          <span>Admin Dashboard</span>
         </a>
       </li>
     </ul>

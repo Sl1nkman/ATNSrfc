@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Request for Change</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div>
+    <label class="px-3 d-inline-block">Name of Initiator: </label>
+    <p class=" px-3 d-inline-block">{{this.phase1.initiatorName.firstName}}  {{this.phase1.initiatorName.lastName}}</p>
+    <label class="px-3 d-inline-block bold">Date Requested: {{this.phase1.start_time}}</label>
+    <p class="px-3 d-inline-block"></p>
+  </div>
+  <label class="px-3 ">Requested Change Description: </label>
+  <p class="px-3">{{this.phase1.requested_change}}</p>
+  <label class="px-3">Reason for request: </label>
+  <p class="px-3">{{this.phase1.description}}</p>
+</div>

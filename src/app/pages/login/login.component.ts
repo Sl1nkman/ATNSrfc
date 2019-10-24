@@ -1,3 +1,6 @@
+/* Created by : Liam Gordon McCabe
+*  Student number: 27455211
+*/
 import { Component, OnInit } from '@angular/core';
 import {OAuth} from '../../models/OAuth';
 import swal from 'sweetalert2'; // Sweet Alerts import
@@ -39,15 +42,28 @@ export class LoginComponent implements OnInit {
           this.cookieService.set( 'jwt', data.jwt );
 
           this.router.navigate(['home']  );
-          swal('Logged In' , data.message , 'success' );
+          // swal('Logged In' , data.message , 'success' );
+          swal({
+            type: 'success',
+            title: 'Logged In',
+            text: data.message ,
+            showConfirmButton: false,
+            timer: 1500
+          });
         } else {
+          this.OAuthService.getCSRFToken().subscribe( ( data1: Data) => {
+            this.Token = data1.tokenValue ;
+          });
           swal('Failure', data.message , 'error');
         }
       });
 
   }
+  onForgotPassword($event) {
+    this.router.navigate(['forgotPassword']);
+  }
   ngOnInit() {
-    this.Token = this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
+    this.OAuthService.getCSRFToken().subscribe( (data: Data) => {
       this.Token = data.tokenValue ;
     });
   }
