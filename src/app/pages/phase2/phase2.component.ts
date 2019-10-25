@@ -1,16 +1,17 @@
 /* Created by : Liam Gordon McCabe
 *  Student number: 27455211
 */
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CCRPhase2} from '../../models/CCR-Phase2';
 import {RFC} from '../../models/RFC';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import {NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry} from 'ngx-file-drop';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import swal from 'sweetalert2';
 import {Data, Router} from '@angular/router';
 import {Phase2Service} from '../../services/phase2.service';
 import {DATE} from 'ngx-bootstrap/chronos/units/constants';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'app-phase2',
     templateUrl: './phase2.component.html',
@@ -24,7 +25,8 @@ export class Phase2Component implements OnInit {
     public datepickerConfig: Partial<BsDatepickerConfig>;
     public files: NgxFileDropEntry[] [] = [];
     public filesForUpload = [];
-    public user ;
+    public user;
+    public response;
 
 
     public availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -162,7 +164,7 @@ export class Phase2Component implements OnInit {
             case '1' :
                 this.displayNatureOfChange = true;
                 this.displaySelectTemporaryAmountOfDays = false;
-                this.phase2.temporaryPeriodNumberOfDays = 0 ;
+                this.phase2.temporaryPeriodNumberOfDays = 0;
                 this.phase2.temporaryPeriodStartDate = undefined;
                 this.phase2.temporaryPeriodEndDate = undefined;
                 break;
@@ -188,7 +190,7 @@ export class Phase2Component implements OnInit {
 
     public onSelectTemporaryStartDate($event) {
         const maxDate = new Date();
-        maxDate.setDate($event.getDate() + parseInt( this.phase2.temporaryPeriodNumberOfDays + '', 10));
+        maxDate.setDate($event.getDate() + parseInt(this.phase2.temporaryPeriodNumberOfDays + '', 10));
         this.phase2.temporaryPeriodEndDate = maxDate;
         localStorage.setItem('temporaryPeriodStartDate', this.phase2.temporaryPeriodStartDate.toString());
         localStorage.setItem('temporaryPeriodEndDate', maxDate.toString());
@@ -286,18 +288,18 @@ export class Phase2Component implements OnInit {
     public onSelectEosSystem($event) {
         this.phase2.eosSystem = $event.target.value;
         localStorage.setItem('eosSystem', $event.target.value);
-        this.phase2service.getEOSTCBNumber(this.phase2.eosSystem).subscribe( (data: Data) => {
-            let tcb = parseInt(data.latest_TCB_number , 10);
+        this.phase2service.getEOSTCBNumber(this.phase2.eosSystem).subscribe((data: Data) => {
+            let tcb = parseInt(data.latest_TCB_number, 10);
             tcb += 1;
             for (const eos of this.availableEosSystems) {
-                if (eos[0] === $event.target.value ) {
+                if (eos[0] === $event.target.value) {
                     this.phase2.TCB_CRF_ID = eos[1] + tcb;
                     localStorage.setItem('tcb', this.phase2.TCB_CRF_ID);
                 }
             }
         });
 
-         // database reference to eos tcb number + 1
+        // database reference to eos tcb number + 1
         this.displayTCB_CRF_ID = true;
         this.displayConfigurationItems = true;
     }
@@ -474,6 +476,7 @@ export class Phase2Component implements OnInit {
         localStorage.setItem('recommendOppose', $event.target.value);
         this.phase2.recommend_oppose = $event.target.value;
     }
+
     onInputReasonRecommendOppose() {
         const submitButton = document.getElementById('submit');
         submitButton.classList.remove('disabled');
@@ -523,7 +526,7 @@ export class Phase2Component implements OnInit {
         }).then((result) => {
             if (result.value) {
                 if (this.localObj !== null) {
-                    this.phase2service.updatePhase2(this.phase2, this.localObj.ID).subscribe((data: Data) => {
+                    this.phase2service.updatePhase2(this.phase2, this.localObj.ID, this.response[0]).subscribe((data: Data) => {
                         if (data.success) {
                             if (this.phase2.additionalDocuments) {
                                 this.populateForm();
@@ -550,6 +553,15 @@ export class Phase2Component implements OnInit {
                                     }
                                 });
                             }
+                            swal({
+                                title: 'Updated',
+                                text: 'Phase 2 successfully updated',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            localStorage.clear();
+                            this.router.navigate(['home']);
                         }
                     });
                 } else {
@@ -570,11 +582,11 @@ export class Phase2Component implements OnInit {
                                         localStorage.clear();
                                         this.router.navigate(['home']);
                                     } else {
-                                        swal('Error' , data.message , 'error' );
+                                        swal('Error', data.message, 'error');
                                     }
                                 });
                             } else {
-                                swal('Success' , data1.message , 'success' );
+                                swal('Success', data1.message, 'success');
                                 this.router.navigate(['home']);
                             }
                         } else {
@@ -601,6 +613,7 @@ export class Phase2Component implements OnInit {
             }
         });
     }
+
     ngOnInit() {
         this.phase2service.getCSRFToken().subscribe((data: Data) => {
             this.phase2.CSRF_token = data.tokenValue;
@@ -616,7 +629,7 @@ export class Phase2Component implements OnInit {
 
         this.phase1 = this.phase2service.getPhase1();
         if (this.user == null) {
-            this.phase2service.getUserByID(this.phase1.user_ID).subscribe( (data: Data) => {
+            this.phase2service.getUserByID(this.phase1.user_ID).subscribe((data: Data) => {
                 this.user = data.firstName + ' ' + data.lastName;
             });
         }
@@ -624,7 +637,7 @@ export class Phase2Component implements OnInit {
         if (this.phase1 != null) {
             this.RFC.requestDescription = this.phase1.requested_change;
             this.RFC.reasonForRequest = this.phase1.description;
-            this.RFC.dateRequested =  this.phase1.start_time;
+            this.RFC.dateRequested = this.phase1.start_time;
             this.phase2.CCR_ID = this.phase1.ID;
             this.user = this.phase2service.getUser();
 
@@ -732,236 +745,236 @@ export class Phase2Component implements OnInit {
                 }
             }
 
-                this.phase2.changePeriod = this.localObj.changePeriod_ID;
-                switch (this.phase2.changePeriod) {
-                    case '1' :
-                        this.displayNatureOfChange = true;
-                        this.displaySelectTemporaryAmountOfDays = false;
-                        break;
-                    case '2' :
-                        this.displaySelectTemporaryAmountOfDays = true;
-                        this.displayNatureOfChange = false;
-                        break;
-                    case '3':
-
-                        this.displayNatureOfChange = false;
-                        this.displaySelectTemporaryAmountOfDays = true;
-                        break;
-                }
-
-                if (this.localObj.temporaryStartDate !== null && this.localObj.temporaryEndDate !== null && this.localObj.temporaryNoOfDays !== null) {
-                    this.phase2.temporaryPeriodStartDate = this.localObj.temporaryStartDate;
-                    this.phase2.temporaryPeriodEndDate = this.localObj.temporaryEndDate;
-                    this.phase2.temporaryPeriodNumberOfDays = parseInt(this.localObj.temporaryNoOfDays , 10);
-                    this.displayTemporaryDateSelection = true;
+            this.phase2.changePeriod = this.localObj.changePeriod_ID;
+            switch (this.phase2.changePeriod) {
+                case '1' :
                     this.displayNatureOfChange = true;
-                }
+                    this.displaySelectTemporaryAmountOfDays = false;
+                    break;
+                case '2' :
+                    this.displaySelectTemporaryAmountOfDays = true;
+                    this.displayNatureOfChange = false;
+                    break;
+                case '3':
 
-                this.phase2.natureOfChange = this.localObj.natureChange_ID;
-                if (this.phase2.natureOfChange !== undefined) {
-                    this.displayEOSystem = true;
-                } else {
-                    this.displayEOSystem = false;
-                }
+                    this.displayNatureOfChange = false;
+                    this.displaySelectTemporaryAmountOfDays = true;
+                    break;
+            }
 
-                this.phase2.eosSystem = this.localObj.eos_ID;
-                this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_ID;
-                this.displayTCB_CRF_ID = true;
-                this.displayConfigurationItems = true;
-                this.phase2.configurationItems = this.localObj.configurationDescr;
+            if (this.localObj.temporaryStartDate !== null && this.localObj.temporaryEndDate !== null && this.localObj.temporaryNoOfDays !== null) {
+                this.phase2.temporaryPeriodStartDate = this.localObj.temporaryStartDate;
+                this.phase2.temporaryPeriodEndDate = this.localObj.temporaryEndDate;
+                this.phase2.temporaryPeriodNumberOfDays = parseInt(this.localObj.temporaryNoOfDays, 10);
+                this.displayTemporaryDateSelection = true;
+                this.displayNatureOfChange = true;
+            }
 
-                if (this.localObj.changeTypeHW === '1') {
-                    this.displayChangeType = true;
-                    this.phase2.change.hardware = true;
-                } else {
-                    this.phase2.change.hardware = false;
-                }
-                if (this.localObj.changeTypeSW === '1') {
-                    this.displayChangeType = true;
-                    this.phase2.change.software = true;
-                } else {
-                    this.phase2.change.software = false;
-                }
-                if (this.localObj.changeTypeFW === '1') {
-                    this.displayChangeType = true;
-                    this.phase2.change.firmware = true;
-                } else {
-                    this.phase2.change.firmware = false;
-                }
-                if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware) {
-                    this.displayAdditionalAttachedDocuments = true;
-                } else {
-                    this.displayAdditionalAttachedDocuments = false;
-                }
-
-                if (this.localObj.impactRisks_ID !== '2') {
-                    this.displayEstimatedImpact = true;
-                }
-
-                if (this.localObj.impactOnClients !== null) {
-                    this.displayEstimatedImpact = true;
-                    this.phase2.estimatedImpacts.clients = this.localObj.impactOnClients;
-                }
-                if (this.localObj.impactOnOperations !== null) {
-                    this.displayEstimatedImpact = true;
-                    this.phase2.estimatedImpacts.operations = this.localObj.impactOnOperations;
-                }
-                if (this.localObj.impactonTech !== null) {
-                    this.displayEstimatedImpact = true;
-                    this.phase2.estimatedImpacts.technical = this.localObj.impactonTech;
-                }
-
-                if (this.phase2.estimatedImpacts.technical !== undefined ||
-                    this.phase2.estimatedImpacts.clients !== undefined ||
-                    this.phase2.estimatedImpacts.operations !== undefined) {
-                    this.displayProblemReportRaised = true;
-                } else {
-                    this.displayProblemReportRaised = false;
-                }
-
-                if (this.localObj.reportRaisedContractor === '1') {
-                    this.phase2.problemReportRaised = true;
-                } else {
-                    this.phase2.problemReportRaised = false;
-                }
-
-                if (this.phase2.problemReportRaised) {
-                    this.displayChangePreTested = false;
-                } else if (!this.phase2.problemReportRaised) {
-                    this.displayChangePreTested = true;
-                    this.phase2.problemReportRef = undefined;
-                }
-
-                if (this.localObj.preTestSuccess) {
-                    this.phase2.changeSuccessfullyTested = 'yes';
-                } else if (this.localObj.preTestSuccess) {
-                    this.phase2.changeSuccessfullyTested = 'no';
-                } else {
-                    this.phase2.changeSuccessfullyTested = 'na';
-                }
-                if (this.phase2.changeSuccessfullyTested === 'yes') {
-                    this.displayChangeNotSuccessfullyTestedReason = false;
-                    this.displaySpecialistComments = true;
-                    this.phase2.changeNotSuccessfullyTestedReason = undefined;
-                    if (this.displaySelectTemporaryAmountOfDays) {
-                        this.displayRecommendOrOppose = true;
-                    }
-                } else if (this.phase2.changeSuccessfullyTested === 'no') {
-                    this.phase2.changeNotSuccessfullyTestedReason = this.localObj.reasonUnsucesTest;
-                    this.displayChangeNotSuccessfullyTestedReason = true;
-                    this.displaySpecialistComments = false;
-                    this.displayRecommendOrOppose = false;
-                } else if (this.phase2.changeSuccessfullyTested === 'na') {
-                    this.displayChangeNotSuccessfullyTestedReason = false;
-                    this.displaySpecialistComments = true;
-                    this.phase2.changeNotSuccessfullyTestedReason = undefined;
-                    if (this.displaySelectTemporaryAmountOfDays) {
-                        this.displayRecommendOrOppose = true;
-                    }
-                }
-                this.phase2.specialistComment = this.localObj.specialist_comment;
-                this.phase2.proposedImplementationDate = this.localObj.proposed_implementation_date;
-                this.displayRecommendOrOppose = false;
-
-                this.activateSubmitButton = true;
-                const submitButton = document.getElementById('submit');
-                submitButton.classList.remove('disabled');
-                document.getElementById('cancel').classList.add('invisible');
+            this.phase2.natureOfChange = this.localObj.natureChange_ID;
+            if (this.phase2.natureOfChange !== undefined) {
+                this.displayEOSystem = true;
             } else {
-                const event = {target: {value: null, checked: null}};
-                event.target.value = localStorage.getItem('requestPriority');
-                if (event.target.value !== null) {
-                    this.onSelectPriority(event);
-                }
-                event.target.value = localStorage.getItem('changePeriod');
-                if (event.target.value !== null) {
-                    this.onSelectChangePeriod(event);
-                }
+                this.displayEOSystem = false;
+            }
 
-                if (localStorage.getItem('temporaryPeriodNumberOfDays') !== null) {
-                    event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
-                    this.onSelectNumberOfTemporaryDays(event);
-                }
-                if (localStorage.getItem('temporaryPeriodStartDate') !== null) {
-                    this.phase2.temporaryPeriodStartDate = new Date(localStorage.getItem('temporaryPeriodStartDate'));
-                    this.phase2.temporaryPeriodEndDate = new Date(localStorage.getItem('temporaryPeriodEndDate'));
-                    this.displayNatureOfChange = true;
-                }
+            this.phase2.eosSystem = this.localObj.eos_ID;
+            this.phase2.TCB_CRF_ID = this.localObj.tcb_crf_ID;
+            this.displayTCB_CRF_ID = true;
+            this.displayConfigurationItems = true;
+            this.phase2.configurationItems = this.localObj.configurationDescr;
 
-                if (localStorage.getItem('clients') !== null) {
-                    this.phase2.estimatedImpacts.clients = localStorage.getItem('clients');
-                    this.displayEstimatedImpactClients = true;
-                }
-                if (localStorage.getItem('operations') !== null) {
-                    this.phase2.estimatedImpacts.operations = localStorage.getItem('operations');
-                    this.displayEstimatedImpactOps = true;
-                }
-                if (localStorage.getItem('technical') !== null) {
-                    this.phase2.estimatedImpacts.technical = localStorage.getItem('technical');
-                    this.displayEstimatedImpactTech = true;
-                }
+            if (this.localObj.changeTypeHW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.hardware = true;
+            } else {
+                this.phase2.change.hardware = false;
+            }
+            if (this.localObj.changeTypeSW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.software = true;
+            } else {
+                this.phase2.change.software = false;
+            }
+            if (this.localObj.changeTypeFW === '1') {
+                this.displayChangeType = true;
+                this.phase2.change.firmware = true;
+            } else {
+                this.phase2.change.firmware = false;
+            }
+            if (this.phase2.change.firmware || this.phase2.change.software || this.phase2.change.hardware) {
+                this.displayAdditionalAttachedDocuments = true;
+            } else {
+                this.displayAdditionalAttachedDocuments = false;
+            }
 
-                if (localStorage.getItem('predictedImpact') !== null) {
-                    event.target.value = localStorage.getItem('predictedImpact');
-                    this.onSelectImpact(event);
-                }
-                this.estimatedImpact(null);
+            if (this.localObj.impactRisks_ID !== '2') {
+                this.displayEstimatedImpact = true;
+            }
 
-                this.phase2.natureOfChange = localStorage.getItem('natureOfChange');
-                if (this.phase2.natureOfChange !== null) {
-                    this.onSelectNatureOfChange(null);
-                }
+            if (this.localObj.impactOnClients !== null) {
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.clients = this.localObj.impactOnClients;
+            }
+            if (this.localObj.impactOnOperations !== null) {
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.operations = this.localObj.impactOnOperations;
+            }
+            if (this.localObj.impactonTech !== null) {
+                this.displayEstimatedImpact = true;
+                this.phase2.estimatedImpacts.technical = this.localObj.impactonTech;
+            }
 
-                event.target.value = localStorage.getItem('eosSystem');
-                if (event.target.value !== null) {
-                    this.onSelectEosSystem(event);
-                    this.phase2.TCB_CRF_ID = localStorage.getItem('tcb');
-                }
+            if (this.phase2.estimatedImpacts.technical !== undefined ||
+                this.phase2.estimatedImpacts.clients !== undefined ||
+                this.phase2.estimatedImpacts.operations !== undefined) {
+                this.displayProblemReportRaised = true;
+            } else {
+                this.displayProblemReportRaised = false;
+            }
 
-                event.target.checked = JSON.parse(localStorage.getItem('changeHW'));
-                if (event.target.checked !== null) {
-                    this.displayChangeType = true;
-                    this.onSelectChangeTypeHW(event);
-                }
+            if (this.localObj.reportRaisedContractor === '1') {
+                this.phase2.problemReportRaised = true;
+            } else {
+                this.phase2.problemReportRaised = false;
+            }
 
-                event.target.checked = JSON.parse(localStorage.getItem('changeSW'));
-                if (event.target.checked !== null) {
-                    this.displayChangeType = true;
-                    this.onSelectChangeTypeSW(event);
-                }
+            if (this.phase2.problemReportRaised) {
+                this.displayChangePreTested = false;
+            } else if (!this.phase2.problemReportRaised) {
+                this.displayChangePreTested = true;
+                this.phase2.problemReportRef = undefined;
+            }
 
-                event.target.checked = JSON.parse(localStorage.getItem('changeFW'));
-                if (event.target.checked !== null) {
-                    this.displayChangeType = true;
-                    this.onSelectChangeTypeFW(event);
+            if (this.localObj.preTestSuccess) {
+                this.phase2.changeSuccessfullyTested = 'yes';
+            } else if (this.localObj.preTestSuccess) {
+                this.phase2.changeSuccessfullyTested = 'no';
+            } else {
+                this.phase2.changeSuccessfullyTested = 'na';
+            }
+            if (this.phase2.changeSuccessfullyTested === 'yes') {
+                this.displayChangeNotSuccessfullyTestedReason = false;
+                this.displaySpecialistComments = true;
+                this.phase2.changeNotSuccessfullyTestedReason = undefined;
+                if (this.displaySelectTemporaryAmountOfDays) {
+                    this.displayRecommendOrOppose = true;
                 }
-
-                console.log(localStorage.getItem('additionalDocuments'));
-                event.target.value = localStorage.getItem('additionalDocuments');
-                if (event.target.value !== null) {
-                    this.onSelectAdditionalDocuments(event);
+            } else if (this.phase2.changeSuccessfullyTested === 'no') {
+                this.phase2.changeNotSuccessfullyTestedReason = this.localObj.reasonUnsucesTest;
+                this.displayChangeNotSuccessfullyTestedReason = true;
+                this.displaySpecialistComments = false;
+                this.displayRecommendOrOppose = false;
+            } else if (this.phase2.changeSuccessfullyTested === 'na') {
+                this.displayChangeNotSuccessfullyTestedReason = false;
+                this.displaySpecialistComments = true;
+                this.phase2.changeNotSuccessfullyTestedReason = undefined;
+                if (this.displaySelectTemporaryAmountOfDays) {
+                    this.displayRecommendOrOppose = true;
                 }
+            }
+            this.phase2.specialistComment = this.localObj.specialist_comment;
+            this.phase2.proposedImplementationDate = this.localObj.proposed_implementation_date;
+            this.displayRecommendOrOppose = true;
+            this.response = null;
+            this.phase2service.getSpecialistResponse(this.localObj.ID, this.localObj.spec_ID).toPromise().then((data: Data) => {
+                this.response = data[0];
+                this.phase2.specialistComment = this.response[0].description;
+                this.phase2.recommend_oppose = this.response[0].status;
+                this.phase2.reasonForRecommendOppose = this.response[0].reason_for_recommend_oppose;
+            });
 
-                event.target.value = localStorage.getItem('problemReportRaised');
-                if (event.target.value !== null) {
-                    this.onSelectReportRaised(event);
-                }
+            this.activateSubmitButton = true;
+            const submitButton = document.getElementById('submit');
+            submitButton.classList.remove('disabled');
+            document.getElementById('cancel').classList.add('invisible');
+        } else {
+            const event = {target: {value: null, checked: null}};
+            event.target.value = localStorage.getItem('requestPriority');
+            if (event.target.value !== null) {
+                this.onSelectPriority(event);
+            }
+            event.target.value = localStorage.getItem('changePeriod');
+            if (event.target.value !== null) {
+                this.onSelectChangePeriod(event);
+            }
 
-                event.target.value = localStorage.getItem('preTested');
-                if (event.target.value !== null) {
-                    this.onSelectPreTested(event);
-                }
+            if (localStorage.getItem('temporaryPeriodNumberOfDays') !== null) {
+                event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
+                this.onSelectNumberOfTemporaryDays(event);
+            }
+            if (localStorage.getItem('temporaryPeriodStartDate') !== null) {
+                this.phase2.temporaryPeriodStartDate = new Date(localStorage.getItem('temporaryPeriodStartDate'));
+                this.phase2.temporaryPeriodEndDate = new Date(localStorage.getItem('temporaryPeriodEndDate'));
+                this.displayNatureOfChange = true;
+            }
 
-                event.target.value = localStorage.getItem('recommendOppose');
-                if (event.target.value !== null) {
-                    this.onSelectRecommendOrOppose(event);
-                }
+            if (localStorage.getItem('clients') !== null) {
+                this.phase2.estimatedImpacts.clients = localStorage.getItem('clients');
+                this.displayEstimatedImpactClients = true;
+            }
+            if (localStorage.getItem('operations') !== null) {
+                this.phase2.estimatedImpacts.operations = localStorage.getItem('operations');
+                this.displayEstimatedImpactOps = true;
+            }
+            if (localStorage.getItem('technical') !== null) {
+                this.phase2.estimatedImpacts.technical = localStorage.getItem('technical');
+                this.displayEstimatedImpactTech = true;
+            }
 
-                this.phase2.configurationItems = localStorage.getItem('config');
-                this.phase2.specialistComment = localStorage.getItem('comment');
-                this.phase2.changeNotSuccessfullyTestedReason = localStorage.getItem('reasonUnsuccess');
-        }
-        }
+            if (localStorage.getItem('predictedImpact') !== null) {
+                event.target.value = localStorage.getItem('predictedImpact');
+                this.onSelectImpact(event);
+            }
+            this.estimatedImpact(null);
+
+            this.phase2.natureOfChange = localStorage.getItem('natureOfChange');
+            if (this.phase2.natureOfChange !== null) {
+                this.onSelectNatureOfChange(null);
+            }
+
+            event.target.value = localStorage.getItem('eosSystem');
+            if (event.target.value !== null) {
+                this.onSelectEosSystem(event);
+                this.phase2.TCB_CRF_ID = localStorage.getItem('tcb');
+            }
+
+            event.target.checked = JSON.parse(localStorage.getItem('changeHW'));
+            if (event.target.checked !== null) {
+                this.displayChangeType = true;
+                this.onSelectChangeTypeHW(event);
+            }
+
+            event.target.checked = JSON.parse(localStorage.getItem('changeSW'));
+            if (event.target.checked !== null) {
+                this.displayChangeType = true;
+                this.onSelectChangeTypeSW(event);
+            }
+
+            event.target.checked = JSON.parse(localStorage.getItem('changeFW'));
+            if (event.target.checked !== null) {
+                this.displayChangeType = true;
+                this.onSelectChangeTypeFW(event);
+            }
+
+            event.target.value = localStorage.getItem('additionalDocuments');
+            if (event.target.value !== null) {
+                this.onSelectAdditionalDocuments(event);
+            }
+
+            event.target.value = localStorage.getItem('problemReportRaised');
+            if (event.target.value !== null) {
+                this.onSelectReportRaised(event);
+            }
+
+            event.target.value = localStorage.getItem('preTested');
+            if (event.target.value !== null) {
+                this.onSelectPreTested(event);
+            }
+
+            event.target.value = localStorage.getItem('recommendOppose');
+            if (event.target.value !== null) {
+                this.onSelectRecommendOrOppose(event);
+            }
 
         setStrings() {
             localStorage.setItem('config', this.phase2.configurationItems);
@@ -969,6 +982,13 @@ export class Phase2Component implements OnInit {
             localStorage.setItem('comment', this.phase2.specialistComment);
 
         }
-
     }
+
+    setStrings() {
+        localStorage.setItem('config', this.phase2.configurationItems);
+        localStorage.setItem('reasonUnsuccess', this.phase2.changeNotSuccessfullyTestedReason);
+        localStorage.setItem('comment', this.phase2.specialistComment);
+    }
+
+}
 

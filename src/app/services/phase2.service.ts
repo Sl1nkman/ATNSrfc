@@ -16,6 +16,15 @@ export class Phase2Service {
 
   constructor(private http: HttpClient ) { }
 
+  getSpecialistResponse(CCR, specialID){
+    const obj = {
+      dataSelection: 'specialistResponse',
+      ID: CCR,
+      specID: specialID
+    };
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+  }
+
   getCSRFToken() {
     return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
   }
@@ -43,8 +52,8 @@ export class Phase2Service {
     return this.http.post('/ATNSCCR_PHP/backend/api2/specialistConfiguration.php' , phase2 , httpOptions);
   }
 
-  updatePhase2(phase2: CCRPhase2, ccrID) {
-    const obj = {phase2: phase2, updateSelection: 'phase2', ID: ccrID};
+  updatePhase2(phase2: CCRPhase2, ccrID, response) {
+    const obj = {phase2: phase2, updateSelection: 'phase2', ID: ccrID, response: response};
     return this.http.post('/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
   }
 

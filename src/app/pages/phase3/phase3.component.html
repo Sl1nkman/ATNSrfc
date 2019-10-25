@@ -460,8 +460,12 @@
     </div>
     <div class="shadow card bg-light mx-auto">
         <div class="form-group">
-            <h3 class="pt-3 px-3 text-primary">CCR Phase 3: Sign Off</h3>
+            <h3 class="ptdi px-3 text-primary">CCR Phase 3: Sign Off</h3>
 
+        </div>
+        <h3 class="px-3 text-primary">Manager Responses:</h3><br>
+        <div *ngFor="let man of managerResponses, index as i">
+            <p class="px-3">Manager: {{this.managers[i]}} Response: {{man.status}}</p><br>
         </div>
         <div class="form-group">
             <div class="row">

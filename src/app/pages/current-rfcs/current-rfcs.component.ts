@@ -62,7 +62,6 @@ export class CurrentRFCSComponent implements OnInit {
     ngOnInit() {
         this.currentccrsService.getMyCCRs().subscribe((data: Data) => {
                 this.myCCRs = data;
-                console.log(this.myCCRs);
             }
         );
     }
