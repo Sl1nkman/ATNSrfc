@@ -122,10 +122,9 @@ export class Phase2Component implements OnInit {
             prioritySelect.classList.add('text-danger');
             this.emergencySelected = true;
             this.phase2.additionalDocuments = false;
-            this.displayRecommendOrOppose = true;
-            this.displaySpecialistComments = true;
-            this.displayPredictedRisks = false;
-            this.displayPredictedRisks = false;
+            this.displayRecommendOrOppose = false;
+            this.displaySpecialistComments = false;
+            this.displayPredictedRisks = true;
             this.displayChangePeriod = false;
             this.displayNatureOfChange = false;
             this.displayEOSystem = false;
@@ -301,6 +300,14 @@ export class Phase2Component implements OnInit {
          // database reference to eos tcb number + 1
         this.displayTCB_CRF_ID = true;
         this.displayConfigurationItems = true;
+    }
+
+    public onInputConfigurationItems() {
+        this.displayChangeType = true;
+        if (this.emergencySelected === true) {
+            this.displayRecommendOrOppose = true;
+            this.displaySpecialistComments = true;
+        }
     }
 
     public onSelectChangeTypeHW(e) {
@@ -960,6 +967,7 @@ export class Phase2Component implements OnInit {
             localStorage.setItem('config', this.phase2.configurationItems);
             localStorage.setItem('reasonUnsuccess', this.phase2.changeNotSuccessfullyTestedReason);
             localStorage.setItem('comment', this.phase2.specialistComment);
+
         }
 
     }
