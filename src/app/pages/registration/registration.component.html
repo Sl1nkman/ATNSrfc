@@ -81,7 +81,7 @@
               class="form-control" (input)="validateEmpId(User.employeeId)"
               [ngClass]="{'true': this.showEmpId, 'false':!this.showEmpId}"
               [(ngModel)]="User.employeeId"
-              type="number" name='EmployeeId' id="employeeID" required>
+              type="text" name='EmployeeId' id="employeeID" required>
     </div>
     <div class="form-group">
       <label>Contact Number</label>
@@ -104,7 +104,7 @@
       <label *ngIf="this.showEmail == true" style="color: green">Valid
       </label>
       <input
-              ngbPopover="Please enter the username of your email before the @"
+              ngbPopover="Please enter the username of your ATNS email before the @"
               triggers="mouseenter:mouseleave"
               placement="bottom-right"
               popoverTitle="INPUT USERNAME"

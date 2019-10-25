@@ -13,6 +13,7 @@ export class Phase3Service {
 
     private obj = null;
     public phaseData = null;
+    public response = null;
 
     constructor(private http: HttpClient) {
     }
@@ -21,6 +22,20 @@ export class Phase3Service {
         return this.http.get('/ATNSCCR_PHP/backend/api2/token.php'  , httpOptions );
     }
 
+    getManagerResponses(CCR){
+        const obj = {
+            dataSelection: 'managerResponse',
+            ID: CCR
+        };
+        return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    }
+
+    getManagers(){
+        const obj = {
+            dataSelection: 'manager'
+        };
+        return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    }
 
     upload(formData: FormData) {
         formData.append('phase', 'phase3');
