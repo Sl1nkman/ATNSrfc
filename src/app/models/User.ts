@@ -6,7 +6,7 @@ export interface User {
   site: string;
   name: string;
   surname: string;
-  employeeId: number;
+  employeeId: string;
   contactNumber: string;
   email: string;
   password: string;

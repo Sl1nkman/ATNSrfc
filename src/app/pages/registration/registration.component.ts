@@ -126,8 +126,9 @@ if (this.password === value) {
 }
   }
   // Validates that employee ID is of 4 character length
-  validateEmpId(employeeId: number) {
-    if (employeeId.toString().length === 4 ) {
+  validateEmpId(employeeId: string) {
+    const re = /^[0-9]*$/ ;
+    if (employeeId.toString().length === 4 && re.test(employeeId) ) {
       this.showEmpId = true;
     } else {
       this.showEmpId = false;
