@@ -43,7 +43,6 @@ export class Phase3Service {
     }
 
     submitPhase3(phase3: CCRPhase3 ) {
-        console.log(phase3);
         return this.http.post('/ATNSCCR_PHP/backend/api2/specialistImplementation.php' , phase3 , httpOptions);
     }
 
@@ -62,6 +61,5 @@ export class Phase3Service {
 
     setphases(phaseData) {
         this.phaseData = phaseData ;
-        console.log(this.phaseData);
     }
 }

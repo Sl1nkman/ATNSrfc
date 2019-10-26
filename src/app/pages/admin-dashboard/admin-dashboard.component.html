@@ -1,5 +1,5 @@
 <!--Created By Blaine Viljoen-->
-<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.editUserRole && !this.deleteUserRole && !this.showEditAlert && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
+<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.editUserRole && !this.showSite && !this.deleteUserRole && !this.showEditAlert && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
     <div class="row">
         <div class="col">
             <div class="mat-card">
@@ -25,6 +25,8 @@
                     <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40  waves-effect z-depth-0" (click)="this.redirectSQL()">Run SQL</button>
                     <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('add')">Add EOS system</button>
                     <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.eosShow('delete')">Remove EOS system</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealSite('add')">Add Site</button>
+                    <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.revealSite('delete')">Remove Site</button>
                     <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('add')">Add Title</button>
                     <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.titleShow('delete')">Remove Title</button>
                     <button class="mx-3 mt-1 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.showManager('add')">Add manager</button>
@@ -66,7 +68,7 @@
 <!--        </div>-->
 <!--    </div>-->
 </div><br>
-<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.showEditAlert && !this.editUserRole && !this.deleteUserRole && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
+<div *ngIf="!this.showSpecialist && !this.edit && !this.displayCCR && !this.showEditDocs && !this.showSite && !this.showEditAlert && !this.editUserRole && !this.deleteUserRole && !this.showManagerEdit && !this.showTitleEdit && !this.showAssignSite && !this.editEOS && !this.showAssignEOS">
     <div *ngFor="let rfc of initiatedRFC; index as i" >
         <div class="row h-100"  >
             <div class="col mb-4">
@@ -323,6 +325,33 @@
     <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.editEOSSystems()" *ngIf="this.operation === 'delete'">Remove</button><br *ngIf="this.operation === 'delete'"><br *ngIf="this.operation === 'delete'">
 
     <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideEOS()">Back</button>
+</div>
+
+<div *ngIf="this.showSite">
+    <div *ngIf="this.operation === 'add'">
+        <h2 class="px-3 pt-1 text-primary card-title">Add Site to system:</h2>
+        <label for="eosSystem">Region: </label>
+        <select class="px-3 pt-2 card-text rounded w-100 form-control" id="region" [(ngModel)]="this.regionID">
+            <option selected="selected" disabled="disabled">Select one</option>
+            <option *ngFor="let region of this.region" value="{{region.ID}}">{{region.description}}</option>
+        </select><br>
+        <label for="code">Code: </label>
+        <input id="code" type="text" class="rounded w-75 form-control" [(ngModel)]="this.siteCode"><br>
+        <label for="siteDesc">Description: </label>
+        <input id="siteDesc" type="text" class="rounded w-75 form-control" [(ngModel)]="this.siteDescription"><br>
+        <button class="mx-3 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.editSite()">Save</button><br><br>
+    </div>
+    <div *ngIf="this.operation === 'delete'">
+        <h2 class="px-3 pt-1 text-primary card-title">Remove Site from system:</h2>
+        <label for="site">Site: </label>
+        <select class="px-3 pt-2 card-text rounded w-100 form-control" id="site" [(ngModel)]="this.siteCode">
+            <option selected="selected" disabled="disabled">Select one</option>
+            <option *ngFor="let site of this.allSites" value="{{site.code}}">{{site.code}}</option>
+        </select><br>
+        <button class="mx-3 btn btn-outline-danger btn-rounded w-40 waves-effect z-depth-0" (click)="this.editSite()">Remove</button><br><br>
+    </div>
+
+    <button class="mx-3 mb-2 ml-2 btn btn-outline-info btn-rounded w-40 waves-effect z-depth-0" (click)="this.hideSite()">Back</button>
 </div>
 
 <div *ngIf="this.showAssignEOS">

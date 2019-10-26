@@ -3,6 +3,7 @@
 */
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './../../services/app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { AppService } from './../../services/app.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private router: Router) { }
   isCollapsed = true;
   ngOnInit() {
   }
@@ -20,6 +21,10 @@ export class NavbarComponent implements OnInit {
   }
   toggleSidebar() {
     this.appService.toggleSidebar();
+  }
+
+  logOut() {
+    this.router.navigate(['login']);
   }
 }
 

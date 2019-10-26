@@ -207,7 +207,6 @@ export class Phase1Component implements OnInit {
       this.RFC.requestDescription = this.localOBJ.requested_change;
       this.RFC.reasonForRequest = this.localOBJ.description;
       this.RFC.site_ID = this.phase1Service.getSite();
-      console.log(this.RFC.site_ID);
 
       if ( this.RFC.site_ID !== null || undefined) {
         this.displayNotifyManager = true;

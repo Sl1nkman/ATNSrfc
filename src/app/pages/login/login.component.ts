@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       });
 
   }
-  onForgotPassword($event) {
+  onForgotPassword() {
     this.router.navigate(['forgotPassword']);
   }
   ngOnInit() {

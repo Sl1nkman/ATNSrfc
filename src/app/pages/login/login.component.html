@@ -14,7 +14,7 @@
       <input type="password" id="password" name="password" class="form-control" [(ngModel)]="pass"  (input)="setPassword(pass)">
       <div class="d-flex align-items-center justify-content-between">
         <div>
-          <a href="/forgotPassword">Forgot password?</a>
+          <a (click)="onForgotPassword();">Forgot password?</a>
         </div>
       </div>
 

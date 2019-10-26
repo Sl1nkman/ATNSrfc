@@ -470,15 +470,12 @@ export class Phase3Component implements OnInit {
           this.phase3.CCR_ID                            = this.phase3Service.phaseData[1][0].ID;
       }
 
-      console.log(this.phase3Service.phaseData);
       this.phase3Service.getManagerResponses(this.phase3Service.phaseData[1][0].ID).toPromise().then((data: Data)=>{
           this.managerResponses = data[0];
-          console.log(this.managerResponses);
 
           let users = null;
           this.phase3Service.getManagers().toPromise().then((data: Data) => {
               users = data[0];
-              console.log(users);
               for (let i = 0; i < this.managerResponses.length; i++){
                   for(let x = 0; x < users.length; x++){
                       if(this.managerResponses[i].manager_ID === users[x].ID){
@@ -486,9 +483,7 @@ export class Phase3Component implements OnInit {
                       }
                   }
               }
-              console.log(users);
           });
-          console.log(users);
       });
 
       this.disableSubmitButton = false;
