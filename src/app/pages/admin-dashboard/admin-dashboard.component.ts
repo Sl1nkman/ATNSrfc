@@ -125,7 +125,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   public redirectSQL() {
-    const url = 'http://localhost/phpmyadmin/db_sql.php?db=test';
+    const url = this.adminDashboardService.phpMyAdminUrl;
     window.open(url, '_blank');
   }
 
@@ -497,20 +497,20 @@ export class AdminDashboardComponent implements OnInit {
     this.selectedRole = $event.target.value;
   }
 
-  revealEditAlert(){
+  revealEditAlert() {
     this.showEditAlert = true;
   }
 
-  hideEditAlert(){
+  hideEditAlert() {
     this.alertMessage = null;
     this.alertFreq = null;
     this.showEditAlert = false;
     this.selectedAlert = null;
   }
 
-  editAlert(){
+  editAlert() {
     this.adminDashboardService.editAlert(this.selectedAlert, this.alertMessage, this.alertFreq).subscribe((data: Data) => {
-      if(data.success){
+      if (data.success) {
         swal('Success' , 'The alert has been edited successfully' , 'success' );
         this.adminDashboardService.getAlert().toPromise().then(result => {
           this.alerts = result[0];

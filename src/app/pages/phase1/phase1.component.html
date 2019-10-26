@@ -102,7 +102,9 @@
     <!--    </div>-->
     <div class="form-group px-3 pt-3" *ngIf="this.displayRequestDescription">
         <label for="requestedChange">Change Request Description</label>
-        <textarea rows="8"
+        <textarea ngbPopover="Please input a description of the change you would like to implement"
+                  triggers="mouseenter:mouseleave" placement="bottom" popoverTitle="INPUT CHANGE REQUEST DESCRIPTION"
+                  rows="8"
                   class="form-control rounded"
                   type="text"
                   name="requestedChange"
@@ -114,7 +116,9 @@
     </div>
     <div class="form-group px-3" *ngIf="this.displayReasonForRequest">
         <label for="description">Reason For Request</label>
-        <textarea rows="8"
+        <textarea ngbPopover="Please input a comprehensive reason for your request"
+                  triggers="mouseenter:mouseleave" placement="top" popoverTitle="INPUT CHANGE REQUEST REASON"
+                  rows="8"
                   class="form-control rounded"
                   type="text"
                   name="description"

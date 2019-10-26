@@ -9,7 +9,9 @@ const httpOptions = {
     providedIn: 'root'
 })
 
-export class AdminDashboardService{
+export class AdminDashboardService {
+
+    public phpMyAdminUrl = 'http://35.197.228.135/phpmyadmin/';
 
     constructor(private http: HttpClient) {
     }
@@ -41,22 +43,22 @@ export class AdminDashboardService{
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php' , obj , httpOptions);
     }
 
-    editAlert(id, message, freq){
+    editAlert(id, message, freq) {
         const obj = {updateSelection: 'alert', ID: id, message: message, frequency: freq};
         return this.http.post('/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
     }
 
-    getAlert(){
+    getAlert() {
         const obj = {dataSelection: 'alert'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    deleteDoc(obj){
+    deleteDoc(obj) {
         return this.http.post('/ATNSCCR_PHP/backend/api2/removeFiles.php', obj, httpOptions);
     }
 
-    editUserRole(user, role, operation){
-        if(operation === 'add'){
+    editUserRole(user, role, operation) {
+        if (operation === 'add') {
             const obj = {insertSelection: 'userRole', userID: user, roleID: role};
             return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj, httpOptions);
         } else {
@@ -65,8 +67,8 @@ export class AdminDashboardService{
         }
     }
 
-    assignEOS(user, eos, operation){
-        if(operation === 'add'){
+    assignEOS(user, eos, operation) {
+        if (operation === 'add') {
             const obj = {insertSelection: 'eosAssign', userID: user, eosID: eos};
             return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj, httpOptions);
         } else {
@@ -75,8 +77,8 @@ export class AdminDashboardService{
         }
     }
 
-    assignSite(user, site, operation){
-        if(operation === 'add'){
+    assignSite(user, site, operation) {
+        if (operation === 'add') {
             const obj = {insertSelection: 'siteAssign', userID: user, siteID: site};
             return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj, httpOptions);
         } else {
@@ -85,57 +87,57 @@ export class AdminDashboardService{
         }
     }
 
-    getSiteUser(){
+    getSiteUser() {
         const obj = {dataSelection: 'siteAssign'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    getEOSUser(){
+    getEOSUser() {
         const obj = {dataSelection: 'eosAssign'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    insertTitle(type, description){
+    insertTitle(type, description) {
         const obj = {insertSelection: 'title', type: type, description: description};
         return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj , httpOptions);
     }
 
-    deleteTitle(id){
+    deleteTitle(id) {
         const obj = {deleteSelection: 'title', ID: id};
         return this.http.post('/ATNSCCR_PHP/backend/api2/removeData.php', obj, httpOptions);
     }
 
-    getTitle(){
+    getTitle() {
         const obj = {dataSelection: 'title'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    insertManager(job, site, first, last, phone, email){
+    insertManager(job, site, first, last, phone, email) {
         const obj = {insertSelection: 'manager', job: job, site: site, first: first, last: last, phone: phone, email: email};
         return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj , httpOptions);
     }
 
-    deleteManager(id){
+    deleteManager(id) {
         const obj = {deleteSelection: 'manager', ID: id};
         return this.http.post('/ATNSCCR_PHP/backend/api2/removeData.php', obj, httpOptions);
     }
 
-    getManager(){
+    getManager() {
         const obj = {dataSelection: 'manager'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
 
-    insertEOS(type, description){
+    insertEOS(type, description) {
         const obj = {insertSelection: 'eos', type: type, description: description};
         return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj , httpOptions);
     }
 
-    deleteEOS(id){
+    deleteEOS(id) {
         const obj = {deleteSelection: 'eos', ID: id};
         return this.http.post('/ATNSCCR_PHP/backend/api2/removeData.php', obj, httpOptions);
     }
 
-    getEOS(){
+    getEOS() {
         const obj = {dataSelection: 'eos'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
