@@ -38,9 +38,14 @@ export class AdminDashboardComponent implements OnInit {
   public eosType;
   public eosDescription;
   public editEOS = false;
-
   public showAssignEOS = false;
   public eosUser = [];
+
+  public siteCode;
+  public siteDescription;
+  public regionID;
+  public showSite = false;
+  public region = [];
 
   public titles = [];
   public titleType;
@@ -460,7 +465,6 @@ export class AdminDashboardComponent implements OnInit {
         }
       }
       this.phase1.setobj(this.initiatedRFC[index], siteID);
-      console.log(this.allSites);
     } else if (this.selectedPhase === 'Phase2') {
       let user = '';
       for (let i = 0; i < this.users.length; i++) {
@@ -788,7 +792,6 @@ export class AdminDashboardComponent implements OnInit {
 
   hideEOS() {
     this.editEOS = false;
-    console.log(this.eosType);
     this.eosType = null;
     this.eosDescription = null;
   }
@@ -824,7 +827,6 @@ export class AdminDashboardComponent implements OnInit {
         swal('Failure' , 'System does not exist' , 'error' );
         return;
       }
-      console.log(id);
       this.adminDashboardService.deleteEOS(id).subscribe((data: Data) => {
         if (data.success) {
           swal('Success' , 'The EOS has been deleted successfully' , 'success' );
@@ -833,6 +835,62 @@ export class AdminDashboardComponent implements OnInit {
           });
         } else {
           swal('Failure' , 'The EOS has not been deleted successfully' , 'error' );
+        }
+      });
+    }
+  }
+
+  revealSite(operation){
+    this.showSite = true;
+    this.operation = operation;
+  }
+
+  hideSite(){
+    this.showSite = false;
+    this.siteCode = null;
+    this.siteDescription = null;
+    this.regionID = null;
+  }
+
+  editSite() {
+    if (this.operation === 'add') {
+      for (let i = 0; i < this.allSites.length; i++) {
+        if (this.allSites[i].code === this.siteCode) {
+          swal('Failure' , 'Site already exists' , 'error' );
+          return;
+        }
+      }
+
+      this.adminDashboardService.addSite(this.regionID, this.siteCode, this.siteDescription).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The Site has been added successfully' , 'success' );
+          this.adminDashboardService.getSites().toPromise().then(result => {
+            this.allSites = result[0];
+          });
+        } else {
+          swal('Failure' , 'The Site has not been added successfully' , 'error' );
+        }
+      });
+    } else {
+      let id = -1;
+      for (let i = 0; i < this.allSites.length; i++) {
+        if (this.allSites[i].code === this.siteCode) {
+          id = this.allSites[i].ID;
+        }
+      }
+
+      if (id === -1) {
+        swal('Failure' , 'Site does not exist' , 'error' );
+        return;
+      }
+      this.adminDashboardService.removeSite(id).subscribe((data: Data) => {
+        if (data.success) {
+          swal('Success' , 'The Site has been deleted successfully' , 'success' );
+          this.adminDashboardService.getSites().toPromise().then(result => {
+            this.allSites = result[0];
+          });
+        } else {
+          swal('Failure' , 'The Site has not been deleted successfully' , 'error' );
         }
       });
     }
@@ -880,6 +938,7 @@ export class AdminDashboardComponent implements OnInit {
       this.titles = data[14];
       this.managers = data[15];
       this.alerts = data[16];
+      this.region = data[17];
 
       for (let i = 0; i < this.initiatedRFC.length; i++) {
         if (this.phase2RFCs.length !== this.initiatedRFC.length) {

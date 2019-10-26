@@ -48,7 +48,22 @@ export class AdminDashboardService {
         return this.http.post('/ATNSCCR_PHP/backend/api2/updateData.php', obj, httpOptions);
     }
 
-    getAlert() {
+    addSite(regionID, code, description){
+        const obj = {insertSelection: 'site', region: regionID, code: code, description: description};
+        return this.http.post('/ATNSCCR_PHP/backend/api2/insertData.php', obj, httpOptions);
+    }
+
+    removeSite(id){
+        const obj = {deleteSelection: 'site', ID: id};
+        return this.http.post('/ATNSCCR_PHP/backend/api2/removeData.php', obj, httpOptions);
+    }
+
+    getSites(){
+        const obj = {dataSelection: 'sites'};
+        return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
+    }
+
+    getAlert(){
         const obj = {dataSelection: 'alert'};
         return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
     }
