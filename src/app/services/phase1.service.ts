@@ -14,12 +14,18 @@ export class Phase1Service {
 
   private obj = null;
   private siteID = 0;
+
   constructor(private http: HttpClient ) {
   }
 
   submitRequest(phase1: RFC ) {
 
      return this.http.post('/ATNSCCR_PHP/backend/api2/initiateRequest.php', phase1 , httpOptions);
+  }
+
+  getSites(){
+    const obj = {dataSelection: 'sites'};
+    return this.http.post('/ATNSCCR_PHP/backend/api2/pageData.php', obj, httpOptions);
   }
 
   updateRequest(phase1: RFC, ccrID) {

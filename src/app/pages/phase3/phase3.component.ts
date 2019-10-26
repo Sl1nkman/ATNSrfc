@@ -30,6 +30,8 @@ export class Phase3Component implements OnInit {
     public disableSubmitButton: boolean;
     public files: NgxFileDropEntry[] [] = []  ;
     public filesForUpload = [];
+    public managerResponses = [];
+    public managers = [];
     public numberOfDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 ];
     public selectedNoDays: number;
 
@@ -419,6 +421,7 @@ export class Phase3Component implements OnInit {
   }
 
   ngOnInit() {
+
       this.phsae2service.getPageData().subscribe((data: Data) => {
           this.availablePriorities = data[0];
           this.availableImpacts = data[1];
@@ -466,6 +469,27 @@ export class Phase3Component implements OnInit {
           this.phase2.proposedImplementationDate        = this.phase3Service.phaseData[1][0].proposed_implementation_date;
           this.phase3.CCR_ID                            = this.phase3Service.phaseData[1][0].ID;
       }
+
+      console.log(this.phase3Service.phaseData);
+      this.phase3Service.getManagerResponses(this.phase3Service.phaseData[1][0].ID).toPromise().then((data: Data)=>{
+          this.managerResponses = data[0];
+          console.log(this.managerResponses);
+
+          let users = null;
+          this.phase3Service.getManagers().toPromise().then((data: Data) => {
+              users = data[0];
+              console.log(users);
+              for (let i = 0; i < this.managerResponses.length; i++){
+                  for(let x = 0; x < users.length; x++){
+                      if(this.managerResponses[i].manager_ID === users[x].ID){
+                          this.managers.push(users[i].firstname + ' ' + users[i].lastname);
+                      }
+                  }
+              }
+              console.log(users);
+          });
+          console.log(users);
+      });
 
       this.disableSubmitButton = false;
       const submitButton = document.getElementById('submit');

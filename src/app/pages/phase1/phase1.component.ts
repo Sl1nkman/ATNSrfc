@@ -142,6 +142,7 @@ export class Phase1Component implements OnInit {
           this.phase1Service.updateRequest(this.RFC, this.localOBJ.ID).subscribe((data: Data) => {
             if (data.success) {
               this.localOBJ = null;
+              this.phase1Service.setobj(null, null);
               localStorage.removeItem('request');
               localStorage.removeItem('description');
               localStorage.removeItem('site');
@@ -181,18 +182,25 @@ export class Phase1Component implements OnInit {
     });
   }
   ngOnInit() {
+    this.localOBJ = this.phase1Service.getobj();
 
     this.phase1Service.getCSRFToken().subscribe( (data: Data) => {
       this.RFC.CSRF_token = data.tokenValue ;
     });
-    this.phase1Service.getPageData().subscribe((data: Data) => {
-      this.usersSites = data[0];
-      this.managers = data[1];
-    });
 
-    this.localOBJ = this.phase1Service.getobj();
+    if(this.localOBJ === null){
+      this.phase1Service.getPageData().toPromise().then((data: Data) => {
+        this.usersSites = data[0];
+        this.managers = data[1];
+      });
+    }
+
 
     if (this.localOBJ !== null) {
+      this.phase1Service.getSites().toPromise().then((data: Data) => {
+        this.usersSites = data[0];
+      });
+
       localStorage.setItem('request', this.localOBJ.requested_change);
       localStorage.setItem('description', this.localOBJ.description);
       localStorage.setItem('site', this.phase1Service.getSite());

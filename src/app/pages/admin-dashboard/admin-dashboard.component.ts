@@ -460,6 +460,7 @@ export class AdminDashboardComponent implements OnInit {
         }
       }
       this.phase1.setobj(this.initiatedRFC[index], siteID);
+      console.log(this.allSites);
     } else if (this.selectedPhase === 'Phase2') {
       let user = '';
       for (let i = 0; i < this.users.length; i++) {
