@@ -148,6 +148,9 @@ export class Phase1Component implements OnInit {
               localStorage.removeItem('site');
               swal('Success' , data.message , 'success' );
             } else {
+              localStorage.removeItem('request');
+              localStorage.removeItem('description');
+              localStorage.removeItem('site');
               swal('Failure' , data.message , 'error' );
             }
           });
