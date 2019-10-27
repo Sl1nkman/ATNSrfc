@@ -595,7 +595,7 @@
             <div class="row mx-3">
                 <label for="technicalImpact" class="">Reason for Recommend or Oppose: </label>
             </div>
-                <div class="row mx-3">
+                <div class="row mx-3" *ngIf="this.displayReasonRecommendOppose">
                 <input popoverTitle="Reason for Recommend or Oppose"
                        ngbPopover="Please provide the reason for your recommend/oppose or retest here"
                        triggers="mouseenter:mouseleave" placement="bottom"
@@ -606,6 +606,7 @@
                        (input)="onInputReasonRecommendOppose()"
                        [(ngModel)]="this.phase2.reasonForRecommendOppose"
                 >
+
             </div>
         </div>
         <div class="form-group">

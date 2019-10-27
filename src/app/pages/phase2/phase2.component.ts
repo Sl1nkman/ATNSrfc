@@ -61,6 +61,7 @@ export class Phase2Component implements OnInit {
     public displaySpecialistComments: boolean;
     public displayProposedImplementationDate: boolean;
     public displayRecommendOrOppose: boolean;
+    public displayReasonRecommendOppose: boolean;
     public activateSubmitButton: boolean;
 
     public RFC: RFC = {
@@ -478,6 +479,7 @@ export class Phase2Component implements OnInit {
     public onSelectRecommendOrOppose($event) {
         localStorage.setItem('recommendOppose', $event.target.value);
         this.phase2.recommend_oppose = $event.target.value;
+        this.displayReasonRecommendOppose = true;
     }
 
     onInputReasonRecommendOppose() {
