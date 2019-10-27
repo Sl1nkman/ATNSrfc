@@ -27,7 +27,7 @@ export class Phase2Component implements OnInit {
     public filesForUpload = [];
     public user;
     public response;
-
+    public localStorage = false;
 
     public availableNumberOfTemporaryDays: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
@@ -409,6 +409,9 @@ export class Phase2Component implements OnInit {
             this.phase2.estimatedImpacts.clients !== undefined ||
             this.phase2.estimatedImpacts.operations !== undefined) {
             this.displayProblemReportRaised = true;
+            localStorage.setItem('clients', this.phase2.estimatedImpacts.clients);
+            localStorage.setItem('operations', this.phase2.estimatedImpacts.operations);
+            localStorage.setItem('technical', this.phase2.estimatedImpacts.technical);
         } else {
             this.displayProblemReportRaised = false;
         }
@@ -889,35 +892,36 @@ export class Phase2Component implements OnInit {
             document.getElementById('cancel').classList.add('invisible');
         } else {
             const event = {target: {value: null, checked: null}};
-            if (localStorage.getItem('requestPriority') !== null) {
+            if (localStorage.getItem('requestPriority') != null) {
+                this.localStorage = true;
                 event.target.value = localStorage.getItem('requestPriority');
                 this.onSelectPriority(event);
             }
 
-            if (localStorage.getItem('changePeriod') !== null) {
+            if (localStorage.getItem('changePeriod') != null) {
                 event.target.value = localStorage.getItem('changePeriod');
                 this.onSelectChangePeriod(event);
             }
 
-            if (localStorage.getItem('temporaryPeriodNumberOfDays') !== null) {
+            if (localStorage.getItem('temporaryPeriodNumberOfDays') != null) {
                 event.target.value = parseInt(localStorage.getItem('temporaryPeriodNumberOfDays'), 10);
                 this.onSelectNumberOfTemporaryDays(event);
             }
-            if (localStorage.getItem('temporaryPeriodStartDate') !== null) {
+            if (localStorage.getItem('temporaryPeriodStartDate') != null) {
                 this.phase2.temporaryPeriodStartDate = new Date(localStorage.getItem('temporaryPeriodStartDate'));
                 this.phase2.temporaryPeriodEndDate = new Date(localStorage.getItem('temporaryPeriodEndDate'));
                 this.displayNatureOfChange = true;
             }
 
-            if (localStorage.getItem('clients') !== null) {
+            if (localStorage.getItem('clients') != null) {
                 this.phase2.estimatedImpacts.clients = localStorage.getItem('clients');
                 this.displayEstimatedImpactClients = true;
             }
-            if (localStorage.getItem('operations') !== null) {
+            if (localStorage.getItem('operations') != null) {
                 this.phase2.estimatedImpacts.operations = localStorage.getItem('operations');
                 this.displayEstimatedImpactOps = true;
             }
-            if (localStorage.getItem('technical') !== null) {
+            if (localStorage.getItem('technical') != null) {
                 this.phase2.estimatedImpacts.technical = localStorage.getItem('technical');
                 this.displayEstimatedImpactTech = true;
             }
@@ -929,59 +933,59 @@ export class Phase2Component implements OnInit {
             this.estimatedImpact(null);
 
 
-            if (localStorage.getItem('natureOfChange') !== null) {
+            if (localStorage.getItem('natureOfChange') != null) {
                 this.phase2.natureOfChange = localStorage.getItem('natureOfChange');
                 this.onSelectNatureOfChange(null);
             }
 
 
-            if (localStorage.getItem('eosSystem') !== null) {
+            if (localStorage.getItem('eosSystem') != null) {
                 event.target.value = localStorage.getItem('eosSystem');
                 this.onSelectEosSystem(event);
                 this.phase2.TCB_CRF_ID = localStorage.getItem('tcb');
             }
 
 
-            if (localStorage.getItem('changeHW') !== null) {
+            if (localStorage.getItem('changeHW') != null) {
                 event.target.checked = JSON.parse(localStorage.getItem('changeHW'));
                 this.displayChangeType = true;
                 this.onSelectChangeTypeHW(event);
             }
 
 
-            if (localStorage.getItem('changeSW') !== null) {
+            if (localStorage.getItem('changeSW') != null) {
                 event.target.checked = JSON.parse(localStorage.getItem('changeSW'));
                 this.displayChangeType = true;
                 this.onSelectChangeTypeSW(event);
             }
 
 
-            if (localStorage.getItem('changeFW') !== null) {
+            if (localStorage.getItem('changeFW') != null) {
                 event.target.checked = JSON.parse(localStorage.getItem('changeFW'));
                 this.displayChangeType = true;
                 this.onSelectChangeTypeFW(event);
             }
 
 
-            if (localStorage.getItem('additionalDocuments') !== null) {
+            if (localStorage.getItem('additionalDocuments') != null) {
                 event.target.value = localStorage.getItem('additionalDocuments');
                 this.onSelectAdditionalDocuments(event);
             }
 
 
-            if (localStorage.getItem('problemReportRaised') !== null) {
+            if (localStorage.getItem('problemReportRaised') != null) {
                 event.target.value = localStorage.getItem('problemReportRaised');
                 this.onSelectReportRaised(event);
             }
 
 
-            if (localStorage.getItem('preTested') !== null) {
+            if (localStorage.getItem('preTested') != null) {
                 event.target.value = localStorage.getItem('preTested');
                 this.onSelectPreTested(event);
             }
 
 
-            if (localStorage.getItem('recommendOppose') !== null) {
+            if (localStorage.getItem('recommendOppose') != null) {
                 event.target.value = localStorage.getItem('recommendOppose');
                 this.onSelectRecommendOrOppose(event);
             }
