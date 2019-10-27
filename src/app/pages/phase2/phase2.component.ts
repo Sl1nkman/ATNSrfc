@@ -546,6 +546,7 @@ export class Phase2Component implements OnInit {
                                         localStorage.clear();
                                         this.router.navigate(['home']);
                                     } else {
+                                        localStorage.clear();
                                         swal({
                                             title: 'Failure',
                                             text: data.message,
@@ -585,14 +586,17 @@ export class Phase2Component implements OnInit {
                                         localStorage.clear();
                                         this.router.navigate(['home']);
                                     } else {
+                                        localStorage.clear();
                                         swal('Error', data.message, 'error');
                                     }
                                 });
                             } else {
+                                localStorage.clear();
                                 swal('Success', data1.message, 'success');
                                 this.router.navigate(['home']);
                             }
                         } else {
+                            localStorage.clear();
                             swal({
                                 title: 'Failed',
                                 text: data1.message,
