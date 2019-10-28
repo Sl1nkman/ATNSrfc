@@ -12,21 +12,23 @@
         </div>
     </div>
     <div class="row text-center" *ngFor="let ccr of myCCRs">
-        <div class="col mb-4">
-            <div class="card h-100">
-                <div class="card-body" (click)="viewCcrPhase1(ccr[0][0])">
-                    <label>CCR Initiated: </label>
-                    <p class="card-text"> {{ccr[0][0].start_time}}</p>
-                    <label>Initiator Name</label>
-                    <p class="card-text">{{ccr[0][0].initiatorName.firstName}}  {{ccr[0][0].initiatorName.lastName }}</p>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary" *ngIf="!ccr[1][0]" (click)="configureCCR(ccr[0][0])">Configure CCR
-                    </button>
-                </div>
 
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body" (click)="viewCcrPhase1(ccr[0][0])">
+                        <label>CCR Initiated: </label>
+                        <p class="card-text"> {{ccr[0][0].start_time}}</p>
+                        <label>Initiator Name</label>
+                        <p class="card-text">{{ccr[0][0].initiatorName.firstName}}  {{ccr[0][0].initiatorName.lastName }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" *ngIf="!ccr[1][0]" (click)="configureCCR(ccr[0][0])">Configure CCR
+                        </button>
+                    </div>
+
+                </div>
             </div>
-        </div>
+
         <div class="col mb-4">
             <div class="card h-100" *ngIf="ccr[1][0]">
                 <div class="card-body" (click)="viewCcrPhase2(ccr[1][0])">
@@ -37,7 +39,9 @@
 
                 </div>
                 <div class="card-footer" *ngIf=" !ccr[2][0]">
-                    <button class="btn btn-primary" [disabled]="!ccr[1][0].specialistPhase3Access" (click)="implementCCR(ccr)">Implement CCR</button>
+                    <button class="btn btn-primary" [disabled]="!ccr[1][0].specialistPhase3Access"
+                            (click)="implementCCR(ccr)">Implement CCR
+                    </button>
                     <button class="btn btn-primary mt-1" *ngIf="ccr[1][0].specialistResponses.length > 0"
                             (click)="viewSpecialistResponses(ccr[1][0].specialistResponses)">View Specialist Responses
                     </button>
