@@ -75,7 +75,7 @@
                 <h2 class="px-3 text-secondary" *ngIf="i === 0">Initiated requests:</h2><br>
                     <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h2>
+                            <h5 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{rfc.ID}}</h5>
                             <p class="card-text"> Request: {{rfc.requested_change}}</p>
                             <p class="card-text"> Reason: {{rfc.description}}</p>
                         </div>
@@ -89,7 +89,7 @@
                 <h2 class="px-3 text-secondary" *ngIf="i === 0">CCR's in Phase 2:</h2><br>
                     <div class="card h-100" *ngIf="this.phase2RFCs[i].ID === -1" >
                         <div class="card-body">
-                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">TCB ID: {{this.phase2RFCs[i].ID}}</h2>
+                            <h5 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">TCB ID: {{this.phase2RFCs[i].tcb_crf_ID}}</h5>
                             <p class="card-text"> Phase 2 not yet processed</p>
                         </div>
                         <div class="card-footer">
@@ -98,7 +98,7 @@
 
                     <div class="card h-100" *ngIf="this.phase2RFCs[i].ID !== -1" >
                         <div class="card-body">
-                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">TCB ID: {{this.phase2RFCs[i].TCB_CRF_ID}}</h2>
+                            <h5 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">TCB ID: {{this.phase2RFCs[i].tcb_crf_ID}}</h5>
                             <p class="card-text"> Phase 1 ID: {{this.phase2RFCs[i].phase1_ID}}</p>
                             <p class="card-text"> Specialist ID: {{this.phase2RFCs[i].spec_ID}}</p>
                         </div>
@@ -116,7 +116,7 @@
                 <h2 class="px-3 text-secondary" *ngIf="i === 0">CCR's in Phase 3:</h2><br>
                     <div class="card h-10" *ngIf="this.phase3RFCS[i].ID === -1" style="height: 28vh">
                         <div class="card-body">
-                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h2>
+                            <h5 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h5>
                             <p class="card-text"> Phase 3 has not yet been processed</p>
                         </div>
                         <div class="card-footer">
@@ -125,7 +125,7 @@
 
                     <div class="card h-100" *ngIf="this.phase3RFCS[i].ID !== -1" style="height: 28vh">
                         <div class="card-body">
-                            <h2 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h2>
+                            <h5 class="px-3 pt-1 text-primary card-title" style="cursor: pointer;" (click)="this.showCCR(i)">CCR ID: {{this.phase3RFCS[i].ID}}</h5>
                             <p class="card-text"> CCR_ID: {{this.phase3RFCS[i].CCR_ID}}</p>
                         </div>
                         <div class="card-footer">
